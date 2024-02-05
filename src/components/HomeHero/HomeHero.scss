@@ -1,0 +1,39 @@
+.hero {
+  display: flex;
+  padding: 2rem 1.5rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1.5rem;
+  align-self: stretch;
+  position: relative;
+  height: 30vh;
+  &__img {
+    position: absolute;
+    background-position: right;
+    left: -3.625rem;
+    top: 0.02569rem;
+    z-index: 1;
+    rotate: 180deg;
+    background-color: gray;
+    opacity: 100%;
+    filter: brightness(35%);
+    height: 100%;
+  }
+  &__button-wrap {
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+  }
+  &__title {
+    z-index: 3;
+    color: white;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0;
+  }
+}

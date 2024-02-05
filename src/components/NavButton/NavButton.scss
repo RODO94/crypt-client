@@ -1,0 +1,29 @@
+@use "../../partials/variables" as *;
+
+.nav-button {
+  display: flex;
+  padding: 1rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  flex: 1 0 0;
+  font-family: "Roboto", system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 0.85rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  color: #fff;
+  border-radius: 1.5rem;
+  border: 1px solid #000;
+  text-decoration: none;
+
+  &--blue {
+    background: $ultramarine-4;
+  }
+  &--dark {
+    background-color: $space-wolves-2;
+  }
+  &--green {
+    background-color: $dark-angels-1;
+  }
+}
