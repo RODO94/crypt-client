@@ -8,18 +8,16 @@
   align-self: stretch;
   position: relative;
   height: 30vh;
-  &__img {
-    position: absolute;
-    background-position: right;
-    left: -3.625rem;
-    top: 0.02569rem;
-    z-index: 1;
-    rotate: 180deg;
-    background-color: gray;
-    opacity: 100%;
-    filter: brightness(35%);
-    height: 100%;
-  }
+  background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.65) 0%,
+      rgba(0, 0, 0, 0.65) 100%
+    ),
+    url(../../assets/birdseye-battle.png), lightgray 50%;
+  object-fit: contain;
+  background-position: center;
+  background-size: cover;
+
   &__button-wrap {
     z-index: 2;
     display: flex;
