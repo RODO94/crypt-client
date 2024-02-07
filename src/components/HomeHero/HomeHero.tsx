@@ -1,5 +1,4 @@
 import "./HomeHero.scss";
-import birdsEyeBattle from "../../assets/birdseye-battle.png";
 import NavButton from "../NavButton/NavButton";
 
 export default function HomeHero() {

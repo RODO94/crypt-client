@@ -1,0 +1,12 @@
+@use "../../partials/variables" as *;
+
+.upcomingbattles {
+  display: flex;
+  padding: 2rem 1.5rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  align-self: stretch;
+  background: $background-2;
+}
