@@ -17,8 +17,10 @@
     border: 1px solid #000;
     background-color: $background-1;
   }
+
   &__text {
     color: white;
+    margin: 0;
   }
   &__player-info {
     font-size: 0.75rem;
@@ -32,9 +34,17 @@
     align-items: flex-end;
     align-self: stretch;
   }
+  &__player-rank {
+    margin: 0;
+  }
+  &__player-name {
+    margin: 0;
+  }
+
   &__rank-txt {
     font-size: 0.5rem;
     text-transform: uppercase;
+    margin: 0;
   }
 }
 

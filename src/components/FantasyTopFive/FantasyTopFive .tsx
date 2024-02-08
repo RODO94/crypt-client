@@ -43,9 +43,9 @@ export default function FantasyTopFive() {
             name={army.name}
             ranking={army.ranking}
             status={
-              Number(army.prev_ranking) > index + 1
+              Number(army.prev_ranking) < index + 1
                 ? "decrease"
-                : Number(army.prev_ranking) < index + 1
+                : Number(army.prev_ranking) > index + 1
                 ? "increase"
                 : "no change"
             }
