@@ -5,9 +5,6 @@ export default function BattleCard({ name, known_as, rank }: Player) {
   let nameArray = name.toLowerCase().split(" ");
   let nameColour: string = " ";
 
-  console.log(nameArray);
-  console.log(nameColour);
-
   for (let i = 0; i < nameArray.length; i++) {
     nameArray[i] !== " "
       ? (nameColour = nameColour + nameArray[i])

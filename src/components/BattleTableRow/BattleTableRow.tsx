@@ -24,6 +24,7 @@ export default function BattleTableRow({
           {player_1.map((player) => {
             return (
               <BattleCard
+                key={crypto.randomUUID()}
                 name={player.name}
                 known_as={player.known_as}
                 rank={player.rank}
@@ -36,6 +37,7 @@ export default function BattleTableRow({
           {player_2.map((player) => {
             return (
               <BattleCard
+                key={crypto.randomUUID()}
                 name={player.name}
                 known_as={player.known_as}
                 rank={player.rank}
@@ -45,8 +47,8 @@ export default function BattleTableRow({
         </div>
       </article>
       <div className="battle-row__details">
-        <BattleTypePill battle_type={battle_type} />
-        <PlayerTypePill player_type={player_type} />
+        <BattleTypePill key={crypto.randomUUID()} battle_type={battle_type} />
+        <PlayerTypePill key={crypto.randomUUID()} player_type={player_type} />
       </div>
     </section>
   );

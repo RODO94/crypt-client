@@ -46,8 +46,9 @@ export default function UpcomingBattles() {
             currentDate = battle.date;
             return (
               <>
-                <DateTableHeader date={battle.date} />
+                <DateTableHeader key={index} date={battle.date} />
                 <BattleTableRow
+                  key={crypto.randomUUID()}
                   battle_type={battle.battle_type}
                   player_type={battle.player_type}
                   player_1={battle.player_1}
@@ -58,6 +59,7 @@ export default function UpcomingBattles() {
           } else if (currentDate === battle.date) {
             return (
               <BattleTableRow
+                key={crypto.randomUUID()}
                 battle_type={battle.battle_type}
                 player_type={battle.player_type}
                 player_1={battle.player_1}
@@ -65,10 +67,12 @@ export default function UpcomingBattles() {
               />
             );
           } else if (currentDate !== battle.date) {
+            currentDate = battle.date;
             return (
               <>
-                <DateTableHeader date={battle.date} />
+                <DateTableHeader key={index} date={battle.date} />
                 <BattleTableRow
+                  key={crypto.randomUUID()}
                   battle_type={battle.battle_type}
                   player_type={battle.player_type}
                   player_1={battle.player_1}
