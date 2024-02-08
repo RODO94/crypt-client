@@ -1,42 +1,41 @@
 import { useEffect, useState } from "react";
 import FiveColTableHeader from "../FiveColTableHeader/FiveColTableHeader";
 import FiveColTableRow from "../FiveColTableRow/FiveColTableRow";
-import "./FortyKTopFive.scss";
+import "./FantasyTopFive .scss";
 import { getRankingTopFive } from "../../utils/RankingRequests";
 import { RankObj } from "../../utils/Interfaces";
 
 interface RankArray extends Array<RankObj> {}
 
-export default function FortyKTopFive() {
-  const [fortyKRankingArray, setFortyKRankingArray] = useState<RankArray>();
+export default function FantasyTopFive() {
+  const [fantasyRankingArray, setFantasyRankingArray] = useState<RankArray>();
 
   useEffect(() => {
     const fetchTopFiveRanking = async () => {
       const response = await getRankingTopFive();
-      const sortedResponse = response.fortyK.sort(
+      const sortedResponse = response.fantasy.sort(
         (a: any, b: any) => b.ranking - a.ranking
       );
-      setFortyKRankingArray(sortedResponse);
+      setFantasyRankingArray(sortedResponse);
     };
     fetchTopFiveRanking();
   }, []);
 
-  if (!fortyKRankingArray) {
+  if (!fantasyRankingArray) {
     return <p>Please wait while we load your content</p>;
   }
 
   return (
-    <section className="fortyk-rankings">
-      <div className="fortyk-rankings__title-wrap">
-        <h2 className="fortyk-rankings__title">40k Rankings</h2>
+    <section className="fantasy-rankings">
+      <div className="fantasy-rankings__title-wrap">
+        <h2 className="fantasy-rankings__title">Fantasy Rankings</h2>
       </div>
       <FiveColTableHeader />
-      {fortyKRankingArray.map((army: RankObj, index: number) => {
+      {fantasyRankingArray.map((army: RankObj, index: number) => {
         let colour = "dark";
         if (index % 2 === 0) {
           colour = "light";
         }
-        console.log(colour);
         return (
           <FiveColTableRow
             rank={`${index + 1}`}

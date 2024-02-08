@@ -1,3 +1,4 @@
+import FantasyTopFive from "../../components/FantasyTopFive/FantasyTopFive ";
 import FortyKTopFive from "../../components/FortyKTopFive/FortyKTopFive";
 import HomeHero from "../../components/HomeHero/HomeHero";
 import UpcomingBattles from "../../components/UpcomingBattles/UpcomingBattles";
@@ -9,6 +10,7 @@ export default function Homepage() {
       <HomeHero />
       <UpcomingBattles />
       <FortyKTopFive />
+      <FantasyTopFive />
     </main>
   );
 }
