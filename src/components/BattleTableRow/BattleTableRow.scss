@@ -1,0 +1,22 @@
+.battle-row {
+  display: flex;
+  padding: 1rem 0rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  &__combatants {
+    display: flex;
+    padding: 0rem 1rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  &__details {
+    display: flex;
+    width: 18.875rem;
+    padding: 0.25rem 1rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.25rem;
+  }
+}

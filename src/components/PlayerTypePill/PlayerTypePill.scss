@@ -1,0 +1,25 @@
+@use "../../partials/variables" as *;
+
+.player-type {
+  display: flex;
+  padding: 0.25rem 0.5rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 0.25rem;
+  text-align: center;
+  font-family: "Roboto", system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 0.625rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  text-transform: uppercase;
+  &--single {
+    border: 1px solid $blood-angels-1;
+    color: $blood-angels-1;
+  }
+  &--multi {
+    border: 1px solid $dark-angels-2;
+    color: $dark-angels-2;
+  }
+}

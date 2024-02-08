@@ -1,5 +1,9 @@
 import "./DateTableHeader.scss";
 
-export default function DateTableHeader() {
-  return;
+interface DateTableHeader {
+  date: string;
+}
+
+export default function DateTableHeader({ date }: DateTableHeader) {
+  return <div className="dateheader">{date}</div>;
 }

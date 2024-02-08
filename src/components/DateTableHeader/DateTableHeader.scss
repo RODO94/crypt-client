@@ -1,0 +1,17 @@
+@use "../../partials/variables" as *;
+.dateheader {
+  display: flex;
+  padding: 0.375rem 3.5625rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  align-self: stretch;
+  border-radius: 1rem 1rem 0rem 0rem;
+  background: $background-1;
+  font-family: "Roboto", system-ui, Avenir, Helvetica, Arial, sans-serif;
+  color: #fff;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
