@@ -20,7 +20,7 @@ export default function BattleTableRow({
   return (
     <section className="battle-row">
       <article className="battle-row__combatants">
-        <div className="battle-row__team-1">
+        <div className="battle-row__team">
           {player_1.map((player) => {
             return (
               <BattleCard
@@ -33,7 +33,7 @@ export default function BattleTableRow({
           })}
         </div>
         <p className="battle-row__versus">VS</p>
-        <div className="battle-row__team-2">
+        <div className="battle-row__team">
           {player_2.map((player) => {
             return (
               <BattleCard

@@ -11,15 +11,18 @@
   font-family: "Roboto", system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-size: 0.625rem;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 700;
   line-height: normal;
   text-transform: uppercase;
   &--40k {
-    border: 1px solid $ultramarine-4;
+    border: 3px solid $ultramarine-4;
     color: $ultramarine-4;
   }
   &--fantasy {
-    border: 1px solid $space-wolves-2;
+    border: 3px solid $space-wolves-2;
     color: $space-wolves-2;
+  }
+  &__text {
+    margin: 0;
   }
 }

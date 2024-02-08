@@ -15,20 +15,38 @@
     align-self: stretch;
     border-radius: 0.5rem;
     border: 1px solid #000;
-    &--necrons {
-      background-color: $dark-angels-2;
-    }
-    &--spacewolves {
-      background-color: $space-wolves-1;
-    }
-    &--ultramarines {
-      background-color: $ultramarine-1;
-    }
-    &--bloodangels {
-      background-color: $blood-angels-1;
-    }
-    &--any {
-      background-color: $background-1;
-    }
+    background-color: $background-1;
   }
+  &__text {
+    color: white;
+  }
+  &__player-info {
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: capitalize;
+    display: flex;
+    padding: 0rem 0.25rem;
+    justify-content: space-between;
+    align-items: flex-end;
+    align-self: stretch;
+  }
+  &__rank-txt {
+    font-size: 0.5rem;
+    text-transform: uppercase;
+  }
+}
+
+.necrons {
+  background-color: $dark-angels-2;
+}
+.spacewolves {
+  background-color: $space-wolves-1;
+}
+.ultramarines {
+  background-color: $ultramarine-1;
+}
+.bloodangels {
+  background-color: $blood-angels-1;
 }

@@ -11,23 +11,17 @@ export default function BattleCard({ name, known_as, rank }: Player) {
       : nameColour;
   }
 
-  if (
-    nameColour !== "necrons" &&
-    nameColour !== "bloodangels" &&
-    nameColour !== "darkangels" &&
-    nameColour !== "spacewolves" &&
-    nameColour !== "ultramarines"
-  ) {
-    nameColour = "any";
-  }
   return (
     <article className="battle-card">
-      <div className={`battle-card__army battle-card__army--${nameColour}`}>
+      <div className={`battle-card__army ${nameColour}`}>
         <p className="battle-card__text">{name}</p>
       </div>
       <div className="battle-card__player-info">
         <p className="battle-card__player-name">{known_as}</p>
-        <p className="battle-card__player-rank">{`Rank: ${rank}`}</p>
+        <p className="battle-card__player-rank">
+          {" "}
+          <span className="battle-card__rank-txt">Rank:</span> {rank}
+        </p>
       </div>
     </article>
   );

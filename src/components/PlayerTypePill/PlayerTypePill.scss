@@ -11,15 +11,18 @@
   font-family: "Roboto", system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-size: 0.625rem;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 700;
   line-height: normal;
   text-transform: uppercase;
   &--single {
-    border: 1px solid $blood-angels-1;
+    border: 3px solid $blood-angels-1;
     color: $blood-angels-1;
   }
   &--multi {
-    border: 1px solid $dark-angels-2;
+    border: 3px solid $dark-angels-2;
     color: $dark-angels-2;
+  }
+  &__text {
+    margin: 0;
   }
 }

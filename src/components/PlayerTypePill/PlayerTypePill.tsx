@@ -9,16 +9,16 @@ export default function PlayerTypePill({ player_type }: PlayerTypePill) {
   let pillText = "";
 
   player_type === "single"
-    ? (pillType = "battle-type battle-type--single")
-    : (pillType = "battle-type battle-type--multi");
+    ? (pillType = "player-type player-type--single")
+    : (pillType = "player-type player-type--multi");
 
   player_type === "single"
-    ? (pillType = "Single Player")
-    : (pillType = "Multiplayer");
+    ? (pillText = "Single Player")
+    : (pillText = "Multiplayer");
 
   return (
     <article className={pillType}>
-      <p className="battle-type__text">{pillText}</p>
+      <p className="player-type__text">{pillText}</p>
     </article>
   );
 }

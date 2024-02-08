@@ -12,7 +12,7 @@ export default function BattleTypePill({ battle_type }: BattleTypePill) {
     ? (pillType = "battle-type battle-type--40k")
     : (pillType = "battle-type battle-type--fantasy");
 
-  battle_type === "40k" ? (pillType = "40k") : (pillType = "Fantasy");
+  battle_type === "40k" ? (pillText = "40k") : (pillText = "Fantasy");
 
   return (
     <article className={pillType}>
