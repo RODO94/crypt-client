@@ -1,0 +1,50 @@
+@use "../../partials/variables" as *;
+
+.table-row {
+  display: inline-flex;
+  padding: 1rem;
+  align-items: center;
+  gap: 1.2rem;
+  &--light {
+    background-color: $table-background--light;
+  }
+  &--dark {
+    background-color: $table-background--dark;
+  }
+
+  &__content {
+    display: flex;
+    height: 1.125rem;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0;
+    &--rank {
+      width: 1.75rem;
+      text-align: center;
+      font-weight: 800;
+    }
+    &--user {
+      width: 2.5rem;
+    }
+    &--army {
+      width: 3.75rem;
+    }
+    &--ranking {
+      width: 3rem;
+    }
+  }
+  &__icon-wrap {
+    display: flex;
+    width: 2.5rem;
+    height: 1.125rem;
+    padding: 0.0625rem 0rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+  }
+}
