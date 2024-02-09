@@ -1,29 +1,31 @@
 import { useEffect, useState } from "react";
-import { getUpcomingBattlesFive } from "../../utils/BattleRequests";
-import "./UpcomingBattles.scss";
-import DateTableHeader from "../DateTableHeader/DateTableHeader";
-import BattleTableRow from "../BattleTableRow/BattleTableRow";
+import { getCompletedBattlesFive } from "../../utils/BattleRequests";
 import { Player } from "../../utils/Interfaces";
+import BattleCompleteRow from "../BattleCompleteRow/BattleCompleteRow";
+import DateTableHeader from "../DateTableHeader/DateTableHeader";
+import "./CompletedBattles.scss";
 
-interface Battle {
+interface CompletedBattle {
   id: string;
   date: string;
+  winner: string;
+  result: string;
   battle_type: "40k" | "fantasy";
   player_type: "single" | "multi";
   player_1: Player[];
   player_2: Player[];
 }
 
-interface BattleArray extends Array<Battle> {}
+interface CompletedBattleArray extends Array<CompletedBattle> {}
 
-export default function UpcomingBattles() {
-  const [battleArray, setBattleArray] = useState<BattleArray>();
+export default function CompletedBattles() {
+  const [battleArray, setBattleArray] = useState<CompletedBattleArray>();
 
   let currentDate = "";
 
   useEffect(() => {
     const battleFn = async () => {
-      const data = await getUpcomingBattlesFive();
+      const data = await getCompletedBattlesFive();
       setBattleArray(data);
       return data;
     };
@@ -32,38 +34,42 @@ export default function UpcomingBattles() {
   }, []);
 
   if (!battleArray) {
-    return <p>content loading... please wait</p>;
+    return <p>Please wait while we load your content</p>;
   }
 
   return (
-    <section className="upcomingbattles">
-      <div className="upcomingbattles__header-wrap">
-        <h2 className="upcomingbattles__header">Upcoming Battles</h2>
+    <section className="completedbattles">
+      <div className="completedbattles__header-wrap">
+        <h2 className="completedbattles__header">Completed Battles</h2>
       </div>
-      <article className="upcomingbattles__battle-list">
-        {battleArray.map((battle: Battle, index: number) => {
+      <article className="completedbattles__battle-list">
+        {battleArray.map((battle: CompletedBattle, index: number) => {
           if (index === 0) {
             currentDate = battle.date;
             return (
               <>
                 <DateTableHeader key={index} date={battle.date} />
-                <BattleTableRow
+                <BattleCompleteRow
                   key={crypto.randomUUID()}
                   battle_type={battle.battle_type}
                   player_type={battle.player_type}
                   player_1={battle.player_1}
                   player_2={battle.player_2}
+                  result={battle.result}
+                  winner={battle.winner}
                 />
               </>
             );
           } else if (currentDate === battle.date) {
             return (
-              <BattleTableRow
+              <BattleCompleteRow
                 key={crypto.randomUUID()}
                 battle_type={battle.battle_type}
                 player_type={battle.player_type}
                 player_1={battle.player_1}
                 player_2={battle.player_2}
+                result={battle.result}
+                winner={battle.winner}
               />
             );
           } else if (currentDate !== battle.date) {
@@ -71,12 +77,14 @@ export default function UpcomingBattles() {
             return (
               <>
                 <DateTableHeader key={index} date={battle.date} />
-                <BattleTableRow
+                <BattleCompleteRow
                   key={crypto.randomUUID()}
                   battle_type={battle.battle_type}
                   player_type={battle.player_type}
                   player_1={battle.player_1}
                   player_2={battle.player_2}
+                  result={battle.result}
+                  winner={battle.winner}
                 />
               </>
             );

@@ -1,6 +1,6 @@
 @use "../../partials/variables" as *;
 
-.upcomingbattles {
+.completedbattles {
   display: flex;
   padding: 2rem 1.5rem;
   flex-direction: column;
@@ -8,7 +8,7 @@
   align-items: center;
   gap: 1.5rem;
   align-self: stretch;
-  background: $background-2;
+  background: $background-3;
   &__header {
     font-family: "Roboto", system-ui, Avenir, Helvetica, Arial, sans-serif;
     font-size: 1.25rem;
