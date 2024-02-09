@@ -53,6 +53,7 @@ export default function UpcomingBattles() {
                   player_type={battle.player_type}
                   player_1={battle.player_1}
                   player_2={battle.player_2}
+                  id={battle.id}
                 />
               </>
             );
@@ -64,6 +65,7 @@ export default function UpcomingBattles() {
                 player_type={battle.player_type}
                 player_1={battle.player_1}
                 player_2={battle.player_2}
+                id={battle.id}
               />
             );
           } else if (currentDate !== battle.date) {
@@ -77,6 +79,7 @@ export default function UpcomingBattles() {
                   player_type={battle.player_type}
                   player_1={battle.player_1}
                   player_2={battle.player_2}
+                  id={battle.id}
                 />
               </>
             );

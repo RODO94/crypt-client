@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { Player } from "../../utils/Interfaces";
 import BattleCard from "../BattleCard/BattleCard";
 import BattleTypePill from "../BattleTypePill/BattleTypePill";
@@ -9,6 +10,7 @@ interface BattleTableRow {
   player_type: string;
   player_1: Array<Player>;
   player_2: Array<Player>;
+  id: string;
 }
 
 export default function BattleTableRow({
@@ -16,9 +18,16 @@ export default function BattleTableRow({
   player_type,
   player_1,
   player_2,
+  id,
 }: BattleTableRow) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/battles/${id}`);
+  };
+
   return (
-    <section className="battle-row">
+    <section className="battle-row" onClick={handleClick}>
       <article className="battle-row__combatants">
         <div className="battle-row__team">
           {player_1.map((player) => {

@@ -9,5 +9,6 @@ export interface RankObj {
   known_as: string;
   name: string;
   ranking: string;
-  prev_ranking: string;
+  prev_ranking?: string;
+  army_id?: string;
 }

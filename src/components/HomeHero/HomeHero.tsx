@@ -8,8 +8,8 @@ export default function HomeHero() {
         The Crypt is a Warhammer gaming club in the East Neuk of Fife
       </h1>
       <div className="hero__button-wrap">
-        <NavButton colour="blue" text="Log In" page="" />
-        <NavButton colour="dark" text="Sign Up" page="" />
+        <NavButton colour="blue" text="Log In" page="/login" />
+        <NavButton colour="dark" text="Sign Up" page="/signup" />
       </div>
     </section>
   );

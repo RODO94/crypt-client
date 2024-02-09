@@ -57,6 +57,7 @@ export default function CompletedBattles() {
                   player_2={battle.player_2}
                   result={battle.result}
                   winner={battle.winner}
+                  id={battle.id}
                 />
               </>
             );
@@ -70,6 +71,7 @@ export default function CompletedBattles() {
                 player_2={battle.player_2}
                 result={battle.result}
                 winner={battle.winner}
+                id={battle.id}
               />
             );
           } else if (currentDate !== battle.date) {
@@ -85,6 +87,7 @@ export default function CompletedBattles() {
                   player_2={battle.player_2}
                   result={battle.result}
                   winner={battle.winner}
+                  id={battle.id}
                 />
               </>
             );

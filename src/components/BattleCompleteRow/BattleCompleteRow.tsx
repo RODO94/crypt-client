@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { Player } from "../../utils/Interfaces";
 import BattleCard from "../BattleCard/BattleCard";
 import BattleTypePill from "../BattleTypePill/BattleTypePill";
@@ -11,6 +12,7 @@ interface BattleTableRow {
   result: string;
   player_1: Array<Player>;
   player_2: Array<Player>;
+  id: string;
 }
 
 export default function BattleCompleteRow({
@@ -19,9 +21,12 @@ export default function BattleCompleteRow({
   winner,
   battle_type,
   player_type,
+  id,
 }: BattleTableRow) {
   let resultStatementOne = "";
   let resultStatementTwo = "";
+
+  const navigate = useNavigate();
 
   winner === "player one"
     ? (resultStatementOne = "Victory")
@@ -35,8 +40,12 @@ export default function BattleCompleteRow({
     ? (resultStatementTwo = "Vanquished")
     : (resultStatementTwo = "Draw");
 
+  const handleClick = () => {
+    navigate(`/battles/${id}`);
+  };
+
   return (
-    <section className="completedbattle-row">
+    <section className="completedbattle-row" onClick={handleClick}>
       <article className="completedbattle-row__combatants">
         <div
           className={
