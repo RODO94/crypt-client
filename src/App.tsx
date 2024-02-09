@@ -15,6 +15,7 @@ import CreateBattle from "./pages/CreateBattle/CreateBattle";
 import AddArmy from "./pages/AddArmy/AddArmy";
 import UserDashboard from "./pages/UserDashboard/UserDashboard";
 import UserProfile from "./pages/UserProfile/UserProfile";
+import NavFooter from "./components/NavFooter/NavFooter";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
           <Route path="/armies/:userID/add" element={<AddArmy />} />
           <Route path="/armies/:userID/:armyID" element={<ArmyInfo />} />
         </Routes>
+        <NavFooter />
       </div>
     </BrowserRouter>
   );

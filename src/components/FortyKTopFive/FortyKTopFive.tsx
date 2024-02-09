@@ -36,7 +36,6 @@ export default function FortyKTopFive() {
         if (index % 2 === 0) {
           colour = "light";
         }
-        console.log(colour);
         return (
           <FiveColTableRow
             rank={`${index + 1}`}

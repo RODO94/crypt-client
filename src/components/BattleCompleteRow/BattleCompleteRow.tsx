@@ -35,9 +35,6 @@ export default function BattleCompleteRow({
     ? (resultStatementTwo = "Vanquished")
     : (resultStatementTwo = "Draw");
 
-  console.log(resultStatementOne);
-  console.log(resultStatementTwo);
-
   return (
     <section className="completedbattle-row">
       <article className="completedbattle-row__combatants">

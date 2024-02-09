@@ -1,0 +1,39 @@
+@use "../../partials/variables" as *;
+.footer {
+  display: flex;
+  padding: 1.5rem 1rem 2rem 1rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1.5rem;
+  align-self: stretch;
+  width: 100%;
+  background-color: $background-1;
+  &-nav {
+    display: flex;
+    padding: 1rem;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: center;
+    align-content: center;
+    row-gap: 1rem;
+    align-self: stretch;
+    flex-wrap: wrap;
+    background-color: $background-3;
+    border-radius: 1rem;
+    &__link {
+      text-decoration: none;
+      color: white;
+      font-size: 0.5rem;
+      font-style: normal;
+      font-weight: 900;
+      line-height: normal;
+      text-align: center;
+      &--active {
+        background-color: $background-2;
+        padding: 0.5rem 0.75rem;
+        border-radius: 0.8rem;
+      }
+    }
+  }
+}
