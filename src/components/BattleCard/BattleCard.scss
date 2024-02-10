@@ -1,4 +1,5 @@
 @use "../../partials/variables" as *;
+@use "../../partials/mixins" as *;
 
 .battle-card {
   display: flex;
@@ -48,15 +49,4 @@
   }
 }
 
-.necrons {
-  background-color: $dark-angels-2;
-}
-.spacewolves {
-  background-color: $space-wolves-1;
-}
-.ultramarines {
-  background-color: $ultramarine-1;
-}
-.bloodangels {
-  background-color: $blood-angels-1;
-}
+@include army_colours;

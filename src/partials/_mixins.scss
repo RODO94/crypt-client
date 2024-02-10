@@ -1,0 +1,162 @@
+@use "./_variables" as *;
+
+@mixin tablet {
+  @media (min-width: $tablet-breakpoint) {
+    @content;
+  }
+}
+@mixin desktop {
+  @media (min-width: $desktop-breakpoint) {
+    @content;
+  }
+}
+
+@mixin army_colours {
+  // 40k
+  .necrons {
+    background-color: $dark-angels-2;
+  }
+  .spacewolves {
+    background-color: $space-wolves-1;
+  }
+  .ultramarines {
+    background-color: $ultramarine-1;
+  }
+  .bloodangels {
+    background-color: $blood-angels-1;
+  }
+  .tau {
+    background-color: $tau;
+  }
+  .orks {
+    background-color: $orks;
+  }
+  .leaguesofvotann {
+    background-color: $leaguesofvotann;
+  }
+  .genestealercult {
+    background-color: $genestealercult;
+  }
+  .tyrannids {
+    background-color: $tyrannids;
+  }
+  .drukhari {
+    background-color: $drukhari;
+  }
+  .aelderi {
+    background-color: $aelderi;
+  }
+  .chaosdemons {
+    background-color: $chaosdemons;
+  }
+  .worldeaters {
+    background-color: $worldeaters;
+  }
+  .thousandsons {
+    background-color: $thousandsons;
+  }
+  .deathguard {
+    background-color: $deathguard;
+  }
+  .chaosspacemarines {
+    background-color: $chaosspacemarines;
+  }
+  .astramilitarum {
+    background-color: $astramilitarum;
+  }
+  .adeptusmechanicus {
+    background-color: $adeptusmechanicus;
+  }
+  .adeptuscustodes {
+    background-color: $adeptuscustodes;
+  }
+  .adeptussororitas {
+    background-color: $adeptussororitas;
+  }
+  .greyknights {
+    background-color: $greyknights;
+  }
+  .deathwatch {
+    background-color: $deathwatch;
+  }
+  .salamanders {
+    background-color: $salamanders;
+  }
+  .whitescars {
+    background-color: $whitescars;
+  }
+  .snakebites {
+    background-color: $snakebites;
+  }
+  .gofforks {
+    background-color: $gofforks;
+  }
+  .bloodaxes {
+    background-color: $bloodaxes;
+  }
+
+  // Fantasy
+  .skaven {
+    background-color: $skaven;
+  }
+  .tzeentchdaemons {
+    background-color: $tzeentchdaemons;
+  }
+  .highelves {
+    background-color: $highelves;
+  }
+  .daemonsofnurgle {
+    background-color: $daemonsofnurgle;
+  }
+  .woodelves {
+    background-color: $woodelves;
+  }
+  .empire {
+    background-color: $empire;
+  }
+  .lizardmen {
+    background-color: $lizardmen-1;
+  }
+  .warriorsofchaostzeentch {
+    background-color: $warriorsofchaostzeentch;
+  }
+  .warriorsofchaos {
+    background-color: $warriorsofchaos;
+  }
+  .warriorsofchaosnurgle {
+    background-color: $warriorsofchaosnurgle;
+  }
+  .slaanesh {
+    background-color: $slaanesh;
+  }
+  .darkelves {
+    background-color: $darkelves;
+  }
+  .beastmen {
+    background-color: $beastmen;
+  }
+  .warriorsofchaoskhorne {
+    background-color: $warriorsofchaoskhorne;
+  }
+  .daemonsofkhorne {
+    background-color: $daemonsofkhorne;
+  }
+  .dwarves {
+    background-color: $dwarves;
+  }
+  .vampirecounts {
+    background-color: $vampirecounts;
+  }
+  .nightgoblins {
+    background-color: $nightgoblins;
+  }
+  .ogrekingdoms {
+    background-color: $ogrekingdoms;
+  }
+  .orcsandgoblins {
+    background-color: $orcsandgoblins;
+  }
+  .savageorcs {
+    background-color: $savageorcs;
+  }
+}

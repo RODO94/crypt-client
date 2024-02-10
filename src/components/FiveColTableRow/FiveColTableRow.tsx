@@ -5,7 +5,7 @@ import "./FiveColTableRow.scss";
 interface rankObjTable extends RankObj {
   status: string;
   colour: string;
-  navTo: string;
+  navTo?: string;
 }
 
 export default function FiveColTableRow({
@@ -76,7 +76,9 @@ export default function FiveColTableRow({
     : (icon = noChangeIcon);
 
   const handleClick = () => {
-    navigate(navTo);
+    if (navTo) {
+      navigate(navTo);
+    }
   };
 
   return (

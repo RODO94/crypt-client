@@ -38,6 +38,7 @@ export default function FantasyTopFive() {
         }
         return (
           <FiveColTableRow
+            key={crypto.randomUUID()}
             rank={`${index + 1}`}
             known_as={army.known_as}
             name={army.name}
@@ -50,6 +51,7 @@ export default function FantasyTopFive() {
                 : "no change"
             }
             colour={colour}
+            navTo="/"
           />
         );
       })}
