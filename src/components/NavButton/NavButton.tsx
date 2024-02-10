@@ -4,7 +4,7 @@ import "./NavButton.scss";
 interface ButtonProps {
   colour: "blue" | "dark" | "green";
   text: string;
-  page: string;
+  page?: string;
 }
 
 export default function NavButton({ colour, text, page }: ButtonProps) {

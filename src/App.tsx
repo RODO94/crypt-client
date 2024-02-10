@@ -16,17 +16,18 @@ import AddArmy from "./pages/AddArmy/AddArmy";
 import UserDashboard from "./pages/UserDashboard/UserDashboard";
 import UserProfile from "./pages/UserProfile/UserProfile";
 import NavFooter from "./components/NavFooter/NavFooter";
+import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <Header />
         <Routes>
           {/* Global Routes */}
           <Route path="/" element={<Homepage />} />
           <Route path="/login" element={<LogIn />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset/:token" element={<ResetPassword />} />
           <Route path="/ranking/40k" element={<FortyKRankingPage />} />
           <Route path="/ranking/fantasy" element={<FantasyRankingPage />} />
@@ -37,12 +38,11 @@ function App() {
           {/* User Routes */}
           <Route path="/:userID" element={<UserDashboard />} />
           <Route path="/:userID/profile" element={<UserProfile />} />
-          <Route path="/battles/:userID/create" element={<CreateBattle />} />
-          <Route path="/battles/:userID/:battleID" element={<BattleInfo />} />
-          <Route path="/armies/:userID/add" element={<AddArmy />} />
-          <Route path="/armies/:userID/:armyID" element={<ArmyInfo />} />
+          <Route path="/battles/create" element={<CreateBattle />} />
+          <Route path="/battles/:battleID" element={<BattleInfo />} />
+          <Route path="/armies/add" element={<AddArmy />} />
+          <Route path="/armies/:armyID" element={<ArmyInfo />} />
         </Routes>
-        <NavFooter />
       </div>
     </BrowserRouter>
   );
