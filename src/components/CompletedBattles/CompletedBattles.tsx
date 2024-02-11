@@ -47,7 +47,10 @@ export default function CompletedBattles() {
           if (index === 0) {
             currentDate = battle.date;
             return (
-              <article key={crypto.randomUUID()}>
+              <article
+                className="completedbattles__container"
+                key={crypto.randomUUID()}
+              >
                 <DateTableHeader key={crypto.randomUUID()} date={battle.date} />
                 <BattleCompleteRow
                   key={crypto.randomUUID()}
@@ -77,7 +80,10 @@ export default function CompletedBattles() {
           } else if (currentDate !== battle.date) {
             currentDate = battle.date;
             return (
-              <article key={crypto.randomUUID()}>
+              <article
+                className="completedbattles__container"
+                key={crypto.randomUUID()}
+              >
                 <DateTableHeader key={crypto.randomUUID()} date={battle.date} />
                 <BattleCompleteRow
                   key={crypto.randomUUID()}

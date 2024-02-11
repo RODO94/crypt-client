@@ -45,7 +45,10 @@ export default function UpcomingBattles() {
           if (index === 0) {
             currentDate = battle.date;
             return (
-              <article key={crypto.randomUUID()}>
+              <article
+                className="upcomingbattles__container"
+                key={crypto.randomUUID()}
+              >
                 <DateTableHeader key={crypto.randomUUID()} date={battle.date} />
                 <BattleTableRow
                   key={crypto.randomUUID()}
@@ -71,7 +74,10 @@ export default function UpcomingBattles() {
           } else if (currentDate !== battle.date) {
             currentDate = battle.date;
             return (
-              <article key={crypto.randomUUID()}>
+              <article
+                className="upcomingbattles__container"
+                key={crypto.randomUUID()}
+              >
                 <DateTableHeader key={crypto.randomUUID()} date={battle.date} />
                 <BattleTableRow
                   key={crypto.randomUUID()}

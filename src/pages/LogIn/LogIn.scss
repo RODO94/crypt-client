@@ -49,6 +49,7 @@
       margin: 0;
     }
     &-forgot {
+      padding: 0.5rem 0;
       align-self: stretch;
       color: #35628b;
       font-size: 0.75rem;
@@ -56,6 +57,10 @@
       font-weight: 600;
       line-height: normal;
       text-decoration: none;
+      outline: none;
+      border: none;
+      text-align: center;
+      background-color: transparent;
     }
   }
   &__submit-button {

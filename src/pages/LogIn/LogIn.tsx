@@ -81,13 +81,13 @@ export default function LogIn() {
           required={true}
         />
         <h2 className={errorClass}>{errorMessage}</h2>
-        <button onClick={handleReset} className={"login__form-forgot"}>
-          Forgot Password
-        </button>
         <button type="submit" className="login__submit-button">
           Login
         </button>
         <NavButton colour="dark" text="Sign Up" page="/signup" />{" "}
+        <button onClick={handleReset} className={"login__form-forgot"}>
+          Forgot Password
+        </button>
       </form>
     </main>
   );
