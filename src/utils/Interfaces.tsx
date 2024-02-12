@@ -38,3 +38,22 @@ export interface RankObj {
   prev_ranking?: string;
   army_id?: string;
 }
+
+export interface UsersObj {
+  first_name: string;
+  last_name: string;
+  email: string;
+  role: string;
+  known_as: string;
+}
+
+export interface CompletedBattle {
+  id: string;
+  date: string;
+  winner: string;
+  result: string;
+  battle_type: "40k" | "fantasy";
+  player_type: "single" | "multi";
+  player_1: Player[];
+  player_2: Player[];
+}

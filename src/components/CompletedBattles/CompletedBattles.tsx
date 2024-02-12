@@ -1,20 +1,9 @@
 import { useEffect, useState } from "react";
 import { getCompletedBattlesFive } from "../../utils/BattleRequests";
-import { Player } from "../../utils/Interfaces";
+import { CompletedBattle, Player } from "../../utils/Interfaces";
 import BattleCompleteRow from "../BattleCompleteRow/BattleCompleteRow";
 import DateTableHeader from "../DateTableHeader/DateTableHeader";
 import "./CompletedBattles.scss";
-
-interface CompletedBattle {
-  id: string;
-  date: string;
-  winner: string;
-  result: string;
-  battle_type: "40k" | "fantasy";
-  player_type: "single" | "multi";
-  player_1: Player[];
-  player_2: Player[];
-}
 
 interface CompletedBattleArray extends Array<CompletedBattle> {}
 

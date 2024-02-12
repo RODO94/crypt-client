@@ -12,4 +12,19 @@ const getCompletedBattlesFive = async () => {
   return data;
 };
 
-export { getUpcomingBattlesFive, getCompletedBattlesFive };
+const getUpcomingBattles = async () => {
+  const { data } = await axios.get(`${baseURL}/battles/upcoming`);
+  return data;
+};
+
+const getCompletedBattles = async () => {
+  const { data } = await axios.get(`${baseURL}/battles/completed`);
+  return data;
+};
+
+export {
+  getUpcomingBattlesFive,
+  getUpcomingBattles,
+  getCompletedBattlesFive,
+  getCompletedBattles,
+};
