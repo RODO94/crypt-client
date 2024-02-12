@@ -19,6 +19,10 @@ export default function ResetPassword() {
 
   const navigate = useNavigate();
 
+  if (!token) {
+    return navigate("/login");
+  }
+
   const handleSubmit = async (event: any) => {
     event.preventDefault();
     const password = event.target.password.value;

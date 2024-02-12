@@ -8,7 +8,6 @@ import {
   loginAuthentication,
 } from "../../utils/UserAuth";
 import { useState } from "react";
-import ForgotPassword from "../ForgotPassword/ForgotPassword";
 
 export default function LogIn() {
   const [errorMessage, setErrorMessage] = useState<string>("");
