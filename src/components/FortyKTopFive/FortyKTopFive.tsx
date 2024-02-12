@@ -4,6 +4,7 @@ import FiveColTableRow from "../FiveColTableRow/FiveColTableRow";
 import "./FortyKTopFive.scss";
 import { getRankingTopFive } from "../../utils/RankingRequests";
 import { RankObj } from "../../utils/Interfaces";
+import { Link } from "react-router-dom";
 
 interface RankArray extends Array<RankObj> {}
 
@@ -28,7 +29,9 @@ export default function FortyKTopFive() {
   return (
     <section className="fortyk-rankings">
       <div className="fortyk-rankings__title-wrap">
-        <h2 className="fortyk-rankings__title">40k Rankings</h2>
+        <Link to={"/rankings/40k"} className="fortyk-rankings__title">
+          40k Rankings
+        </Link>
       </div>
       <FiveColTableHeader />
       {fortyKRankingArray.map((army: RankObj, index: number) => {

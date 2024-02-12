@@ -20,7 +20,7 @@
     background-color: $space-wolves-1;
   }
   .ultramarines {
-    background-color: $ultramarine-1;
+    background-color: $ultramarine-5;
   }
   .bloodangels {
     background-color: $blood-angels-1;
@@ -75,6 +75,7 @@
   }
   .greyknights {
     background-color: $greyknights;
+    color: black;
   }
   .deathwatch {
     background-color: $deathwatch;
@@ -87,12 +88,16 @@
   }
   .snakebites {
     background-color: $snakebites;
+    color: black;
   }
   .gofforks {
     background-color: $gofforks;
   }
   .bloodaxes {
     background-color: $bloodaxes;
+  }
+  .spacemarines {
+    background-color: $ultramarine-1;
   }
 
   // Fantasy
@@ -101,6 +106,7 @@
   }
   .tzeentchdaemons {
     background-color: $tzeentchdaemons;
+    color: black;
   }
   .highelves {
     background-color: $highelves;
@@ -113,6 +119,7 @@
   }
   .empire {
     background-color: $empire;
+    color: black !important;
   }
   .lizardmen {
     background-color: $lizardmen-1;
@@ -158,5 +165,6 @@
   }
   .savageorcs {
     background-color: $savageorcs;
+    color: black;
   }
 }

@@ -4,6 +4,7 @@ import FiveColTableRow from "../FiveColTableRow/FiveColTableRow";
 import "./FantasyTopFive .scss";
 import { getRankingTopFive } from "../../utils/RankingRequests";
 import { RankObj } from "../../utils/Interfaces";
+import { Link } from "react-router-dom";
 
 interface RankArray extends Array<RankObj> {}
 
@@ -28,7 +29,9 @@ export default function FantasyTopFive() {
   return (
     <section className="fantasy-rankings">
       <div className="fantasy-rankings__title-wrap">
-        <h2 className="fantasy-rankings__title">Fantasy Rankings</h2>
+        <Link to={"/rankings/fantasy"} className="fantasy-rankings__title">
+          Fantasy Rankings
+        </Link>
       </div>
       <FiveColTableHeader />
       {fantasyRankingArray.map((army: RankObj, index: number) => {

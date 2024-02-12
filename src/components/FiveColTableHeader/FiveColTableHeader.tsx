@@ -15,9 +15,7 @@ export default function FiveColTableHeader() {
       <p className="table-header__column-header table-header__column-header--score">
         Score
       </p>
-      <p className="table-header__column-header table-header__column-header--icon">
-        Change
-      </p>
+      <p className="table-header__column-header table-header__column-header--icon"></p>
     </article>
   );
 }

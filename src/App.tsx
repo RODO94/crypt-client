@@ -29,8 +29,8 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset/:token" element={<ResetPassword />} />
-          <Route path="/ranking/40k" element={<FortyKRankingPage />} />
-          <Route path="/ranking/fantasy" element={<FantasyRankingPage />} />
+          <Route path="/rankings/40k" element={<FortyKRankingPage />} />
+          <Route path="/rankings/fantasy" element={<FantasyRankingPage />} />
           <Route path="/battles/completed" element={<CompletedBattlesPage />} />
           <Route path="/battles/upcoming" element={<UpcomingBattlesPage />} />
           <Route path="/battles/:battleID" element={<BattleInfo />} />

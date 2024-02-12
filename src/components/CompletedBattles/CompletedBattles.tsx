@@ -4,6 +4,7 @@ import { CompletedBattle, Player } from "../../utils/Interfaces";
 import BattleCompleteRow from "../BattleCompleteRow/BattleCompleteRow";
 import DateTableHeader from "../DateTableHeader/DateTableHeader";
 import "./CompletedBattles.scss";
+import { Link } from "react-router-dom";
 
 interface CompletedBattleArray extends Array<CompletedBattle> {}
 
@@ -29,7 +30,9 @@ export default function CompletedBattles() {
   return (
     <section className="completedbattles">
       <div className="completedbattles__header-wrap">
-        <h2 className="completedbattles__header">Completed Battles</h2>
+        <Link to={"/battles/completed"} className="completedbattles__header">
+          Completed Battles
+        </Link>
       </div>
       <article className="completedbattles__battle-list">
         {battleArray.map((battle: CompletedBattle, index: number) => {

@@ -20,9 +20,10 @@ export default function ResetPassword() {
   const navigate = useNavigate();
 
   if (!token) {
-    return navigate("/login");
-  }
+    navigate("/login");
 
+    return <p>Invalid Token</p>;
+  }
   const handleSubmit = async (event: any) => {
     event.preventDefault();
     const password = event.target.password.value;
@@ -67,7 +68,7 @@ export default function ResetPassword() {
   };
 
   return (
-    <main className="resetpassword">
+    <section className="resetpassword">
       <NavLink to={"/"}>
         <img src={logo} className="resetpassword__logo" />
       </NavLink>
@@ -91,6 +92,6 @@ export default function ResetPassword() {
           Submit
         </button>
       </form>
-    </main>
+    </section>
   );
 }

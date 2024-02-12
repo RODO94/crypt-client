@@ -4,6 +4,7 @@ import "./UpcomingBattles.scss";
 import DateTableHeader from "../DateTableHeader/DateTableHeader";
 import BattleTableRow from "../BattleTableRow/BattleTableRow";
 import { Player } from "../../utils/Interfaces";
+import { Link } from "react-router-dom";
 
 interface Battle {
   id: string;
@@ -38,7 +39,9 @@ export default function UpcomingBattles() {
   return (
     <section className="upcomingbattles">
       <div className="upcomingbattles__header-wrap">
-        <h2 className="upcomingbattles__header">Upcoming Battles</h2>
+        <Link to={"/battles/upcoming"} className="upcomingbattles__header">
+          Upcoming Battles
+        </Link>
       </div>
       <article className="upcomingbattles__battle-list">
         {battleArray.map((battle: Battle, index: number) => {
