@@ -1,5 +1,12 @@
+import DashboardHero from "../../components/DashboardHero/DashboardHero";
 import "./UserDashboard.scss";
 
 export default function UserDashboard() {
-  return <h1>User Dashboard Page</h1>;
+  return (
+    <>
+      <section className="user-dash">
+        <DashboardHero />
+      </section>
+    </>
+  );
 }

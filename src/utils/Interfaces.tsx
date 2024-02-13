@@ -1,5 +1,3 @@
-import { FunctionComponent } from "react";
-
 export interface Player {
   name: string;
   known_as: string;
@@ -52,6 +50,15 @@ export interface CompletedBattle {
   date: string;
   winner: string;
   result: string;
+  battle_type: "40k" | "fantasy";
+  player_type: "single" | "multi";
+  player_1: Player[];
+  player_2: Player[];
+}
+
+export interface Battle {
+  id: string;
+  date: string;
   battle_type: "40k" | "fantasy";
   player_type: "single" | "multi";
   player_1: Player[];

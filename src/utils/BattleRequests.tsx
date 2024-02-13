@@ -22,9 +22,19 @@ const getCompletedBattles = async () => {
   return data;
 };
 
+const getUsersBattles = async (token: string) => {
+  const { data } = await axios.get(`${baseURL}/battles/user/upcoming`, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+  return data;
+};
+
 export {
   getUpcomingBattlesFive,
   getUpcomingBattles,
   getCompletedBattlesFive,
   getCompletedBattles,
+  getUsersBattles,
 };
