@@ -43,6 +43,7 @@ export interface UsersObj {
   email: string;
   role: string;
   known_as: string;
+  user_emblem: string;
 }
 
 export interface CompletedBattle {

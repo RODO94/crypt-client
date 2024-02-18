@@ -1,0 +1,38 @@
+@use "../../partials/variables" as *;
+
+.dashboard-hero {
+  display: flex;
+  padding: 0rem 1rem 2rem 1rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+  background-color: $dark-angels-1;
+  border-radius: 0rem 0rem 2rem 2rem;
+  width: 100%;
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+  }
+  &__header {
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    color: #fff;
+    margin: 0;
+  }
+  &__armies {
+    display: flex;
+    align-items: flex-start;
+    gap: 10%;
+    align-self: stretch;
+  }
+  &__buttons {
+    display: flex;
+    align-items: flex-start;
+    gap: 10%;
+    width: 100%;
+  }
+}

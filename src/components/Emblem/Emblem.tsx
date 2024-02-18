@@ -1,0 +1,151 @@
+import "./Emblem.scss";
+import adeptasororitas from "../../assets/emblems/adepta-sororitas-crest.svg";
+import adeptacustodes from "../../assets/emblems/adeptus-custodes-crest.svg";
+import adeptamechanicus from "../../assets/emblems/adeptus-mechanicus-crest.svg";
+import aelderi from "../../assets/emblems/aelderi-crest.svg";
+import astramilitarum from "../../assets/emblems/astra-militarum-crest.svg";
+import barrowkings from "../../assets/emblems/barrowkings.svg";
+import beastmen from "../../assets/emblems/beastmen.svg";
+import bloodangels from "../../assets/emblems/bloodangels-crest.svg";
+import chaosspacemarines from "../../assets/emblems/chaos-space-marines-crest.svg";
+import chaosdemons from "../../assets/emblems/chaosdemons-crest.svg";
+import daemonsofkhorne from "../../assets/emblems/daemons-of-khorne.svg";
+import daemonsofnurgle from "../../assets/emblems/daemons-of-nurgle.svg";
+import darkelves from "../../assets/emblems/dark-elves.svg";
+import darkangels from "../../assets/emblems/darkangels-crest.svg";
+import darktemplars from "../../assets/emblems/darktemplars-crest.svg";
+import deathguard from "../../assets/emblems/deathguard-crest.svg";
+import deathwatch from "../../assets/emblems/deathwatch-crest.svg";
+import drukhari from "../../assets/emblems/drukhari-crest.svg";
+import dwarf from "../../assets/emblems/dwarf.svg";
+import empire from "../../assets/emblems/empire.svg";
+import genestealercult from "../../assets/emblems/genestealer-cult-crest.svg";
+import greyknights from "../../assets/emblems/greyknights-crest.svg";
+import highelves from "../../assets/emblems/high-elves.svg";
+import leaguesofvotann from "../../assets/emblems/leaguesofvotann-crest.svg";
+import lizardmen from "../../assets/emblems/lizardmen.svg";
+import necrons from "../../assets/emblems/necrons-crest.svg";
+import nightgoblins from "../../assets/emblems/night-goblins.svg";
+import ogrekingdoms from "../../assets/emblems/ogre-kingdoms.svg";
+import orcsandgoblins from "../../assets/emblems/orcs-and-goblins.svg";
+import orks from "../../assets/emblems/orks-crest.svg";
+import savageorcs from "../../assets/emblems/savage-orcs.svg";
+import skaven from "../../assets/emblems/skaven.svg";
+import slaanesh from "../../assets/emblems/slaanesh.svg";
+import spacemarines from "../../assets/emblems/spacemarines-crest.svg";
+import spacewolves from "../../assets/emblems/spacewolves-crest.svg";
+import tau from "../../assets/emblems/t'au-crest.svg";
+import thousandsons from "../../assets/emblems/thousandsons-crest.svg";
+import tyrannids from "../../assets/emblems/tyrannids-crest.svg";
+import tzeentchdaemons from "../../assets/emblems/tzeentch-daemons.svg";
+import vampirecounts from "../../assets/emblems/vampire-counts.svg";
+import warriorsofchaoskhorne from "../../assets/emblems/warriors-of-chaos-khorne.svg";
+import warriorsofchaosnurgle from "../../assets/emblems/warriors-of-chaos-nurgle.svg";
+import warriorsofchaostzeentch from "../../assets/emblems/warriors-of-chaos-tzeentch.svg";
+import warriorsofchaos from "../../assets/emblems/warriors-of-chaos.svg";
+import woodelves from "../../assets/emblems/wood-elves.svg";
+import worldeaters from "../../assets/emblems/worldeaters-crest.svg";
+
+type EmblemType = {
+  emblem: string;
+};
+
+export default function Emblem({ emblem }: EmblemType) {
+  let emblemIcon = tau;
+
+  emblem === "adeptasororitas"
+    ? (emblemIcon = adeptasororitas)
+    : emblem === "adeptacustodes"
+    ? (emblemIcon = adeptacustodes)
+    : emblem === "adeptamechanicus"
+    ? (emblemIcon = adeptamechanicus)
+    : emblem === "aelderi"
+    ? (emblemIcon = aelderi)
+    : emblem === "astramilitarum"
+    ? (emblemIcon = astramilitarum)
+    : emblem === "barrowkings"
+    ? (emblemIcon = barrowkings)
+    : emblem === "beastmen"
+    ? (emblemIcon = beastmen)
+    : emblem === "bloodangels"
+    ? (emblemIcon = bloodangels)
+    : emblem === "chaosspacemarines"
+    ? (emblemIcon = chaosspacemarines)
+    : emblem === "chaosdemons"
+    ? (emblemIcon = chaosdemons)
+    : emblem === "daemonsofkhorne"
+    ? (emblemIcon = daemonsofkhorne)
+    : emblem === "daemonsofnurgle"
+    ? (emblemIcon = daemonsofnurgle)
+    : emblem === "darkelves"
+    ? (emblemIcon = darkelves)
+    : emblem === "darkangels"
+    ? (emblemIcon = darkangels)
+    : emblem === "darktemplars"
+    ? (emblemIcon = darktemplars)
+    : emblem === "deathguard"
+    ? (emblemIcon = deathguard)
+    : emblem === "deathwatch"
+    ? (emblemIcon = deathwatch)
+    : emblem === "drukhari"
+    ? (emblemIcon = drukhari)
+    : emblem === "dwarf"
+    ? (emblemIcon = dwarf)
+    : emblem === "empire"
+    ? (emblemIcon = empire)
+    : emblem === "genestealercult"
+    ? (emblemIcon = genestealercult)
+    : emblem === "greyknights"
+    ? (emblemIcon = greyknights)
+    : emblem === "highelves"
+    ? (emblemIcon = highelves)
+    : emblem === "leaguesofvotann"
+    ? (emblemIcon = leaguesofvotann)
+    : emblem === "lizardmen"
+    ? (emblemIcon = lizardmen)
+    : emblem === "necrons"
+    ? (emblemIcon = necrons)
+    : emblem === "nightgoblins"
+    ? (emblemIcon = nightgoblins)
+    : emblem === "ogrekingdoms"
+    ? (emblemIcon = ogrekingdoms)
+    : emblem === "orcsandgoblins"
+    ? (emblemIcon = orcsandgoblins)
+    : emblem === "orks"
+    ? (emblemIcon = orks)
+    : emblem === "savageorcs"
+    ? (emblemIcon = savageorcs)
+    : emblem === "skaven"
+    ? (emblemIcon = skaven)
+    : emblem === "slaanesh"
+    ? (emblemIcon = slaanesh)
+    : emblem === "spacemarines"
+    ? (emblemIcon = spacemarines)
+    : emblem === "spacewolves"
+    ? (emblemIcon = spacewolves)
+    : emblem === "tau"
+    ? (emblemIcon = tau)
+    : emblem === "thousandsons"
+    ? (emblemIcon = thousandsons)
+    : emblem === "tyrannids"
+    ? (emblemIcon = tyrannids)
+    : emblem === "tzeentchdaemons"
+    ? (emblemIcon = tzeentchdaemons)
+    : emblem === "vampirecounts"
+    ? (emblemIcon = vampirecounts)
+    : emblem === "warriorsofchaoskhorne"
+    ? (emblemIcon = warriorsofchaoskhorne)
+    : emblem === "warriorsofchaosnurgle"
+    ? (emblemIcon = warriorsofchaosnurgle)
+    : emblem === "warriorsofchaostzeentch"
+    ? (emblemIcon = warriorsofchaostzeentch)
+    : emblem === "warriorsofchaos"
+    ? (emblemIcon = warriorsofchaos)
+    : emblem === "woodelves"
+    ? (emblemIcon = woodelves)
+    : emblem === "worldeaters"
+    ? (emblemIcon = worldeaters)
+    : (emblemIcon = necrons);
+
+  return <img className="emblem" src={emblemIcon} alt="army emblem" />;
+}

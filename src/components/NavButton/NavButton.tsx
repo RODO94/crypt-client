@@ -15,6 +15,10 @@ export default function NavButton({ colour, text, page }: ButtonProps) {
     ? (colourClass = "nav-button nav-button--dark")
     : (colourClass = "nav-button nav-button--green");
 
+  if (!page) {
+    page = "/";
+  }
+
   return (
     <Link to={page} className={colourClass}>
       {text}

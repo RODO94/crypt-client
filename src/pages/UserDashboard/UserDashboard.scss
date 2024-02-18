@@ -1,0 +1,11 @@
+@use "../../partials/variables" as *;
+
+.user-dash {
+  display: flex;
+  padding: 3.5rem 1rem 2rem 1rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+  background-color: $dark-angels-1;
+  border-radius: 0rem 0rem 2rem 2rem;
+}

@@ -10,4 +10,45 @@ const getAllUsersNames = async () => {
   });
   return userArray;
 };
-export { getAllUsersNames };
+
+const getUser = async (token: string) => {
+  try {
+    const { data } = await axios.get(`${baseURL}/users/one`, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    return data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+const getNemesis = async (token: string) => {
+  try {
+    const { data } = await axios.get(`${baseURL}/users/nemesis`, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    return data;
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+};
+const getAlly = async (token: string) => {
+  try {
+    const { data } = await axios.get(`${baseURL}/users/ally`, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    return data;
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+};
+export { getAllUsersNames, getUser, getNemesis, getAlly };

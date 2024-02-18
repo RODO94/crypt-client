@@ -3,9 +3,7 @@ import "./NextBattleCard.scss";
 import { Battle, Player } from "../../utils/Interfaces";
 import { getUsersBattles } from "../../utils/BattleRequests";
 import { useNavigate } from "react-router-dom";
-import BattleTableRow from "../BattleTableRow/BattleTableRow";
 import BattleCard from "../BattleCard/BattleCard";
-import ArmyPill from "../ArmyPill/ArmyPill";
 import dayjs from "dayjs";
 
 interface BattleArray extends Array<Battle> {}
@@ -19,6 +17,9 @@ export default function NextBattleCard() {
 
   const token = sessionStorage.getItem("token");
 
+  let nextBattleComp = <p>No Upcoming Battles</p>;
+  let allyComp = <p>No Ally Available</p>;
+
   if (!token) {
     navigate("/login");
     return <p>You need to log in before you can see your dashboard</p>;
@@ -28,6 +29,10 @@ export default function NextBattleCard() {
     const battleFn = async () => {
       const data = await getUsersBattles(token);
       const tempBattleArray = await data.battleArray[0];
+      if (!tempBattleArray) {
+        setBattleArray([]);
+        return setNextBattle([]);
+      }
       const playerOneBoolArray = tempBattleArray.player_1.map((player: any) => {
         if (player.id === data.user.id) {
           return true;
@@ -49,23 +54,31 @@ export default function NextBattleCard() {
     return <p>Please wait for your content to load</p>;
   }
 
-  console.log(nextBattle);
-  return (
-    <article className="next-battle-card">
-      <h3 className="next-battle-card__header">Next Battle</h3>
-      <div className="next-battle-card__container">
+  if (battleArray[0] && nextBattle[0]) {
+    nextBattleComp = (
+      <>
         <p className="next-battle-card__date">
           {dayjs(battleArray[0].date).format("DD/MM")}
         </p>
         <p className="next-battle-card__versus">Vs</p>
-        {nextBattle.map((player: Player) => (
-          <BattleCard
-            name={player.name}
-            known_as={player.known_as}
-            rank={player.rank}
-          />
-        ))}
-      </div>
+        <div className="next-battle-card__container--50">
+          {nextBattle.map((player: Player) => (
+            <BattleCard
+              key={crypto.randomUUID()}
+              name={player.name}
+              known_as={player.known_as}
+              rank={player.rank}
+            />
+          ))}
+        </div>
+      </>
+    );
+  }
+
+  return (
+    <article className="next-battle-card">
+      <h3 className="next-battle-card__header">Next Battle</h3>
+      <div className="next-battle-card__container">{nextBattleComp}</div>
     </article>
   );
 }
