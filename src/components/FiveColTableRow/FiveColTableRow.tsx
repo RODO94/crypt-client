@@ -3,7 +3,6 @@ import { RankObj } from "../../utils/Interfaces";
 import "./FiveColTableRow.scss";
 
 interface rankObjTable extends RankObj {
-  status: string;
   colour: string;
   navTo?: string;
 }

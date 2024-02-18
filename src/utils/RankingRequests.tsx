@@ -18,4 +18,20 @@ const getRanking = async (battleType: string) => {
 
   return responseArray;
 };
-export { getRankingTopFive, getRanking };
+
+const getUserRanking = async (token: string, battleType: string) => {
+  const { data } = await axios.get(`${baseURL}/users/rankings`, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+
+  let responseArray = [];
+
+  battleType === "fortyk"
+    ? (responseArray = data.fortyK)
+    : (responseArray = data.fantasy);
+
+  return responseArray;
+};
+export { getRankingTopFive, getRanking, getUserRanking };

@@ -1,0 +1,27 @@
+@use "../../partials/variables" as *;
+
+.user-dash-rankings {
+  display: flex;
+  padding: 2rem 1.5rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  &__title {
+    color: #fff;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+    margin: 0;
+    &-wrap {
+      display: flex;
+      padding-bottom: 1.5rem;
+      align-items: center;
+      gap: 0.625rem;
+      align-self: stretch;
+    }
+  }
+  &--fantasy {
+    background-color: $background-2;
+  }
+}

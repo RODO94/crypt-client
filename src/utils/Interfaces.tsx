@@ -35,6 +35,8 @@ export interface RankObj {
   ranking: string;
   prev_ranking?: string;
   army_id?: string;
+  status?: string;
+  current_position?: number;
 }
 
 export interface UsersObj {
