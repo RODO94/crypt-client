@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getCompletedBattlesFive } from "../../utils/BattleRequests";
-import { CompletedBattle, Player } from "../../utils/Interfaces";
+import { CompletedBattle } from "../../utils/Interfaces";
 import BattleCompleteRow from "../BattleCompleteRow/BattleCompleteRow";
 import DateTableHeader from "../DateTableHeader/DateTableHeader";
 import "./CompletedBattles.scss";

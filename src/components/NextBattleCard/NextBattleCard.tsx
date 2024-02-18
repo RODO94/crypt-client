@@ -18,7 +18,6 @@ export default function NextBattleCard() {
   const token = sessionStorage.getItem("token");
 
   let nextBattleComp = <p>No Upcoming Battles</p>;
-  let allyComp = <p>No Ally Available</p>;
 
   if (!token) {
     navigate("/login");

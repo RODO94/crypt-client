@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.scss";
-import Header from "./components/Header/Header";
 import Homepage from "./pages/Homepage/Homepage";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import LogIn from "./pages/LogIn/LogIn";
@@ -15,7 +14,6 @@ import CreateBattle from "./pages/CreateBattle/CreateBattle";
 import AddArmy from "./pages/AddArmy/AddArmy";
 import UserDashboard from "./pages/UserDashboard/UserDashboard";
 import UserProfile from "./pages/UserProfile/UserProfile";
-import NavFooter from "./components/NavFooter/NavFooter";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 
 function App() {
