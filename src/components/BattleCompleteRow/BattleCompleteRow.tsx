@@ -41,7 +41,7 @@ export default function BattleCompleteRow({
     : (resultStatementTwo = "Draw");
 
   const handleClick = () => {
-    navigate(`/battles/${id}`);
+    navigate(`/battles/information`, { state: { id: id } });
   };
 
   return (

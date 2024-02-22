@@ -45,6 +45,16 @@ const getUsersResults = async (token: string) => {
   }
 };
 
+const getOneBattle = async (battleID: string) => {
+  try {
+    const { data } = await axios.get(`${baseURL}/battles/${battleID}`);
+    return data;
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+};
+
 export {
   getUpcomingBattlesFive,
   getUpcomingBattles,
@@ -52,4 +62,5 @@ export {
   getCompletedBattles,
   getUsersBattles,
   getUsersResults,
+  getOneBattle,
 };

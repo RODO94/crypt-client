@@ -36,7 +36,7 @@ export default function LogIn() {
 
     setErrorClass("login__error login__error--hidden");
 
-    navigate("/dashboard");
+    navigate("/user");
   };
 
   const handleReset = async (event: any) => {

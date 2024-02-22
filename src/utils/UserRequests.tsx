@@ -11,6 +11,12 @@ const getAllUsersNames = async () => {
   return userArray;
 };
 
+const getAllUsers = async () => {
+  const { data } = await axios.get(`${baseURL}/users/all`);
+
+  return data;
+};
+
 const getUser = async (token: string) => {
   try {
     const { data } = await axios.get(`${baseURL}/users/one`, {
@@ -51,4 +57,4 @@ const getAlly = async (token: string) => {
     return error;
   }
 };
-export { getAllUsersNames, getUser, getNemesis, getAlly };
+export { getAllUsersNames, getUser, getNemesis, getAlly, getAllUsers };

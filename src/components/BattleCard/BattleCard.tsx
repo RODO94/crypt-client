@@ -1,7 +1,7 @@
 import { Player } from "../../utils/Interfaces";
 import "./BattleCard.scss";
 
-export default function BattleCard({ name, known_as, rank }: Player) {
+export default function BattleCard({ name, known_as, rank, army_id }: Player) {
   let nameArray = name.toLowerCase().split(" ");
   let nameColour: string = " ";
 
@@ -12,7 +12,7 @@ export default function BattleCard({ name, known_as, rank }: Player) {
   }
 
   return (
-    <article className="battle-card">
+    <article className="battle-card" id={army_id}>
       <div className={`battle-card__army ${nameColour}`}>
         <p className={`battle-card__text ${nameColour}`}>{name}</p>
       </div>
