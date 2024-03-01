@@ -91,4 +91,7 @@ export interface Battle {
   player_2: Player[];
   player_1_points: number;
   player_2_points: number;
+  table: string;
+  finish: string;
+  start: string;
 }

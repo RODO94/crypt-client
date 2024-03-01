@@ -2,7 +2,10 @@ import { Player } from "../../utils/Interfaces";
 import "./BattleCard.scss";
 
 export default function BattleCard({ name, known_as, rank, army_id }: Player) {
-  let nameArray = name.toLowerCase().split(" ");
+  let nameArray: any[] = [];
+  if (name) {
+    nameArray = name.toLowerCase().split(" ");
+  }
   let nameColour: string = " ";
 
   for (let i = 0; i < nameArray.length; i++) {

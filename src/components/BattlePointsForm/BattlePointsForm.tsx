@@ -1,8 +1,9 @@
+import { Player } from "../../utils/Interfaces";
 import "./BattlePointsForm.scss";
 
 interface BattlePoints {
-  playerOne: string;
-  playerTwo: string;
+  playerOne: Player[];
+  playerTwo: Player[];
   playerOnePoints: number;
   playerTwoPoints: number;
 }

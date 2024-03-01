@@ -7,4 +7,27 @@ const getAllArmies = async () => {
   return data;
 };
 
-export { getAllArmies };
+const updateArmyCombatants = async (
+  requestBody: any,
+  battleID: any,
+  token: string
+) => {
+  try {
+    const { data } = await axios.patch(
+      `${baseURL}/battles/${battleID}/edit/combatants`,
+      requestBody,
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+
+    return true;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+};
+
+export { getAllArmies, updateArmyCombatants };

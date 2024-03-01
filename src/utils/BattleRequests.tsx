@@ -55,6 +55,24 @@ const getOneBattle = async (battleID: string) => {
   }
 };
 
+const updateBattleDetail = async (battleID, token, detail, requestBody) => {
+  try {
+    await axios.patch(
+      `${baseURL}/battles/${battleID}/edit/${detail}`,
+      requestBody,
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+    return true;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+};
+
 export {
   getUpcomingBattlesFive,
   getUpcomingBattles,
@@ -63,4 +81,5 @@ export {
   getUsersBattles,
   getUsersResults,
   getOneBattle,
+  updateBattleDetail,
 };

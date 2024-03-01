@@ -53,6 +53,11 @@ export default function BattleInfo() {
         result={battle.result}
         winner={battle.winner}
         date={battle.date}
+        table={battle.table}
+        start={battle.start}
+        finish={battle.finish}
+        battleID={battleID}
+        token={userToken}
       />
       <BattlePointsForm
         playerOne={battle.player_1}
