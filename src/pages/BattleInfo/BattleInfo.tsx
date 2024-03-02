@@ -6,10 +6,14 @@ import { getOneBattle } from "../../utils/BattleRequests";
 import BattleDash from "../../components/BattleDash/BattleDash";
 import BattlePointsForm from "../../components/BattlePointsForm/BattlePointsForm";
 import { Battle } from "../../utils/Interfaces";
+import NavFooter from "../../components/NavFooter/NavFooter";
 
 export default function BattleInfo() {
   const [battle, setBattle] = useState<Battle>();
   const [role, setRole] = useState<string>("");
+  const [playerOneArray, setPlayerOneArray] = useState([]);
+  const [playerTwoArray, setPlayerTwoArray] = useState([]);
+  const [winnerValue, setWinnerValue] = useState("");
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -32,26 +36,43 @@ export default function BattleInfo() {
     const fetchBattle = async (battleID: string) => {
       const response = await getOneBattle(battleID);
       setBattle(response[0]);
+      setPlayerOneArray(response[0].player_1);
+      setPlayerTwoArray(response[0].player_2);
       return response;
     };
     fetchBattle(battleID);
   }, []);
 
-  if (!userToken || !battle || !role) {
+  useEffect(() => {
+    const fetchWinner = (winner: string) => {
+      if (battle) {
+        winner === battle.combatant_1_id
+          ? setWinnerValue("Player 1")
+          : setWinnerValue("Player 2");
+      }
+    };
+    if (battle) {
+      return fetchWinner(battle.winner);
+    }
+  }, [battle]);
+
+  if (!userToken || !battle || !role || !playerOneArray || !playerTwoArray) {
     return <h1>Content Loading</h1>;
   }
 
   return (
     <>
       <BattleDash
-        playerOne={battle.player_1}
-        playerTwo={battle.player_2}
+        playerOne={playerOneArray}
+        setPlayerOneArray={setPlayerOneArray}
+        playerTwo={playerTwoArray}
+        setPlayerTwoArray={setPlayerTwoArray}
         gameType={battle.player_type}
         battleType={battle.battle_type}
         scenario={battle.scenario}
         pointsSize={battle.points_size}
         result={battle.result}
-        winner={battle.winner}
+        winner={winnerValue}
         date={battle.date}
         table={battle.table}
         start={battle.start}
@@ -60,11 +81,15 @@ export default function BattleInfo() {
         token={userToken}
       />
       <BattlePointsForm
-        playerOne={battle.player_1}
-        playerTwo={battle.player_2}
+        playerOne={playerOneArray}
+        playerTwo={playerTwoArray}
         playerOnePoints={battle.player_1_points}
         playerTwoPoints={battle.player_2_points}
+        result={battle.result}
+        battleID={battleID}
+        token={userToken}
       />
+      <NavFooter />
     </>
   );
 }

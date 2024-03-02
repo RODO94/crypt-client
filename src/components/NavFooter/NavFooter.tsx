@@ -5,6 +5,8 @@ export default function NavFooter() {
   const classNameFn = (isActive: boolean) =>
     isActive ? "footer-nav__link footer-nav__link--active" : "footer-nav__link";
 
+  const userToken = sessionStorage.getItem("token");
+
   return (
     <footer className={"footer"}>
       <nav className="footer-nav">
@@ -36,12 +38,21 @@ export default function NavFooter() {
         >
           Fantasy <br /> Rankings
         </NavLink>
-        <NavLink
-          className={({ isActive }) => classNameFn(isActive)}
-          to={"/login"}
-        >
-          Login
-        </NavLink>
+        {userToken ? (
+          <NavLink
+            className={({ isActive }) => classNameFn(isActive)}
+            to={"/user"}
+          >
+            Dashboard
+          </NavLink>
+        ) : (
+          <NavLink
+            className={({ isActive }) => classNameFn(isActive)}
+            to={"/login"}
+          >
+            Login
+          </NavLink>
+        )}
       </nav>
     </footer>
   );

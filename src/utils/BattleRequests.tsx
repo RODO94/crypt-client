@@ -55,7 +55,12 @@ const getOneBattle = async (battleID: string) => {
   }
 };
 
-const updateBattleDetail = async (battleID, token, detail, requestBody) => {
+const updateBattleDetail = async (
+  battleID: string,
+  token: string,
+  detail: string,
+  requestBody: object
+) => {
   try {
     await axios.patch(
       `${baseURL}/battles/${battleID}/edit/${detail}`,
@@ -73,6 +78,36 @@ const updateBattleDetail = async (battleID, token, detail, requestBody) => {
   }
 };
 
+const submitBattle = async (battleID: string, token: string) => {
+  try {
+    await axios.post(`${baseURL}/battles/${battleID}/submit`, "", {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+
+    return true;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+};
+
+const reSubmitBattle = async (battleID: string, token: string) => {
+  try {
+    await axios.post(`${baseURL}/battles/${battleID}/resubmit`, "", {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+
+    return true;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+};
+
 export {
   getUpcomingBattlesFive,
   getUpcomingBattles,
@@ -82,4 +117,6 @@ export {
   getUsersResults,
   getOneBattle,
   updateBattleDetail,
+  submitBattle,
+  reSubmitBattle,
 };

@@ -54,11 +54,13 @@
 
     &-wrap {
       display: flex;
+      position: relative;
       padding: 1rem;
-      gap: 0.5rem;
+      gap: 1rem;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-end;
       align-self: stretch;
+      flex-direction: column;
       border-radius: 0.5rem;
       box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
       background-color: $space-wolves-4;
@@ -71,11 +73,24 @@
         gap: 1rem;
         flex-direction: column;
         justify-content: space-between;
-        align-items: center;
+        align-items: flex-end;
         align-self: stretch;
         border-radius: 0.5rem;
         box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
         background-color: $space-wolves-4;
+      }
+    }
+    &-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-self: stretch;
+      align-items: center;
+      padding-top: 2rem;
+      width: 100%;
+      gap: 1rem;
+      &--edit {
+        flex-direction: column;
       }
     }
     &-edit-row {
@@ -113,6 +128,13 @@
     gap: 1rem;
     width: 42%;
   }
+  &__input {
+    background-color: white;
+    border: none;
+    outline: none;
+    padding: 0.65rem 0.8rem;
+    border-radius: 0.5rem;
+  }
   &__info {
     background-color: $space-wolves-4;
     border-radius: 0.5rem;
@@ -120,7 +142,7 @@
     padding: 1rem;
     align-items: center;
     gap: 0.5rem;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     min-width: 1rem;
     min-height: 62px;
 
@@ -137,9 +159,6 @@
       flex-direction: column;
 
       gap: 0.5rem;
-      &--date {
-        width: 45%;
-      }
     }
     &-text {
       color: #000;
@@ -153,6 +172,9 @@
       font-family: Roboto;
       margin: auto 0;
       width: fit-content;
+      &--hide {
+        display: none;
+      }
     }
   }
   &__remove {
@@ -180,16 +202,19 @@
     }
   }
   &__edit {
-    color: white;
-    background-color: $ultramarine-5;
+    color: $ultramarine-2;
+    font-family: "Roboto";
+    background-color: transparent;
     border-radius: 8px;
-    font-size: 0.8rem;
+    font-size: 0.5rem;
     font-weight: 600;
     padding: 0.5rem 1rem;
     outline: none;
     border: none;
-    margin-top: 0.5rem;
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+    position: absolute;
+    top: 8px;
+    right: 8px;
     &:hover {
       background-color: $ultramarine-2;
       cursor: pointer;

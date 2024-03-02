@@ -2,7 +2,6 @@ import { Armies, Player, Users } from "../../utils/Interfaces";
 import "./BattleDash.scss";
 import logo from "../../assets/logo.svg";
 import save from "../../assets/save.svg";
-import cancel from "../../assets/cancel.svg";
 import BattleCard from "../BattleCard/BattleCard";
 import PlayerTypePill from "../PlayerTypePill/PlayerTypePill";
 import BattleTypePill from "../BattleTypePill/BattleTypePill";
@@ -31,8 +30,10 @@ interface BattleComp {
   table: string | undefined;
   start: string | undefined;
   finish: string | undefined;
-  battleID: string | undefined;
+  battleID: string;
   token: string;
+  setPlayerTwoArray: Function;
+  setPlayerOneArray: Function;
 }
 
 interface UsersArray extends Array<Users> {}
@@ -53,6 +54,8 @@ export default function BattleDash({
   finish,
   battleID,
   token,
+  setPlayerOneArray,
+  setPlayerTwoArray,
 }: BattleComp) {
   const [pointsSizeValue, setPointsSizeValue] = useState(pointsSize);
   const [scenarioValue, setScenarioValue] = useState(scenario);
@@ -74,9 +77,8 @@ export default function BattleDash({
   const [editDateBool, setEditDateBool] = useState(false);
   const [editStartBool, setEditStartBool] = useState(false);
   const [editFinishBool, setEditFinishBool] = useState(false);
+  const [successBool, setSuccessBool] = useState(false);
 
-  const [playerOneArray, setPlayerOneArray] = useState(playerOne);
-  const [playerTwoArray, setPlayerTwoArray] = useState(playerTwo);
   const [userArray, setUserArray] = useState<UsersArray>();
   const [armyArray, setArmyArray] = useState<ArmiesArray>();
   const [userOneFilter, setUserOneFilter] = useState("");
@@ -87,37 +89,6 @@ export default function BattleDash({
   const [userTwo, setUserTwo] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-      const response = await getAllUsers();
-      setUserOneFilter(response[0].id);
-      setUserTwoFilter(response[0].id);
-
-      setUserOne(response[0].id);
-      setUserTwo(response[0].id);
-      return setUserArray(response);
-    };
-
-    if (token) {
-      setUserEditBool(true);
-    }
-    fetchUsers();
-  }, []);
-
-  useEffect(() => {
-    const fetchArmies = async () => {
-      const response = await getAllArmies();
-      const filteredResponse = response.filter(
-        (army: any) => army.type === battleType
-      );
-      setArmyOne(response[0].name);
-      setArmyTwo(response[0].name);
-
-      return setArmyArray(filteredResponse);
-    };
-    fetchArmies();
-  }, []);
 
   const handleClick = (event: any) => {
     playerEditBool === false
@@ -143,25 +114,18 @@ export default function BattleDash({
       armyName = event.target.parentElement.children.army_1.value.split("+")[1];
       armyID = event.target.parentElement.children.army_1.value.split("+")[0];
       let newArray = [
-        ...playerOneArray,
-        { known_as: userName, name: armyName, army_id: armyID },
+        ...playerOne,
+        { id: userID, known_as: userName, name: armyName, army_id: armyID },
       ];
       setPlayerOneArray(newArray);
 
       let armyIDArrayOne = newArray.map((army) => ({ army_id: army.army_id }));
-      let armyIDArrayTwo = playerTwoArray.map((army) => ({
+      let armyIDArrayTwo = playerTwo.map((army) => ({
         army_id: army.army_id,
       }));
 
       let requestBody = { player_1: armyIDArrayOne, player_2: armyIDArrayTwo };
-      setIsLoading(true);
-      let successBool = await updateArmyCombatants(
-        requestBody,
-        battleID,
-        token
-      );
-      console.log(successBool);
-      setIsLoading(false);
+      setSuccessBool(await updateArmyCombatants(requestBody, battleID, token));
     } else if (player === 2) {
       userID = event.target.parentElement.children.users_2.value.split("+")[0];
       userName =
@@ -169,38 +133,34 @@ export default function BattleDash({
       armyName = event.target.parentElement.children.army_2.value.split("+")[1];
       armyID = event.target.parentElement.children.army_2.value.split("+")[0];
       let newArray = [
-        ...playerTwoArray,
-        { known_as: userName, name: armyName, army_id: armyID },
+        ...playerTwo,
+        { id: userID, known_as: userName, name: armyName, army_id: armyID },
       ];
       setPlayerTwoArray(newArray);
 
       let armyIDArrayTwo = newArray.map((army) => ({ army_id: army.army_id }));
-      let armyIDArrayOne = playerOneArray.map((army) => ({
+      let armyIDArrayOne = playerOne.map((army) => ({
         army_id: army.army_id,
       }));
 
       let requestBody = { player_1: armyIDArrayOne, player_2: armyIDArrayTwo };
-      let successBool = await updateArmyCombatants(
-        requestBody,
-        battleID,
-        token
-      );
+
+      setSuccessBool(await updateArmyCombatants(requestBody, battleID, token));
     }
   };
 
   const removePlayer = async (event: any, player: any) => {
     let targetArmyID = event.target.parentElement.children[0].id;
     if (player === 1) {
-      let newArmyArray = playerOneArray.filter(
+      let newArmyArray = playerOne.filter(
         (army) => army.army_id !== targetArmyID
       );
-      console.log(newArmyArray);
       setPlayerOneArray(newArmyArray);
 
       let newIDArrayOne = newArmyArray.map((army) => ({
         army_id: army.army_id,
       }));
-      let newIDArrayTwo = playerTwoArray.map((army) => ({
+      let newIDArrayTwo = playerTwo.map((army) => ({
         army_id: army.army_id,
       }));
 
@@ -212,10 +172,8 @@ export default function BattleDash({
         token
       );
       setIsLoading(false);
-
-      console.log(successBool);
     } else if (player === 2) {
-      let newArmyArray = playerTwoArray.filter(
+      let newArmyArray = playerTwo.filter(
         (army) => army.army_id !== targetArmyID
       );
       setPlayerTwoArray(newArmyArray);
@@ -223,7 +181,7 @@ export default function BattleDash({
       let newIDArrayTwo = newArmyArray.map((army) => ({
         army_id: army.army_id,
       }));
-      let newIDArrayOne = playerOneArray.map((army) => ({
+      let newIDArrayOne = playerOne.map((army) => ({
         army_id: army.army_id,
       }));
 
@@ -305,7 +263,81 @@ export default function BattleDash({
     }
   };
 
-  if (!armyArray || !userArray || !userOneFilter || !userTwoFilter) {
+  useEffect(() => {
+    const fetchArmies = async () => {
+      const response = await getAllArmies();
+      const filteredResponse = response.filter(
+        (army: any) => army.type === battleType
+      );
+      setArmyOne(response[0].name);
+      setArmyTwo(response[0].name);
+
+      return setArmyArray(filteredResponse);
+    };
+    fetchArmies();
+  }, []);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const response = await getAllUsers();
+      setUserOneFilter(response[0].id);
+      setUserTwoFilter(response[0].id);
+
+      setUserOne(response[0].id);
+      setUserTwo(response[0].id);
+
+      if (armyArray) {
+        // Battle Type User Filter
+        const filteredResponse = await response.filter((user: Player) => {
+          const army = armyArray.find((army) => army.user_id === user.id);
+          return army;
+        });
+
+        // Filter the user list based on current players
+        const secondFilteredResponse = filteredResponse.filter(
+          (user: Player) => {
+            const userOneBool = playerOne.find(
+              (player) => player.id === user.id
+            );
+            const userTwoBool = playerTwo.find(
+              (player) => player.id === user.id
+            );
+
+            if (userOneBool || userTwoBool) {
+              return false;
+            } else {
+              return true;
+            }
+          }
+        );
+
+        return setUserArray(secondFilteredResponse);
+      }
+      setUserArray(response);
+    };
+
+    if (token) {
+      setUserEditBool(true);
+    }
+    fetchUsers();
+  }, [playerOne, playerTwo, armyArray]);
+
+  useEffect(() => {
+    if (userArray && armyArray) {
+      const filteredUserArray = userArray;
+
+      setUserArray(filteredUserArray);
+    }
+  }, []);
+
+  if (
+    !armyArray ||
+    !userArray ||
+    !userOneFilter ||
+    !userTwoFilter ||
+    !playerOne ||
+    !playerTwo
+  ) {
     return <p> Please wait while we load your content</p>;
   }
 
@@ -328,27 +360,41 @@ export default function BattleDash({
                 ? "battle-dash__combatant-wrap"
                 : "battle-dash__combatant-wrap battle-dash__combatant-wrap--hide"
             }
+            onClick={handleClick}
           >
-            <div className="battle-dash__player-wrap">
-              {playerOneArray.map((player) => (
-                <BattleCard
-                  key={crypto.randomUUID()}
-                  name={player.name}
-                  known_as={player.known_as}
-                  rank={player.rank}
-                />
-              ))}{" "}
-            </div>
-            <p className="battle-dash__versus">vs</p>
-            <div className="battle-dash__player-wrap">
-              {playerTwoArray.map((player) => (
-                <BattleCard
-                  key={crypto.randomUUID()}
-                  name={player.name}
-                  known_as={player.known_as}
-                  rank={player.rank}
-                />
-              ))}{" "}
+            <button
+              className={
+                userEditBool && !playerEditBool === true
+                  ? "battle-dash__edit"
+                  : "battle-dash__edit battle-dash__edit--hide"
+              }
+            >
+              {userEditBool && !playerEditBool === true
+                ? "Edit Combatants"
+                : ""}
+            </button>
+            <div className="battle-dash__combatant-container">
+              <div className="battle-dash__player-wrap">
+                {playerOne.map((player) => (
+                  <BattleCard
+                    key={crypto.randomUUID()}
+                    name={player.name}
+                    known_as={player.known_as}
+                    rank={player.rank}
+                  />
+                ))}{" "}
+              </div>
+              <p className="battle-dash__versus">vs</p>
+              <div className="battle-dash__player-wrap">
+                {playerTwo.map((player) => (
+                  <BattleCard
+                    key={crypto.randomUUID()}
+                    name={player.name}
+                    known_as={player.known_as}
+                    rank={player.rank}
+                  />
+                ))}{" "}
+              </div>
             </div>
           </div>
           <div
@@ -358,49 +404,53 @@ export default function BattleDash({
                 : "battle-dash__combatant-wrap battle-dash__combatant-wrap--hide"
             }
           >
-            {playerOneArray.map((player) => (
-              <article
-                key={crypto.randomUUID()}
-                className="battle-dash__combatant"
-              >
-                <BattleCard
+            <button
+              className={
+                userEditBool && playerEditBool === true
+                  ? "battle-dash__edit"
+                  : "battle-dash__edit battle-dash__edit--hide"
+              }
+              onClick={handleClick}
+            >
+              {userEditBool && playerEditBool === true ? "Finish edit" : ""}
+            </button>
+            <div className="battle-dash__combatant-container battle-dash__combatant-container--edit">
+              {playerOne.map((player) => (
+                <article
                   key={crypto.randomUUID()}
-                  army_id={player.army_id}
-                  name={player.name}
-                  known_as={player.known_as}
-                  rank={player.rank}
-                />
-                <button
-                  key={crypto.randomUUID()}
-                  className="battle-dash__remove"
-                  onClick={(event) => {
-                    removePlayer(event, 1);
+                  className="battle-dash__combatant"
+                >
+                  <BattleCard
+                    key={crypto.randomUUID()}
+                    army_id={player.army_id}
+                    name={player.name}
+                    known_as={player.known_as}
+                    rank={player.rank}
+                  />
+                  <button
+                    key={crypto.randomUUID()}
+                    className="battle-dash__remove"
+                    onClick={(event) => {
+                      removePlayer(event, 1);
+                    }}
+                  >
+                    Remove
+                  </button>
+                </article>
+              ))}{" "}
+              <div className="battle-dash__combatant-edit-row">
+                <select
+                  name="users_1"
+                  className="battle-dash__select"
+                  id="users_1"
+                  value={userOne}
+                  onChange={(event) => {
+                    setUserOneFilter(event.target.value.split("+")[0]);
+                    setUserOne(event.target.value);
                   }}
                 >
-                  Remove
-                </button>
-              </article>
-            ))}{" "}
-            <div className="battle-dash__combatant-edit-row">
-              <select
-                name="users_1"
-                className="battle-dash__select"
-                id="users_1"
-                value={userOne}
-                onChange={(event) => {
-                  setUserOneFilter(event.target.value.split("+")[0]);
-                  setUserOne(event.target.value);
-                }}
-              >
-                <option hidden>Select User </option>
-                {userArray
-                  .filter((user) => {
-                    const army = armyArray.find(
-                      (army) => army.user_id === user.id
-                    );
-                    return army;
-                  })
-                  .map((user) => {
+                  <option hidden>Select User </option>
+                  {userArray.map((user) => {
                     return (
                       <option
                         key={crypto.randomUUID()}
@@ -410,23 +460,105 @@ export default function BattleDash({
                       </option>
                     );
                   })}
-              </select>
-              <select
-                name="army_1"
-                className="battle-dash__select"
-                id="army_1"
-                value={armyOne}
-                onChange={(event) => {
-                  setArmyOne(event.target.value);
-                }}
-              >
-                <option hidden> --- Army ---</option>
+                </select>
+                <select
+                  name="army_1"
+                  className="battle-dash__select"
+                  id="army_1"
+                  value={armyOne}
+                  onChange={(event) => {
+                    setArmyOne(event.target.value);
+                  }}
+                >
+                  <option hidden> --- Army ---</option>
 
-                {armyArray.length === 0 ? (
-                  <option>No Armies for this User</option>
-                ) : (
-                  armyArray.map((army) => {
-                    if (army.user_id === userOneFilter) {
+                  {armyArray.length === 0 ? (
+                    <option>No Armies for this User</option>
+                  ) : (
+                    armyArray.map((army) => {
+                      if (army.user_id === userOneFilter) {
+                        return (
+                          <option
+                            key={crypto.randomUUID()}
+                            value={`${army.id}+${army.name}`}
+                          >
+                            {army.name}
+                          </option>
+                        );
+                      }
+                    })
+                  )}
+                </select>
+
+                <button
+                  className="battle-dash__add"
+                  onClick={(event) => {
+                    addArmy(event, 1);
+                  }}
+                >
+                  +
+                </button>
+              </div>{" "}
+              <p className="battle-dash__versus">vs</p>
+              {playerTwo.map((player) => (
+                <article
+                  key={crypto.randomUUID()}
+                  className="battle-dash__combatant"
+                >
+                  <BattleCard
+                    key={player.army_id}
+                    army_id={player.army_id}
+                    name={player.name}
+                    known_as={player.known_as}
+                    rank={player.rank}
+                  />
+                  <button
+                    key={crypto.randomUUID()}
+                    className="battle-dash__remove"
+                    onClick={(event) => {
+                      console.log("Remove has been clicked");
+                      removePlayer(event, 2);
+                    }}
+                  >
+                    Remove
+                  </button>
+                </article>
+              ))}{" "}
+              <div className="battle-dash__combatant-edit-row">
+                <select
+                  name="users_2"
+                  id="users_2"
+                  className="battle-dash__select"
+                  value={userTwo}
+                  onChange={(event) => {
+                    setUserTwoFilter(event.target.value.split("+")[0]);
+
+                    setUserTwo(event.target.value);
+                  }}
+                >
+                  {" "}
+                  <option hidden>Select User</option>
+                  {userArray.map((user) => (
+                    <option
+                      key={crypto.randomUUID()}
+                      value={`${user.id}+${user.known_as}`}
+                    >
+                      {user.known_as}
+                    </option>
+                  ))}
+                </select>
+                <select
+                  name="army_2"
+                  id="army_2"
+                  className="battle-dash__select"
+                  value={armyTwo}
+                  onChange={(event) => {
+                    setArmyTwo(event.target.value);
+                  }}
+                >
+                  <option hidden> --- Army ---</option>
+                  {armyArray.map((army) => {
+                    if (army.user_id === userTwoFilter) {
                       return (
                         <option
                           key={crypto.randomUUID()}
@@ -436,117 +568,19 @@ export default function BattleDash({
                         </option>
                       );
                     }
-                  })
-                )}
-              </select>
-
-              <button
-                className="battle-dash__add"
-                onClick={(event) => {
-                  addArmy(event, 1);
-                }}
-              >
-                +
-              </button>
-            </div>{" "}
-            <p className="battle-dash__versus">vs</p>
-            {playerTwoArray.map((player) => (
-              <article
-                key={crypto.randomUUID()}
-                className="battle-dash__combatant"
-              >
-                <BattleCard
-                  key={player.army_id}
-                  army_id={player.army_id}
-                  name={player.name}
-                  known_as={player.known_as}
-                  rank={player.rank}
-                />
+                  })}
+                </select>
                 <button
-                  key={crypto.randomUUID()}
-                  className="battle-dash__remove"
+                  className="battle-dash__add"
                   onClick={(event) => {
-                    console.log("Remove has been clicked");
-                    removePlayer(event, 2);
+                    addArmy(event, 2);
                   }}
                 >
-                  Remove
+                  +
                 </button>
-              </article>
-            ))}{" "}
-            <div className="battle-dash__combatant-edit-row">
-              <select
-                name="users_2"
-                id="users_2"
-                className="battle-dash__select"
-                value={userTwo}
-                onChange={(event) => {
-                  setUserTwoFilter(event.target.value.split("+")[0]);
-
-                  setUserTwo(event.target.value);
-                }}
-              >
-                {" "}
-                <option hidden>Select User</option>
-                {userArray
-                  .filter((user) => {
-                    const army = armyArray.find(
-                      (army) => army.user_id === user.id
-                    );
-                    return army;
-                  })
-                  .map((user) => (
-                    <option
-                      key={crypto.randomUUID()}
-                      value={`${user.id}+${user.known_as}`}
-                    >
-                      {user.known_as}
-                    </option>
-                  ))}
-              </select>
-              <select
-                name="army_2"
-                id="army_2"
-                className="battle-dash__select"
-                value={armyTwo}
-                onChange={(event) => {
-                  setArmyTwo(event.target.value);
-                }}
-              >
-                <option hidden> --- Army ---</option>
-                {armyArray.map((army) => {
-                  if (army.user_id === userTwoFilter) {
-                    return (
-                      <option
-                        key={crypto.randomUUID()}
-                        value={`${army.id}+${army.name}`}
-                      >
-                        {army.name}
-                      </option>
-                    );
-                  }
-                })}
-              </select>
-              <button
-                className="battle-dash__add"
-                onClick={(event) => {
-                  addArmy(event, 2);
-                }}
-              >
-                +
-              </button>
-            </div>{" "}
+              </div>
+            </div>
           </div>
-          <button
-            className={
-              userEditBool === true
-                ? "battle-dash__edit"
-                : "battle-dash__edit battle-dash__edit--hide"
-            }
-            onClick={handleClick}
-          >
-            Edit
-          </button>
         </div>
         <div className="battle-dash__info-wrap">
           <article className="battle-dash__info-container">
@@ -588,10 +622,11 @@ export default function BattleDash({
                 value={scenarioValue}
                 name="scenario"
                 maxLength={80}
-                className="battle-dash__info-text"
-                onClick={() => {
-                  setEditScenarioBool(true);
-                }}
+                className={
+                  editScenarioBool === true
+                    ? "battle-dash__input"
+                    : "battle-dash__info-text--hide"
+                }
                 onChange={(event) => {
                   setScenarioValue(event.target.value);
                 }}
@@ -616,18 +651,31 @@ export default function BattleDash({
                   }}
                 />
               </button>
+              <p
+                className={
+                  editScenarioBool === false
+                    ? "battle-dash__info-text"
+                    : "battle-dash__info-text--hide"
+                }
+                onClick={() => {
+                  setEditScenarioBool(true);
+                }}
+              >
+                {scenarioValue}
+              </p>
             </div>
           </article>
           <article className="battle-dash__info-container">
             <h2 className="battle-dash__subheader">Points Size</h2>
             <div className="battle-dash__info">
               <input
-                className="battle-dash__info-text"
+                className={
+                  editPointSizeBool === true
+                    ? "battle-dash__input"
+                    : "battle-dash__info-text--hide"
+                }
                 value={pointsSizeValue}
                 type="number"
-                onClick={() => {
-                  setEditPointSizeBool(true);
-                }}
                 onChange={(event: any) => {
                   if (isNaN(event.target.value)) {
                     return setPointsSizeValue(pointsSizeValue);
@@ -655,6 +703,18 @@ export default function BattleDash({
                   }}
                 />
               </button>
+              <p
+                className={
+                  editPointSizeBool === false
+                    ? "battle-dash__info-text"
+                    : "battle-dash__info-text--hide"
+                }
+                onClick={() => {
+                  setEditPointSizeBool(true);
+                }}
+              >
+                {pointsSizeValue}
+              </p>
             </div>
           </article>
           <article className="battle-dash__info-container">
@@ -688,7 +748,7 @@ export default function BattleDash({
                 }
               >
                 <p className="battle-dash__info-text">
-                  {`Table ${tableValue[5]}`}
+                  {tableValue ? `Table ${tableValue[6]}` : ""}
                 </p>
               </div>
               <select
@@ -700,13 +760,15 @@ export default function BattleDash({
                     : "battle-dash__select-wrap--hide"
                 }
                 onChange={(event) => {
+                  console.log(event.target.value);
                   setTableValue(event.target.value);
                 }}
                 disabled={userEditBool && editTableBool === true ? false : true}
               >
-                <option value="table1">Table 1</option>
-                <option value="table2">Table 2</option>
-                <option value="table3">Table 3</option>
+                <option hidden>{tableValue}</option>
+                <option value="Table 1">Table 1</option>
+                <option value="Table 2">Table 2</option>
+                <option value="Table 3">Table 3</option>
               </select>
               <button
                 className={
@@ -731,10 +793,11 @@ export default function BattleDash({
             <h2 className="battle-dash__subheader">Date</h2>{" "}
             <div className="battle-dash__info">
               <div
-                className="battle-dash__date-wrapper"
-                onClick={() => {
-                  setEditDateBool(true);
-                }}
+                className={
+                  editDateBool === true
+                    ? "battle-dash__date-wrapper"
+                    : "battle-dash__info-text--hide"
+                }
               >
                 <DatePicker
                   value={dayjs(dateValue)}
@@ -759,16 +822,29 @@ export default function BattleDash({
                   setEditDateBool(false);
                 }}
               />
+              <p
+                className={
+                  editDateBool === false
+                    ? "battle-dash__info-text"
+                    : "battle-dash__info-text--hide"
+                }
+                onClick={() => {
+                  setEditDateBool(true);
+                }}
+              >
+                {dateValue}
+              </p>
             </div>
           </article>{" "}
           <article className="battle-dash__info-container battle-dash__info-container--date">
             <h2 className="battle-dash__subheader">Start</h2>{" "}
             <div className="battle-dash__info">
               <div
-                className="battle-dash__date-wrap"
-                onClick={() => {
-                  setEditStartBool(true);
-                }}
+                className={
+                  editStartBool === true
+                    ? "battle-dash__date-wrap"
+                    : "battle-dash__info-text--hide"
+                }
               >
                 <TimePicker
                   sx={{ fontWeight: 900 }}
@@ -795,16 +871,29 @@ export default function BattleDash({
                   setEditStartBool(false);
                 }}
               />
+              <p
+                className={
+                  editStartBool === false
+                    ? "battle-dash__info-text"
+                    : "battle-dash__info-text--hide"
+                }
+                onClick={() => {
+                  setEditStartBool(true);
+                }}
+              >
+                {startValue.format("HH:mm")}
+              </p>
             </div>
           </article>{" "}
           <article className="battle-dash__info-container battle-dash__info-container--date">
             <h2 className="battle-dash__subheader">Finish</h2>{" "}
             <div className="battle-dash__info">
               <div
-                className="battle-dash__date-wrap"
-                onClick={() => {
-                  setEditFinishBool(true);
-                }}
+                className={
+                  editFinishBool === true
+                    ? "battle-dash__date-wrap"
+                    : "battle-dash__info-text--hide"
+                }
               >
                 <TimePicker
                   ampm={false}
@@ -831,6 +920,18 @@ export default function BattleDash({
                   setEditFinishBool(false);
                 }}
               />
+              <p
+                className={
+                  editFinishBool === false
+                    ? "battle-dash__info-text"
+                    : "battle-dash__info-text--hide"
+                }
+                onClick={() => {
+                  setEditFinishBool(true);
+                }}
+              >
+                {finishValue.format("HH:mm")}
+              </p>
             </div>
           </article>
         </div>

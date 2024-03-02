@@ -1,4 +1,5 @@
 export interface Player {
+  id?: string;
   name?: string;
   known_as?: string;
   rank?: string;
@@ -94,4 +95,6 @@ export interface Battle {
   table: string;
   finish: string;
   start: string;
+  combatant_1_id?: string;
+  combatant_2_id?: string;
 }
