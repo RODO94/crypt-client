@@ -16,6 +16,7 @@ export default function CompletedBattles() {
   useEffect(() => {
     const battleFn = async () => {
       const data = await getCompletedBattlesFive();
+      console.log(data);
       setBattleArray(data);
       return data;
     };

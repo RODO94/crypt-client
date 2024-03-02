@@ -16,7 +16,7 @@ interface BattlePoints {
   playerOnePoints: number | string;
   playerTwoPoints: number | string;
   battleID: string;
-  token: string | undefined;
+  token: string | "";
   result: string;
 }
 
@@ -61,13 +61,13 @@ export default function BattlePointsForm({
   const handleSubmit = async () => {
     const response = await submitBattle(battleID, token);
     console.log(response);
-    window.location.reload(false);
+    window.location.reload();
   };
 
   const handleReSubmit = async () => {
     const response = await reSubmitBattle(battleID, token);
     console.log(response);
-    window.location.reload(false);
+    window.location.reload();
   };
 
   const handlePointChange = async (player: number) => {
@@ -171,7 +171,7 @@ export default function BattlePointsForm({
           className="battle-points__point-input"
           value={playerTwoVictoryPoints}
           readOnly={
-            editPlayerOneBool && (userEditBool || adminBool) === true
+            editPlayerTwoBool && (userEditBool || adminBool) === true
               ? false
               : true
           }
@@ -183,7 +183,7 @@ export default function BattlePointsForm({
 
             Number(event.target.value) <= 0 ? (newScore = "") : newScore;
 
-            setPlayerOneVictoryPoints(newScore);
+            setPlayerTwoVictoryPoints(newScore);
           }}
         />
         <button
