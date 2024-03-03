@@ -108,6 +108,24 @@ const reSubmitBattle = async (battleID: string, token: string) => {
   }
 };
 
+const createBattleRequest = async (token: string, requestBody: any) => {
+  try {
+    const response: any = await axios.post(
+      `${baseURL}/battles/create`,
+      requestBody,
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+    return response.data.split("ID ")[1];
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+};
+
 export {
   getUpcomingBattlesFive,
   getUpcomingBattles,
@@ -119,4 +137,5 @@ export {
   updateBattleDetail,
   submitBattle,
   reSubmitBattle,
+  createBattleRequest,
 };

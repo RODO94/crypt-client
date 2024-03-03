@@ -59,16 +59,12 @@ export default function BattleDash({
 }: BattleComp) {
   const [pointsSizeValue, setPointsSizeValue] = useState(pointsSize);
   const [scenarioValue, setScenarioValue] = useState(scenario);
-  const [gameTypeValue, setGameTypeValue] = useState(gameType);
   const [battleTypeValue, setBattleTypeValue] = useState(battleType);
-  const [resultValue, setResultValue] = useState(result);
-  const [winnerValue, setWinnerValue] = useState(winner);
   const [dateValue, setDateValue] = useState(date);
   const [tableValue, setTableValue] = useState(table);
   const [startValue, setStartValue] = useState(dayjs(start, "HH:mm:ss"));
   const [finishValue, setFinishValue] = useState(dayjs(finish, "HH:mm:ss"));
   const [playerEditBool, setPlayerEditBool] = useState(false);
-  const [battleDetailsEditBool, setBattleDetailsEditBool] = useState(false);
   const [userEditBool, setUserEditBool] = useState(false);
   const [editBattleTypeBool, setEditBattleTypeBool] = useState(false);
   const [editScenarioBool, setEditScenarioBool] = useState(false);
