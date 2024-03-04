@@ -196,7 +196,6 @@ export default function BattleDash({
   };
 
   const handleChangeSubmit = async (detail: string, value?: any) => {
-    console.log(detail);
     if (detail === "scenario") {
       let requestBody = { scenario: scenarioValue };
       const response = await updateBattleDetail(

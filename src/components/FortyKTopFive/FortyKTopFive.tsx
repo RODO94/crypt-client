@@ -17,6 +17,7 @@ export default function FortyKTopFive() {
       const sortedResponse = response.fortyK.sort(
         (a: any, b: any) => b.ranking - a.ranking
       );
+      console.log(sortedResponse);
       setFortyKRankingArray(sortedResponse);
     };
     fetchTopFiveRanking();
@@ -54,7 +55,8 @@ export default function FortyKTopFive() {
                 : "no change"
             }
             colour={colour}
-            navTo={`/armies/${army.army_id}`}
+            navTo={`/armies/information`}
+            id={army.army_id}
           />
         );
       })}
