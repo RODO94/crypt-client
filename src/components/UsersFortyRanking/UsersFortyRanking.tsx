@@ -46,7 +46,8 @@ export default function UsersFortyRanking() {
             ranking={army.ranking}
             status={army.status}
             colour={colour}
-            navTo="/"
+            navTo="/armies/information"
+            id={army.army_id}
           />
         );
       })}
