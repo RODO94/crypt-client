@@ -10,9 +10,10 @@ import {
 import ArmyDash from "../../components/ArmyDash/ArmyDash";
 import ArmyNemesis from "../../components/ArmyNemesis/ArmyNemesis";
 import ArmyAlly from "../../components/ArmyAlly/ArmyAlly";
+import { ArmyObj } from "../../utils/Interfaces";
 
 export default function ArmyInfo() {
-  const [armyObj, setArmyObj] = useState(null);
+  const [armyObj, setArmyObj] = useState<ArmyObj | null>(null);
   const [battleCount, setBattleCount] = useState(0);
   const [winPercent, setWinPercent] = useState("");
   const [armyRank, setArmyRank] = useState(0);
@@ -21,7 +22,6 @@ export default function ArmyInfo() {
   const location = useLocation();
 
   const armyID = location.state.id;
-  console.log(armyID);
   const userToken = sessionStorage.getItem("token");
   if (!userToken) {
     return navigate("/login");
@@ -30,7 +30,6 @@ export default function ArmyInfo() {
   useEffect(() => {
     const fetchArmy = async () => {
       const response = await getOneArmy(armyID, userToken);
-      console.log(response);
       setArmyObj(response);
     };
     fetchArmy();
@@ -71,7 +70,7 @@ export default function ArmyInfo() {
         armyRank={armyRank}
       />
       <ArmyNemesis armyID={armyObj.id} />
-      <ArmyAlly />
+      <ArmyAlly armyID={armyObj.id} />
     </main>
   );
 }

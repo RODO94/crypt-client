@@ -46,7 +46,6 @@ const getBattleCount = async (id: string, token: string) => {
         },
       }
     );
-    console.log(data);
     return data.count;
   } catch (error) {
     console.error(error);
@@ -61,7 +60,6 @@ const getWinPercent = async (id: string, token: string) => {
         Authorization: "Bearer " + token,
       },
     });
-    console.log(data);
     return data.percent;
   } catch (error) {
     console.error(error);

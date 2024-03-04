@@ -16,7 +16,6 @@ export default function UsersFortyRanking() {
     const fetchRankings = async () => {
       if (token) {
         const response = await getUserRanking(token, "fortyk");
-        console.log(response);
         setRankArray(response);
       }
     };

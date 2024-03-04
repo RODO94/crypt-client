@@ -15,6 +15,7 @@ interface BattleTableRow {
   player_2: Array<Player>;
   id: string;
   combatant_1_id: string;
+  combatant_2_id: string;
 }
 
 export default function BattleCompleteRow({
@@ -25,6 +26,7 @@ export default function BattleCompleteRow({
   player_type,
   id,
   combatant_1_id,
+  combatant_2_id,
 }: BattleTableRow) {
   let resultStatementOne = "";
   let resultStatementTwo = "";
@@ -35,14 +37,14 @@ export default function BattleCompleteRow({
     const fetchWinner = (winner: string) => {
       winner === combatant_1_id
         ? setWinnerValue("Player one")
-        : setWinnerValue("Player two");
+        : winner === combatant_2_id
+        ? setWinnerValue("Player two")
+        : setWinnerValue("draw");
     };
     fetchWinner(winner);
   }, []);
 
   const navigate = useNavigate();
-
-  console.log(winnerValue);
 
   winnerValue === "Player one"
     ? (resultStatementOne = "Victory")
@@ -55,8 +57,6 @@ export default function BattleCompleteRow({
     : winnerValue === "Player one"
     ? (resultStatementTwo = "Vanquished")
     : (resultStatementTwo = "Draw");
-
-  console.log({ resultOne: resultStatementOne, resultTwo: resultStatementTwo });
 
   const handleClick = () => {
     navigate(`/battles/information`, { state: { id: id } });

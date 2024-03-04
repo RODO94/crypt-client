@@ -6,7 +6,6 @@ const baseURL = import.meta.env.VITE_SERVER_URL;
 const loginAuthentication = async (body: LogInBody) => {
   try {
     const { data } = await axios.post(`${baseURL}/users/login`, body);
-    console.log({ message: "Login Token", token: data });
     sessionStorage.setItem("token", data);
     return data;
   } catch (error: any) {

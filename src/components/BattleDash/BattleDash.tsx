@@ -516,7 +516,6 @@ export default function BattleDash({
                     key={crypto.randomUUID()}
                     className="battle-dash__remove"
                     onClick={(event) => {
-                      console.log("Remove has been clicked");
                       removePlayer(event, 2);
                     }}
                   >
@@ -738,7 +737,6 @@ export default function BattleDash({
             <div className="battle-dash__info">
               <div
                 onClick={() => {
-                  console.log("Clicked");
                   setEditTableBool(true);
                 }}
                 className={
@@ -760,7 +758,6 @@ export default function BattleDash({
                     : "battle-dash__select-wrap--hide"
                 }
                 onChange={(event) => {
-                  console.log(event.target.value);
                   setTableValue(event.target.value);
                 }}
                 disabled={userEditBool && editTableBool === true ? false : true}

@@ -17,7 +17,6 @@ export default function FortyKTopFive() {
       const sortedResponse = response.fortyK.sort(
         (a: any, b: any) => b.ranking - a.ranking
       );
-      console.log(sortedResponse);
       setFortyKRankingArray(sortedResponse);
     };
     fetchTopFiveRanking();

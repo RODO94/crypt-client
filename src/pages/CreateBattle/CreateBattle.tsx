@@ -533,7 +533,6 @@ export default function CreateBattle() {
                       key={crypto.randomUUID()}
                       className="create-battle__remove"
                       onClick={(event: any) => {
-                        console.log(event);
                         const targetID =
                           event.target.parentElement.children[0].id;
                         removePlayer(event, targetID, 2);

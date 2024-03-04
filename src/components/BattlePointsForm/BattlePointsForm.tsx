@@ -52,7 +52,6 @@ export default function BattlePointsForm({
       getUserRole(token);
     }
     if (result === "victory" || result === "draw") {
-      console.log("Vic or Draw");
       setUserEditBool(false);
       setBattleOverBool(true);
     }
@@ -60,13 +59,11 @@ export default function BattlePointsForm({
 
   const handleSubmit = async () => {
     const response = await submitBattle(battleID, token);
-    console.log(response);
     window.location.reload();
   };
 
   const handleReSubmit = async () => {
     const response = await reSubmitBattle(battleID, token);
-    console.log(response);
     window.location.reload();
   };
 
@@ -79,7 +76,6 @@ export default function BattlePointsForm({
         "points_1",
         requestBody
       );
-      console.log(response);
       return response;
     } else if (player === 2) {
       const requestBody = { points: Number(playerTwoVictoryPoints) };
@@ -89,7 +85,6 @@ export default function BattlePointsForm({
         "points_2",
         requestBody
       );
-      console.log(response);
       return response;
     }
   };

@@ -16,7 +16,6 @@ export default function CompletedBattles() {
   useEffect(() => {
     const battleFn = async () => {
       const data = await getCompletedBattlesFive();
-      console.log(data);
       setBattleArray(data);
       return data;
     };
@@ -52,6 +51,7 @@ export default function CompletedBattles() {
                   player_1={battle.player_1}
                   player_2={battle.player_2}
                   combatant_1_id={battle.combatant_1_id}
+                  combatant_2_id={battle.combatant_2_id}
                   result={battle.result}
                   winner={battle.winner}
                   id={battle.id}
@@ -67,6 +67,7 @@ export default function CompletedBattles() {
                 player_1={battle.player_1}
                 player_2={battle.player_2}
                 combatant_1_id={battle.combatant_1_id}
+                combatant_2_id={battle.combatant_2_id}
                 result={battle.result}
                 winner={battle.winner}
                 id={battle.id}
@@ -88,6 +89,7 @@ export default function CompletedBattles() {
                   player_2={battle.player_2}
                   result={battle.result}
                   combatant_1_id={battle.combatant_1_id}
+                  combatant_2_id={battle.combatant_2_id}
                   winner={battle.winner}
                   id={battle.id}
                 />
