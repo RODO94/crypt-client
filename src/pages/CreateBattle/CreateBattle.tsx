@@ -16,7 +16,6 @@ import { createBattleRequest } from "../../utils/BattleRequests";
 import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import DoneIcon from "@mui/icons-material/Done";
-import logo from "../../assets/logo.svg";
 import Header from "../../components/Header/Header";
 
 interface UsersArray extends Array<Users> {}

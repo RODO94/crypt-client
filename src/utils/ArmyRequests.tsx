@@ -7,6 +7,21 @@ const getAllArmies = async () => {
   return data;
 };
 
+const addArmyRequest = async (token: string, requestBody: any) => {
+  try {
+    const { data } = await axios.post(`${baseURL}/armies/create`, requestBody, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+
+    return data;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+};
+
 const updateArmyCombatants = async (
   requestBody: any,
   battleID: any,
@@ -30,4 +45,4 @@ const updateArmyCombatants = async (
   }
 };
 
-export { getAllArmies, updateArmyCombatants };
+export { getAllArmies, updateArmyCombatants, addArmyRequest };

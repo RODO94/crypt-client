@@ -12,10 +12,12 @@ import { updateBattleDetail } from "../../utils/BattleRequests";
 import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import {
+  ArrowLeftIcon,
   DatePicker,
   LocalizationProvider,
   TimePicker,
 } from "@mui/x-date-pickers";
+import { useNavigate } from "react-router-dom";
 
 interface BattleComp {
   playerOne: Player[];
@@ -85,6 +87,8 @@ export default function BattleDash({
   const [userTwo, setUserTwo] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleClick = (event: any) => {
     playerEditBool === false
@@ -340,6 +344,14 @@ export default function BattleDash({
   return (
     <section className="battle-dash">
       <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <div
+          onClick={() => {
+            navigate(-1);
+          }}
+          className="battle-dash__back-arrow"
+        >
+          <ArrowLeftIcon /> Back
+        </div>
         <div className="battle-dash__header-wrap">
           <h1 className="battle-dash__header">Battle Information</h1>
           <img

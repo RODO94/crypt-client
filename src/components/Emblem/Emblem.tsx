@@ -1,7 +1,7 @@
 import "./Emblem.scss";
 import adeptasororitas from "../../assets/emblems/adepta-sororitas-crest.svg";
-import adeptacustodes from "../../assets/emblems/adeptus-custodes-crest.svg";
-import adeptamechanicus from "../../assets/emblems/adeptus-mechanicus-crest.svg";
+import adeptuscustodes from "../../assets/emblems/adeptus-custodes-crest.svg";
+import adeptusmechanicus from "../../assets/emblems/adeptus-mechanicus-crest.svg";
 import aelderi from "../../assets/emblems/aelderi-crest.svg";
 import astramilitarum from "../../assets/emblems/astra-militarum-crest.svg";
 import barrowkings from "../../assets/emblems/barrowkings.svg";
@@ -45,6 +45,12 @@ import warriorsofchaostzeentch from "../../assets/emblems/warriors-of-chaos-tzee
 import warriorsofchaos from "../../assets/emblems/warriors-of-chaos.svg";
 import woodelves from "../../assets/emblems/wood-elves.svg";
 import worldeaters from "../../assets/emblems/worldeaters-crest.svg";
+import ultramarines from "../../assets/emblems/ultramarines.svg";
+import salamanders from "../../assets/emblems/salamanders.svg";
+import whitescars from "../../assets/emblems/whitescars.svg";
+import snakebites from "../../assets/emblems/snakebites.svg";
+import gofforks from "../../assets/emblems/gofforks.svg";
+import bloodaxes from "../../assets/emblems/bloodaxes.svg";
 
 type EmblemType = {
   emblem: string;
@@ -55,10 +61,10 @@ export default function Emblem({ emblem }: EmblemType) {
 
   emblem === "adeptasororitas"
     ? (emblemIcon = adeptasororitas)
-    : emblem === "adeptacustodes"
-    ? (emblemIcon = adeptacustodes)
-    : emblem === "adeptamechanicus"
-    ? (emblemIcon = adeptamechanicus)
+    : emblem === "adeptuscustodes"
+    ? (emblemIcon = adeptuscustodes)
+    : emblem === "adeptusmechanicus"
+    ? (emblemIcon = adeptusmechanicus)
     : emblem === "aelderi"
     ? (emblemIcon = aelderi)
     : emblem === "astramilitarum"
@@ -69,6 +75,8 @@ export default function Emblem({ emblem }: EmblemType) {
     ? (emblemIcon = beastmen)
     : emblem === "bloodangels"
     ? (emblemIcon = bloodangels)
+    : emblem === "bloodaxes"
+    ? (emblemIcon = bloodaxes)
     : emblem === "chaosspacemarines"
     ? (emblemIcon = chaosspacemarines)
     : emblem === "chaosdemons"
@@ -97,6 +105,8 @@ export default function Emblem({ emblem }: EmblemType) {
     ? (emblemIcon = genestealercult)
     : emblem === "greyknights"
     ? (emblemIcon = greyknights)
+    : emblem === "gofforks"
+    ? (emblemIcon = gofforks)
     : emblem === "highelves"
     ? (emblemIcon = highelves)
     : emblem === "leaguesofvotann"
@@ -113,12 +123,16 @@ export default function Emblem({ emblem }: EmblemType) {
     ? (emblemIcon = orcsandgoblins)
     : emblem === "orks"
     ? (emblemIcon = orks)
+    : emblem === "salamanders"
+    ? (emblemIcon = salamanders)
     : emblem === "savageorcs"
     ? (emblemIcon = savageorcs)
     : emblem === "skaven"
     ? (emblemIcon = skaven)
     : emblem === "slaanesh"
     ? (emblemIcon = slaanesh)
+    : emblem === "snakebites"
+    ? (emblemIcon = snakebites)
     : emblem === "spacemarines"
     ? (emblemIcon = spacemarines)
     : emblem === "spacewolves"
@@ -141,10 +155,14 @@ export default function Emblem({ emblem }: EmblemType) {
     ? (emblemIcon = warriorsofchaostzeentch)
     : emblem === "warriorsofchaos"
     ? (emblemIcon = warriorsofchaos)
+    : emblem === "whitescars"
+    ? (emblemIcon = whitescars)
     : emblem === "woodelves"
     ? (emblemIcon = woodelves)
     : emblem === "worldeaters"
     ? (emblemIcon = worldeaters)
+    : emblem === "ultramarines"
+    ? (emblemIcon = ultramarines)
     : (emblemIcon = necrons);
 
   return <img className="emblem" src={emblemIcon} alt="army emblem" />;

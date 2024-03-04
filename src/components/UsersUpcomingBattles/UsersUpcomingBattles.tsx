@@ -35,6 +35,8 @@ export default function UsersUpcomingBattles() {
     }
   }, []);
 
+  console.log(battleArray);
+
   if (!battleArray) {
     return <p>content loading... please wait</p>;
   }
