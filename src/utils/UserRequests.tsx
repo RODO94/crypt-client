@@ -31,6 +31,16 @@ const getUser = async (token: string) => {
   }
 };
 
+const getArmyUser = async (id: string) => {
+  try {
+    const { data } = await axios.get(`${baseURL}/users/one/${id}`);
+    return data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
 const getNemesis = async (token: string) => {
   try {
     const { data } = await axios.get(`${baseURL}/users/nemesis`, {
@@ -57,4 +67,11 @@ const getAlly = async (token: string) => {
     return error;
   }
 };
-export { getAllUsersNames, getUser, getNemesis, getAlly, getAllUsers };
+export {
+  getAllUsersNames,
+  getUser,
+  getNemesis,
+  getAlly,
+  getAllUsers,
+  getArmyUser,
+};

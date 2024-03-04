@@ -4,6 +4,7 @@ import BattleCard from "../BattleCard/BattleCard";
 import BattleTypePill from "../BattleTypePill/BattleTypePill";
 import PlayerTypePill from "../PlayerTypePill/PlayerTypePill";
 import "./BattleCompleteRow.scss";
+import { useEffect, useState } from "react";
 
 interface BattleTableRow {
   battle_type: string;
@@ -13,6 +14,7 @@ interface BattleTableRow {
   player_1: Array<Player>;
   player_2: Array<Player>;
   id: string;
+  combatant_1_id: string;
 }
 
 export default function BattleCompleteRow({
@@ -22,23 +24,39 @@ export default function BattleCompleteRow({
   battle_type,
   player_type,
   id,
+  combatant_1_id,
 }: BattleTableRow) {
   let resultStatementOne = "";
   let resultStatementTwo = "";
 
+  const [winnerValue, setWinnerValue] = useState("");
+
+  useEffect(() => {
+    const fetchWinner = (winner: string) => {
+      winner === combatant_1_id
+        ? setWinnerValue("Player one")
+        : setWinnerValue("Player two");
+    };
+    fetchWinner(winner);
+  }, []);
+
   const navigate = useNavigate();
 
-  winner === "player one"
+  console.log(winnerValue);
+
+  winnerValue === "Player one"
     ? (resultStatementOne = "Victory")
-    : winner === "player two"
+    : winnerValue === "Player two"
     ? (resultStatementOne = "Vanquished")
     : (resultStatementOne = "Draw");
 
-  winner === "player two"
+  winnerValue === "Player two"
     ? (resultStatementTwo = "Victory")
-    : winner === "player one"
+    : winnerValue === "Player one"
     ? (resultStatementTwo = "Vanquished")
     : (resultStatementTwo = "Draw");
+
+  console.log({ resultOne: resultStatementOne, resultTwo: resultStatementTwo });
 
   const handleClick = () => {
     navigate(`/battles/information`, { state: { id: id } });
@@ -49,18 +67,18 @@ export default function BattleCompleteRow({
       <article className="completedbattle-row__combatants">
         <div
           className={
-            winner === "player one"
+            winnerValue === "Player one"
               ? "completedbattle-row__team completedbattle-row__team--winner"
-              : winner === "player two"
+              : winnerValue === "Player two"
               ? "completedbattle-row__team completedbattle-row__team--vanquished"
               : "completedbattle-row__team completedbattle-row__team--draw"
           }
         >
           <span
             className={
-              winner === "player one"
+              winnerValue === "Player one"
                 ? "completedbattle-row__team completedbattle-row__team--winner"
-                : winner === "player two"
+                : winnerValue === "Player two"
                 ? "completedbattle-row__team completedbattle-row__team--vanquished"
                 : "completedbattle-row__team--draw"
             }
@@ -81,18 +99,18 @@ export default function BattleCompleteRow({
         <p className="completedbattle-row__versus">VS</p>
         <div
           className={
-            winner === "player two"
+            winnerValue === "Player two"
               ? "completedbattle-row__team completedbattle-row__team--winner"
-              : winner === "player one"
+              : winnerValue === "Player one"
               ? "completedbattle-row__team completedbattle-row__team--vanquished"
               : "completedbattle-row__team completedbattle-row__team--draw"
           }
         >
           <span
             className={
-              winner === "player two"
+              winnerValue === "Player two"
                 ? "completedbattle-row__team completedbattle-row__team--winner"
-                : winner === "player one"
+                : winnerValue === "Player one"
                 ? "completedbattle-row__team completedbattle-row__team--vanquished"
                 : "completedbattle-row__team completedbattle-row__team--draw"
             }

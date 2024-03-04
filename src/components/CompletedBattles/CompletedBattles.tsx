@@ -51,6 +51,7 @@ export default function CompletedBattles() {
                   player_type={battle.player_type}
                   player_1={battle.player_1}
                   player_2={battle.player_2}
+                  combatant_1_id={battle.combatant_1_id}
                   result={battle.result}
                   winner={battle.winner}
                   id={battle.id}
@@ -65,6 +66,7 @@ export default function CompletedBattles() {
                 player_type={battle.player_type}
                 player_1={battle.player_1}
                 player_2={battle.player_2}
+                combatant_1_id={battle.combatant_1_id}
                 result={battle.result}
                 winner={battle.winner}
                 id={battle.id}
@@ -85,6 +87,7 @@ export default function CompletedBattles() {
                   player_1={battle.player_1}
                   player_2={battle.player_2}
                   result={battle.result}
+                  combatant_1_id={battle.combatant_1_id}
                   winner={battle.winner}
                   id={battle.id}
                 />

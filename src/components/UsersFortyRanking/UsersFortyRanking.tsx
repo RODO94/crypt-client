@@ -16,6 +16,7 @@ export default function UsersFortyRanking() {
     const fetchRankings = async () => {
       if (token) {
         const response = await getUserRanking(token, "fortyk");
+        console.log(response);
         setRankArray(response);
       }
     };
@@ -46,7 +47,7 @@ export default function UsersFortyRanking() {
             ranking={army.ranking}
             status={army.status}
             colour={colour}
-            navTo="/armies/information"
+            navTo={"/armies/information"}
             id={army.army_id}
           />
         );

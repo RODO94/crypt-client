@@ -6,6 +6,24 @@ export interface Player {
   army_id?: string;
 }
 
+export interface AllyObj {
+  armyID: string;
+  count: number;
+  id: string;
+  known_as: string;
+  name: string;
+  rank: string;
+}
+
+export interface ArmyObj {
+  emblem: string;
+  emblem_id: string;
+  id: string;
+  name: string;
+  type: string;
+  user_id: string;
+}
+
 export interface LogInBody {
   email: string;
   password: string;
@@ -77,6 +95,7 @@ export interface CompletedBattle {
   player_type: "single" | "multi";
   player_1: Player[];
   player_2: Player[];
+  combatant_1_id: string;
 }
 
 export interface Battle {

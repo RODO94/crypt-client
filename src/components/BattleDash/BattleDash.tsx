@@ -204,7 +204,6 @@ export default function BattleDash({
         detail,
         requestBody
       );
-      console.log(response);
     } else if (detail === "pointsize") {
       let requestBody = { points_size: pointsSizeValue };
       const response = await updateBattleDetail(
@@ -213,7 +212,6 @@ export default function BattleDash({
         detail,
         requestBody
       );
-      console.log(response);
     } else if (detail === "date") {
       let requestBody = { date: dateValue };
       const response = await updateBattleDetail(
@@ -222,7 +220,6 @@ export default function BattleDash({
         detail,
         requestBody
       );
-      console.log(response);
     } else if (detail === "start") {
       let requestBody = { start: dayjs(startValue).format("HH:mm:ss") };
       const response = await updateBattleDetail(
@@ -231,7 +228,6 @@ export default function BattleDash({
         detail,
         requestBody
       );
-      console.log(response);
     } else if (detail === "finish") {
       let requestBody = { finish: dayjs(finishValue).format("HH:mm:ss") };
       const response = await updateBattleDetail(
@@ -240,7 +236,6 @@ export default function BattleDash({
         detail,
         requestBody
       );
-      console.log(response);
     } else if (detail === "table") {
       let requestBody = { table: tableValue };
       const response = await updateBattleDetail(
@@ -249,7 +244,6 @@ export default function BattleDash({
         detail,
         requestBody
       );
-      console.log(response);
     } else if (detail === "gametype") {
       let requestBody = { battle_type: value };
       const response = await updateBattleDetail(
@@ -258,7 +252,6 @@ export default function BattleDash({
         detail,
         requestBody
       );
-      console.log(response);
     }
   };
 
@@ -623,7 +616,7 @@ export default function BattleDash({
             </div>
           </article>
           <article className="battle-dash__info-container">
-            <h2 className="battle-dash__subheader">Narrative / Scenario</h2>
+            <h2 className="battle-dash__subheader">Scenario</h2>
             <div className="battle-dash__info">
               <input
                 value={scenarioValue}

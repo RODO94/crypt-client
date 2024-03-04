@@ -22,6 +22,64 @@ const addArmyRequest = async (token: string, requestBody: any) => {
   }
 };
 
+const getOneArmy = async (id: string, token: string) => {
+  try {
+    const { data } = await axios.get(`${baseURL}/armies/army/${id}`, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    return data;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+};
+
+const getBattleCount = async (id: string, token: string) => {
+  try {
+    const { data } = await axios.get(
+      `${baseURL}/battles/${id}/completed/count`,
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+    console.log(data);
+    return data.count;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+};
+
+const getWinPercent = async (id: string, token: string) => {
+  try {
+    const { data } = await axios.get(`${baseURL}/battles/${id}/win/percent`, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    console.log(data);
+    return data.percent;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+};
+
+const getArmyRank = async (id: string) => {
+  try {
+    const { data } = await axios.get(`${baseURL}/rankings/${id}`);
+
+    return data;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+};
+
 const updateArmyCombatants = async (
   requestBody: any,
   battleID: any,
@@ -45,4 +103,35 @@ const updateArmyCombatants = async (
   }
 };
 
-export { getAllArmies, updateArmyCombatants, addArmyRequest };
+const getArmyNemesis = async (id: string) => {
+  try {
+    const { data } = await axios.get(`${baseURL}/armies/${id}/nemesis`);
+
+    return data;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+};
+const getArmyAlly = async (id: string) => {
+  try {
+    const { data } = await axios.get(`${baseURL}/armies/${id}/ally`);
+
+    return data;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+};
+
+export {
+  getAllArmies,
+  updateArmyCombatants,
+  addArmyRequest,
+  getOneArmy,
+  getBattleCount,
+  getWinPercent,
+  getArmyRank,
+  getArmyNemesis,
+  getArmyAlly,
+};

@@ -21,6 +21,7 @@ export default function NemesisCard() {
   useEffect(() => {
     const fetchNemesis = async () => {
       const response = await getNemesis(token);
+      console.log(response);
       setNemesis(response);
     };
 
