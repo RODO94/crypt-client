@@ -61,7 +61,7 @@ export default function BattleInfo() {
   }
 
   return (
-    <>
+    <main>
       <BattleDash
         playerOne={playerOneArray}
         setPlayerOneArray={setPlayerOneArray}
@@ -90,6 +90,6 @@ export default function BattleInfo() {
         token={userToken}
       />
       <NavFooter />
-    </>
+    </main>
   );
 }

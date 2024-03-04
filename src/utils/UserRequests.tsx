@@ -67,6 +67,34 @@ const getAlly = async (token: string) => {
     return error;
   }
 };
+
+const makeAdmin = async (id: string, token: string) => {
+  try {
+    const { data } = await axios.patch(`${baseURL}/users/${id}/admin`, "", {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    return data;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+};
+
+const removeUser = async (id: string, token: string) => {
+  try {
+    const { data } = await axios.get(`${baseURL}/users/${id}/admin`, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    return data;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+};
 export {
   getAllUsersNames,
   getUser,
@@ -74,4 +102,5 @@ export {
   getAlly,
   getAllUsers,
   getArmyUser,
+  makeAdmin,
 };

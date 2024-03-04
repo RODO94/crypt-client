@@ -66,6 +66,12 @@ export default function NavFooter() {
             >
               Fantasy <br /> Rankings
             </NavLink>
+            <NavLink
+              className={({ isActive }) => classNameFn(isActive)}
+              to={"/user/profile"}
+            >
+              Profile
+            </NavLink>
             {userToken ? (
               <NavLink
                 className={({ isActive }) => classNameFn(isActive)}

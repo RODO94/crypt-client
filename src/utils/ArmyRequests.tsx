@@ -7,6 +7,11 @@ const getAllArmies = async () => {
   return data;
 };
 
+const getAllUserArmies = async (id: string) => {
+  const { data } = await axios.get(`${baseURL}/armies/all/${id}`);
+  return data;
+};
+
 const addArmyRequest = async (token: string, requestBody: any) => {
   try {
     const { data } = await axios.post(`${baseURL}/armies/create`, requestBody, {
@@ -132,4 +137,5 @@ export {
   getArmyRank,
   getArmyNemesis,
   getArmyAlly,
+  getAllUserArmies,
 };
