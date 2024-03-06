@@ -16,7 +16,7 @@ const loginAuthentication = async (body: LogInBody) => {
 
 const signupAuthentication = async (body: SignUpBody) => {
   try {
-    const { data } = await axios.post(`${baseURL}/users/signup`, body);
+    const { data } = await axios.post(`${baseURL}/users/register`, body);
 
     return data;
   } catch (error: any) {
