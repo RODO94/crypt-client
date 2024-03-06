@@ -9,6 +9,7 @@ import {
   updateBattleDetail,
 } from "../../utils/BattleRequests";
 import { getUser } from "../../utils/UserRequests";
+import { useNavigate } from "react-router";
 
 interface BattlePoints {
   playerOne: Player[];
@@ -39,9 +40,14 @@ export default function BattlePointsForm({
   const [battleOverBool, setBattleOverBool] = useState(false);
   const [adminBool, setAdminBool] = useState(false);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     const getUserRole = async (token: string) => {
       const response = await getUser(token);
+      if (!response) {
+        return navigate("/");
+      }
 
       if (response.role === "admin") {
         setAdminBool(true);
@@ -58,12 +64,12 @@ export default function BattlePointsForm({
   }, []);
 
   const handleSubmit = async () => {
-    const response = await submitBattle(battleID, token);
+    await submitBattle(battleID, token);
     window.location.reload();
   };
 
   const handleReSubmit = async () => {
-    const response = await reSubmitBattle(battleID, token);
+    await reSubmitBattle(battleID, token);
     window.location.reload();
   };
 
@@ -88,6 +94,10 @@ export default function BattlePointsForm({
       return response;
     }
   };
+
+  if (!playerOne || !playerTwo) {
+    return <h1>Loading Content, please wait</h1>;
+  }
 
   return (
     <section className="battle-points">

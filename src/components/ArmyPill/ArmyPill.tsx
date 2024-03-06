@@ -2,7 +2,7 @@ import { Player } from "../../utils/Interfaces";
 import "./ArmyPill.scss";
 
 export default function ArmyPill({ name }: Player) {
-  let nameArray = name.toLowerCase().split(" ");
+  let nameArray = name ? name.toLowerCase().split(" ") : "";
   let nameColour: string = " ";
 
   for (let i = 0; i < nameArray.length; i++) {

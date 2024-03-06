@@ -75,7 +75,6 @@ export default function BattleDash({
   const [editDateBool, setEditDateBool] = useState(false);
   const [editStartBool, setEditStartBool] = useState(false);
   const [editFinishBool, setEditFinishBool] = useState(false);
-  const [successBool, setSuccessBool] = useState(false);
 
   const [userArray, setUserArray] = useState<UsersArray>();
   const [armyArray, setArmyArray] = useState<ArmiesArray>();
@@ -86,11 +85,9 @@ export default function BattleDash({
   const [armyTwo, setArmyTwo] = useState("");
   const [userTwo, setUserTwo] = useState("");
 
-  const [isLoading, setIsLoading] = useState(false);
-
   const navigate = useNavigate();
 
-  const handleClick = (event: any) => {
+  const handleClick = () => {
     playerEditBool === false
       ? setPlayerEditBool(true)
       : setPlayerEditBool(false);
@@ -125,7 +122,7 @@ export default function BattleDash({
       }));
 
       let requestBody = { player_1: armyIDArrayOne, player_2: armyIDArrayTwo };
-      setSuccessBool(await updateArmyCombatants(requestBody, battleID, token));
+      await updateArmyCombatants(requestBody, battleID, token);
     } else if (player === 2) {
       userID = event.target.parentElement.children.users_2.value.split("+")[0];
       userName =
@@ -145,7 +142,7 @@ export default function BattleDash({
 
       let requestBody = { player_1: armyIDArrayOne, player_2: armyIDArrayTwo };
 
-      setSuccessBool(await updateArmyCombatants(requestBody, battleID, token));
+      await updateArmyCombatants(requestBody, battleID, token);
     }
   };
 
@@ -165,13 +162,7 @@ export default function BattleDash({
       }));
 
       let requestBody = { player_1: newIDArrayOne, player_2: newIDArrayTwo };
-      setIsLoading(true);
-      let successBool = await updateArmyCombatants(
-        requestBody,
-        battleID,
-        token
-      );
-      setIsLoading(false);
+      await updateArmyCombatants(requestBody, battleID, token);
     } else if (player === 2) {
       let newArmyArray = playerTwo.filter(
         (army) => army.army_id !== targetArmyID
@@ -187,77 +178,41 @@ export default function BattleDash({
 
       let requestBody = { player_1: newIDArrayOne, player_2: newIDArrayTwo };
 
-      let successBool = await updateArmyCombatants(
-        requestBody,
-        battleID,
-        token
-      );
+      await updateArmyCombatants(requestBody, battleID, token);
     }
   };
 
   const handleChangeSubmit = async (detail: string, value?: any) => {
     if (detail === "scenario") {
       let requestBody = { scenario: scenarioValue };
-      const response = await updateBattleDetail(
-        battleID,
-        token,
-        detail,
-        requestBody
-      );
+      await updateBattleDetail(battleID, token, detail, requestBody);
     } else if (detail === "pointsize") {
       let requestBody = { points_size: pointsSizeValue };
-      const response = await updateBattleDetail(
-        battleID,
-        token,
-        detail,
-        requestBody
-      );
+      await updateBattleDetail(battleID, token, detail, requestBody);
     } else if (detail === "date") {
       let requestBody = { date: dateValue };
-      const response = await updateBattleDetail(
-        battleID,
-        token,
-        detail,
-        requestBody
-      );
+      await updateBattleDetail(battleID, token, detail, requestBody);
     } else if (detail === "start") {
       let requestBody = { start: dayjs(startValue).format("HH:mm:ss") };
-      const response = await updateBattleDetail(
-        battleID,
-        token,
-        detail,
-        requestBody
-      );
+      await updateBattleDetail(battleID, token, detail, requestBody);
     } else if (detail === "finish") {
       let requestBody = { finish: dayjs(finishValue).format("HH:mm:ss") };
-      const response = await updateBattleDetail(
-        battleID,
-        token,
-        detail,
-        requestBody
-      );
+      await updateBattleDetail(battleID, token, detail, requestBody);
     } else if (detail === "table") {
       let requestBody = { table: tableValue };
-      const response = await updateBattleDetail(
-        battleID,
-        token,
-        detail,
-        requestBody
-      );
+      await updateBattleDetail(battleID, token, detail, requestBody);
     } else if (detail === "gametype") {
       let requestBody = { battle_type: value };
-      const response = await updateBattleDetail(
-        battleID,
-        token,
-        detail,
-        requestBody
-      );
+      await updateBattleDetail(battleID, token, detail, requestBody);
     }
   };
 
   useEffect(() => {
     const fetchArmies = async () => {
       const response = await getAllArmies();
+      if (!response) {
+        return navigate("/");
+      }
       const filteredResponse = response.filter(
         (army: any) => army.type === battleType
       );

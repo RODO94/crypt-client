@@ -52,7 +52,8 @@ export default function CreateBattle() {
 
   const userToken = sessionStorage.getItem("token");
   if (!userToken) {
-    return navigate("/login");
+    navigate("/login");
+    return <h1>You need to log in</h1>;
   }
 
   useEffect(() => {

@@ -95,8 +95,8 @@ export interface CompletedBattle {
   player_type: "single" | "multi";
   player_1: Player[];
   player_2: Player[];
-  combatant_1_id: string;
-  combatant_2_id: string;
+  combatant_1_id?: string;
+  combatant_2_id?: string;
 }
 
 export interface Battle {

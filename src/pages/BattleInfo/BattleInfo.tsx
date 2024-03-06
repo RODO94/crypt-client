@@ -20,12 +20,16 @@ export default function BattleInfo() {
   const battleID = location.state.id;
   const userToken = sessionStorage.getItem("token");
   if (!userToken) {
-    return navigate("/login");
+    navigate("/login");
+    return <h1>You need to log in</h1>;
   }
 
   useEffect(() => {
     const fetchRole = async (token: string) => {
       const data = await getUser(token);
+      if (!data) {
+        return navigate("/");
+      }
       setRole(data.role);
       return data;
     };
@@ -35,6 +39,9 @@ export default function BattleInfo() {
   useEffect(() => {
     const fetchBattle = async (battleID: string) => {
       const response = await getOneBattle(battleID);
+      if (!response) {
+        return navigate("/");
+      }
       setBattle(response[0]);
       setPlayerOneArray(response[0].player_1);
       setPlayerTwoArray(response[0].player_2);
@@ -57,9 +64,12 @@ export default function BattleInfo() {
   }, [battle]);
 
   if (!userToken || !battle || !role || !playerOneArray || !playerTwoArray) {
-    return <h1>Content Loading</h1>;
+    return (
+      <div>
+        <h1>Content Loading</h1>
+      </div>
+    );
   }
-
   return (
     <main>
       <BattleDash

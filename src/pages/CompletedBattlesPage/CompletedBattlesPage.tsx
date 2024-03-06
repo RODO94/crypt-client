@@ -281,8 +281,12 @@ export default function CompletedBattlesPage() {
                     player_2={battle.player_2}
                     result={battle.result}
                     winner={battle.winner}
-                    combatant_1_id={battle.combatant_1_id}
-                    combatant_2_id={battle.combatant_2_id}
+                    combatant_1_id={
+                      battle.combatant_1_id ? battle.combatant_1_id : ""
+                    }
+                    combatant_2_id={
+                      battle.combatant_2_id ? battle.combatant_2_id : ""
+                    }
                     id={battle.id}
                   />
                 </article>
@@ -297,8 +301,12 @@ export default function CompletedBattlesPage() {
                   player_2={battle.player_2}
                   result={battle.result}
                   winner={battle.winner}
-                  combatant_1_id={battle.combatant_1_id}
-                  combatant_2_id={battle.combatant_2_id}
+                  combatant_1_id={
+                    battle.combatant_1_id ? battle.combatant_1_id : ""
+                  }
+                  combatant_2_id={
+                    battle.combatant_2_id ? battle.combatant_2_id : ""
+                  }
                   id={battle.id}
                 />
               );
@@ -321,8 +329,12 @@ export default function CompletedBattlesPage() {
                     player_2={battle.player_2}
                     result={battle.result}
                     winner={battle.winner}
-                    combatant_1_id={battle.combatant_1_id}
-                    combatant_2_id={battle.combatant_2_id}
+                    combatant_1_id={
+                      battle.combatant_1_id ? battle.combatant_1_id : ""
+                    }
+                    combatant_2_id={
+                      battle.combatant_2_id ? battle.combatant_2_id : ""
+                    }
                     id={battle.id}
                   />
                 </article>

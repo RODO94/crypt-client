@@ -4,16 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { getAllUsers, getUser, makeAdmin } from "../../utils/UserRequests";
 import { getAllUserArmies } from "../../utils/ArmyRequests";
 import BattleCard from "../../components/BattleCard/BattleCard";
-import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import PersonOffIcon from "@mui/icons-material/PersonOff";
 import {
   Button,
   Menu,
   MenuItem,
   MenuProps,
   alpha,
-  dividerClasses,
   styled,
 } from "@mui/material";
 
@@ -22,7 +19,7 @@ export default function UserProfile() {
   const [user, setUser] = useState<any>();
   const [fantasyArmyArray, setFantasyArmyArray] = useState([]);
   const [fortykArmyArray, setFortykArmyArray] = useState([]);
-  const [userArray, setUserArray] = useState();
+  const [userArray, setUserArray] = useState([]);
   const [targetUser, setTargetUser] = useState();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const navigate = useNavigate();
@@ -37,12 +34,13 @@ export default function UserProfile() {
 
   const userToken = sessionStorage.getItem("token");
   if (!userToken) {
-    return navigate("/login");
+    navigate("/login");
+    return <h1>You need to log in</h1>;
   }
 
   const handleAdmin = async () => {
     if (targetUser) {
-      const response = await makeAdmin(targetUser, userToken);
+      await makeAdmin(targetUser, userToken);
     }
     window.location.reload();
   };
@@ -151,7 +149,7 @@ export default function UserProfile() {
       </section>
       <section className="user-profile__army-list">
         <h2 className="user-profile__subheader">Fantasy Armies</h2>
-        {fantasyArmyArray.map((army) => {
+        {fantasyArmyArray.map((army: any) => {
           return (
             <article
               key={`article${army.id}`}
@@ -173,7 +171,7 @@ export default function UserProfile() {
       </section>{" "}
       <section id="fortyk" className="user-profile__army-list">
         <h2 className="user-profile__subheader">40k Armies</h2>
-        {fortykArmyArray.map((army) => {
+        {fortykArmyArray.map((army: any) => {
           return (
             <article
               key={`article${army.id}`}
@@ -209,7 +207,7 @@ export default function UserProfile() {
             Action
           </p>
         </div>
-        {userArray.map((user, index) => {
+        {userArray.map((user: any, index: number) => {
           return (
             <article
               id={user.id}
@@ -245,7 +243,7 @@ export default function UserProfile() {
                     aria-expanded={open ? "true" : undefined}
                     variant="contained"
                     disableElevation
-                    onClick={(event) => {
+                    onClick={(event: any) => {
                       setTargetUser(event.target.parentElement.id);
                       handleClick(event);
                     }}
@@ -264,7 +262,7 @@ export default function UserProfile() {
                   >
                     <MenuItem
                       key={`menuitem${user.id}`}
-                      onClick={(event) => {
+                      onClick={() => {
                         handleAdmin();
                       }}
                       disableRipple

@@ -1,8 +1,6 @@
 import { NavLink } from "react-router-dom";
 import "./NavFooter.scss";
 import { useState } from "react";
-import MenuIcon from "@mui/icons-material/Menu";
-import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import { ThemeProvider } from "@emotion/react";
 import { createTheme } from "@mui/material";
 import rankings from "../../assets/rankings.svg";
@@ -10,7 +8,6 @@ import home from "../../assets/home.svg";
 import battles from "../../assets/battles.svg";
 
 export default function NavFooter() {
-  const [toggleBool, setToggleBool] = useState(false);
   const [battleToggle, setBattleToggle] = useState(false);
   const [rankingsToggle, setRankingsToggle] = useState(false);
   const classNameFn = (isActive: boolean) =>
