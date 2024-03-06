@@ -54,7 +54,8 @@ export default function FortyKTopFive() {
                 : "no change"
             }
             colour={colour}
-            navTo={`/armies/${army.army_id}`}
+            navTo={`/armies/information`}
+            id={army.army_id}
           />
         );
       })}

@@ -54,7 +54,8 @@ export default function FantasyTopFive() {
                 : "no change"
             }
             colour={colour}
-            navTo="/"
+            navTo="/armies/information"
+            id={army.army_id}
           />
         );
       })}

@@ -1,0 +1,243 @@
+@use "../../partials/variables" as *;
+
+.battle-dash {
+  display: flex;
+  padding: 2rem 1rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+  align-self: stretch;
+  border-radius: 0rem 0rem 2rem 2rem;
+  background-color: $ultramarine-4;
+  &__header {
+    color: #fff;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    &-wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-direction: row;
+      align-self: stretch;
+    }
+    &-img {
+      width: 3rem;
+      height: 3rem;
+    }
+  }
+  &__battle-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+    align-self: stretch;
+  }
+  &__subheader {
+    color: #fff;
+    font-size: 0.8125rem;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    margin: 0;
+  }
+  &__select-wrap {
+    &--hide {
+      display: none;
+    }
+  }
+  &__combatant {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-self: stretch;
+
+    &-wrap {
+      display: flex;
+      position: relative;
+      padding: 1rem;
+      gap: 1rem;
+      justify-content: space-between;
+      align-items: flex-end;
+      align-self: stretch;
+      flex-direction: column;
+      border-radius: 0.5rem;
+      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+      background-color: $space-wolves-4;
+      &--hide {
+        display: none;
+      }
+      &--edit {
+        display: flex;
+        padding: 1rem;
+        gap: 1rem;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-end;
+        align-self: stretch;
+        border-radius: 0.5rem;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        background-color: $space-wolves-4;
+      }
+    }
+    &-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-self: stretch;
+      align-items: center;
+      padding-top: 2rem;
+      width: 100%;
+      gap: 1rem;
+      &--edit {
+        flex-direction: column;
+      }
+    }
+    &-edit-row {
+      display: flex;
+      width: 100%;
+      justify-content: space-around;
+      align-items: center;
+    }
+  }
+  &__versus {
+    color: #000;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+  &__submit-button {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    &--hide {
+      display: none;
+    }
+  }
+  &__toggle-icon {
+    height: 1.5rem;
+    width: 1.5rem;
+    &--hide {
+      display: none;
+    }
+  }
+  &__player-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 42%;
+  }
+  &__input {
+    background-color: white;
+    border: none;
+    outline: none;
+    padding: 0.65rem 0.8rem;
+    border-radius: 0.5rem;
+  }
+  &__info {
+    background-color: $space-wolves-4;
+    border-radius: 0.5rem;
+    display: flex;
+    padding: 1rem;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: nowrap;
+    min-width: 1rem;
+    min-height: 62px;
+
+    &-wrap {
+      display: flex;
+      align-items: center;
+      align-content: center;
+      gap: 1rem;
+      align-self: stretch;
+      flex-wrap: wrap;
+    }
+    &-container {
+      display: flex;
+      flex-direction: column;
+
+      gap: 0.5rem;
+    }
+    &-text {
+      color: #000;
+      font-size: 0.875rem;
+      font-style: normal;
+      font-weight: 900;
+      line-height: normal;
+      background-color: transparent;
+      outline: none;
+      border: none;
+      font-family: Roboto;
+      margin: auto 0;
+      width: fit-content;
+      &--hide {
+        display: none;
+      }
+    }
+  }
+  &__remove {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    font-weight: 700;
+  }
+  &__add {
+    border-radius: 35%;
+    outline: none;
+    border: none;
+    font-size: 1rem;
+    font-weight: 500;
+    width: 2rem;
+    height: 2rem;
+    background-color: $dark-angels-4;
+    color: white;
+  }
+  &__loader {
+    height: 100%;
+    width: 100%;
+    &--hide {
+      display: none;
+    }
+  }
+  &__edit {
+    color: $ultramarine-2;
+    font-family: "Roboto";
+    background-color: transparent;
+    border-radius: 8px;
+    font-size: 0.5rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    outline: none;
+    border: none;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    &:hover {
+      background-color: $ultramarine-2;
+      cursor: pointer;
+    }
+    &--hide {
+      display: none;
+    }
+  }
+  &__select {
+    outline: none;
+    border: none;
+    padding: 0.7rem;
+    border-radius: 4px;
+    font-family: "Roboto";
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+  }
+  &__back-arrow {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+}

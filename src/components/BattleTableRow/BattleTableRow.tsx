@@ -23,7 +23,7 @@ export default function BattleTableRow({
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/battles/${id}`);
+    navigate(`/battles/information`, { state: { id: id } });
   };
 
   return (

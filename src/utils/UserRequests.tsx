@@ -11,6 +11,12 @@ const getAllUsersNames = async () => {
   return userArray;
 };
 
+const getAllUsers = async () => {
+  const { data } = await axios.get(`${baseURL}/users/all`);
+
+  return data;
+};
+
 const getUser = async (token: string) => {
   try {
     const { data } = await axios.get(`${baseURL}/users/one`, {
@@ -18,6 +24,16 @@ const getUser = async (token: string) => {
         Authorization: "Bearer " + token,
       },
     });
+    return data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+const getArmyUser = async (id: string) => {
+  try {
+    const { data } = await axios.get(`${baseURL}/users/one/${id}`);
     return data;
   } catch (error) {
     console.error(error);
@@ -51,4 +67,40 @@ const getAlly = async (token: string) => {
     return error;
   }
 };
-export { getAllUsersNames, getUser, getNemesis, getAlly };
+
+const makeAdmin = async (id: string, token: string) => {
+  try {
+    const { data } = await axios.patch(`${baseURL}/users/${id}/admin`, "", {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    return data;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+};
+
+const removeUser = async (id: string, token: string) => {
+  try {
+    const { data } = await axios.get(`${baseURL}/users/${id}/admin`, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    return data;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+};
+export {
+  getAllUsersNames,
+  getUser,
+  getNemesis,
+  getAlly,
+  getAllUsers,
+  getArmyUser,
+  makeAdmin,
+};

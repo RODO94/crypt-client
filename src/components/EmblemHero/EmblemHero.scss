@@ -1,0 +1,14 @@
+.emblem-hero {
+  display: block;
+  height: 100%;
+  width: 100%;
+
+  &__container {
+    position: absolute;
+    height: 80%;
+    top: 25%;
+    left: 3%;
+    z-index: 0;
+    opacity: 40%;
+  }
+}

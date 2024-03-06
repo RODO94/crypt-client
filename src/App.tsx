@@ -31,15 +31,13 @@ function App() {
           <Route path="/rankings/fantasy" element={<FantasyRankingPage />} />
           <Route path="/battles/completed" element={<CompletedBattlesPage />} />
           <Route path="/battles/upcoming" element={<UpcomingBattlesPage />} />
-          <Route path="/battles/:battleID" element={<BattleInfo />} />
-          <Route path="/armies/:armyID" element={<ArmyInfo />} />
+          <Route path="/battles/information" element={<BattleInfo />} />
+          <Route path="/armies/information" element={<ArmyInfo />} />
           {/* User Routes */}
-          <Route path="/:userID" element={<UserDashboard />} />
-          <Route path="/:userID/profile" element={<UserProfile />} />
+          <Route path="/user" element={<UserDashboard />} />
+          <Route path="/user/profile" element={<UserProfile />} />
           <Route path="/battles/create" element={<CreateBattle />} />
-          <Route path="/battles/:battleID" element={<BattleInfo />} />
           <Route path="/armies/add" element={<AddArmy />} />
-          <Route path="/armies/:armyID" element={<ArmyInfo />} />
         </Routes>
       </div>
     </BrowserRouter>
