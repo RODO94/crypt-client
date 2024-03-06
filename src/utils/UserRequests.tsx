@@ -103,4 +103,5 @@ export {
   getAllUsers,
   getArmyUser,
   makeAdmin,
+  removeUser,
 };

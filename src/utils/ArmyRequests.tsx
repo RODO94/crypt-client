@@ -89,7 +89,7 @@ const updateArmyCombatants = async (
   token: string
 ) => {
   try {
-    const { data } = await axios.patch(
+    await axios.patch(
       `${baseURL}/battles/${battleID}/edit/combatants`,
       requestBody,
       {
