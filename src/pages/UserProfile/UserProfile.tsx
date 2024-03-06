@@ -19,7 +19,7 @@ import {
 
 export default function UserProfile() {
   const [role, setRole] = useState<string>("");
-  const [user, setUser] = useState();
+  const [user, setUser] = useState<any>();
   const [fantasyArmyArray, setFantasyArmyArray] = useState([]);
   const [fortykArmyArray, setFortykArmyArray] = useState([]);
   const [userArray, setUserArray] = useState();
