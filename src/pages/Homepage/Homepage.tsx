@@ -13,9 +13,9 @@ export default function Homepage() {
       <Header />
       <HomeHero />
       <UpcomingBattles />
-      <FortyKTopFive />
+      {/* <FortyKTopFive />
       <FantasyTopFive />
-      <CompletedBattles />
+      <CompletedBattles /> */}
       <NavFooter />
     </main>
   );
