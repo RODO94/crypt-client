@@ -1,5 +1,5 @@
-// import CompletedBattles from "../../components/CompletedBattles/CompletedBattles";
-// import FantasyTopFive from "../../components/FantasyTopFive/FantasyTopFive ";
+import CompletedBattles from "../../components/CompletedBattles/CompletedBattles";
+import FantasyTopFive from "../../components/FantasyTopFive/FantasyTopFive ";
 import FortyKTopFive from "../../components/FortyKTopFive/FortyKTopFive";
 import Header from "../../components/Header/Header";
 import HomeHero from "../../components/HomeHero/HomeHero";
@@ -14,8 +14,8 @@ export default function Homepage() {
       <HomeHero />
       <UpcomingBattles />
       <FortyKTopFive />
-      {/* <FantasyTopFive />
-      <CompletedBattles /> */}
+      <FantasyTopFive />
+      <CompletedBattles />
       <NavFooter />
     </main>
   );
