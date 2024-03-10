@@ -31,6 +31,7 @@ export default function ArmyInfo() {
   useEffect(() => {
     const fetchArmy = async () => {
       const response = await getOneArmy(armyID, userToken);
+      console.log("get one army");
       setArmyObj(response);
     };
     fetchArmy();
@@ -40,15 +41,18 @@ export default function ArmyInfo() {
     if (armyObj) {
       const fetchBattleCount = async () => {
         const response = await getBattleCount(armyObj.user_id, userToken);
+        console.log("battle Request");
         setBattleCount(response);
       };
       const fetchWinPercent = async () => {
         const response = await getWinPercent(armyObj.user_id, userToken);
+        console.log("win percent request");
         setWinPercent(response);
       };
 
       const fetchArmyRankScore = async () => {
         const response = await getArmyRank(armyObj.id);
+        console.log("army score request");
         setArmyRank(Number(response.ranking));
       };
 

@@ -42,9 +42,9 @@ export default function BattleInfo() {
       if (!response) {
         return navigate("/");
       }
-      setBattle(response[0]);
-      setPlayerOneArray(response[0].player_1);
-      setPlayerTwoArray(response[0].player_2);
+      setBattle(response);
+      setPlayerOneArray(response.player_1);
+      setPlayerTwoArray(response.player_2);
       return response;
     };
     fetchBattle(battleID);
