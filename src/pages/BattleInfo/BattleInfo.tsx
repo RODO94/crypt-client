@@ -55,7 +55,9 @@ export default function BattleInfo() {
       if (battle) {
         winner === battle.combatant_1_id
           ? setWinnerValue("Player 1")
-          : setWinnerValue("Player 2");
+          : winner === battle.combatant_2_id
+          ? setWinnerValue("Player 2")
+          : setWinnerValue("TBC");
       }
     };
     if (battle) {
