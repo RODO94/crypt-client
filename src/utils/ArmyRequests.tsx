@@ -3,8 +3,13 @@ import axios from "axios";
 const baseURL = import.meta.env.VITE_SERVER_URL;
 
 const getAllArmies = async () => {
-  const { data } = await axios.get(`${baseURL}/armies/all`);
-  return data;
+  try {
+    const { data } = await axios.get(`${baseURL}/armies/all`);
+    return data;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
 };
 
 const getAllUserArmies = async (id: string) => {

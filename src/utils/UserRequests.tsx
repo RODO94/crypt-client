@@ -12,9 +12,14 @@ const getAllUsersNames = async () => {
 };
 
 const getAllUsers = async () => {
-  const { data } = await axios.get(`${baseURL}/users/all`);
+  try {
+    const { data } = await axios.get(`${baseURL}/users/all`);
 
-  return data;
+    return data;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
 };
 
 const getUser = async (token: string) => {

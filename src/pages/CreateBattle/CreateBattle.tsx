@@ -35,7 +35,7 @@ export default function CreateBattle() {
   const [playerTwoError, setPlayerTwoError] = useState(false);
 
   const [armyArray, setArmyArray] = useState<ArmiesArray>();
-  const [userArray, setUserArray] = useState<UsersArray>();
+  const [userArray, setUserArray] = useState<UsersArray | null>(null);
   const [playerOne, setPlayerOne] = useState<Player[]>([]);
   const [playerTwo, setPlayerTwo] = useState<Player[]>([]);
   const [userOneFilter, setUserOneFilter] = useState("");
@@ -58,30 +58,42 @@ export default function CreateBattle() {
 
   useEffect(() => {
     const fetchArmies = async () => {
-      const response = await getAllArmies();
-      const filteredResponse = response.filter(
+      if (!armyArray) {
+        const response = await getAllArmies();
+        const filteredResponse = response.filter(
+          (army: any) => army.type === battleType
+        );
+        return setArmyArray(filteredResponse);
+      }
+      const filteredResponse = armyArray.filter(
         (army: any) => army.type === battleType
       );
-      setArmyOne(response[0].name);
-      setArmyTwo(response[0].name);
 
+      setArmyOne(filteredResponse[0].name);
+      setArmyTwo(filteredResponse[0].name);
       return setArmyArray(filteredResponse);
     };
     fetchArmies();
+    console.log("run fetch armies");
   }, [battleType]);
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const response = await getAllUsers();
-      setUserOneFilter(response[0].id);
-      setUserTwoFilter(response[0].id);
+      if (userArray === null) {
+        const response = await getAllUsers();
+        console.log("server request");
+        setUserOneFilter(response[0].id);
+        setUserTwoFilter(response[0].id);
 
-      setUserOne(response[0].id);
-      setUserTwo(response[0].id);
+        setUserOne(response[0].id);
+        setUserTwo(response[0].id);
 
-      if (armyArray) {
+        setUserArray(response);
+      }
+
+      if (armyArray && userArray) {
         // Battle Type User Filter
-        const filteredResponse = await response.filter((user: Player) => {
+        const filteredResponse = await userArray.filter((user: Player) => {
           const army = armyArray.find((army) => army.user_id === user.id);
           return army;
         });
@@ -106,10 +118,10 @@ export default function CreateBattle() {
 
         return setUserArray(secondFilteredResponse);
       }
-      setUserArray(response);
     };
 
     fetchUsers();
+    console.log("run fetch users");
   }, [playerOne, playerTwo, armyArray]);
 
   const removePlayer = (event: any, targetID: string, player: number) => {
@@ -206,7 +218,9 @@ export default function CreateBattle() {
       player_2: formattedPlayerTwo,
       date: dayjs(date).format("YYYY-MM-DD"),
       start: dayjs(start).format("HH:mm:ss"),
-      finish: dayjs(finish).format("HH:mm:ss"),
+      finish: !finish
+        ? dayjs(start).format("HH:mm:ss")
+        : dayjs(finish).format("HH:mm:ss"),
       table: table,
     };
 
