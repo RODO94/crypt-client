@@ -17,7 +17,6 @@ import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import DoneIcon from "@mui/icons-material/Done";
 import Header from "../../components/Header/Header";
-import { unstable_getNormalizedScrollLeft } from "@mui/utils";
 
 interface UsersArray extends Array<Users> {}
 interface ArmiesArray extends Array<Armies> {}
