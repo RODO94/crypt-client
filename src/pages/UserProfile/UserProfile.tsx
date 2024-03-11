@@ -152,14 +152,26 @@ export default function UserProfile() {
         {fantasyArmyArray.map((army: any) => {
           return (
             <article
-              key={`article${army.id}`}
+              key={`article${army.army_id}`}
               className="user-profile__army-card"
             >
-              <div key={`div2${army.id}`} className="user-profile__army-wrap">
-                <BattleCard key={`battlecard${army.id}`} name={army.name} />
+              <div
+                key={`div2${army.army_id}`}
+                className="user-profile__army-wrap"
+              >
+                <BattleCard
+                  key={`battlecard${army.army_id}`}
+                  name={army.name}
+                />
               </div>
-              <div key={`div${army.id}`} className="user-profile__count-wrap">
-                <strong key={`strong${army.id}`} className="user-profile__info">
+              <div
+                key={`div${army.army_id}`}
+                className="user-profile__count-wrap"
+              >
+                <strong
+                  key={`strong${army.army_id}`}
+                  className="user-profile__info"
+                >
                   {army.count > 1 || army.count === 0
                     ? `${army.count} games`
                     : `${army.count} game`}
@@ -174,15 +186,27 @@ export default function UserProfile() {
         {fortykArmyArray.map((army: any) => {
           return (
             <article
-              key={`article${army.id}`}
+              key={`article${army.army_id}`}
               className="user-profile__army-card"
             >
               {" "}
-              <div key={`div2${army.id}`} className="user-profile__army-wrap">
-                <BattleCard key={`battlecard${army.id}`} name={army.name} />
+              <div
+                key={`div2${army.army_id}`}
+                className="user-profile__army-wrap"
+              >
+                <BattleCard
+                  key={`battlecard${army.army_id}`}
+                  name={army.name}
+                />
               </div>
-              <div key={`div${army.id}`} className="user-profile__count-wrap">
-                <strong key={`strong${army.id}`} className="user-profile__info">
+              <div
+                key={`div${army.army_id}`}
+                className="user-profile__count-wrap"
+              >
+                <strong
+                  key={`strong${army.army_id}`}
+                  className="user-profile__info"
+                >
                   {army.count > 1 || army.count === 0
                     ? `${army.count} games`
                     : `${army.count} game`}
@@ -210,6 +234,7 @@ export default function UserProfile() {
         {userArray.map((user: any, index: number) => {
           return (
             <article
+              key={`article${user.id}`}
               id={user.id}
               className={
                 index % 2 !== 0
@@ -217,17 +242,33 @@ export default function UserProfile() {
                   : "user-profile__user-records user-profile__user-records--dark"
               }
             >
-              <strong id="user" className="user-profile__user-record">
+              <strong
+                key={`strong${user.id}`}
+                id="user"
+                className="user-profile__user-record"
+              >
                 {user.known_as}
               </strong>
-              <p id="email" className="user-profile__user-record">
+              <p
+                key={`email${user.id}`}
+                id="email"
+                className="user-profile__user-record"
+              >
                 {user.email}
               </p>
-              <p id="role" className="user-profile__user-record">
+              <p
+                key={`role${user.id}`}
+                id="role"
+                className="user-profile__user-record"
+              >
                 {user.role}
               </p>
               {user.role !== "admin" ? (
-                <div className="user-profile__user-record--action" id={user.id}>
+                <div
+                  key={`div${user.id}`}
+                  className="user-profile__user-record--action"
+                  id={user.id}
+                >
                   <Button
                     key={`button${user.id}`}
                     size="small"
