@@ -60,6 +60,7 @@ export default function CreateBattle() {
 
   useEffect(() => {
     const fetchArmies = async () => {
+      console.log(armyArray);
       if (!armyArray) {
         const response = await getAllArmies();
         setArmyArray(response);

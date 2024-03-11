@@ -14,7 +14,6 @@ export default function NavButton({ colour, text, page }: ButtonProps) {
     : colour === "dark"
     ? (colourClass = "nav-button nav-button--dark")
     : (colourClass = "nav-button nav-button--green");
-  console.log(page);
 
   if (!page) {
     page = "/";
