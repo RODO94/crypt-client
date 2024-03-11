@@ -1,13 +1,15 @@
 .emblem-hero {
   display: block;
-  height: 100%;
-  width: 100%;
+  margin: 0 auto;
+  height: 50vh;
 
   &__container {
     position: absolute;
     height: 80%;
     top: 25%;
-    left: 3%;
+    left: 0;
+    margin: 0 auto;
+    width: 100%;
     z-index: 0;
     opacity: 40%;
   }

@@ -61,6 +61,7 @@ export default function ArmyInfo() {
             );
           }, 30);
         }
+
         let responseArmyRank = await getArmyRank(response.id);
         if (!responseArmyRank) {
           setTimeout(async () => {
