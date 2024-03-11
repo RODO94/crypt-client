@@ -60,6 +60,7 @@ export default function CreateBattle() {
     const fetchArmies = async () => {
       if (!armyArray) {
         const response = await getAllArmies();
+        console.log("army request");
         const filteredResponse = response.filter(
           (army: any) => army.type === battleType
         );
