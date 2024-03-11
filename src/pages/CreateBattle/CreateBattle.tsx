@@ -63,6 +63,7 @@ export default function CreateBattle() {
       console.log(armyArray);
       if (!armyArray) {
         const response = await getAllArmies();
+        console.log({ armyResponse: response });
         setArmyArray(response);
         console.log("army request");
         const filteredResponse = response.filter(
