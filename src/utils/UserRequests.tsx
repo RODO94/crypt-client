@@ -56,7 +56,7 @@ const getNemesis = async (token: string) => {
     return data;
   } catch (error) {
     console.error(error);
-    return error;
+    return false;
   }
 };
 const getAlly = async (token: string) => {
@@ -69,7 +69,7 @@ const getAlly = async (token: string) => {
     return data;
   } catch (error) {
     console.error(error);
-    return error;
+    return false;
   }
 };
 

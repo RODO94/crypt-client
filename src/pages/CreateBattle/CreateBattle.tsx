@@ -17,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import DoneIcon from "@mui/icons-material/Done";
 import Header from "../../components/Header/Header";
+import { unstable_getNormalizedScrollLeft } from "@mui/utils";
 
 interface UsersArray extends Array<Users> {}
 interface ArmiesArray extends Array<Armies> {}
@@ -35,7 +36,9 @@ export default function CreateBattle() {
   const [playerTwoError, setPlayerTwoError] = useState(false);
 
   const [armyArray, setArmyArray] = useState<ArmiesArray>();
-  const [userArray, setUserArray] = useState<UsersArray | null>(null);
+  const [userArray, setUserArray] = useState<UsersArray>();
+  const [filteredArmyArray, setFilteredArmyArray] = useState<ArmiesArray>();
+  const [filteredUserArray, setFilteredUserArray] = useState<UsersArray>();
   const [playerOne, setPlayerOne] = useState<Player[]>([]);
   const [playerTwo, setPlayerTwo] = useState<Player[]>([]);
   const [userOneFilter, setUserOneFilter] = useState("");
@@ -60,19 +63,27 @@ export default function CreateBattle() {
     const fetchArmies = async () => {
       if (!armyArray) {
         const response = await getAllArmies();
+        setArmyArray(response);
         console.log("army request");
         const filteredResponse = response.filter(
           (army: any) => army.type === battleType
         );
-        return setArmyArray(filteredResponse);
+        return setFilteredArmyArray(filteredResponse);
       }
-      const filteredResponse = armyArray.filter(
-        (army: any) => army.type === battleType
-      );
+      if (armyArray) {
+        const filteredResponse = armyArray.filter(
+          (army: any) => army.type === battleType
+        );
 
-      setArmyOne(filteredResponse[0].name);
-      setArmyTwo(filteredResponse[0].name);
-      return setArmyArray(filteredResponse);
+        console.log({
+          armyArray: armyArray,
+          filteredResponse: filteredResponse,
+        });
+
+        setArmyOne(filteredResponse[0].name);
+        setArmyTwo(filteredResponse[0].name);
+        return setFilteredArmyArray(filteredResponse);
+      }
     };
     fetchArmies();
     console.log("run fetch armies");
@@ -80,7 +91,7 @@ export default function CreateBattle() {
 
   useEffect(() => {
     const fetchUsers = async () => {
-      if (userArray === null) {
+      if (!userArray) {
         const response = await getAllUsers();
         console.log("server request");
         setUserOneFilter(response[0].id);
@@ -88,14 +99,15 @@ export default function CreateBattle() {
 
         setUserOne(response[0].id);
         setUserTwo(response[0].id);
-
         setUserArray(response);
       }
 
-      if (armyArray && userArray) {
+      if (filteredArmyArray && userArray) {
         // Battle Type User Filter
-        const filteredResponse = await userArray.filter((user: Player) => {
-          const army = armyArray.find((army) => army.user_id === user.id);
+        const filteredResponse = userArray.filter((user: Player) => {
+          const army = filteredArmyArray.find(
+            (army) => army.user_id === user.id
+          );
           return army;
         });
 
@@ -117,13 +129,13 @@ export default function CreateBattle() {
           }
         );
 
-        return setUserArray(secondFilteredResponse);
+        return setFilteredUserArray(secondFilteredResponse);
       }
     };
 
     fetchUsers();
     console.log("run fetch users");
-  }, [playerOne, playerTwo, armyArray]);
+  }, [playerOne, playerTwo, filteredArmyArray]);
 
   const removePlayer = (event: any, targetID: string, player: number) => {
     event.preventDefault();
@@ -249,9 +261,13 @@ export default function CreateBattle() {
       );
     }
   };
+
+  console.log(userOneFilter);
   if (
     !armyArray ||
     !userArray ||
+    !filteredArmyArray ||
+    !filteredUserArray ||
     !userOneFilter ||
     !userTwoFilter ||
     !playerOne ||
@@ -457,7 +473,7 @@ export default function CreateBattle() {
                     }}
                   >
                     <option hidden>Select User </option>
-                    {userArray.map((user) => {
+                    {filteredUserArray.map((user) => {
                       return (
                         <option
                           key={crypto.randomUUID()}
@@ -489,7 +505,7 @@ export default function CreateBattle() {
                     {armyArray.length === 0 ? (
                       <option>No Armies for this User</option>
                     ) : (
-                      armyArray.map((army) => {
+                      filteredArmyArray.map((army) => {
                         if (army.user_id === userOneFilter) {
                           return (
                             <option
@@ -579,7 +595,7 @@ export default function CreateBattle() {
                   >
                     {" "}
                     <option hidden>Select User</option>
-                    {userArray.map((user) => (
+                    {filteredUserArray.map((user) => (
                       <option
                         key={crypto.randomUUID()}
                         value={`${user.id}+${user.known_as}`}
@@ -605,7 +621,7 @@ export default function CreateBattle() {
                     }}
                   >
                     <option hidden> Select Army</option>
-                    {armyArray.map((army) => {
+                    {filteredArmyArray.map((army) => {
                       if (army.user_id === userTwoFilter) {
                         return (
                           <option

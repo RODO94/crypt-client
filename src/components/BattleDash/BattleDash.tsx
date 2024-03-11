@@ -78,6 +78,9 @@ export default function BattleDash({
 
   const [userArray, setUserArray] = useState<UsersArray>();
   const [armyArray, setArmyArray] = useState<ArmiesArray>();
+  const [filteredArmyArray, setFilteredArmyArray] = useState<ArmiesArray>();
+  const [filteredUserArray, setFilteredUserArray] = useState<UsersArray>();
+
   const [userOneFilter, setUserOneFilter] = useState("");
   const [userTwoFilter, setUserTwoFilter] = useState("");
   const [armyOne, setArmyOne] = useState("");
@@ -209,34 +212,53 @@ export default function BattleDash({
 
   useEffect(() => {
     const fetchArmies = async () => {
-      const response = await getAllArmies();
-      if (!response) {
-        return navigate("/");
+      if (!armyArray) {
+        const response = await getAllArmies();
+        setArmyArray(response);
+        console.log("army request");
+        const filteredResponse = response.filter(
+          (army: any) => army.type === battleType
+        );
+        return setFilteredArmyArray(filteredResponse);
       }
-      const filteredResponse = response.filter(
-        (army: any) => army.type === battleType
-      );
-      setArmyOne(response[0].name);
-      setArmyTwo(response[0].name);
+      if (armyArray) {
+        const filteredResponse = armyArray.filter(
+          (army: any) => army.type === battleTypeValue
+        );
 
-      return setArmyArray(filteredResponse);
+        console.log({
+          armyArray: armyArray,
+          filteredResponse: filteredResponse,
+        });
+
+        setArmyOne(filteredResponse[0].name);
+        setArmyTwo(filteredResponse[0].name);
+        return setFilteredArmyArray(filteredResponse);
+      }
     };
+
     fetchArmies();
-  }, []);
+  }, [battleTypeValue]);
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const response = await getAllUsers();
-      setUserOneFilter(response[0].id);
-      setUserTwoFilter(response[0].id);
+      if (!userArray) {
+        const response = await getAllUsers();
+        console.log("server request");
+        setUserOneFilter(response[0].id);
+        setUserTwoFilter(response[0].id);
 
-      setUserOne(response[0].id);
-      setUserTwo(response[0].id);
+        setUserOne(response[0].id);
+        setUserTwo(response[0].id);
+        setUserArray(response);
+      }
 
-      if (armyArray) {
+      if (filteredArmyArray && userArray) {
         // Battle Type User Filter
-        const filteredResponse = await response.filter((user: Player) => {
-          const army = armyArray.find((army) => army.user_id === user.id);
+        const filteredResponse = userArray.filter((user: Player) => {
+          const army = filteredArmyArray.find(
+            (army) => army.user_id === user.id
+          );
           return army;
         });
 
@@ -258,16 +280,15 @@ export default function BattleDash({
           }
         );
 
-        return setUserArray(secondFilteredResponse);
+        return setFilteredUserArray(secondFilteredResponse);
       }
-      setUserArray(response);
     };
-
     if (token) {
       setUserEditBool(true);
     }
     fetchUsers();
-  }, [playerOne, playerTwo, armyArray]);
+    console.log("run fetch users");
+  }, [playerOne, playerTwo, filteredArmyArray]);
 
   useEffect(() => {
     if (userArray && armyArray) {
@@ -280,6 +301,8 @@ export default function BattleDash({
   if (
     !armyArray ||
     !userArray ||
+    !filteredArmyArray ||
+    !filteredUserArray ||
     !userOneFilter ||
     !userTwoFilter ||
     !playerOne ||
@@ -405,7 +428,7 @@ export default function BattleDash({
                   }}
                 >
                   <option hidden>Select User </option>
-                  {userArray.map((user) => {
+                  {filteredUserArray.map((user) => {
                     return (
                       <option
                         key={crypto.randomUUID()}
@@ -430,7 +453,7 @@ export default function BattleDash({
                   {armyArray.length === 0 ? (
                     <option>No Armies for this User</option>
                   ) : (
-                    armyArray.map((army) => {
+                    filteredArmyArray.map((army) => {
                       if (army.user_id === userOneFilter) {
                         return (
                           <option
@@ -492,7 +515,7 @@ export default function BattleDash({
                 >
                   {" "}
                   <option hidden>Select User</option>
-                  {userArray.map((user) => (
+                  {filteredUserArray.map((user) => (
                     <option
                       key={crypto.randomUUID()}
                       value={`${user.id}+${user.known_as}`}
@@ -511,7 +534,7 @@ export default function BattleDash({
                   }}
                 >
                   <option hidden> --- Army ---</option>
-                  {armyArray.map((army) => {
+                  {filteredArmyArray.map((army) => {
                     if (army.user_id === userTwoFilter) {
                       return (
                         <option
@@ -573,7 +596,7 @@ export default function BattleDash({
             <h2 className="battle-dash__subheader">Scenario</h2>
             <div className="battle-dash__info">
               <input
-                value={scenarioValue}
+                value={!scenarioValue ? "---" : scenarioValue}
                 name="scenario"
                 maxLength={80}
                 className={
@@ -615,7 +638,7 @@ export default function BattleDash({
                   setEditScenarioBool(true);
                 }}
               >
-                {scenarioValue}
+                {!scenarioValue ? "---" : scenarioValue}
               </p>
             </div>
           </article>
