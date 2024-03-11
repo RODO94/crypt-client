@@ -36,6 +36,11 @@ export default function BattleCompleteRow({
 
   useEffect(() => {
     const fetchWinner = (winner: string) => {
+      console.log({
+        winner: winner,
+        player1: combatant_1_id,
+        player2: combatant_2_id,
+      });
       winner === combatant_1_id
         ? setWinnerValue("Player 1")
         : winner === combatant_2_id
@@ -48,16 +53,36 @@ export default function BattleCompleteRow({
   const navigate = useNavigate();
 
   winnerValue === "Player 1"
-    ? (resultStatementOne = <img src={crown} />)
+    ? (resultStatementOne = (
+        <div className="completedbattle-row__icon-wrap">
+          <img
+            src={crown}
+            alt="crown depicting the winner of the battle"
+            className="completedbattle-row__icon"
+          />
+        </div>
+      ))
     : winnerValue === "Player 2"
     ? (resultStatementOne = "")
     : (resultStatementOne = "Draw");
 
-  winnerValue === "Player 1"
-    ? (resultStatementTwo = <img src={crown} />)
-    : winnerValue === "Player 2"
+  winnerValue === "Player 2"
+    ? (resultStatementTwo = (
+        <div className="completedbattle-row__icon-wrap">
+          <img
+            src={crown}
+            alt="crown depicting the winner of the battle"
+            className="completedbattle-row__icon"
+          />
+        </div>
+      ))
+    : winnerValue === "Player 1"
     ? (resultStatementTwo = "")
     : (resultStatementTwo = "Draw");
+
+  console.log(resultStatementOne);
+  console.log(resultStatementTwo);
+  console.log(winnerValue);
 
   const handleClick = () => {
     navigate(`/battles/information`, { state: { id: id } });

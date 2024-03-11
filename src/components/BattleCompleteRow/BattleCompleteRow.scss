@@ -16,6 +16,9 @@
     gap: 0.25rem;
     width: 100%;
   }
+  &__versus {
+    padding: 0.5rem;
+  }
   &__details {
     display: flex;
     width: 18.875rem;
@@ -33,15 +36,33 @@
     gap: 0.5rem;
     flex: 1 0 0;
     &--winner {
-      color: $dark-angels-2;
       font-weight: 700;
+      background-color: $background-winner;
+      padding: 0.5rem;
+      border-radius: 8px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     &--vanquished {
-      color: $blood-angels-2;
-      font-weight: 700;
+      font-weight: 400;
+      // background-color: $background-vanquished;
+      // padding: 0.5rem;
+      // border-radius: 8px;
+      opacity: 65%;
     }
     &--none {
       display: none;
+    }
+  }
+  &__icon {
+    height: 3rem;
+    &-wrap {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 }

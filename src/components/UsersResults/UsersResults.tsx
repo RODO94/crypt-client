@@ -59,8 +59,12 @@ export default function UsersResults() {
                   result={battle.result}
                   winner={battle.winner}
                   id={battle.id}
-                  combatant_1_id=""
-                  combatant_2_id=""
+                  combatant_1_id={
+                    battle.combatant_1_id ? battle.combatant_1_id : ""
+                  }
+                  combatant_2_id={
+                    battle.combatant_2_id ? battle.combatant_2_id : ""
+                  }
                 />
               </article>
             );
@@ -75,8 +79,12 @@ export default function UsersResults() {
                 result={battle.result}
                 winner={battle.winner}
                 id={battle.id}
-                combatant_1_id=""
-                combatant_2_id=""
+                combatant_1_id={
+                  battle.combatant_1_id ? battle.combatant_1_id : ""
+                }
+                combatant_2_id={
+                  battle.combatant_2_id ? battle.combatant_2_id : ""
+                }
               />
             );
           } else if (currentDate !== battle.date) {
@@ -96,8 +104,12 @@ export default function UsersResults() {
                   result={battle.result}
                   winner={battle.winner}
                   id={battle.id}
-                  combatant_1_id=""
-                  combatant_2_id=""
+                  combatant_1_id={
+                    battle.combatant_1_id ? battle.combatant_1_id : ""
+                  }
+                  combatant_2_id={
+                    battle.combatant_2_id ? battle.combatant_2_id : ""
+                  }
                 />
               </article>
             );
