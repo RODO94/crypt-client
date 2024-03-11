@@ -21,6 +21,12 @@ export default function AllyCard() {
   useEffect(() => {
     const fetchAlly = async () => {
       const response = await getAlly(token);
+      if (!response) {
+        setTimeout(async () => {
+          const response = await getAlly(token);
+          setAlly(response);
+        }, 20);
+      }
       setAlly(response);
     };
 
