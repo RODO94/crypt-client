@@ -5,7 +5,7 @@ import {
   getArmyRank,
   getBattleCount,
   getOneArmy,
-  getWinPercent,
+  // getWinPercent,
 } from "../../utils/ArmyRequests";
 import ArmyDash from "../../components/ArmyDash/ArmyDash";
 import ArmyNemesis from "../../components/ArmyNemesis/ArmyNemesis";
@@ -15,7 +15,7 @@ import { ArmyObj } from "../../utils/Interfaces";
 export default function ArmyInfo() {
   const [armyObj, setArmyObj] = useState<ArmyObj | null>(null);
   const [battleCount, setBattleCount] = useState(0);
-  const [winPercent, setWinPercent] = useState("");
+  // const [winPercent, setWinPercent] = useState("");
   const [armyRank, setArmyRank] = useState(0);
 
   const navigate = useNavigate();
@@ -48,19 +48,19 @@ export default function ArmyInfo() {
           }, 20);
         }
 
-        let responseWinPercent = await getWinPercent(
-          response.user_id,
-          userToken
-        );
+        // let responseWinPercent = await getWinPercent(
+        //   response.user_id,
+        //   userToken
+        // );
 
-        if (!responseWinPercent) {
-          setTimeout(async () => {
-            responseWinPercent = await getWinPercent(
-              response.user_id,
-              userToken
-            );
-          }, 30);
-        }
+        // if (!responseWinPercent) {
+        //   setTimeout(async () => {
+        //     responseWinPercent = await getWinPercent(
+        //       response.user_id,
+        //       userToken
+        //     );
+        //   }, 30);
+        // }
 
         let responseArmyRank = await getArmyRank(response.id);
         if (!responseArmyRank) {
@@ -70,7 +70,7 @@ export default function ArmyInfo() {
         }
 
         setBattleCount(await responseBattleCount);
-        setWinPercent(await responseWinPercent);
+        // setWinPercent(await responseWinPercent);
         setArmyRank(Number(await responseArmyRank.ranking));
       }
     };
@@ -84,7 +84,7 @@ export default function ArmyInfo() {
   return (
     <main className="army-info">
       <ArmyDash
-        winPercent={winPercent}
+        winPercent={"50%"}
         battleCount={battleCount}
         armyObj={armyObj}
         armyRank={armyRank}
