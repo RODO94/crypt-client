@@ -10,7 +10,6 @@ interface CompletedBattleArray extends Array<CompletedBattle> {}
 
 export default function CompletedBattles() {
   const [battleArray, setBattleArray] = useState<CompletedBattleArray>();
-  const [winnerValue, setWinnerValue] = useState("");
 
   let currentDate = "";
 
@@ -23,21 +22,6 @@ export default function CompletedBattles() {
 
     battleFn();
   }, []);
-
-  useEffect(() => {
-    const fetchWinner = (winner: string) => {
-      if (battleArray) {
-        battleArray.winner === battleArray.combatant_1_id
-          ? setWinnerValue("Player 1")
-          : winner === battleArray.combatant_2_id
-          ? setWinnerValue("Player 2")
-          : setWinnerValue("TBC");
-      }
-    };
-    if (battleArray) {
-      return fetchWinner(battleArray.winner);
-    }
-  }, [battleArray]);
 
   if (!battleArray) {
     return <p>Please wait while we load your content</p>;

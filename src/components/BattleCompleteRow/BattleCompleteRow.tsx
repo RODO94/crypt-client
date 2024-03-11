@@ -6,7 +6,6 @@ import PlayerTypePill from "../PlayerTypePill/PlayerTypePill";
 import "./BattleCompleteRow.scss";
 import { useEffect, useState } from "react";
 import crown from "../../assets/crown.svg";
-import { JSXElement } from "@babel/types";
 
 interface BattleTableRow {
   battle_type: string;
