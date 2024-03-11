@@ -36,11 +36,6 @@ export default function BattleCompleteRow({
 
   useEffect(() => {
     const fetchWinner = (winner: string) => {
-      console.log({
-        winner: winner,
-        player1: combatant_1_id,
-        player2: combatant_2_id,
-      });
       winner === combatant_1_id
         ? setWinnerValue("Player 1")
         : winner === combatant_2_id
@@ -79,10 +74,6 @@ export default function BattleCompleteRow({
     : winnerValue === "Player 1"
     ? (resultStatementTwo = "")
     : (resultStatementTwo = "Draw");
-
-  console.log(resultStatementOne);
-  console.log(resultStatementTwo);
-  console.log(winnerValue);
 
   const handleClick = () => {
     navigate(`/battles/information`, { state: { id: id } });
