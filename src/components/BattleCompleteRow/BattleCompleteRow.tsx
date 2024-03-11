@@ -36,9 +36,9 @@ export default function BattleCompleteRow({
   useEffect(() => {
     const fetchWinner = (winner: string) => {
       winner === combatant_1_id
-        ? setWinnerValue("Player one")
+        ? setWinnerValue("Player 1")
         : winner === combatant_2_id
-        ? setWinnerValue("Player two")
+        ? setWinnerValue("Player 2")
         : setWinnerValue("draw");
     };
     fetchWinner(winner);
@@ -46,15 +46,15 @@ export default function BattleCompleteRow({
 
   const navigate = useNavigate();
 
-  winnerValue === "Player one"
+  winnerValue === "Player 1"
     ? (resultStatementOne = "Victory")
-    : winnerValue === "Player two"
+    : winnerValue === "Player 2"
     ? (resultStatementOne = "Vanquished")
     : (resultStatementOne = "Draw");
 
-  winnerValue === "Player two"
+  winnerValue === "Player 1"
     ? (resultStatementTwo = "Victory")
-    : winnerValue === "Player one"
+    : winnerValue === "Player 2"
     ? (resultStatementTwo = "Vanquished")
     : (resultStatementTwo = "Draw");
 
