@@ -32,33 +32,31 @@ export default function ArmyInfo() {
     const fetchArmy = async () => {
       const response = await getOneArmy(armyID, userToken);
       console.log("get one army");
-      setArmyObj(response);
+      if (response) {
+        setArmyObj(response);
+      }
     };
     fetchArmy();
   }, []);
 
   useEffect(() => {
     if (armyObj) {
-      const fetchBattleCount = async () => {
-        const response = await getBattleCount(armyObj.user_id, userToken);
-        console.log("battle Request");
-        setBattleCount(response);
-      };
-      const fetchWinPercent = async () => {
-        const response = await getWinPercent(armyObj.user_id, userToken);
-        console.log("win percent request");
-        setWinPercent(response);
-      };
-
-      const fetchArmyRankScore = async () => {
-        const response = await getArmyRank(armyObj.id);
-        console.log("army score request");
-        setArmyRank(Number(response.ranking));
+      const fetchArmyInfo = async () => {
+        const responseBattleCount = await getBattleCount(
+          armyObj.user_id,
+          userToken
+        );
+        const responseWinPercent = await getWinPercent(
+          armyObj.user_id,
+          userToken
+        );
+        const responseArmyRank = await getArmyRank(armyObj.id);
+        setBattleCount(responseBattleCount);
+        setWinPercent(responseWinPercent);
+        setArmyRank(Number(responseArmyRank.ranking));
       };
 
-      fetchBattleCount();
-      fetchWinPercent();
-      fetchArmyRankScore();
+      fetchArmyInfo();
     }
   }, [armyObj]);
 

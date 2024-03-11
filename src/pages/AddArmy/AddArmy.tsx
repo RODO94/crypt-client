@@ -81,7 +81,7 @@ export default function AddArmy() {
       setLoadingBool(true);
       const response = await addArmyRequest(userToken, requestBody);
       if (!response) {
-        navigate("/");
+        navigate("/user");
         return <h1>You need to log in</h1>;
       }
       if (response) {
