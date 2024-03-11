@@ -244,6 +244,18 @@ export default function BattleDash({
     const fetchUsers = async () => {
       if (!userArray) {
         const response = await getAllUsers();
+        if (!response) {
+          console.log("user response failed");
+          setTimeout(async () => {
+            const response = await getAllUsers();
+            setUserOneFilter(response[0].id);
+            setUserTwoFilter(response[0].id);
+
+            setUserOne(response[0].id);
+            setUserTwo(response[0].id);
+            return setUserArray(response);
+          }, 200);
+        }
         console.log("server request");
         setUserOneFilter(response[0].id);
         setUserTwoFilter(response[0].id);
