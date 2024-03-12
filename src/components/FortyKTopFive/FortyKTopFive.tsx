@@ -30,7 +30,7 @@ export default function FortyKTopFive() {
     <section className="fortyk-rankings">
       <div className="fortyk-rankings__title-wrap">
         <Link to={"/rankings/40k"} className="fortyk-rankings__title">
-          40k Rankings
+          40,000 Rankings
         </Link>
       </div>
       <FiveColTableHeader />

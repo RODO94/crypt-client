@@ -1,3 +1,5 @@
+@use "../../partials/mixins" as *;
+
 .hero {
   display: flex;
   padding: 2rem 1.5rem;
@@ -17,12 +19,27 @@
   background-position: center;
   background-size: cover;
 
+  @include tablet {
+    padding: 4rem 3rem;
+    gap: 3rem;
+  }
+  @include desktop {
+    padding: 8rem;
+    gap: 6rem;
+  }
+
   &__button-wrap {
     z-index: 2;
     display: flex;
     align-items: center;
     gap: 0.625rem;
     align-self: stretch;
+    @include tablet {
+      gap: 1rem;
+    }
+    @include desktop {
+      gap: 3rem;
+    }
   }
   &__title {
     z-index: 3;
@@ -32,5 +49,12 @@
     font-weight: 600;
     line-height: normal;
     margin: 0;
+    @include tablet {
+      font-size: 3rem;
+    }
+    @include desktop {
+      font-size: 5rem;
+      line-height: 6rem;
+    }
   }
 }

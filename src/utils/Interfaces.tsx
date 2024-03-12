@@ -2,7 +2,7 @@ export interface Player {
   id?: string;
   name?: string;
   known_as?: string;
-  rank?: string;
+  ranking?: string;
   army_id?: string;
 }
 

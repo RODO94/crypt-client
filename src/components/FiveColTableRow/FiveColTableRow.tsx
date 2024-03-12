@@ -31,10 +31,9 @@ export default function FiveColTableRow({
   let chevronUp = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="15"
-      height="10"
       viewBox="0 0 15 10"
       fill="none"
+      className="table-row__icon-svg"
     >
       <path
         d="M12.1875 10L15 7.27273L7.5 0L0 7.27273L2.8125 10L7.5 5.45455L12.1875 10Z"
@@ -46,10 +45,9 @@ export default function FiveColTableRow({
   let chevronDown = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="15"
-      height="10"
       viewBox="0 0 15 10"
       fill="none"
+      className="table-row__icon-svg"
     >
       <path
         d="M2.8125 0L0 2.72727L7.5 10L15 2.72727L12.1875 0L7.5 4.54545L2.8125 0Z"
@@ -61,10 +59,9 @@ export default function FiveColTableRow({
   let noChangeIcon = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="22"
-      height="3"
       viewBox="0 0 22 3"
       fill="none"
+      className="table-row__icon-svg table-row__icon-svg--nochange"
     >
       <path d="M0 0V3H22V0H0Z" fill="#4F4F4F" />
     </svg>

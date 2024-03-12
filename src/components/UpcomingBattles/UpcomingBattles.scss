@@ -1,4 +1,5 @@
 @use "../../partials/variables" as *;
+@use "../../partials/mixins" as *;
 
 .upcomingbattles {
   display: flex;
@@ -9,6 +10,14 @@
   gap: 1.5rem;
   align-self: stretch;
   background: $background-2;
+  @include tablet {
+    padding: 2rem 3rem;
+    gap: 1.5rem;
+  }
+  @include desktop {
+    padding: 4rem 8rem;
+    gap: 3rem;
+  }
   &__header {
     font-family: "Roboto", system-ui, Avenir, Helvetica, Arial, sans-serif;
     font-size: 1.25rem;
@@ -17,6 +26,16 @@
     line-height: normal;
     color: #fff;
     margin: 0;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+    @include tablet {
+      font-size: 2rem;
+    }
+    @include desktop {
+      font-size: 3rem;
+    }
     &-wrap {
       display: flex;
       align-items: flex-start;

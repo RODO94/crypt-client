@@ -1,5 +1,5 @@
 @use "../../partials/variables" as *;
-
+@use "../../partials/mixins" as *;
 .completedbattle-row {
   display: flex;
   padding: 1rem 0rem;
@@ -8,6 +8,10 @@
   gap: 0.5rem;
   width: 100%;
   background-color: $table-background--dark;
+  @include tablet {
+    padding: 1.5rem 1rem;
+    gap: 1rem;
+  }
   &__combatants {
     display: flex;
     padding: 0rem 1rem;
@@ -17,7 +21,8 @@
     width: 100%;
   }
   &__versus {
-    padding: 0.5rem;
+    margin: 0 1rem;
+    font-weight: 600;
   }
   &__details {
     display: flex;
@@ -47,9 +52,7 @@
     }
     &--vanquished {
       font-weight: 400;
-      // background-color: $background-vanquished;
-      // padding: 0.5rem;
-      // border-radius: 8px;
+
       opacity: 65%;
     }
     &--none {

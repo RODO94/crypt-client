@@ -7,6 +7,12 @@
   align-items: center;
   gap: 0.25rem;
   align-self: stretch;
+  @include tablet {
+    gap: 0.5rem;
+  }
+  @include desktop {
+    gap: 0.75rem;
+  }
   &__army {
     display: flex;
     padding: 0.5rem 0.75rem;
@@ -23,6 +29,12 @@
     color: white;
     margin: 0;
     text-align: center;
+    @include tablet {
+      font-size: 1.25rem;
+    }
+    @include tablet {
+      font-size: 1.75rem;
+    }
   }
   &__player-info {
     font-size: 0.75rem;
@@ -35,6 +47,12 @@
     justify-content: space-between;
     align-items: flex-end;
     align-self: stretch;
+    @include tablet {
+      font-size: 1rem;
+    }
+    @include desktop {
+      font-size: 1.35rem;
+    }
   }
   &__player-rank {
     margin: 0;

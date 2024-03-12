@@ -1,5 +1,6 @@
 @use "../../partials/variables" as *;
 @use "../../partials/typography" as *;
+@use "../../partials/mixins" as *;
 
 .table-header {
   display: inline-flex;
@@ -9,6 +10,10 @@
   border-radius: 1rem 1rem 0rem 0rem;
   border-bottom: 1px solid #000;
   background: $table-header;
+  width: 100%;
+  @include tablet {
+    padding: 1.5rem;
+  }
 
   &__column-header {
     display: flex;
@@ -22,20 +27,24 @@
     line-height: normal;
     text-align: left;
     margin: 0;
+    @include tablet {
+      font-size: 1.35rem;
+    }
     &--rank {
-      width: 1.75rem;
+      width: 15%;
+      text-align: center;
     }
     &--user {
-      width: 3.75rem;
+      width: 25%;
     }
     &--army {
-      width: 4.5rem;
+      width: 37%;
     }
     &--score {
-      width: 2.5rem;
+      width: 13%;
     }
     &--icon {
-      width: 1rem;
+      width: 10%;
       text-align: center;
     }
   }

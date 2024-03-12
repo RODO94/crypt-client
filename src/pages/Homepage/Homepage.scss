@@ -1,5 +1,19 @@
+@use "../../partials/mixins" as *;
+@use "../../partials/variables" as *;
 main {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.homepage {
+  &__ranking-wrap {
+    width: 100%;
+    @include tablet {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      background: $background-4;
+    }
+  }
 }

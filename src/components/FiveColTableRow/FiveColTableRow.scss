@@ -1,11 +1,12 @@
 @use "../../partials/variables" as *;
 @use "../../partials/typography" as *;
-
+@use "../../partials/mixins" as *;
 .table-row {
   display: inline-flex;
   padding: 1rem;
   align-items: center;
   gap: 1.2rem;
+  width: 100%;
   &--light {
     background-color: $table-background--light;
   }
@@ -15,7 +16,9 @@
   &:hover {
     background-color: $table-background--hover;
   }
-
+  @include tablet {
+    padding: 1.5rem;
+  }
   &__content {
     display: flex;
     height: 1.125rem;
@@ -26,29 +29,46 @@
     font-weight: 400;
     line-height: normal;
     margin: 0;
+    @include tablet {
+      font-size: 1.2rem;
+    }
     &--rank {
-      width: 1.75rem;
+      width: 15%;
       text-align: center;
       font-weight: 800;
     }
     &--user {
-      width: 3.75rem;
+      width: 25%;
     }
     &--army {
-      width: 4.5rem;
+      width: 37%;
     }
     &--ranking {
-      width: 2.5rem;
+      width: 13%;
+    }
+    &--icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
   &__icon-wrap {
     display: flex;
-    width: 1rem;
+    width: 10%;
     height: 1.125rem;
     padding: 0.0625rem 0rem;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 0.625rem;
+    @include tablet {
+      height: 1.5rem;
+    }
+  }
+  &__icon-svg {
+    height: 1.5rem;
+    &--nochange {
+      width: 70%;
+    }
   }
 }

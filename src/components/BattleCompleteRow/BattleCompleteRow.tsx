@@ -108,7 +108,7 @@ export default function BattleCompleteRow({
                 key={crypto.randomUUID()}
                 name={player.name}
                 known_as={player.known_as}
-                rank={player.rank}
+                ranking={player.ranking}
               />
             );
           })}
@@ -140,7 +140,7 @@ export default function BattleCompleteRow({
                 key={crypto.randomUUID()}
                 name={player.name}
                 known_as={player.known_as}
-                rank={player.rank}
+                ranking={player.ranking}
               />
             );
           })}

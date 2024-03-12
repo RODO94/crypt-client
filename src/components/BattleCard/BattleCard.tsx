@@ -1,7 +1,12 @@
 import { Player } from "../../utils/Interfaces";
 import "./BattleCard.scss";
 
-export default function BattleCard({ name, known_as, rank, army_id }: Player) {
+export default function BattleCard({
+  name,
+  known_as,
+  ranking,
+  army_id,
+}: Player) {
   let nameArray: any[] = [];
   if (name) {
     nameArray = name.toLowerCase().split(" ");
@@ -21,7 +26,7 @@ export default function BattleCard({ name, known_as, rank, army_id }: Player) {
       </div>
       <div className="battle-card__player-info">
         <p className="battle-card__player-name">{known_as}</p>
-        <p className="battle-card__player-rank">{rank}</p>
+        <p className="battle-card__player-rank">{ranking}</p>
       </div>
     </article>
   );

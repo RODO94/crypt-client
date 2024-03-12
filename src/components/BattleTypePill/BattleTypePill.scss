@@ -1,4 +1,5 @@
 @use "../../partials/variables" as *;
+@use "../../partials/mixins" as *;
 
 .battle-type {
   display: flex;
@@ -14,6 +15,15 @@
   font-weight: 700;
   line-height: normal;
   text-transform: uppercase;
+  @include tablet {
+    font-size: 0.875rem;
+    padding: 0.35rem 0.75rem;
+  }
+  @include desktop {
+    font-size: 1.2rem;
+    padding: 0.35rem 1rem;
+  }
+
   &--40k {
     border: 3px solid $ultramarine-4;
     color: $ultramarine-4;

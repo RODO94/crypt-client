@@ -1,3 +1,5 @@
+@use "../../partials/mixins" as *;
+@use "../../partials/variables" as *;
 .fortyk-rankings {
   display: flex;
   padding: 2rem 1.5rem;
@@ -5,6 +7,16 @@
   justify-content: center;
   align-items: center;
   align-self: stretch;
+  @include tablet {
+    width: 100%;
+    padding: 2rem 3rem;
+    background: $background-4;
+  }
+  @include desktop {
+    width: 100%;
+    padding: 4rem 8rem;
+    background: $background-4;
+  }
   &__title {
     color: white;
     font-size: 1.25rem;
@@ -12,12 +24,28 @@
     line-height: normal;
     font-weight: 900;
     margin: 0;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+    @include tablet {
+      font-size: 2rem;
+    }
+    @include desktop {
+      font-size: 3rem;
+    }
     &-wrap {
       display: flex;
       padding-bottom: 1.5rem;
       align-items: center;
       gap: 0.625rem;
       align-self: stretch;
+      @include tablet {
+        padding-bottom: 2.5rem;
+      }
+      @include desktop {
+        padding-bottom: 3.5rem;
+      }
     }
   }
 }

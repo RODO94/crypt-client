@@ -13,6 +13,9 @@ interface Battle {
   player_type: "single" | "multi";
   player_1: Player[];
   player_2: Player[];
+  table: string;
+  start: string;
+  finish: string;
 }
 
 interface BattleArray extends Array<Battle> {}
@@ -60,6 +63,9 @@ export default function UpcomingBattles() {
                   player_1={battle.player_1}
                   player_2={battle.player_2}
                   id={battle.id}
+                  table={battle.table}
+                  start={battle.start}
+                  finish={battle.finish}
                 />
               </article>
             );
@@ -72,6 +78,9 @@ export default function UpcomingBattles() {
                 player_1={battle.player_1}
                 player_2={battle.player_2}
                 id={battle.id}
+                table={battle.table}
+                start={battle.start}
+                finish={battle.finish}
               />
             );
           } else if (currentDate !== battle.date) {
@@ -89,6 +98,9 @@ export default function UpcomingBattles() {
                   player_1={battle.player_1}
                   player_2={battle.player_2}
                   id={battle.id}
+                  table={battle.table}
+                  start={battle.start}
+                  finish={battle.finish}
                 />
               </article>
             );
