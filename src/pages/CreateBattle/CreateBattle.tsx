@@ -59,88 +59,57 @@ export default function CreateBattle() {
   }
 
   useEffect(() => {
-    const fetchArmies = async () => {
-      console.log(armyArray);
-      if (!armyArray) {
-        const response = await getAllArmies();
-        console.log({ armyResponse: response });
-        if (!response) {
-          const response = await getAllArmies();
-          setArmyArray(response);
-        }
-        setArmyArray(response);
-        console.log("army request");
-        const filteredResponse = response.filter(
-          (army: any) => army.type === battleType
-        );
-        return setFilteredArmyArray(filteredResponse);
-      }
-      if (armyArray) {
-        const filteredResponse = armyArray.filter(
-          (army: any) => army.type === battleType
-        );
+    const fetchData = async () => {
+      const armyResponse = await getAllArmies();
+      const userResponse = await getAllUsers();
 
-        console.log({
-          armyArray: armyArray,
-          filteredResponse: filteredResponse,
-        });
-
-        setArmyOne(filteredResponse[0].name);
-        setArmyTwo(filteredResponse[0].name);
-        return setFilteredArmyArray(filteredResponse);
-      }
+      setArmyArray(await armyResponse);
+      setUserArray(await userResponse);
+      setFilteredArmyArray(await armyResponse);
+      setFilteredUserArray(await userResponse);
     };
-    fetchArmies();
-    console.log("run fetch armies");
-  }, [battleType]);
+
+    fetchData();
+  }, []);
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      if (!userArray) {
-        const response = await getAllUsers();
-        console.log("server request");
-        setUserOneFilter(response[0].id);
-        setUserTwoFilter(response[0].id);
+    const filteredArmyArray = armyArray?.filter(
+      (army) => army.type === battleType
+    );
 
-        setUserOne(response[0].id);
-        setUserTwo(response[0].id);
-        setUserArray(response);
+    console.log(filteredArmyArray);
+
+    setFilteredArmyArray(filteredArmyArray);
+
+    // Filter the user list based on if a user has an army in the army array
+    const filteredResponse = userArray?.filter((user: Player) => {
+      const army = filteredArmyArray?.find((army) => army.user_id === user.id);
+      return army;
+    });
+
+    // Filter the user list based on current players
+    const secondFilteredResponse = filteredResponse?.filter((user: Player) => {
+      const userOneBool = playerOne.find((player) => player.id === user.id);
+      const userTwoBool = playerTwo.find((player) => player.id === user.id);
+
+      if (userOneBool || userTwoBool) {
+        return false;
+      } else {
+        return true;
       }
+    });
 
-      if (filteredArmyArray && userArray) {
-        // Battle Type User Filter
-        const filteredResponse = userArray.filter((user: Player) => {
-          const army = filteredArmyArray.find(
-            (army) => army.user_id === user.id
-          );
-          return army;
-        });
-
-        // Filter the user list based on current players
-        const secondFilteredResponse = filteredResponse.filter(
-          (user: Player) => {
-            const userOneBool = playerOne.find(
-              (player) => player.id === user.id
-            );
-            const userTwoBool = playerTwo.find(
-              (player) => player.id === user.id
-            );
-
-            if (userOneBool || userTwoBool) {
-              return false;
-            } else {
-              return true;
-            }
-          }
-        );
-
-        return setFilteredUserArray(secondFilteredResponse);
-      }
-    };
-
-    fetchUsers();
-    console.log("run fetch users");
-  }, [playerOne, playerTwo, filteredArmyArray]);
+    setFilteredUserArray(secondFilteredResponse);
+  }, [
+    battleType,
+    armyArray,
+    playerOne,
+    playerTwo,
+    userOne,
+    userTwo,
+    armyOne,
+    armyTwo,
+  ]);
 
   const removePlayer = (event: any, targetID: string, player: number) => {
     event.preventDefault();
@@ -168,7 +137,9 @@ export default function CreateBattle() {
         ...playerOne,
         { id: userID, known_as: userName, name: armyName, army_id: armyID },
       ];
-      return setPlayerOne(newArray);
+      setPlayerOne(newArray);
+      setArmyOne("");
+      return setUserOne("");
     } else if (player === 2) {
       userID = event.target.parentElement.children.users_2.value.split("+")[0];
       userName =
@@ -179,7 +150,9 @@ export default function CreateBattle() {
         ...playerTwo,
         { id: userID, known_as: userName, name: armyName, army_id: armyID },
       ];
-      return setPlayerTwo(newArray);
+      setPlayerTwo(newArray);
+      setArmyTwo("");
+      return setUserTwo("");
     }
   };
 
@@ -267,17 +240,7 @@ export default function CreateBattle() {
     }
   };
 
-  console.log(userOneFilter);
-  if (
-    !armyArray ||
-    !userArray ||
-    !filteredArmyArray ||
-    !filteredUserArray ||
-    !userOneFilter ||
-    !userTwoFilter ||
-    !playerOne ||
-    !playerTwo
-  ) {
+  if (!armyArray || !userArray) {
     return (
       <main className="create-battle">
         <section className="create-battle_section">
@@ -294,7 +257,7 @@ export default function CreateBattle() {
         <h2 className="create-battle__header">Create New Battle</h2>
         <div
           onClick={() => {
-            navigate(-1);
+            navigate("/user");
           }}
           className="create-battle__back-arrow"
         >
@@ -478,7 +441,7 @@ export default function CreateBattle() {
                     }}
                   >
                     <option hidden>Select User </option>
-                    {filteredUserArray.map((user) => {
+                    {filteredUserArray?.map((user) => {
                       return (
                         <option
                           key={crypto.randomUUID()}
@@ -498,6 +461,7 @@ export default function CreateBattle() {
                     }
                     id="army_1"
                     value={armyOne}
+                    disabled={!userOne ? true : false}
                     onChange={(event) => {
                       playerOneError
                         ? setPlayerOneError(false)
@@ -510,7 +474,7 @@ export default function CreateBattle() {
                     {armyArray.length === 0 ? (
                       <option>No Armies for this User</option>
                     ) : (
-                      filteredArmyArray.map((army) => {
+                      filteredArmyArray?.map((army) => {
                         if (army.user_id === userOneFilter) {
                           return (
                             <option
@@ -600,7 +564,7 @@ export default function CreateBattle() {
                   >
                     {" "}
                     <option hidden>Select User</option>
-                    {filteredUserArray.map((user) => (
+                    {filteredUserArray?.map((user) => (
                       <option
                         key={crypto.randomUUID()}
                         value={`${user.id}+${user.known_as}`}
@@ -612,6 +576,7 @@ export default function CreateBattle() {
                   <select
                     name="army_2"
                     id="army_2"
+                    disabled={!userTwo ? true : false}
                     className={
                       !playerTwoError
                         ? "create-battle__select"
@@ -626,7 +591,7 @@ export default function CreateBattle() {
                     }}
                   >
                     <option hidden> Select Army</option>
-                    {filteredArmyArray.map((army) => {
+                    {filteredArmyArray?.map((army) => {
                       if (army.user_id === userTwoFilter) {
                         return (
                           <option
