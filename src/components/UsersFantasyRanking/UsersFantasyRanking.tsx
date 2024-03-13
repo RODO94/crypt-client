@@ -1,31 +1,17 @@
-import { useEffect, useState } from "react";
 import { RankObj } from "../../utils/Interfaces";
 import "./UsersFantasyRanking.scss";
-import { getUserRanking } from "../../utils/RankingRequests";
 import FiveColTableHeader from "../FiveColTableHeader/FiveColTableHeader";
 import FiveColTableRow from "../FiveColTableRow/FiveColTableRow";
+import { CircularProgress } from "@mui/material";
 
-interface RankArray extends Array<RankObj> {}
-
-export default function UsersFantasyRanking() {
-  const [rankArray, setRankArray] = useState<RankArray>();
-
-  const token = sessionStorage.getItem("token");
-
-  useEffect(() => {
-    const fetchRankings = async () => {
-      if (token) {
-        const response = await getUserRanking(token, "fantasy");
-        setRankArray(response);
-      }
-    };
-    fetchRankings();
-  }, []);
-
+export default function UsersFantasyRanking({ rankArray }: any) {
   if (!rankArray) {
-    return <p>Your content is loading, please wait</p>;
+    return (
+      <div>
+        <CircularProgress />
+      </div>
+    );
   }
-
   return (
     <section className="user-dash-rankings user-dash-rankings--fantasy">
       <div className="user-dash-rankings__title-wrap">

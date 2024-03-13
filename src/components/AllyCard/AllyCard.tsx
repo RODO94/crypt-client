@@ -2,32 +2,27 @@ import { useEffect, useState } from "react";
 import "./AllyCard.scss";
 import { Player } from "../../utils/Interfaces";
 import { getAlly } from "../../utils/UserRequests";
-import { useNavigate } from "react-router-dom";
 import BattleCard from "../BattleCard/BattleCard";
 
 export default function AllyCard() {
   const [ally, setAlly] = useState<Player>();
 
-  const navigate = useNavigate();
   let allyComp = <p>No Ally Available</p>;
 
   const token = sessionStorage.getItem("token");
 
-  if (!token) {
-    navigate("/login");
-    return <p>You need to log in before you can see your Ally</p>;
-  }
-
   useEffect(() => {
     const fetchAlly = async () => {
-      const response = await getAlly(token);
-      if (!response) {
-        setTimeout(async () => {
-          const response = await getAlly(token);
-          setAlly(response);
-        }, 20);
+      if (token) {
+        const response = await getAlly(token);
+        if (!response) {
+          setTimeout(async () => {
+            const response = await getAlly(token);
+            setAlly(response);
+          }, 20);
+        }
+        setAlly(response);
       }
-      setAlly(response);
     };
 
     fetchAlly();

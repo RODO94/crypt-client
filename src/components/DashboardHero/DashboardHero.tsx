@@ -17,11 +17,9 @@ export default function DashboardHero() {
   useEffect(() => {
     const userToken = sessionStorage.getItem("token");
     const assignToken = () => {
-      if (!userToken) {
-        navigate("/login");
-        return <p>You need to log in before you can see your dashboard</p>;
+      if (userToken) {
+        setToken(userToken);
       }
-      setToken(userToken);
     };
     assignToken();
   }, []);

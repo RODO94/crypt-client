@@ -1,47 +1,19 @@
-import { useEffect, useState } from "react";
-import { getUsersBattles } from "../../utils/BattleRequests";
 import "./UsersUpcomingBattles.scss";
 import DateTableHeader from "../DateTableHeader/DateTableHeader";
 import BattleTableRow from "../BattleTableRow/BattleTableRow";
-import { Player } from "../../utils/Interfaces";
 import { Link } from "react-router-dom";
+import { Battle } from "../../utils/Interfaces";
+import { CircularProgress } from "@mui/material";
 
-interface Battle {
-  id: string;
-  date: string;
-  battle_type: "40k" | "fantasy";
-  player_type: "single" | "multi";
-  start: string;
-  table: string;
-  finish: string;
-  player_1: Player[];
-  player_2: Player[];
-}
-
-interface BattleArray extends Array<Battle> {}
-
-export default function UsersUpcomingBattles() {
-  const [battleArray, setBattleArray] = useState<BattleArray>();
-
+export default function UsersUpcomingBattles({ battleArray }: any) {
   let currentDate = "";
-  const token = sessionStorage.getItem("token");
-
-  useEffect(() => {
-    if (token) {
-      const battleFn = async (token: string) => {
-        const data = await getUsersBattles(token);
-        setBattleArray(data.battleArray);
-        return data;
-      };
-
-      battleFn(token);
-    }
-  }, []);
-
   if (!battleArray) {
-    return <p>content loading... please wait</p>;
+    return (
+      <div>
+        <CircularProgress />
+      </div>
+    );
   }
-
   return (
     <section className="upcomingbattles users-upcomingbattles">
       <div className="upcomingbattles__header-wrap">

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import "./NextBattleCard.scss";
 import { Battle, Player } from "../../utils/Interfaces";
 import { getUsersBattles } from "../../utils/BattleRequests";
-import { useNavigate } from "react-router-dom";
 import BattleCard from "../BattleCard/BattleCard";
 import dayjs from "dayjs";
 
@@ -13,37 +12,34 @@ export default function NextBattleCard() {
   const [nextBattle, setNextBattle] = useState<PlayerArray>();
   const [battleArray, setBattleArray] = useState<BattleArray>();
 
-  const navigate = useNavigate();
-
   const token = sessionStorage.getItem("token");
 
   let nextBattleComp = <p>No Upcoming Battles</p>;
 
-  if (!token) {
-    navigate("/login");
-    return <p>You need to log in before you can see your dashboard</p>;
-  }
-
   useEffect(() => {
     const battleFn = async () => {
-      const data = await getUsersBattles(token);
-      const tempBattleArray = await data.battleArray[0];
-      if (!tempBattleArray) {
-        setBattleArray([]);
-        return setNextBattle([]);
-      }
-      const playerOneBoolArray = tempBattleArray.player_1.map((player: any) => {
-        if (player.id === data.user.id) {
-          return true;
+      if (token) {
+        const data = await getUsersBattles(token);
+        const tempBattleArray = await data.battleArray[0];
+        if (!tempBattleArray) {
+          setBattleArray([]);
+          return setNextBattle([]);
         }
-        return false;
-      });
-      playerOneBoolArray.includes(true)
-        ? setNextBattle(tempBattleArray.player_2)
-        : setNextBattle(tempBattleArray.player_1);
+        const playerOneBoolArray = tempBattleArray.player_1.map(
+          (player: any) => {
+            if (player.id === data.user.id) {
+              return true;
+            }
+            return false;
+          }
+        );
+        playerOneBoolArray.includes(true)
+          ? setNextBattle(tempBattleArray.player_2)
+          : setNextBattle(tempBattleArray.player_1);
 
-      setBattleArray(data.battleArray);
-      return data;
+        setBattleArray(data.battleArray);
+        return data;
+      }
     };
 
     battleFn();

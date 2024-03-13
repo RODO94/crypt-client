@@ -1,35 +1,19 @@
-import { useEffect, useState } from "react";
-import { getUsersResults } from "../../utils/BattleRequests";
+import { CircularProgress } from "@mui/material";
 import { CompletedBattle } from "../../utils/Interfaces";
 import BattleCompleteRow from "../BattleCompleteRow/BattleCompleteRow";
 import DateTableHeader from "../DateTableHeader/DateTableHeader";
 import "./UsersResults.scss";
 import { Link } from "react-router-dom";
 
-interface CompletedBattleArray extends Array<CompletedBattle> {}
-
-export default function UsersResults() {
-  const [battleArray, setBattleArray] = useState<CompletedBattleArray>();
-
+export default function UsersResults({ battleArray }: any) {
   let currentDate = "";
-  const token = sessionStorage.getItem("token");
-
-  useEffect(() => {
-    if (token) {
-      const battleFn = async (token: string) => {
-        const data = await getUsersResults(token);
-        setBattleArray(data);
-        return data;
-      };
-
-      battleFn(token);
-    }
-  }, []);
-
   if (!battleArray) {
-    return <p>Please wait while we load your content</p>;
+    return (
+      <div>
+        <CircularProgress />
+      </div>
+    );
   }
-
   return (
     <section className="completedbattles">
       <div className="completedbattles__header-wrap">

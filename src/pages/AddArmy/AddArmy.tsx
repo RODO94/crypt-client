@@ -80,10 +80,6 @@ export default function AddArmy() {
     try {
       setLoadingBool(true);
       const response = await addArmyRequest(userToken, requestBody);
-      if (!response) {
-        navigate("/user");
-        return <h1>You need to log in</h1>;
-      }
       if (response) {
         setLoadingBool(false);
         setSuccessBool(true);
@@ -91,9 +87,9 @@ export default function AddArmy() {
           navigate(`/armies/information`, { state: { id: response.id } });
         }, 2000);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
-      return error;
+      return error.response.data;
     }
   };
 

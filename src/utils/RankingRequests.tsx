@@ -34,4 +34,14 @@ const getUserRanking = async (token: string, battleType: string) => {
 
   return responseArray;
 };
-export { getRankingTopFive, getRanking, getUserRanking };
+
+const getAllUserRanking = async (token: string) => {
+  const { data } = await axios.get(`${baseURL}/users/rankings`, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+
+  return data;
+};
+export { getRankingTopFive, getRanking, getUserRanking, getAllUserRanking };
