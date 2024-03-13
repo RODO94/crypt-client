@@ -25,24 +25,20 @@ export default function UserDashboard() {
   const token = sessionStorage.getItem("token");
 
   useEffect(() => {
-    const fetchRankings = async () => {
+    const fetchData = async () => {
       if (token) {
-        const response = await getAllUserRanking(token);
-        setRankArray(response);
+        const [rankingsResponse, battlesResponse] = await Promise.all([
+          getAllUserRanking(token),
+          Promise.all([getUsersBattles(token), getUsersResults(token)]),
+        ]);
+
+        setRankArray(rankingsResponse);
+        setUpcomingBattles(battlesResponse[0].battleArray);
+        setUserResults(battlesResponse[1]);
       }
     };
 
-    const fetchBattles = async () => {
-      if (token) {
-        const upcomingBattles = await getUsersBattles(token);
-        const completedBattles = await getUsersResults(token);
-
-        setUpcomingBattles(upcomingBattles.battleArray);
-        setUserResults(completedBattles);
-      }
-    };
-    fetchRankings();
-    fetchBattles();
+    fetchData();
   }, []);
   if (!rankArray || !upcomingBattles || !userResults) {
     return (
