@@ -32,7 +32,7 @@ export default function ArmyAlly({ armyID }: ArmyID) {
               <BattleCard
                 name={allyObj?.name}
                 known_as={allyObj?.known_as}
-                rank={allyObj?.rank}
+                ranking={allyObj?.ranking}
                 army_id={allyObj?.armyID}
               />
             </div>

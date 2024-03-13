@@ -38,7 +38,7 @@ export default function NemesisCard() {
         key={crypto.randomUUID()}
         name={nemesis.name}
         known_as={nemesis.known_as}
-        rank={nemesis.rank}
+        ranking={nemesis.ranking}
       />
     );
   }

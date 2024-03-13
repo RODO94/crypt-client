@@ -12,7 +12,7 @@ export interface AllyObj {
   id: string;
   known_as: string;
   name: string;
-  rank: string;
+  ranking: string;
 }
 
 export interface ArmyObj {

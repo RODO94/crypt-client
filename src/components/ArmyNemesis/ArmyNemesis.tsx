@@ -36,7 +36,7 @@ export default function ArmyNemesis({ armyID }: ArmyNemesis) {
               <BattleCard
                 name={nemesisObj?.name}
                 known_as={nemesisObj?.known_as}
-                rank={nemesisObj?.rank}
+                ranking={nemesisObj?.ranking}
                 army_id={nemesisObj?.armyID}
               />
             </div>

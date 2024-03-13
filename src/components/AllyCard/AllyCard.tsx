@@ -38,7 +38,7 @@ export default function AllyCard() {
         key={crypto.randomUUID()}
         name={ally.name}
         known_as={ally.known_as}
-        rank={ally.rank}
+        ranking={ally.ranking}
       />
     );
   }

@@ -1,22 +1,13 @@
 import { useEffect, useState } from "react";
 import { getUpcomingBattles } from "../../utils/BattleRequests";
 import "./UpcomingBattlesPage.scss";
-import { Player } from "../../utils/Interfaces";
+import { Battle } from "../../utils/Interfaces";
 import DateTableHeader from "../../components/DateTableHeader/DateTableHeader";
 import BattleTableRow from "../../components/BattleTableRow/BattleTableRow";
 import NavFooter from "../../components/NavFooter/NavFooter";
 import { Link } from "react-router-dom";
 import { getAllUsersNames } from "../../utils/UserRequests";
 import logo from "../../assets/logo.svg";
-
-interface Battle {
-  id: string;
-  date: string;
-  battle_type: "40k" | "fantasy";
-  player_type: "single" | "multi";
-  player_1: Player[];
-  player_2: Player[];
-}
 
 interface BattleArray extends Array<Battle> {}
 interface NameArray extends Array<string> {}
@@ -185,6 +176,9 @@ export default function UpcomingBattlesPage() {
                     player_1={battle.player_1}
                     player_2={battle.player_2}
                     id={battle.id}
+                    table={battle.table}
+                    start={battle.start}
+                    finish={battle.finish}
                   />
                 </article>
               );
@@ -197,6 +191,9 @@ export default function UpcomingBattlesPage() {
                   player_1={battle.player_1}
                   player_2={battle.player_2}
                   id={battle.id}
+                  table={battle.table}
+                  start={battle.start}
+                  finish={battle.finish}
                 />
               );
             } else if (currentDate !== battle.date) {
@@ -217,6 +214,9 @@ export default function UpcomingBattlesPage() {
                     player_1={battle.player_1}
                     player_2={battle.player_2}
                     id={battle.id}
+                    table={battle.table}
+                    start={battle.start}
+                    finish={battle.finish}
                   />
                 </article>
               );

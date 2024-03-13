@@ -51,7 +51,11 @@ export default function FantasyRankingPage() {
             {fantasyRankingArray[0].known_as}
           </p>
           <div className="fantasy-ranking-page__army-pill">
-            <ArmyPill name={fantasyRankingArray[0].name} known_as="" rank="" />
+            <ArmyPill
+              name={fantasyRankingArray[0].name}
+              known_as=""
+              ranking=""
+            />
           </div>
         </div>
       </section>

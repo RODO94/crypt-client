@@ -11,6 +11,9 @@ interface Battle {
   date: string;
   battle_type: "40k" | "fantasy";
   player_type: "single" | "multi";
+  start: string;
+  table: string;
+  finish: string;
   player_1: Player[];
   player_2: Player[];
 }
@@ -63,6 +66,9 @@ export default function UsersUpcomingBattles() {
                   player_1={battle.player_1}
                   player_2={battle.player_2}
                   id={battle.id}
+                  table={battle.table}
+                  start={battle.start}
+                  finish={battle.finish}
                 />
               </article>
             );
@@ -75,6 +81,9 @@ export default function UsersUpcomingBattles() {
                 player_1={battle.player_1}
                 player_2={battle.player_2}
                 id={battle.id}
+                table={battle.table}
+                start={battle.start}
+                finish={battle.finish}
               />
             );
           } else if (currentDate !== battle.date) {
@@ -92,6 +101,9 @@ export default function UsersUpcomingBattles() {
                   player_1={battle.player_1}
                   player_2={battle.player_2}
                   id={battle.id}
+                  table={battle.table}
+                  start={battle.start}
+                  finish={battle.finish}
                 />
               </article>
             );

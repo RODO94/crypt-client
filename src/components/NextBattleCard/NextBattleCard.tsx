@@ -66,7 +66,7 @@ export default function NextBattleCard() {
               key={crypto.randomUUID()}
               name={player.name}
               known_as={player.known_as}
-              rank={player.rank}
+              ranking={player.ranking}
             />
           ))}
         </div>

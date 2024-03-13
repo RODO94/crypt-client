@@ -111,7 +111,7 @@ export default function BattlePointsForm({
               key={crypto.randomUUID()}
               name={player.name}
               known_as={player.known_as}
-              rank={player.rank}
+              ranking={player.ranking}
               army_id={player.army_id}
             />
           ))}
@@ -164,7 +164,7 @@ export default function BattlePointsForm({
               key={crypto.randomUUID()}
               name={player.name}
               known_as={player.known_as}
-              rank={player.rank}
+              ranking={player.ranking}
               army_id={player.army_id}
             />
           ))}
