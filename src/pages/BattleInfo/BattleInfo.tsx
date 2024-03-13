@@ -23,47 +23,39 @@ export default function BattleInfo() {
     navigate("/login");
     return <h1>You need to log in</h1>;
   }
-
   useEffect(() => {
-    const fetchRole = async (token: string) => {
-      const data = await getUser(token);
-      if (!data) {
+    const fetchData = async () => {
+      // Fetch user data and set role
+      const userData = await getUser(userToken);
+      if (!userData) {
         return navigate("/");
       }
-      setRole(data.role);
-      return data;
-    };
-    fetchRole(userToken);
-  }, []);
+      setRole(userData.role);
 
-  useEffect(() => {
-    const fetchBattle = async (battleID: string) => {
-      const response = await getOneBattle(battleID);
-      if (!response) {
+      // Fetch battle data
+      const battleData = await getOneBattle(battleID);
+      if (!battleData) {
         return navigate("/");
       }
-      setBattle(response);
-      setPlayerOneArray(response.player_1);
-      setPlayerTwoArray(response.player_2);
-      return response;
-    };
-    fetchBattle(battleID);
-  }, []);
+      setBattle(battleData);
+      setPlayerOneArray(battleData.player_1);
+      setPlayerTwoArray(battleData.player_2);
 
-  useEffect(() => {
-    const fetchWinner = (winner: string) => {
-      if (battle) {
-        winner === battle.combatant_1_id
-          ? setWinnerValue("Player 1")
-          : winner === battle.combatant_2_id
-          ? setWinnerValue("Player 2")
-          : setWinnerValue("TBC");
-      }
+      // Set winner value
+      const fetchWinner = (winner: string) => {
+        if (battleData) {
+          winner === battleData.combatant_1_id
+            ? setWinnerValue("Player 1")
+            : winner === battleData.combatant_2_id
+            ? setWinnerValue("Player 2")
+            : setWinnerValue("TBC");
+        }
+      };
+      fetchWinner(battleData.winner);
     };
-    if (battle) {
-      return fetchWinner(battle.winner);
-    }
-  }, [battle]);
+
+    fetchData();
+  }, [userToken, battleID]);
 
   if (!userToken || !battle || !role || !playerOneArray || !playerTwoArray) {
     return (

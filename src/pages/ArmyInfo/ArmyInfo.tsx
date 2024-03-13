@@ -5,7 +5,7 @@ import {
   getArmyRank,
   getBattleCount,
   getOneArmy,
-  // getWinPercent,
+  getWinPercent,
 } from "../../utils/ArmyRequests";
 import ArmyDash from "../../components/ArmyDash/ArmyDash";
 import ArmyNemesis from "../../components/ArmyNemesis/ArmyNemesis";
@@ -15,7 +15,7 @@ import { ArmyObj } from "../../utils/Interfaces";
 export default function ArmyInfo() {
   const [armyObj, setArmyObj] = useState<ArmyObj | null>(null);
   const [battleCount, setBattleCount] = useState(0);
-  // const [winPercent, setWinPercent] = useState("");
+  const [winPercent, setWinPercent] = useState("");
   const [armyRank, setArmyRank] = useState(0);
 
   const navigate = useNavigate();
@@ -29,53 +29,41 @@ export default function ArmyInfo() {
   }
 
   useEffect(() => {
-    const fetchArmy = async () => {
+    const fetchData = async () => {
       const response = await getOneArmy(armyID, userToken);
       if (response) {
         setArmyObj(response);
 
-        let responseBattleCount = await getBattleCount(
-          response.user_id,
-          userToken
-        );
-
-        if (!responseBattleCount) {
-          setTimeout(async () => {
-            responseBattleCount = await getBattleCount(
-              response.user_id,
-              userToken
-            );
-          }, 20);
+        // Batch multiple queries into a single Promise.all call
+        const [battleCount, winPercent, armyRank] = await Promise.all([
+          getBattleCount(response.user_id, userToken),
+          getWinPercent(response.user_id, userToken),
+          getArmyRank(response.id),
+        ]);
+        console.log(winPercent);
+        // Set state after all queries have completed
+        if (battleCount) {
+          setBattleCount(battleCount);
+        } else {
+          // Retry or handle case when response is null
         }
 
-        // let responseWinPercent = await getWinPercent(
-        //   response.user_id,
-        //   userToken
-        // );
-
-        // if (!responseWinPercent) {
-        //   setTimeout(async () => {
-        //     responseWinPercent = await getWinPercent(
-        //       response.user_id,
-        //       userToken
-        //     );
-        //   }, 30);
-        // }
-
-        let responseArmyRank = await getArmyRank(response.id);
-        if (!responseArmyRank) {
-          setTimeout(async () => {
-            responseArmyRank = await getArmyRank(response.id);
-          }, 40);
+        if (winPercent || winPercent === 0) {
+          setWinPercent(winPercent);
+        } else {
+          // Retry or handle case when response is null
         }
 
-        setBattleCount(await responseBattleCount);
-        // setWinPercent(await responseWinPercent);
-        setArmyRank(Number(await responseArmyRank.ranking));
+        if (armyRank) {
+          setArmyRank(Number(armyRank.ranking));
+        } else {
+          // Retry or handle case when response is null
+        }
       }
     };
-    fetchArmy();
-  }, []);
+
+    fetchData();
+  }, [armyID, userToken]);
 
   if (!armyObj) {
     return;
@@ -84,7 +72,7 @@ export default function ArmyInfo() {
   return (
     <main className="army-info">
       <ArmyDash
-        winPercent={"50%"}
+        winPercent={winPercent}
         battleCount={battleCount}
         armyObj={armyObj}
         armyRank={armyRank}

@@ -211,115 +211,61 @@ export default function BattleDash({
   };
 
   useEffect(() => {
-    const fetchArmies = async () => {
-      if (!armyArray) {
-        const response = await getAllArmies();
-        setArmyArray(response);
-        console.log("army request");
-        const filteredResponse = response.filter(
-          (army: any) => army.type === battleType
-        );
-        return setFilteredArmyArray(filteredResponse);
-      }
-      if (armyArray) {
-        const filteredResponse = armyArray.filter(
-          (army: any) => army.type === battleTypeValue
-        );
+    const fetchData = async () => {
+      const armyResponse = await getAllArmies();
+      const userResponse = await getAllUsers();
 
-        console.log({
-          armyArray: armyArray,
-          filteredResponse: filteredResponse,
-        });
-
-        setArmyOne(filteredResponse[0].name);
-        setArmyTwo(filteredResponse[0].name);
-        return setFilteredArmyArray(filteredResponse);
-      }
+      setArmyArray(await armyResponse);
+      setUserArray(await userResponse);
+      setFilteredArmyArray(await armyResponse);
+      setFilteredUserArray(await userResponse);
     };
 
-    fetchArmies();
-  }, [battleTypeValue]);
+    fetchData();
+  }, []);
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      if (!userArray) {
-        const response = await getAllUsers();
-        if (!response) {
-          console.log("user response failed");
-          setTimeout(async () => {
-            const response = await getAllUsers();
-            setUserOneFilter(response[0].id);
-            setUserTwoFilter(response[0].id);
+    const filteredArmyArray = armyArray?.filter(
+      (army) => army.type === battleType
+    );
 
-            setUserOne(response[0].id);
-            setUserTwo(response[0].id);
-            return setUserArray(response);
-          }, 200);
-        }
-        console.log("server request");
-        setUserOneFilter(response[0].id);
-        setUserTwoFilter(response[0].id);
+    setFilteredArmyArray(filteredArmyArray);
 
-        setUserOne(response[0].id);
-        setUserTwo(response[0].id);
-        setUserArray(response);
+    // Filter the user list based on if a user has an army in the army array
+    const filteredResponse = userArray?.filter((user: Player) => {
+      const army = filteredArmyArray?.find((army) => army.user_id === user.id);
+      return army;
+    });
+
+    // Filter the user list based on current players
+    const secondFilteredResponse = filteredResponse?.filter((user: Player) => {
+      const userOneBool = playerOne.find((player) => player.id === user.id);
+      const userTwoBool = playerTwo.find((player) => player.id === user.id);
+
+      if (userOneBool || userTwoBool) {
+        return false;
+      } else {
+        return true;
       }
+    });
 
-      if (filteredArmyArray && userArray) {
-        // Battle Type User Filter
-        const filteredResponse = userArray.filter((user: Player) => {
-          const army = filteredArmyArray.find(
-            (army) => army.user_id === user.id
-          );
-          return army;
-        });
-
-        // Filter the user list based on current players
-        const secondFilteredResponse = filteredResponse.filter(
-          (user: Player) => {
-            const userOneBool = playerOne.find(
-              (player) => player.id === user.id
-            );
-            const userTwoBool = playerTwo.find(
-              (player) => player.id === user.id
-            );
-
-            if (userOneBool || userTwoBool) {
-              return false;
-            } else {
-              return true;
-            }
-          }
-        );
-
-        return setFilteredUserArray(secondFilteredResponse);
-      }
-    };
     if (token) {
       setUserEditBool(true);
     }
-    fetchUsers();
-    console.log("run fetch users");
-  }, [playerOne, playerTwo, filteredArmyArray]);
 
-  useEffect(() => {
-    if (userArray && armyArray) {
-      const filteredUserArray = userArray;
+    setFilteredUserArray(secondFilteredResponse);
+  }, [
+    battleType,
+    armyArray,
+    playerOne,
+    playerTwo,
+    userOne,
+    userTwo,
+    armyOne,
+    armyTwo,
+  ]);
 
-      setUserArray(filteredUserArray);
-    }
-  }, []);
-
-  if (
-    !armyArray ||
-    !userArray ||
-    !filteredArmyArray ||
-    !filteredUserArray ||
-    !userOneFilter ||
-    !userTwoFilter ||
-    !playerOne ||
-    !playerTwo
-  ) {
+  if (!armyArray || !userArray || !playerOne || !playerTwo) {
     return <p> Please wait while we load your content</p>;
   }
 
@@ -350,7 +296,6 @@ export default function BattleDash({
                 ? "battle-dash__combatant-wrap"
                 : "battle-dash__combatant-wrap battle-dash__combatant-wrap--hide"
             }
-            onClick={handleClick}
           >
             <button
               className={
@@ -358,6 +303,7 @@ export default function BattleDash({
                   ? "battle-dash__edit"
                   : "battle-dash__edit battle-dash__edit--hide"
               }
+              onClick={handleClick}
             >
               {userEditBool && !playerEditBool === true
                 ? "Edit Combatants"
@@ -440,7 +386,7 @@ export default function BattleDash({
                   }}
                 >
                   <option hidden>Select User </option>
-                  {filteredUserArray.map((user) => {
+                  {filteredUserArray?.map((user) => {
                     return (
                       <option
                         key={crypto.randomUUID()}
@@ -465,7 +411,7 @@ export default function BattleDash({
                   {armyArray.length === 0 ? (
                     <option>No Armies for this User</option>
                   ) : (
-                    filteredArmyArray.map((army) => {
+                    filteredArmyArray?.map((army) => {
                       if (army.user_id === userOneFilter) {
                         return (
                           <option
@@ -527,7 +473,7 @@ export default function BattleDash({
                 >
                   {" "}
                   <option hidden>Select User</option>
-                  {filteredUserArray.map((user) => (
+                  {filteredUserArray?.map((user) => (
                     <option
                       key={crypto.randomUUID()}
                       value={`${user.id}+${user.known_as}`}
@@ -546,7 +492,7 @@ export default function BattleDash({
                   }}
                 >
                   <option hidden> --- Army ---</option>
-                  {filteredArmyArray.map((army) => {
+                  {filteredArmyArray?.map((army) => {
                     if (army.user_id === userTwoFilter) {
                       return (
                         <option
