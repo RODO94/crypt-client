@@ -77,6 +77,11 @@ export interface RankObj {
   current_position?: number;
 }
 
+export interface allRankObjs {
+  fortyK: RankObj;
+  fantays: RankObj;
+}
+
 export interface UsersObj {
   first_name: string;
   last_name: string;

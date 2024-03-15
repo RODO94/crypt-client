@@ -19,7 +19,7 @@ export default function NextBattleCard() {
   useEffect(() => {
     const battleFn = async () => {
       if (token) {
-        const data = await getUsersBattles(token);
+        const data = await getUsersBattles(token, 5);
         const tempBattleArray = await data.battleArray[0];
         if (!tempBattleArray) {
           setBattleArray([]);

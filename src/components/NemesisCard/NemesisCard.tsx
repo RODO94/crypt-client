@@ -14,13 +14,7 @@ export default function NemesisCard() {
   useEffect(() => {
     const fetchNemesis = async () => {
       if (token) {
-        const response = await getNemesis(token);
-        if (!response) {
-          setTimeout(async () => {
-            const response = await getNemesis(token);
-            setNemesis(response);
-          }, 200);
-        }
+        const response = await getNemesis(token, 5);
         setNemesis(response);
       }
     };

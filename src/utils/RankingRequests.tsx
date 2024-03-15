@@ -35,13 +35,33 @@ const getUserRanking = async (token: string, battleType: string) => {
   return responseArray;
 };
 
-const getAllUserRanking = async (token: string) => {
-  const { data } = await axios.get(`${baseURL}/users/rankings`, {
-    headers: {
-      Authorization: "Bearer " + token,
-    },
-  });
+const getAllUserRanking = async (
+  token: string,
+  count: number
+): Promise<any | false> => {
+  const cachedRankings: string | null = sessionStorage.getItem("user-rankings");
+  if (cachedRankings) {
+    return JSON.parse(cachedRankings);
+  } else {
+    try {
+      const { data } = await axios.get(`${baseURL}/users/rankings`, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
 
-  return data;
+      sessionStorage.setItem("user-rankings", JSON.stringify(data));
+
+      return data;
+    } catch (error: any) {
+      count--;
+      if (count > 0) {
+        return getAllUserRanking(token, count);
+      } else {
+        console.error(error);
+        return error.response.data;
+      }
+    }
+  }
 };
 export { getRankingTopFive, getRanking, getUserRanking, getAllUserRanking };

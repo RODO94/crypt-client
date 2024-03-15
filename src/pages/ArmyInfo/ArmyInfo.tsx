@@ -40,7 +40,6 @@ export default function ArmyInfo() {
           getWinPercent(response.user_id, userToken),
           getArmyRank(response.id),
         ]);
-        console.log(winPercent);
         // Set state after all queries have completed
         if (battleCount) {
           setBattleCount(battleCount);

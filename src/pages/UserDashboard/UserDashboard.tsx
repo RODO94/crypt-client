@@ -28,8 +28,8 @@ export default function UserDashboard() {
     const fetchData = async () => {
       if (token) {
         const [rankingsResponse, battlesResponse] = await Promise.all([
-          getAllUserRanking(token),
-          Promise.all([getUsersBattles(token), getUsersResults(token)]),
+          getAllUserRanking(token, 5),
+          Promise.all([getUsersBattles(token, 5), getUsersResults(token, 5)]),
         ]);
 
         setRankArray(rankingsResponse);

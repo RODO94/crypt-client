@@ -85,7 +85,7 @@ export default function AddArmy() {
         setSuccessBool(true);
         setTimeout(() => {
           navigate(`/armies/information`, { state: { id: response.id } });
-        }, 2000);
+        }, 4000);
       }
     } catch (error: any) {
       console.error(error);

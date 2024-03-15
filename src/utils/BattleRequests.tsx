@@ -22,26 +22,63 @@ const getCompletedBattles = async () => {
   return data;
 };
 
-const getUsersBattles = async (token: string) => {
-  const { data } = await axios.get(`${baseURL}/battles/user/upcoming`, {
-    headers: {
-      Authorization: "Bearer " + token,
-    },
-  });
-  return data;
+const getUsersBattles = async (
+  token: string,
+  count: number
+): Promise<any | false> => {
+  const cachedUserBattles: string | null =
+    sessionStorage.getItem("user-battles");
+
+  if (cachedUserBattles) {
+    return JSON.parse(cachedUserBattles);
+  } else {
+    try {
+      const { data } = await axios.get(`${baseURL}/battles/user/upcoming`, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+      sessionStorage.setItem("user-battles", JSON.stringify(data));
+      return data;
+    } catch (error) {
+      count--;
+
+      if (count > 0) {
+        return getUsersBattles(token, count);
+      } else {
+        console.error(error);
+        return false;
+      }
+    }
+  }
 };
 
-const getUsersResults = async (token: string) => {
-  try {
-    const { data } = await axios.get(`${baseURL}/battles/user/completed`, {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    });
-    return data;
-  } catch (error: any) {
-    console.error(error);
-    return [{ errorMessage: error.response }];
+const getUsersResults = async (
+  token: string,
+  count: number
+): Promise<any | false> => {
+  const cachedUserResults = sessionStorage.getItem("user-results");
+
+  if (cachedUserResults) {
+    return JSON.parse(cachedUserResults);
+  } else {
+    try {
+      const { data } = await axios.get(`${baseURL}/battles/user/completed`, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+      sessionStorage.setItem("user-results", JSON.stringify(data));
+
+      return data;
+    } catch (error: any) {
+      count--;
+      if (count > 0) {
+        return getUsersResults(token, count);
+      }
+      console.error(error);
+      return false;
+    }
   }
 };
 
