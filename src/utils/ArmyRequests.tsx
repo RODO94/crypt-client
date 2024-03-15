@@ -2,13 +2,25 @@ import axios from "axios";
 
 const baseURL = import.meta.env.VITE_SERVER_URL;
 
-const getAllArmies = async () => {
-  try {
-    const { data } = await axios.get(`${baseURL}/armies/all`);
-    return data;
-  } catch (error) {
-    console.error(error);
-    return false;
+const getAllArmies = async (count: number): Promise<any | false> => {
+  const cachedArmyList = sessionStorage.getItem("army-list");
+  if (cachedArmyList) {
+    return JSON.parse(cachedArmyList);
+  } else {
+    try {
+      const { data } = await axios.get(`${baseURL}/armies/all`);
+
+      sessionStorage.setItem("army-list", JSON.stringify(data));
+
+      return data;
+    } catch (error) {
+      count--;
+      if (count > 0) {
+        return getAllArmies(count);
+      }
+      console.error(error);
+      return false;
+    }
   }
 };
 

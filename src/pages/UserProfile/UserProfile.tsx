@@ -113,7 +113,7 @@ export default function UserProfile() {
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const response = await getAllUsers();
+      const response = await getAllUsers(2);
       setUserArray(response);
     };
     fetchUsers();

@@ -60,8 +60,8 @@ export default function CreateBattle() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const armyResponse = await getAllArmies();
-      const userResponse = await getAllUsers();
+      const armyResponse = await getAllArmies(3);
+      const userResponse = await getAllUsers(3);
 
       setArmyArray(await armyResponse);
       setUserArray(await userResponse);

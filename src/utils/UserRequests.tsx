@@ -11,14 +11,24 @@ const getAllUsersNames = async () => {
   return userArray;
 };
 
-const getAllUsers = async () => {
-  try {
-    const { data } = await axios.get(`${baseURL}/users/all`);
+const getAllUsers = async (count: number): Promise<any | false> => {
+  const cachedUserList = sessionStorage.getItem("user-list");
 
-    return data;
-  } catch (error) {
-    console.error(error);
-    return false;
+  if (cachedUserList) {
+    return JSON.parse(cachedUserList);
+  } else {
+    try {
+      const { data } = await axios.get(`${baseURL}/users/all`);
+      sessionStorage.setItem("user-list", JSON.stringify(data));
+      return data;
+    } catch (error) {
+      count--;
+      if (count > 0) {
+        return getAllUsers(count);
+      }
+      console.error(error);
+      return false;
+    }
   }
 };
 

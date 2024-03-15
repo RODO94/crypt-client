@@ -212,8 +212,8 @@ export default function BattleDash({
 
   useEffect(() => {
     const fetchData = async () => {
-      const armyResponse = await getAllArmies();
-      const userResponse = await getAllUsers();
+      const armyResponse = await getAllArmies(2);
+      const userResponse = await getAllUsers(2);
 
       setArmyArray(await armyResponse);
       setUserArray(await userResponse);
