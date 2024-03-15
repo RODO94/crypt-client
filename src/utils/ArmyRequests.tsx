@@ -51,8 +51,31 @@ const getOneArmy = async (id: string, token: string) => {
         Authorization: "Bearer " + token,
       },
     });
+    console.log(data);
     return data;
   } catch (error) {
+    console.error(error);
+    return false;
+  }
+};
+
+const getArmyInfo = async (
+  id: string,
+  token: string,
+  count: number
+): Promise<any | false> => {
+  try {
+    const { data } = await axios.get(`${baseURL}/armies/${id}/info`, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    return data;
+  } catch (error) {
+    count--;
+    if (count > 0) {
+      return getArmyInfo(id, token, count);
+    }
     console.error(error);
     return false;
   }
@@ -155,4 +178,5 @@ export {
   getArmyNemesis,
   getArmyAlly,
   getAllUserArmies,
+  getArmyInfo,
 };

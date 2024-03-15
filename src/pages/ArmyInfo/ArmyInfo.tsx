@@ -1,12 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import "./ArmyInfo.scss";
 import { useEffect, useState } from "react";
-import {
-  getArmyRank,
-  getBattleCount,
-  getOneArmy,
-  getWinPercent,
-} from "../../utils/ArmyRequests";
+import { getArmyInfo } from "../../utils/ArmyRequests";
 import ArmyDash from "../../components/ArmyDash/ArmyDash";
 import ArmyNemesis from "../../components/ArmyNemesis/ArmyNemesis";
 import ArmyAlly from "../../components/ArmyAlly/ArmyAlly";
@@ -17,6 +12,7 @@ export default function ArmyInfo() {
   const [battleCount, setBattleCount] = useState(0);
   const [winPercent, setWinPercent] = useState("");
   const [armyRank, setArmyRank] = useState(0);
+  const [owner, setOwner] = useState("");
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -30,39 +26,22 @@ export default function ArmyInfo() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await getOneArmy(armyID, userToken);
-      if (response) {
-        setArmyObj(response);
-
-        // Batch multiple queries into a single Promise.all call
-        const [battleCount, winPercent, armyRank] = await Promise.all([
-          getBattleCount(response.user_id, userToken),
-          getWinPercent(response.user_id, userToken),
-          getArmyRank(response.id),
-        ]);
-        // Set state after all queries have completed
-        if (battleCount) {
-          setBattleCount(battleCount);
-        } else {
-          // Retry or handle case when response is null
-        }
-
-        if (winPercent || winPercent === 0) {
-          setWinPercent(winPercent);
-        } else {
-          // Retry or handle case when response is null
-        }
-
-        if (armyRank) {
-          setArmyRank(Number(armyRank.ranking));
-        } else {
-          // Retry or handle case when response is null
+      if (!armyObj) {
+        const response = await getArmyInfo(armyID, userToken, 3);
+        console.log(response);
+        console.log(armyID);
+        if (response) {
+          setArmyObj(response.user);
+          setBattleCount(response.battleCount);
+          setWinPercent(response.winPercent);
+          setArmyRank(Number(response.user.ranking));
+          setOwner(response.user.known_as);
         }
       }
     };
 
     fetchData();
-  }, [armyID, userToken]);
+  }, [armyID]);
 
   if (!armyObj) {
     return;
@@ -75,6 +54,7 @@ export default function ArmyInfo() {
         battleCount={battleCount}
         armyObj={armyObj}
         armyRank={armyRank}
+        owner={owner}
       />
       <ArmyNemesis armyID={armyObj.id} />
       <ArmyAlly armyID={armyObj.id} />

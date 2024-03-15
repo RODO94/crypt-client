@@ -77,8 +77,6 @@ export default function CreateBattle() {
       (army) => army.type === battleType
     );
 
-    console.log(filteredArmyArray);
-
     setFilteredArmyArray(filteredArmyArray);
 
     // Filter the user list based on if a user has an army in the army array
@@ -217,14 +215,14 @@ export default function CreateBattle() {
 
     try {
       setLoadingBool(true);
-      const response = await createBattleRequest(userToken, requestBody);
+      const response = await createBattleRequest(userToken, requestBody, 5);
 
       if (response) {
         setLoadingBool(false);
         setSuccessBool(true);
         setTimeout(() => {
           navigate(`/battles/information`, { state: { id: response } });
-        }, 2000);
+        }, 4000);
       }
     } catch (error) {
       console.error(error);

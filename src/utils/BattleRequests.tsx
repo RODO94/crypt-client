@@ -145,7 +145,11 @@ const reSubmitBattle = async (battleID: string, token: string) => {
   }
 };
 
-const createBattleRequest = async (token: string, requestBody: any) => {
+const createBattleRequest = async (
+  token: string,
+  requestBody: any,
+  count: number
+) => {
   try {
     const response: any = await axios.post(
       `${baseURL}/battles/create`,
@@ -158,6 +162,10 @@ const createBattleRequest = async (token: string, requestBody: any) => {
     );
     return response.data.split("ID ")[1];
   } catch (error) {
+    count--;
+    if (count > 0) {
+      createBattleRequest(token, requestBody, count);
+    }
     console.error(error);
     return false;
   }

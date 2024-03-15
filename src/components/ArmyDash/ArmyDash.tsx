@@ -3,7 +3,6 @@ import { ArmyObj } from "../../utils/Interfaces";
 import "./ArmyDash.scss";
 import EmblemHero from "../EmblemHero/EmblemHero";
 import BattleCard from "../BattleCard/BattleCard";
-import { getArmyUser } from "../../utils/UserRequests";
 import logo from "../../assets/logo.svg";
 import { ArrowLeftIcon } from "@mui/x-date-pickers";
 import { useNavigate } from "react-router-dom";
@@ -13,6 +12,7 @@ interface armyDashObj {
   battleCount: number;
   armyObj: ArmyObj;
   armyRank: number;
+  owner: string;
 }
 
 export default function ArmyDash({
@@ -20,9 +20,9 @@ export default function ArmyDash({
   battleCount,
   armyObj,
   armyRank,
+  owner,
 }: armyDashObj) {
   const [emblemName, setEmblemName] = useState(armyObj.emblem);
-  const [owner, setOwner] = useState("");
 
   const navigate = useNavigate();
 
@@ -34,13 +34,6 @@ export default function ArmyDash({
       newString.push(lowerCaseString);
     }
     setEmblemName(newString.join(""));
-
-    const fetchUser = async () => {
-      const response = await getArmyUser(armyObj.user_id);
-      setOwner(response.known_as);
-    };
-
-    fetchUser();
   }, [armyObj]);
 
   if (!owner) {
