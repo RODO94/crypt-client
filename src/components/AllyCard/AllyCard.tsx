@@ -3,7 +3,7 @@ import "./AllyCard.scss";
 import BattleCard from "../BattleCard/BattleCard";
 import { RankObj } from "../../utils/Interfaces";
 interface AllyComp {
-  ally: RankObj;
+  ally: RankObj | undefined;
 }
 export default function AllyCard({ ally }: AllyComp) {
   let allyComp = <p>No Ally Available</p>;

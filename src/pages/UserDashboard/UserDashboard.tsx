@@ -21,8 +21,8 @@ export default function UserDashboard() {
   const [rankArray, setRankArray] = useState<AllRankArray>();
   const [upcomingBattles, setUpcomingBattles] = useState();
   const [userResults, setUserResults] = useState();
-  const [ally, setAlly] = useState<RankObj>();
-  const [nemesis, setNemesis] = useState<RankObj>();
+  const [ally, setAlly] = useState<RankObj | undefined>();
+  const [nemesis, setNemesis] = useState<RankObj | undefined>();
   const [userObj, setUserObj] = useState<UsersObj>();
   const [nextBattle, setNextBattle] = useState<Battle | undefined>();
 
@@ -49,7 +49,7 @@ export default function UserDashboard() {
     fetchData();
   }, []);
 
-  if (!userObj || !nemesis || !ally) {
+  if (!userObj) {
     return <p>content loading</p>;
   }
 

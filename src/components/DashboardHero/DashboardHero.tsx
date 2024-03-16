@@ -8,8 +8,8 @@ import { Battle, RankObj, UsersObj } from "../../utils/Interfaces";
 
 interface dashboardType {
   userObj: UsersObj;
-  nemesis: RankObj;
-  ally: RankObj;
+  nemesis: RankObj | undefined;
+  ally: RankObj | undefined;
   nextBattle: Battle | undefined;
 }
 
@@ -19,7 +19,6 @@ export default function DashboardHero({
   ally,
   nextBattle,
 }: dashboardType) {
-  console.log(nextBattle);
   if (!userObj) {
     return;
   }

@@ -3,7 +3,7 @@ import { RankObj } from "../../utils/Interfaces";
 import BattleCard from "../BattleCard/BattleCard";
 
 interface NemesisComp {
-  nemesis: RankObj;
+  nemesis: RankObj | undefined;
 }
 
 export default function NemesisCard({ nemesis }: NemesisComp) {
