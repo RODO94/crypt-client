@@ -1,63 +1,30 @@
-import { useEffect, useState } from "react";
 import "./NextBattleCard.scss";
 import { Battle, Player } from "../../utils/Interfaces";
-import { getUsersBattles } from "../../utils/BattleRequests";
 import BattleCard from "../BattleCard/BattleCard";
 import dayjs from "dayjs";
 
-interface BattleArray extends Array<Battle> {}
-interface PlayerArray extends Array<Player> {}
+interface nextBattleType {
+  nextBattle: Battle | undefined;
+  id: string | undefined;
+}
 
-export default function NextBattleCard() {
-  const [nextBattle, setNextBattle] = useState<PlayerArray>();
-  const [battleArray, setBattleArray] = useState<BattleArray>();
-
-  const token = sessionStorage.getItem("token");
-
+export default function NextBattleCard({ nextBattle, id }: nextBattleType) {
   let nextBattleComp = <p>No Upcoming Battles</p>;
 
-  useEffect(() => {
-    const battleFn = async () => {
-      if (token) {
-        const data = await getUsersBattles(token, 5);
-        const tempBattleArray = await data.battleArray[0];
-        if (!tempBattleArray) {
-          setBattleArray([]);
-          return setNextBattle([]);
-        }
-        const playerOneBoolArray = tempBattleArray.player_1.map(
-          (player: any) => {
-            if (player.id === data.user.id) {
-              return true;
-            }
-            return false;
-          }
-        );
-        playerOneBoolArray.includes(true)
-          ? setNextBattle(tempBattleArray.player_2)
-          : setNextBattle(tempBattleArray.player_1);
-
-        setBattleArray(data.battleArray);
-        return data;
-      }
-    };
-
-    battleFn();
-  }, []);
-
-  if (!nextBattle || !battleArray) {
-    return <p>Please wait for your content to load</p>;
-  }
-
-  if (battleArray[0] && nextBattle[0]) {
+  if (nextBattle) {
+    const opponentBool = nextBattle.player_1.find((player) => player.id === id);
+    console.log(opponentBool);
+    const battleOpponentArray = opponentBool
+      ? nextBattle.player_2
+      : nextBattle.player_1;
     nextBattleComp = (
       <>
         <p className="next-battle-card__date">
-          {dayjs(battleArray[0].date).format("DD/MM")}
+          {dayjs(nextBattle.date).format("DD/MM")}
         </p>
         <p className="next-battle-card__versus">Vs</p>
         <div className="next-battle-card__container--50">
-          {nextBattle.map((player: Player) => (
+          {battleOpponentArray.map((player: Player) => (
             <BattleCard
               key={crypto.randomUUID()}
               name={player.name}

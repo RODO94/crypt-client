@@ -4,7 +4,7 @@ import FiveColTableHeader from "../FiveColTableHeader/FiveColTableHeader";
 import FiveColTableRow from "../FiveColTableRow/FiveColTableRow";
 import { CircularProgress } from "@mui/material";
 
-export default function UsersFantasyRanking({ rankArray }: any) {
+export default function UsersFantasyRanking({ rankArray, user }: any) {
   if (!rankArray) {
     return (
       <div>
@@ -27,7 +27,7 @@ export default function UsersFantasyRanking({ rankArray }: any) {
           <FiveColTableRow
             key={crypto.randomUUID()}
             rank={String(army.current_position)}
-            known_as={army.known_as}
+            known_as={user}
             name={army.name}
             ranking={army.ranking}
             status={army.status}

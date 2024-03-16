@@ -1,26 +1,14 @@
-import { useEffect, useState } from "react";
 import "./NemesisCard.scss";
-import { Player } from "../../utils/Interfaces";
-import { getNemesis } from "../../utils/UserRequests";
+import { RankObj } from "../../utils/Interfaces";
 import BattleCard from "../BattleCard/BattleCard";
 
-export default function NemesisCard() {
-  const [nemesis, setNemesis] = useState<Player>();
+interface NemesisComp {
+  nemesis: RankObj;
+}
 
+export default function NemesisCard({ nemesis }: NemesisComp) {
   let nemesisComp = <p>No Nemesis Available</p>;
 
-  const token = sessionStorage.getItem("token");
-
-  useEffect(() => {
-    const fetchNemesis = async () => {
-      if (token) {
-        const response = await getNemesis(token, 5);
-        setNemesis(response);
-      }
-    };
-
-    fetchNemesis();
-  }, []);
   if (nemesis) {
     nemesisComp = (
       <BattleCard

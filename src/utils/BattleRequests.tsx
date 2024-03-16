@@ -26,29 +26,21 @@ const getUsersBattles = async (
   token: string,
   count: number
 ): Promise<any | false> => {
-  const cachedUserBattles: string | null =
-    sessionStorage.getItem("user-battles");
+  try {
+    const { data } = await axios.get(`${baseURL}/battles/user/upcoming`, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    return data;
+  } catch (error) {
+    count--;
 
-  if (cachedUserBattles) {
-    return JSON.parse(cachedUserBattles);
-  } else {
-    try {
-      const { data } = await axios.get(`${baseURL}/battles/user/upcoming`, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
-      sessionStorage.setItem("user-battles", JSON.stringify(data));
-      return data;
-    } catch (error) {
-      count--;
-
-      if (count > 0) {
-        return getUsersBattles(token, count);
-      } else {
-        console.error(error);
-        return false;
-      }
+    if (count > 0) {
+      return getUsersBattles(token, count);
+    } else {
+      console.error(error);
+      return false;
     }
   }
 };

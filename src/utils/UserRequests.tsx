@@ -46,6 +46,28 @@ const getUser = async (token: string) => {
   }
 };
 
+const getUserInfo = async (
+  token: string,
+  count: number
+): Promise<any | false> => {
+  try {
+    const { data } = await axios.get(`${baseURL}/users/user/info`, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    return data;
+  } catch (error) {
+    count--;
+    if (count > 0) {
+      return getUserInfo(token, count);
+    } else {
+      console.error(error);
+      return false;
+    }
+  }
+};
+
 const getArmyUser = async (id: string) => {
   try {
     const { data } = await axios.get(`${baseURL}/users/one/${id}`);
@@ -144,4 +166,5 @@ export {
   getArmyUser,
   makeAdmin,
   removeUser,
+  getUserInfo,
 };

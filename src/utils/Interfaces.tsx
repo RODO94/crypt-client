@@ -89,6 +89,7 @@ export interface UsersObj {
   role: string;
   known_as: string;
   user_emblem: string;
+  id?: string;
 }
 
 export interface CompletedBattle {
@@ -122,4 +123,6 @@ export interface Battle {
   start: string;
   combatant_1_id?: string;
   combatant_2_id?: string;
+  user_1_id?: string;
+  user_2_id?: string;
 }
