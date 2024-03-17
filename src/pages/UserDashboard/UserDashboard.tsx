@@ -33,7 +33,6 @@ export default function UserDashboard() {
 
   if (!token) {
     navigate("/login");
-    return <p>Log in is required</p>;
   }
   useEffect(() => {
     const fetchData = async () => {
