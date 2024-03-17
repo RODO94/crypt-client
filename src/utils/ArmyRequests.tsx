@@ -29,7 +29,11 @@ const getAllUserArmies = async (id: string) => {
   return data;
 };
 
-const addArmyRequest = async (token: string, requestBody: any) => {
+const addArmyRequest = async (
+  token: string,
+  requestBody: any,
+  count: number
+): Promise<any | false> => {
   try {
     const { data } = await axios.post(`${baseURL}/armies/create`, requestBody, {
       headers: {
@@ -39,6 +43,10 @@ const addArmyRequest = async (token: string, requestBody: any) => {
 
     return data;
   } catch (error) {
+    count--;
+    if (count > 0) {
+      return addArmyRequest(token, requestBody, count);
+    }
     console.error(error);
     return false;
   }
