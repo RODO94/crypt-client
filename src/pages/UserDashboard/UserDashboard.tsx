@@ -31,10 +31,10 @@ export default function UserDashboard() {
 
   const navigate = useNavigate();
 
-  if (!token) {
-    navigate("/login");
-  }
   useEffect(() => {
+    if (!token) {
+      return navigate("/login");
+    }
     const fetchData = async () => {
       if (token) {
         const [infoResponse, battlesResponse] = await Promise.all([
