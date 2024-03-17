@@ -79,7 +79,7 @@ export default function AddArmy() {
 
     try {
       setLoadingBool(true);
-      const response = await addArmyRequest(userToken, requestBody);
+      const response = await addArmyRequest(userToken, requestBody, 2);
       if (response) {
         setLoadingBool(false);
         setSuccessBool(true);
