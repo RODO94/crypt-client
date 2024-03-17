@@ -9,6 +9,7 @@ import "./UserDashboard.scss";
 import { Battle, RankObj, UsersObj } from "../../utils/Interfaces";
 import { getUsersBattles } from "../../utils/BattleRequests";
 import { getUserInfo } from "../../utils/UserRequests";
+import { useNavigate } from "react-router-dom";
 
 interface RankArray extends Array<RankObj> {}
 
@@ -28,6 +29,11 @@ export default function UserDashboard() {
 
   const token = sessionStorage.getItem("token");
 
+  const navigate = useNavigate();
+
+  if (!token) {
+    return navigate("/login");
+  }
   useEffect(() => {
     const fetchData = async () => {
       if (token) {
