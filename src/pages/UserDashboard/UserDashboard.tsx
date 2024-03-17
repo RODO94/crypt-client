@@ -32,7 +32,9 @@ export default function UserDashboard() {
   const navigate = useNavigate();
 
   if (!token) {
-    return navigate("/login");
+    navigate("/login");
+
+    return <p>Log in is required</p>;
   }
   useEffect(() => {
     const fetchData = async () => {
