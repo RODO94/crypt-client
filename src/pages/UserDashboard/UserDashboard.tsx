@@ -42,6 +42,10 @@ export default function UserDashboard() {
           getUsersBattles(token, 5),
         ]);
 
+        if (!infoResponse || !battlesResponse) {
+          return navigate("/login");
+        }
+
         setRankArray(infoResponse.rankArray);
         setUpcomingBattles(battlesResponse.battleArray);
         setUserResults(infoResponse.userResults);

@@ -4,9 +4,12 @@ import adeptuscustodes from "../../assets/emblems/adeptus-custodes-crest.svg";
 import adeptusmechanicus from "../../assets/emblems/adeptus-mechanicus-crest.svg";
 import aelderi from "../../assets/emblems/aelderi-crest.svg";
 import astramilitarum from "../../assets/emblems/astra-militarum-crest.svg";
+import badmoons from "../../assets/emblems/bad-moons.svg";
 import barrowkings from "../../assets/emblems/barrowkings.svg";
 import beastmen from "../../assets/emblems/beastmen.svg";
+import blackdragons from "../../assets/emblems/black-dragons.svg";
 import bloodangels from "../../assets/emblems/bloodangels-crest.svg";
+import centurionhonor from "../../assets/emblems/centurion-honour.svg";
 import chaosspacemarines from "../../assets/emblems/chaos-space-marines-crest.svg";
 import chaosdemons from "../../assets/emblems/chaosdemons-crest.svg";
 import daemonsofkhorne from "../../assets/emblems/daemons-of-khorne.svg";
@@ -19,11 +22,14 @@ import deathwatch from "../../assets/emblems/deathwatch-crest.svg";
 import drukhari from "../../assets/emblems/drukhari-crest.svg";
 import dwarf from "../../assets/emblems/dwarf.svg";
 import empire from "../../assets/emblems/empire.svg";
+import falshia from "../../assets/emblems/falshia.svg";
 import genestealercult from "../../assets/emblems/genestealer-cult-crest.svg";
 import greyknights from "../../assets/emblems/greyknights-crest.svg";
 import highelves from "../../assets/emblems/high-elves.svg";
 import leaguesofvotann from "../../assets/emblems/leaguesofvotann-crest.svg";
 import lizardmen from "../../assets/emblems/lizardmen.svg";
+import kroot from "../../assets/emblems/kroot.svg";
+import metalica from "../../assets/emblems/metalica.svg";
 import necrons from "../../assets/emblems/necrons-crest.svg";
 import nightgoblins from "../../assets/emblems/night-goblins.svg";
 import ogrekingdoms from "../../assets/emblems/ogre-kingdoms.svg";
@@ -39,6 +45,7 @@ import thousandsons from "../../assets/emblems/thousandsons-crest.svg";
 import tyrannids from "../../assets/emblems/tyrannids-crest.svg";
 import tzeentchdaemons from "../../assets/emblems/tzeentch-daemons.svg";
 import vampirecounts from "../../assets/emblems/vampire-counts.svg";
+import warpspiders from "../../assets/emblems/warp-spiders.svg";
 import warriorsofchaoskhorne from "../../assets/emblems/warriors-of-chaos-khorne.svg";
 import warriorsofchaosnurgle from "../../assets/emblems/warriors-of-chaos-nurgle.svg";
 import warriorsofchaostzeentch from "../../assets/emblems/warriors-of-chaos-tzeentch.svg";
@@ -69,6 +76,10 @@ export default function EmblemHero({ emblem }: EmblemType) {
     ? (emblemIcon = aelderi)
     : emblem === "astramilitarum"
     ? (emblemIcon = astramilitarum)
+    : emblem === "badmoons"
+    ? (emblemIcon = badmoons)
+    : emblem === "blackdragons"
+    ? (emblemIcon = blackdragons)
     : emblem === "barrowkings"
     ? (emblemIcon = barrowkings)
     : emblem === "beastmen"
@@ -77,6 +88,8 @@ export default function EmblemHero({ emblem }: EmblemType) {
     ? (emblemIcon = bloodangels)
     : emblem === "bloodaxes"
     ? (emblemIcon = bloodaxes)
+    : emblem === "centurionhonor"
+    ? (emblemIcon = centurionhonor)
     : emblem === "chaosspacemarines"
     ? (emblemIcon = chaosspacemarines)
     : emblem === "chaosdemons"
@@ -101,6 +114,8 @@ export default function EmblemHero({ emblem }: EmblemType) {
     ? (emblemIcon = dwarf)
     : emblem === "empire"
     ? (emblemIcon = empire)
+    : emblem === "falshia"
+    ? (emblemIcon = falshia)
     : emblem === "genestealercult"
     ? (emblemIcon = genestealercult)
     : emblem === "greyknights"
@@ -113,6 +128,10 @@ export default function EmblemHero({ emblem }: EmblemType) {
     ? (emblemIcon = leaguesofvotann)
     : emblem === "lizardmen"
     ? (emblemIcon = lizardmen)
+    : emblem === "kroot"
+    ? (emblemIcon = kroot)
+    : emblem === "metalica"
+    ? (emblemIcon = metalica)
     : emblem === "necrons"
     ? (emblemIcon = necrons)
     : emblem === "nightgoblins"
@@ -147,6 +166,8 @@ export default function EmblemHero({ emblem }: EmblemType) {
     ? (emblemIcon = tzeentchdaemons)
     : emblem === "vampirecounts"
     ? (emblemIcon = vampirecounts)
+    : emblem === "warpspiders"
+    ? (emblemIcon = warpspiders)
     : emblem === "warriorsofchaoskhorne"
     ? (emblemIcon = warriorsofchaoskhorne)
     : emblem === "warriorsofchaosnurgle"

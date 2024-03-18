@@ -3,8 +3,15 @@ import InputBox from "../../components/InputBox/InputBox";
 import "./SignUp.scss";
 import logo from "../../assets/logo.svg";
 import { signupAuthentication } from "../../utils/UserAuth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SignUpBody } from "../../utils/Interfaces";
+import { emblemNameArray } from "../../utils/EmblemNames";
+import Emblem from "../../components/Emblem/Emblem";
+
+interface EmblemNameObj {
+  lowercase: string;
+  original: string;
+}
 
 export default function SignUp() {
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -14,8 +21,37 @@ export default function SignUp() {
   const [successClass, setSuccessClass] = useState<string>(
     "signup__sucess signup__success--hidden"
   );
+  const [emblemName, setEmblemName] = useState<string | undefined>();
+
+  const [emblemArray, setEmblemArray] = useState<null | EmblemNameObj[]>(null);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const formatEmblemArray = () => {
+      const filteredArray = [
+        ...emblemNameArray[0].fortyk,
+        ...emblemNameArray[0].fantasy,
+      ];
+      const formattedArray = filteredArray.map((emblem) => {
+        let newString = [];
+        const splitString = emblem.split(" ");
+        for (let i = 0; i < splitString.length; i++) {
+          let lowerCaseString = splitString[i].toLowerCase();
+          newString.push(lowerCaseString);
+        }
+        return { lowercase: newString.join(""), original: emblem };
+      });
+
+      const sortedArray = formattedArray.sort((a, b) =>
+        a.lowercase.localeCompare(b.lowercase)
+      );
+
+      setEmblemArray(sortedArray);
+      setEmblemName(sortedArray[0].lowercase);
+    };
+    formatEmblemArray();
+  }, []);
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
@@ -102,6 +138,28 @@ export default function SignUp() {
           type="password"
           required={true}
         />
+        <label htmlFor="army-type" className="add-army__label">
+          Emblem
+          <select
+            name="emblem"
+            className="add-army__select"
+            value={emblemName ? emblemName : "adeptasororitas"}
+            onChange={(event) => {
+              setEmblemName(event.target.value);
+            }}
+          >
+            {emblemArray?.map((emblem, index) => {
+              return (
+                <option key={index} value={emblem.lowercase}>
+                  {emblem.original}
+                </option>
+              );
+            })}
+          </select>
+        </label>
+        <div className="add-army__emblem-wrap">
+          <Emblem emblem={emblemName ? emblemName : "adeptasororitas"} />
+        </div>
         <h2 className={errorClass}>{errorMessage}</h2>
         <h2 className={successClass}>Sign Up Successful</h2>
         <button type="submit" className="signup__submit-button">

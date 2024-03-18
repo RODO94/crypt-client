@@ -31,12 +31,10 @@ export default function AddArmy() {
   const navigate = useNavigate();
   const userToken = sessionStorage.getItem("token");
 
-  if (!userToken) {
-    navigate("/login");
-    return <h1>You need to log in</h1>;
-  }
-
   useEffect(() => {
+    if (!userToken) {
+      return navigate("/login");
+    }
     const formatEmblemArray = () => {
       const filteredArray =
         type === "40k" ? emblemNameArray[0].fortyk : emblemNameArray[0].fantasy;
@@ -49,7 +47,12 @@ export default function AddArmy() {
         }
         return { lowercase: newString.join(""), original: emblem };
       });
-      setEmblemArray(formattedArray);
+      const sortedArray = formattedArray.sort((a, b) =>
+        a.lowercase.localeCompare(b.lowercase)
+      );
+
+      setEmblemArray(sortedArray);
+      setEmblemName(sortedArray[0].lowercase);
     };
     formatEmblemArray();
   }, [type]);
@@ -79,13 +82,15 @@ export default function AddArmy() {
 
     try {
       setLoadingBool(true);
-      const response = await addArmyRequest(userToken, requestBody, 2);
-      if (response) {
-        setLoadingBool(false);
-        setSuccessBool(true);
-        setTimeout(() => {
-          navigate(`/armies/information`, { state: { id: response.id } });
-        }, 4000);
+      if (userToken) {
+        const response = await addArmyRequest(userToken, requestBody, 2);
+        if (response) {
+          setLoadingBool(false);
+          setSuccessBool(true);
+          setTimeout(() => {
+            navigate(`/armies/information`, { state: { id: response.id } });
+          }, 4000);
+        }
       }
     } catch (error: any) {
       console.error(error);
@@ -102,7 +107,7 @@ export default function AddArmy() {
       <main className="add-army">
         <Header />{" "}
         <section className="add-army__section">
-          <h2 className="add-army__header">Create New Battle</h2>
+          <h2 className="add-army__header">Add New Army</h2>
           <div
             onClick={() => {
               navigate(-1);

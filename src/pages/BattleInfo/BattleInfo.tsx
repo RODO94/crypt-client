@@ -26,12 +26,10 @@ export default function BattleInfo() {
   useEffect(() => {
     const fetchData = async () => {
       // Fetch user data and set role
+      console.log(battleID);
       const userData = await getUser(userToken);
-      if (!userData) {
-        return navigate("/");
-      }
-      setRole(userData.role);
 
+      setRole(userData.role);
       // Fetch battle data
       const battleData = await getOneBattle(battleID);
       if (!battleData) {

@@ -30,6 +30,13 @@ export const emblemNameArray = [
       "Snake Bites",
       "Goff Orks",
       "Blood Axes",
+      "Falshia",
+      "Kroot",
+      "Bad Moons",
+      "Warp Spiders",
+      "Metalica",
+      "Black Dragons",
+      "Centurion Honor",
     ],
     fantasy: [
       "Skaven",
