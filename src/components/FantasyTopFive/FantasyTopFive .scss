@@ -51,9 +51,17 @@
     }
   }
   &__toggle {
+    width: 2rem;
+
     &:hover {
       background-color: black;
       border-radius: 8px;
+    }
+    @include tablet {
+      width: 3rem;
+    }
+    @include desktop {
+      width: 3.5rem;
     }
   }
 }

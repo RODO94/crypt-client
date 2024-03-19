@@ -5,12 +5,16 @@
   padding: 1rem 0rem;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1rem;
   width: 100%;
   background-color: $table-background--dark;
   @include tablet {
     padding: 1.5rem 1rem;
-    gap: 1rem;
+    gap: 2rem;
+  }
+  @include desktop {
+    padding: 2.5rem 1.75rem;
+    gap: 2.5rem;
   }
   &__combatants {
     display: flex;

@@ -43,9 +43,13 @@ export default function FortyKTopFive() {
         </Link>
         <div className="fortyk-rankings__toggle" onClick={handleClick}>
           {hideSectionBool === false ? (
-            <ExpandLessIcon style={{ color: "#fff" }} />
+            <ExpandLessIcon
+              style={{ color: "#fff", width: "100%", height: "auto" }}
+            />
           ) : (
-            <ExpandMoreIcon style={{ color: "#fff" }} />
+            <ExpandMoreIcon
+              style={{ color: "#fff", width: "100%", height: "auto" }}
+            />
           )}{" "}
         </div>
       </div>

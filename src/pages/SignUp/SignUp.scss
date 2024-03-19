@@ -92,5 +92,10 @@
     border: 1px solid #000;
     text-decoration: none;
     background: $dark-angels-2;
+    &:hover {
+      background: $dark-angels-1;
+      cursor: pointer;
+      text-decoration: underline;
+    }
   }
 }

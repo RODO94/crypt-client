@@ -50,8 +50,16 @@
     }
   }
   &__toggle {
+    width: 2rem;
+    @include tablet {
+      width: 3rem;
+    }
+    @include desktop {
+      width: 3.5rem;
+    }
     &:hover {
       background-color: black;
+      cursor: pointer;
       border-radius: 8px;
     }
   }

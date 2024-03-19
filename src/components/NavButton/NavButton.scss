@@ -18,23 +18,36 @@
   border: 1px solid #000;
   text-decoration: none;
   width: 100%;
+  &:hover {
+    font-weight: 900;
+    text-decoration: underline;
+  }
   @include tablet {
     font-size: 1rem;
     border: 2px solid black;
   }
   @include desktop {
-    font-size: 2rem;
-    padding: 2rem;
+    font-size: 1.25rem;
+    padding: 1rem;
     border: 3px solid black;
   }
 
   &--blue {
     background: $ultramarine-4;
+    &:hover {
+      background: $ultramarine-5;
+    }
   }
   &--dark {
     background-color: $space-wolves-2;
+    &:hover {
+      background: $space-wolves-1;
+    }
   }
   &--green {
     background-color: $dark-angels-1;
+    &:hover {
+      background: $dark-angels-2;
+    }
   }
 }

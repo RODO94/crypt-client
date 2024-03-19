@@ -12,9 +12,9 @@ export default function Homepage() {
     <main>
       <Header />
       <HomeHero />
-      <UpcomingBattles />
       <FortyKTopFive />
       <FantasyTopFive />
+      <UpcomingBattles />
       <CompletedBattles />
       <NavFooter />
     </main>

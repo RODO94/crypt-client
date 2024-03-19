@@ -1,4 +1,5 @@
 @use "../../partials/variables" as *;
+@use "../../partials/mixins" as *;
 .footer {
   position: sticky;
   bottom: 0;
@@ -9,6 +10,9 @@
   gap: 1.5rem;
   width: 100%;
   background-color: transparent;
+  @include desktop {
+    display: none;
+  }
   &--closed {
     align-items: flex-end;
   }

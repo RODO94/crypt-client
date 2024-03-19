@@ -32,6 +32,9 @@
     @include tablet {
       font-size: 1.2rem;
     }
+    @include desktop {
+      font-size: 1.25rem;
+    }
     &--rank {
       width: 15%;
       text-align: center;
@@ -55,7 +58,7 @@
   &__icon-wrap {
     display: flex;
     width: 10%;
-    height: 1.125rem;
+    height: 1rem;
     padding: 0.0625rem 0rem;
     flex-direction: column;
     justify-content: center;
@@ -66,9 +69,15 @@
     }
   }
   &__icon-svg {
-    height: 1.5rem;
+    height: 0.5rem;
+    @include tablet {
+      height: 0.75rem;
+    }
+    @include desktop {
+      height: 1rem;
+    }
     &--nochange {
-      width: 70%;
+      width: 50%;
     }
   }
 }

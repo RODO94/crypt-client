@@ -3,6 +3,7 @@
 .hero {
   display: flex;
   padding: 2rem 1.5rem;
+  padding-top: 8.5rem;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
@@ -14,18 +15,21 @@
       rgba(0, 0, 0, 0.65) 0%,
       rgba(0, 0, 0, 0.65) 100%
     ),
-    url(../../assets/birdseye-battle.png), lightgray 50%;
+    url(../../assets/birdseye-battle.png), lightgray 100%;
   object-fit: contain;
   background-position: center;
   background-size: cover;
 
   @include tablet {
     padding: 4rem 3rem;
+    padding-top: 10rem;
     gap: 3rem;
   }
   @include desktop {
+    flex-direction: row;
+    align-items: flex-end;
     padding: 8rem;
-    gap: 6rem;
+    gap: 4rem;
   }
 
   &__button-wrap {
@@ -33,14 +37,16 @@
     display: flex;
     align-items: center;
     gap: 0.625rem;
-    align-self: stretch;
+    width: 100%;
     @include tablet {
       gap: 1rem;
     }
     @include desktop {
-      gap: 3rem;
+      gap: 1.5rem;
+      flex-direction: column;
     }
   }
+
   &__title {
     z-index: 3;
     color: white;
@@ -55,6 +61,25 @@
     @include desktop {
       font-size: 5rem;
       line-height: 6rem;
+    }
+  }
+  &__logo {
+    display: none;
+    @include desktop {
+      display: block;
+      justify-self: flex-start;
+      width: 8rem;
+
+      margin: 0 auto;
+    }
+    &-wrap {
+      @include desktop {
+        position: absolute;
+        bottom: 150%;
+        z-index: 4;
+        top: 1.5rem;
+        right: 2rem;
+      }
     }
   }
 }

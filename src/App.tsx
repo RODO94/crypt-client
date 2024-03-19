@@ -15,11 +15,13 @@ import AddArmy from "./pages/AddArmy/AddArmy";
 import UserDashboard from "./pages/UserDashboard/UserDashboard";
 import UserProfile from "./pages/UserProfile/UserProfile";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
+import NavHeader from "./components/NavHeader/NavHeader";
 
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
+        <NavHeader />
         <Routes>
           {/* Global Routes */}
           <Route path="/" element={<Homepage />} />
