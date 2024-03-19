@@ -236,8 +236,10 @@ export default function CompletedBattlesPage() {
           >
             <option value={yearFilter.toString()}>{yearFilter}</option>
             <option value="all">All</option>
-            {yearArray.map((year) => (
-              <option value={year.toString()}>{year}</option>
+            {yearArray.map((year, index) => (
+              <option key={`${year} ${index}`} value={year.toString()}>
+                {year}
+              </option>
             ))}
           </select>
         </div>{" "}

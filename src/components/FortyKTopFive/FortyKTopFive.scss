@@ -40,12 +40,19 @@
       align-items: center;
       gap: 0.625rem;
       align-self: stretch;
+      justify-content: space-between;
       @include tablet {
         padding-bottom: 2.5rem;
       }
       @include desktop {
         padding-bottom: 3.5rem;
       }
+    }
+  }
+  &__toggle {
+    &:hover {
+      background-color: black;
+      border-radius: 8px;
     }
   }
 }

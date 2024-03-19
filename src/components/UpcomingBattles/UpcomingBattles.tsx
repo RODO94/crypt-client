@@ -5,6 +5,8 @@ import DateTableHeader from "../DateTableHeader/DateTableHeader";
 import BattleTableRow from "../BattleTableRow/BattleTableRow";
 import { Player } from "../../utils/Interfaces";
 import { Link } from "react-router-dom";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 interface Battle {
   id: string;
@@ -22,6 +24,7 @@ interface BattleArray extends Array<Battle> {}
 
 export default function UpcomingBattles() {
   const [battleArray, setBattleArray] = useState<BattleArray>();
+  const [hideSectionBool, setHideSectionBool] = useState<boolean>(false);
 
   let currentDate = "";
 
@@ -35,6 +38,12 @@ export default function UpcomingBattles() {
     battleFn();
   }, []);
 
+  const handleClick = () => {
+    hideSectionBool === false
+      ? setHideSectionBool(true)
+      : setHideSectionBool(false);
+  };
+
   if (!battleArray) {
     return <p>content loading... please wait</p>;
   }
@@ -45,9 +54,25 @@ export default function UpcomingBattles() {
         <Link to={"/battles/upcoming"} className="upcomingbattles__header">
           Upcoming Battles
         </Link>
+        <div className="upcomingbattles__toggle" onClick={handleClick}>
+          {hideSectionBool === false ? (
+            <ExpandLessIcon style={{ color: "#fff" }} />
+          ) : (
+            <ExpandMoreIcon style={{ color: "#fff" }} />
+          )}
+        </div>
       </div>
-      <article className="upcomingbattles__battle-list">
+      <article
+        className={
+          hideSectionBool === false
+            ? "upcomingbattles__battle-list"
+            : "section--hide"
+        }
+      >
         {battleArray.map((battle: Battle, index: number) => {
+          if (index > 5) {
+            return;
+          }
           if (index === 0) {
             currentDate = battle.date;
             return (

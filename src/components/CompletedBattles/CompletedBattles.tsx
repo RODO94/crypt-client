@@ -5,11 +5,14 @@ import BattleCompleteRow from "../BattleCompleteRow/BattleCompleteRow";
 import DateTableHeader from "../DateTableHeader/DateTableHeader";
 import "./CompletedBattles.scss";
 import { Link } from "react-router-dom";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 interface CompletedBattleArray extends Array<CompletedBattle> {}
 
 export default function CompletedBattles() {
   const [battleArray, setBattleArray] = useState<CompletedBattleArray>();
+  const [hideSectionBool, setHideSectionBool] = useState<boolean>(false);
 
   let currentDate = "";
 
@@ -23,6 +26,12 @@ export default function CompletedBattles() {
     battleFn();
   }, []);
 
+  const handleClick = () => {
+    hideSectionBool === false
+      ? setHideSectionBool(true)
+      : setHideSectionBool(false);
+  };
+
   if (!battleArray) {
     return <p>Please wait while we load your content</p>;
   }
@@ -33,9 +42,23 @@ export default function CompletedBattles() {
         <Link to={"/battles/completed"} className="completedbattles__header">
           Completed Battles
         </Link>
+        <div className="completedbattles__toggle" onClick={handleClick}>
+          {hideSectionBool === false ? (
+            <ExpandLessIcon style={{ color: "#fff" }} />
+          ) : (
+            <ExpandMoreIcon style={{ color: "#fff" }} />
+          )}{" "}
+        </div>
       </div>
-      <article className="completedbattles__battle-list">
+      <article
+        className={
+          hideSectionBool === false ? "completedbattles-list" : "section--hide"
+        }
+      >
         {battleArray.map((battle: CompletedBattle, index: number) => {
+          if (index > 5) {
+            return;
+          }
           if (index === 0) {
             currentDate = battle.date;
             return (

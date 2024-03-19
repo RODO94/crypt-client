@@ -64,13 +64,17 @@ export default function BattlePointsForm({
   }, []);
 
   const handleSubmit = async () => {
-    await submitBattle(battleID, token);
-    window.location.reload();
+    const response = await submitBattle(battleID, token);
+    if (response) {
+      window.location.reload();
+    }
   };
 
   const handleReSubmit = async () => {
-    await reSubmitBattle(battleID, token);
-    window.location.reload();
+    const response = await reSubmitBattle(battleID, token);
+    if (response) {
+      window.location.reload();
+    }
   };
 
   const handlePointChange = async (player: number) => {

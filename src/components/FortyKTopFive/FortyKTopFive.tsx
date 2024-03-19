@@ -5,11 +5,14 @@ import "./FortyKTopFive.scss";
 import { getRankingTopFive } from "../../utils/RankingRequests";
 import { RankObj } from "../../utils/Interfaces";
 import { Link } from "react-router-dom";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 interface RankArray extends Array<RankObj> {}
 
 export default function FortyKTopFive() {
   const [fortyKRankingArray, setFortyKRankingArray] = useState<RankArray>();
+  const [hideSectionBool, setHideSectionBool] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchTopFiveRanking = async () => {
@@ -22,6 +25,12 @@ export default function FortyKTopFive() {
     fetchTopFiveRanking();
   }, []);
 
+  const handleClick = () => {
+    hideSectionBool === false
+      ? setHideSectionBool(true)
+      : setHideSectionBool(false);
+  };
+
   if (!fortyKRankingArray) {
     return <p>Please wait while we load your content</p>;
   }
@@ -32,33 +41,46 @@ export default function FortyKTopFive() {
         <Link to={"/rankings/40k"} className="fortyk-rankings__title">
           40,000 Rankings
         </Link>
+        <div className="fortyk-rankings__toggle" onClick={handleClick}>
+          {hideSectionBool === false ? (
+            <ExpandLessIcon style={{ color: "#fff" }} />
+          ) : (
+            <ExpandMoreIcon style={{ color: "#fff" }} />
+          )}{" "}
+        </div>
       </div>
-      <FiveColTableHeader />
-      {fortyKRankingArray.map((army: RankObj, index: number) => {
-        let colour = "dark";
-        if (index % 2 === 0) {
-          colour = "light";
+      <article
+        className={
+          hideSectionBool === false ? "fortyk-rankings__list" : "section--hide"
         }
-        return (
-          <FiveColTableRow
-            key={crypto.randomUUID()}
-            rank={`${index + 1}`}
-            known_as={army.known_as}
-            name={army.name}
-            ranking={army.ranking}
-            status={
-              Number(army.prev_ranking) < index + 1
-                ? "decrease"
-                : Number(army.prev_ranking) > index + 1
-                ? "increase"
-                : "no change"
-            }
-            colour={colour}
-            navTo={`/armies/information`}
-            id={army.army_id}
-          />
-        );
-      })}
+      >
+        <FiveColTableHeader />
+        {fortyKRankingArray.map((army: RankObj, index: number) => {
+          let colour = "dark";
+          if (index % 2 === 0) {
+            colour = "light";
+          }
+          return (
+            <FiveColTableRow
+              key={crypto.randomUUID()}
+              rank={`${index + 1}`}
+              known_as={army.known_as}
+              name={army.name}
+              ranking={army.ranking}
+              status={
+                Number(army.prev_ranking) < index + 1
+                  ? "decrease"
+                  : Number(army.prev_ranking) > index + 1
+                  ? "increase"
+                  : "no change"
+              }
+              colour={colour}
+              navTo={`/armies/information`}
+              id={army.army_id}
+            />
+          );
+        })}
+      </article>
     </section>
   );
 }
