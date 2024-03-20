@@ -7,15 +7,15 @@
   justify-content: center;
   align-items: center;
   align-self: stretch;
+  background: $background-1;
+  width: 100%;
   @include tablet {
-    width: 100%;
     padding: 2rem 3rem;
-    background: $background-4;
+    gap: 1.5rem;
   }
   @include desktop {
-    width: 100%;
     padding: 4rem 8rem;
-    background: $background-4;
+    gap: 3rem;
   }
   &__title {
     color: white;
@@ -36,17 +36,10 @@
     }
     &-wrap {
       display: flex;
-      padding-bottom: 1.5rem;
       align-items: center;
       gap: 0.625rem;
       align-self: stretch;
       justify-content: space-between;
-      @include tablet {
-        padding-bottom: 2.5rem;
-      }
-      @include desktop {
-        padding-bottom: 3.5rem;
-      }
     }
   }
   &__toggle {

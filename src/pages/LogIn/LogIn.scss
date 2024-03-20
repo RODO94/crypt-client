@@ -110,17 +110,28 @@
     border: 1px solid #000;
     text-decoration: none;
     background: $ultramarine-4;
+    max-width: 25rem;
+    border: 1px solid $ultramarine-1;
+
     &:hover {
       background: $ultramarine-5;
+      cursor: pointer;
     }
     @include tablet {
       font-size: 1rem;
-      border: 2px solid black;
+      border: 2px solid $ultramarine-1;
     }
     @include desktop {
       font-size: 1.25rem;
       padding: 1rem;
-      border: 3px solid black;
     }
+  }
+  &__button-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
   }
 }

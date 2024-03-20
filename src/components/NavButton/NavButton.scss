@@ -15,21 +15,22 @@
   line-height: normal;
   color: #fff;
   border-radius: 1.5rem;
-  border: 1px solid #000;
   text-decoration: none;
   width: 100%;
+  border: 1px solid $ultramarine-1;
+  max-width: 25rem;
   &:hover {
     font-weight: 900;
     text-decoration: underline;
   }
   @include tablet {
     font-size: 1rem;
-    border: 2px solid black;
+    border: 2px solid $ultramarine-1;
   }
   @include desktop {
     font-size: 1.25rem;
     padding: 1rem;
-    border: 3px solid black;
+    border: 2px solid $ultramarine-1;
   }
 
   &--blue {
@@ -39,7 +40,13 @@
     }
   }
   &--dark {
-    background-color: $space-wolves-2;
+    background-color: $space-wolves-5;
+    border: 2px solid $space-wolves-1;
+
+    @include tablet {
+      border: 2px solid $space-wolves-1;
+    }
+
     &:hover {
       background: $space-wolves-1;
     }

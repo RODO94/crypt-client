@@ -80,10 +80,12 @@ export default function LogIn() {
           required={true}
         />
         <h2 className={errorClass}>{errorMessage}</h2>
-        <button type="submit" className="login__submit-button">
-          Login
-        </button>
-        <NavButton colour="dark" text="Sign Up" page="/signup" />{" "}
+        <div className="login__button-wrap">
+          <button type="submit" className="login__submit-button">
+            Login
+          </button>
+          <NavButton colour="dark" text="Sign Up" page="/signup" />{" "}
+        </div>
         <button onClick={handleReset} className={"login__form-forgot"}>
           Forgot Password
         </button>
