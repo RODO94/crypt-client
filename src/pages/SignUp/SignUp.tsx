@@ -61,6 +61,7 @@ export default function SignUp() {
     const firstName = event.target.firstname.value;
     const lastName = event.target.lastname.value;
     const knownAs = event.target.knownas.value;
+    const code = event.target.cryptcode.value;
 
     if (password !== confirmPassword) {
       setErrorClass("login__error login__error--visible");
@@ -79,6 +80,13 @@ export default function SignUp() {
     ) {
       setErrorClass("signup__error signup__error--visible");
       return setErrorMessage("Please fill out all of the fields to sign up");
+    }
+
+    if (!code || code.toLowerCase() !== "sic nunquam dormi mortui") {
+      setErrorClass("signup__error signup__error--visible");
+      return setErrorMessage(
+        "Ha! You do not possess the correct Crypt Code! Speak with your Lord and return stronger!"
+      );
     }
 
     const requestObj: SignUpBody = {
@@ -137,12 +145,18 @@ export default function SignUp() {
           label="Confirm Password"
           type="password"
           required={true}
+        />{" "}
+        <InputBox
+          name="cryptcode"
+          label="Crypt Code"
+          type="password"
+          required={true}
         />
-        <label htmlFor="army-type" className="add-army__label">
+        <label htmlFor="emblem-type" className="signup__label">
           Emblem
           <select
             name="emblem"
-            className="add-army__select"
+            className="signup__select"
             value={emblemName ? emblemName : "adeptasororitas"}
             onChange={(event) => {
               setEmblemName(event.target.value);
@@ -150,14 +164,18 @@ export default function SignUp() {
           >
             {emblemArray?.map((emblem, index) => {
               return (
-                <option key={index} value={emblem.lowercase}>
+                <option
+                  className="signup__option"
+                  key={index}
+                  value={emblem.lowercase}
+                >
                   {emblem.original}
                 </option>
               );
             })}
           </select>
         </label>
-        <div className="add-army__emblem-wrap">
+        <div className="signup__emblem-wrap">
           <Emblem emblem={emblemName ? emblemName : "adeptasororitas"} />
         </div>
         <h2 className={errorClass}>{errorMessage}</h2>
