@@ -4,6 +4,7 @@ export interface Player {
   known_as?: string;
   ranking?: string;
   army_id?: string;
+  emblem?: string;
 }
 
 export interface AllyObj {
@@ -13,6 +14,7 @@ export interface AllyObj {
   known_as: string;
   name: string;
   ranking: string;
+  emblem: string;
 }
 
 export interface ArmyObj {
@@ -75,6 +77,7 @@ export interface RankObj {
   army_id?: string;
   status?: string;
   current_position?: number;
+  emblem?: string;
 }
 
 export interface allRankObjs {

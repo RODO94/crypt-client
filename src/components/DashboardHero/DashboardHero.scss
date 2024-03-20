@@ -1,14 +1,18 @@
 @use "../../partials/variables" as *;
-
+@use "../../partials/mixins" as *;
 .dashboard-hero {
   display: flex;
-  padding: 0rem 1rem 2rem 1rem;
   flex-direction: column;
   align-items: flex-start;
   gap: 2rem;
   background-color: $dark-angels-1;
   border-radius: 0rem 0rem 2rem 2rem;
   width: 100%;
+
+  @include desktop {
+    gap: 4rem;
+  }
+
   &__container {
     display: flex;
     justify-content: space-between;
@@ -22,17 +26,76 @@
     line-height: normal;
     color: #fff;
     margin: 0;
+    @include tablet {
+      font-size: 3rem;
+    }
+    @include desktop {
+      font-size: 4rem;
+    }
+  }
+  &__battle-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    @include desktop {
+      width: 100%;
+      gap: 3rem;
+      justify-content: space-between;
+    }
+  }
+  &__next-battle {
+    display: flex;
+    width: 100%;
   }
   &__armies {
     display: flex;
     align-items: flex-start;
     gap: 10%;
     align-self: stretch;
+    @include desktop {
+      flex-direction: row;
+      justify-content: space-between;
+      height: 100%;
+      width: 100%;
+      gap: 2rem;
+    }
   }
   &__buttons {
     display: flex;
     align-items: flex-start;
     gap: 10%;
     width: 100%;
+    @include desktop {
+      justify-content: space-between;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 2rem;
+    }
+  }
+  &__info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    @include desktop {
+    }
+  }
+  &__content {
+    width: 100%;
+    gap: 3rem;
+    display: flex;
+    flex-direction: column;
+    @include desktop {
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+  }
+  &__actions {
+    width: 100%;
+    display: flex;
+    @include desktop {
+      justify-content: space-between;
+    }
   }
 }

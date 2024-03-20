@@ -38,6 +38,7 @@ export default function ArmyNemesis({ armyID }: ArmyNemesis) {
                 known_as={nemesisObj?.known_as}
                 ranking={nemesisObj?.ranking}
                 army_id={nemesisObj?.armyID}
+                emblem={nemesisObj?.emblem}
               />
             </div>
             <p className="army-nemesis__txt">{`${nemesisObj?.count} games`}</p>

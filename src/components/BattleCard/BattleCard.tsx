@@ -6,10 +6,11 @@ export default function BattleCard({
   known_as,
   ranking,
   army_id,
+  emblem,
 }: Player) {
   let nameArray: any[] = [];
-  if (name) {
-    nameArray = name.toLowerCase().split(" ");
+  if (emblem) {
+    nameArray = emblem.toLowerCase().split(" ");
   }
   let nameColour: string = " ";
 

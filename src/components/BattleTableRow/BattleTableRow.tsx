@@ -46,6 +46,7 @@ export default function BattleTableRow({
                 name={player.name}
                 known_as={player.known_as}
                 ranking={player.ranking}
+                emblem={player.emblem}
               />
             );
           })}
@@ -59,6 +60,7 @@ export default function BattleTableRow({
                 name={player.name}
                 known_as={player.known_as}
                 ranking={player.ranking}
+                emblem={player.emblem}
               />
             );
           })}

@@ -11,6 +11,8 @@ interface nextBattleType {
 export default function NextBattleCard({ nextBattle, id }: nextBattleType) {
   let nextBattleComp = <p>No Upcoming Battles</p>;
 
+  const startTime = dayjs(nextBattle?.start, "HH:mm:ss").format("HH:mm");
+
   if (nextBattle) {
     const opponentBool = nextBattle.player_1.find((player) => player.id === id);
     console.log(opponentBool);
@@ -19,10 +21,13 @@ export default function NextBattleCard({ nextBattle, id }: nextBattleType) {
       : nextBattle.player_1;
     nextBattleComp = (
       <>
-        <p className="next-battle-card__date">
-          {dayjs(nextBattle.date).format("DD/MM")}
-        </p>
-        <p className="next-battle-card__versus">Vs</p>
+        <div className="next-battle-card__timing">
+          <p className="next-battle-card__date">
+            {dayjs(nextBattle.date).format("DD/MM")}
+          </p>
+          <p className="next-battle-card__start">{startTime}</p>
+        </div>
+        <p className="next-battle-card__versus">vs</p>
         <div className="next-battle-card__container--50">
           {battleOpponentArray.map((player: Player) => (
             <BattleCard
@@ -30,6 +35,7 @@ export default function NextBattleCard({ nextBattle, id }: nextBattleType) {
               name={player.name}
               known_as={player.known_as}
               ranking={player.ranking}
+              emblem={player.emblem}
             />
           ))}
         </div>

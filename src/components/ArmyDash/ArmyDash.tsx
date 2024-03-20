@@ -58,7 +58,7 @@ export default function ArmyDash({
       <div className="army-dash__army-wrap">
         <h3 className="army-dash__label">Army</h3>
         <article className="army-dash__army-card">
-          <BattleCard name={armyObj.name} />
+          <BattleCard name={armyObj.name} emblem={armyObj.emblem} />
         </article>
       </div>
       <div className="army-dash__stat-container">

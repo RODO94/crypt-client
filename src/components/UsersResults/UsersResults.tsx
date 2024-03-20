@@ -21,7 +21,7 @@ export default function UsersResults({ battleArray }: any) {
           Recent Results
         </Link>
       </div>
-      <article className="completedbattles__battle-list">
+      <article className="completedbattles-list">
         {battleArray.map((battle: CompletedBattle, index: number) => {
           if (index > 7) {
             return;

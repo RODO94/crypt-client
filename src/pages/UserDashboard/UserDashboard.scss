@@ -1,4 +1,5 @@
 @use "../../partials/variables" as *;
+@use "../../partials/mixins" as *;
 
 .user-dash {
   display: flex;
@@ -8,4 +9,12 @@
   gap: 2rem;
   background-color: $dark-angels-1;
   border-radius: 0rem 0rem 2rem 2rem;
+  @include tablet {
+    padding: 4rem 3rem;
+    gap: 3rem;
+  }
+  @include desktop {
+    padding: 6rem 8rem;
+    gap: 4rem;
+  }
 }

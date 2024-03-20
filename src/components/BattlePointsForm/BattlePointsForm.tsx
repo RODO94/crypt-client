@@ -117,6 +117,7 @@ export default function BattlePointsForm({
               known_as={player.known_as}
               ranking={player.ranking}
               army_id={player.army_id}
+              emblem={player.emblem}
             />
           ))}
         </div>
@@ -170,6 +171,7 @@ export default function BattlePointsForm({
               known_as={player.known_as}
               ranking={player.ranking}
               army_id={player.army_id}
+              emblem={player.emblem}
             />
           ))}
         </div>

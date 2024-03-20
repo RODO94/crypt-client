@@ -34,6 +34,7 @@ export default function ArmyAlly({ armyID }: ArmyID) {
                 known_as={allyObj?.known_as}
                 ranking={allyObj?.ranking}
                 army_id={allyObj?.armyID}
+                emblem={allyObj?.emblem}
               />
             </div>
             <p className="army-ally__txt">{`${allyObj?.count} games`}</p>

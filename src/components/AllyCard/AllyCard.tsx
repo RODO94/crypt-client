@@ -15,6 +15,7 @@ export default function AllyCard({ ally }: AllyComp) {
         name={ally.name}
         known_as={ally.known_as}
         ranking={ally.ranking}
+        emblem={ally.emblem}
       />
     );
   }

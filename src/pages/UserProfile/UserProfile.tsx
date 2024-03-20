@@ -162,6 +162,7 @@ export default function UserProfile() {
                 <BattleCard
                   key={`battlecard${army.army_id}`}
                   name={army.name}
+                  emblem={army.emblem}
                 />
               </div>
               <div
@@ -197,6 +198,7 @@ export default function UserProfile() {
                 <BattleCard
                   key={`battlecard${army.army_id}`}
                   name={army.name}
+                  emblem={army.emblem}
                 />
               </div>
               <div

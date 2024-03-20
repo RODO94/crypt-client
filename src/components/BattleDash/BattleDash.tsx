@@ -317,6 +317,7 @@ export default function BattleDash({
                     name={player.name}
                     known_as={player.known_as}
                     ranking={player.ranking}
+                    emblem={player.emblem}
                   />
                 ))}{" "}
               </div>
@@ -328,6 +329,7 @@ export default function BattleDash({
                     name={player.name}
                     known_as={player.known_as}
                     ranking={player.ranking}
+                    emblem={player.emblem}
                   />
                 ))}{" "}
               </div>
@@ -362,6 +364,7 @@ export default function BattleDash({
                     name={player.name}
                     known_as={player.known_as}
                     ranking={player.ranking}
+                    emblem={player.emblem}
                   />
                   <button
                     key={crypto.randomUUID()}
@@ -447,6 +450,7 @@ export default function BattleDash({
                     name={player.name}
                     known_as={player.known_as}
                     ranking={player.ranking}
+                    emblem={player.emblem}
                   />
                   <button
                     key={crypto.randomUUID()}

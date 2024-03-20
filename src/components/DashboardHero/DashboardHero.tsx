@@ -28,18 +28,28 @@ export default function DashboardHero({
         <h1 className="dashboard-hero__header">{`Hey ${userObj?.known_as}!`}</h1>
         <Emblem emblem={userObj.user_emblem} />
       </div>
-      <NextBattleCard nextBattle={nextBattle} id={userObj.id} />
-      <div className="dashboard-hero__armies">
-        <NemesisCard nemesis={nemesis} />
-        <AllyCard ally={ally} />
-      </div>
-      <div className="dashboard-hero__buttons">
-        <NavButton colour="blue" text="Add an Army" page="/armies/add" />
-        <NavButton
-          colour="dark"
-          text="Create a Battle"
-          page="/battles/create"
-        />
+      <div className="dashboard-hero__content">
+        <div className="dashboard-hero__info">
+          <div className="dashboard-hero__battle-wrap">
+            <article className="dashboard-hero__next-battle">
+              <NextBattleCard nextBattle={nextBattle} id={userObj.id} />
+            </article>
+            <article className="dashboard-hero__armies">
+              <NemesisCard nemesis={nemesis} />
+              <AllyCard ally={ally} />
+            </article>
+          </div>
+        </div>
+        <div className="dashboard-hero__actions">
+          <div className="dashboard-hero__buttons">
+            <NavButton colour="blue" text="Add an Army" page="/armies/add" />
+            <NavButton
+              colour="dark"
+              text="Create a Battle"
+              page="/battles/create"
+            />
+          </div>
+        </div>
       </div>
     </section>
   );

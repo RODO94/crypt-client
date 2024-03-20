@@ -16,6 +16,7 @@ export default function NemesisCard({ nemesis }: NemesisComp) {
         name={nemesis.name}
         known_as={nemesis.known_as}
         ranking={nemesis.ranking}
+        emblem={nemesis.emblem}
       />
     );
   }
