@@ -131,9 +131,16 @@ export default function CreateBattle() {
         event.target.parentElement.children.users_1.value.split("+")[1];
       armyName = event.target.parentElement.children.army_1.value.split("+")[1];
       armyID = event.target.parentElement.children.army_1.value.split("+")[0];
+      const armyObj = armyArray?.find((army) => army.id === armyID);
       let newArray = [
         ...playerOne,
-        { id: userID, known_as: userName, name: armyName, army_id: armyID },
+        {
+          id: userID,
+          known_as: userName,
+          name: armyName,
+          army_id: armyID,
+          emblem: armyObj?.emblem,
+        },
       ];
       setPlayerOne(newArray);
       setArmyOne("");
@@ -144,9 +151,17 @@ export default function CreateBattle() {
         event.target.parentElement.children.users_2.value.split("+")[1];
       armyName = event.target.parentElement.children.army_2.value.split("+")[1];
       armyID = event.target.parentElement.children.army_2.value.split("+")[0];
+      const armyObj = armyArray?.find((army) => army.id === armyID);
+
       let newArray = [
         ...playerTwo,
-        { id: userID, known_as: userName, name: armyName, army_id: armyID },
+        {
+          id: userID,
+          known_as: userName,
+          name: armyName,
+          army_id: armyID,
+          emblem: armyObj?.emblem,
+        },
       ];
       setPlayerTwo(newArray);
       setArmyTwo("");

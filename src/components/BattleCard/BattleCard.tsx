@@ -20,6 +20,8 @@ export default function BattleCard({
       : nameColour;
   }
 
+  console.log({ nameColour, emblem });
+
   return (
     <article className="battle-card" id={army_id}>
       <div className={`battle-card__army ${nameColour}`}>

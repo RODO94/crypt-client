@@ -12,9 +12,11 @@
   @include tablet {
     padding: 4rem 3rem;
     gap: 3rem;
+    border-radius: 0rem 0rem 3rem 3rem;
   }
   @include desktop {
     padding: 6rem 8rem;
     gap: 4rem;
+    border-radius: 0rem 0rem 3.5rem 3.5rem;
   }
 }

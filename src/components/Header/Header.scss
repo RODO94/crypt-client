@@ -1,7 +1,5 @@
 @use "../../partials/mixins" as *;
 .header {
-  position: absolute;
-  top: 1rem;
   display: flex;
   padding: 1.5rem;
   flex-direction: column;

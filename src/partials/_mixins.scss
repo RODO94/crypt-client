@@ -13,6 +13,9 @@
 
 @mixin army_colours {
   // 40k
+  .darkangels {
+    background-color: $dark-angels-5;
+  }
   .necrons {
     background-color: $dark-angels-2;
   }
