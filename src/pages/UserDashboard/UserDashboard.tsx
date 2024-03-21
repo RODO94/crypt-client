@@ -72,6 +72,8 @@ export default function UserDashboard() {
             nemesis={nemesis}
             ally={ally}
             nextBattle={nextBattle}
+            fortykRanked={rankArray?.fortyK[0]}
+            fantasyRanked={rankArray?.fantasy[0]}
           />
         </section>
         <NavFooter />
@@ -87,6 +89,8 @@ export default function UserDashboard() {
           userObj={userObj}
           nemesis={nemesis}
           ally={ally}
+          fortykRanked={rankArray?.fortyK[0]}
+          fantasyRanked={rankArray?.fantasy[0]}
         />
       </section>
       <UsersFortyRanking

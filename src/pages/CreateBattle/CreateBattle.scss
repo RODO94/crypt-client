@@ -31,11 +31,21 @@
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     max-width: 30rem;
     margin: 0 auto;
+    @include desktop {
+      margin-top: 6rem;
+    }
   }
   &__back-arrow {
     position: absolute;
+    display: flex;
+    align-items: center;
     top: 1.5rem;
     left: 8px;
+    &:hover {
+      cursor: pointer;
+      background-color: white;
+      border-radius: 8px;
+    }
   }
   &__header {
     color: #000;
@@ -136,31 +146,53 @@
     font-weight: 700;
   }
   &__add {
-    background-color: $dark-angels-5;
-    padding: 0.25rem 1rem;
-
+    background-color: $dark-angels-2;
+    padding: 0.75rem 1rem;
     color: white;
-    border-radius: 0.5rem;
-    font-size: 0.75rem;
-    font-weight: 900;
+    border-radius: 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
     border: none;
     outline: none;
+    &:hover {
+      background-color: $dark-angels-5;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    &--disabled {
+      @extend .create-battle__add;
+      background-color: $background-vanquished;
+      color: $table-background--light;
+      &:hover {
+        background-color: $background-vanquished;
+        cursor: auto;
+        text-decoration: none;
+      }
+    }
   }
   &__create {
     display: flex;
-    padding: 0.5rem 2.5rem;
+    padding: 0.75rem 2.5rem;
     justify-content: center;
     align-items: center;
     gap: 0.625rem;
     align-self: stretch;
-    border-radius: 1.5rem;
+    border-radius: 1rem;
     border: 1px solid #000;
     background-color: $dark-angels-1;
     color: #fff;
     font-size: 1rem;
     font-style: normal;
-    font-weight: 600;
+    font-weight: 700;
     line-height: normal;
+    &:hover {
+      background-color: $dark-angels-5;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    @include tablet {
+      border: 2px solid #000;
+    }
   }
   &__success-message {
     display: flex;

@@ -8,6 +8,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import { ThemeProvider } from "@emotion/react";
 import { createTheme } from "@mui/material";
+import PersonIcon from "@mui/icons-material/Person";
+import profile from "../../assets/profile.svg";
 
 export default function NavHeader() {
   const [toggleBool, setToggleBool] = useState(false);
@@ -109,10 +111,20 @@ export default function NavHeader() {
               </NavLink>
             </div>
           </article>
-          <NavLink
-            className={({ isActive }) => classNameFn(isActive)}
-            to={userToken ? "/user" : "/"}
+          <div
+            className={
+              userToken ? "header-nav__user-nav" : "header-nav__user-nav--hide"
+            }
           >
+            <NavLink
+              className={({ isActive }) => classNameFn(isActive)}
+              to={"/user"}
+            >
+              <PersonIcon style={{ width: "2.5rem", height: "2.5rem" }} />
+              <p className="header-nav__icon-txt">Dashboard</p>
+            </NavLink>{" "}
+          </div>
+          <NavLink className={({ isActive }) => classNameFn(isActive)} to={"/"}>
             <img
               src={home}
               alt="fortress icon for home navigation"
@@ -154,6 +166,23 @@ export default function NavHeader() {
               </NavLink>
             </div>
           </article>
+          <div
+            className={
+              userToken ? "header-nav__user-nav" : "header-nav__user-nav--hide"
+            }
+          >
+            <NavLink
+              className={({ isActive }) => classNameFn(isActive)}
+              to={"/user/profile"}
+            >
+              <img
+                src={profile}
+                alt="fortress icon for home navigation"
+                className="header-nav__icons"
+              />
+              <p className="header-nav__icon-txt">Profile</p>
+            </NavLink>{" "}
+          </div>
         </nav>
       </header>
     </ThemeProvider>

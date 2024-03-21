@@ -8,6 +8,10 @@
   gap: 1rem;
   width: 100%;
   background-color: $table-background--dark;
+  &:hover {
+    cursor: pointer;
+    background-color: $table-background--hover;
+  }
   @include tablet {
     padding: 1.5rem 1rem;
     gap: 2rem;
@@ -23,10 +27,22 @@
     align-items: center;
     gap: 0.25rem;
     width: 100%;
+    @include tablet {
+      padding: 0rem 2rem;
+    }
+    @include desktop {
+      padding: 1rem 3rem;
+    }
   }
   &__versus {
     margin: 0 1rem;
     font-weight: 600;
+    @include tablet {
+      margin: 0 1.5rem;
+    }
+    @include desktop {
+      margin: 0 2.5rem;
+    }
   }
   &__details {
     display: flex;
@@ -53,6 +69,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      @include desktop {
+        padding: 1.5rem;
+      }
     }
     &--vanquished {
       font-weight: 400;
@@ -70,6 +89,12 @@
       display: flex;
       justify-content: center;
       align-items: center;
+    }
+    @include tablet {
+      height: 5rem;
+    }
+    @include desktop {
+      height: 6rem;
     }
   }
 }

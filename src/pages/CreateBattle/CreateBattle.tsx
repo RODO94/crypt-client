@@ -504,7 +504,11 @@ export default function CreateBattle() {
                   </select>
 
                   <button
-                    className="create-battle__add"
+                    className={
+                      armyOne
+                        ? "create-battle__add"
+                        : "create-battle__add--disabled"
+                    }
                     onClick={(event) => {
                       event?.preventDefault();
                       playerOneError
@@ -512,8 +516,9 @@ export default function CreateBattle() {
                         : playerOneError;
                       addArmy(event, 1);
                     }}
+                    disabled={armyOne ? false : true}
                   >
-                    +
+                    + Add Army
                   </button>
                   <p
                     className={
@@ -620,7 +625,11 @@ export default function CreateBattle() {
                     })}
                   </select>
                   <button
-                    className="create-battle__add"
+                    className={
+                      armyTwo
+                        ? "create-battle__add"
+                        : "create-battle__add--disabled"
+                    }
                     onClick={(event) => {
                       event.preventDefault();
                       playerTwoError
@@ -628,8 +637,9 @@ export default function CreateBattle() {
                         : playerTwoError;
                       addArmy(event, 2);
                     }}
+                    disabled={armyTwo ? false : true}
                   >
-                    +
+                    + Add Army
                   </button>
                   <p
                     className={
@@ -652,7 +662,7 @@ export default function CreateBattle() {
               }}
               className="create-battle__create"
             >
-              Create
+              Create Battle
             </button>
           ) : loadingBool && !successBool ? (
             <div className="create-battle__success-message">

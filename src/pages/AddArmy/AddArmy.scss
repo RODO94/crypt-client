@@ -1,4 +1,5 @@
 @use "../../partials/variables" as *;
+@use "../../partials/mixins" as *;
 
 .add-army {
   background: linear-gradient(
@@ -15,7 +16,11 @@
   padding: 0rem 1rem;
   flex-direction: column;
   align-items: center;
-  min-height: 100vh;
+  min-height: 120vh;
+  padding-bottom: 6rem;
+  @include desktop {
+    padding-top: 6rem;
+  }
   &__section {
     position: relative;
     display: flex;
@@ -27,6 +32,9 @@
     border-radius: 1rem;
     background: rgba(255, 255, 255, 0.85);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    width: 100%;
+    max-width: 30rem;
+    margin: 0 auto;
   }
   &__form {
     display: flex;
@@ -37,7 +45,15 @@
   &__back-arrow {
     position: absolute;
     top: 1.5rem;
+    display: flex;
+    align-items: center;
     left: 8px;
+    padding: 0.5rem;
+    &:hover {
+      cursor: pointer;
+      background-color: white;
+      border-radius: 8px;
+    }
   }
   &__header {
     color: #000;
@@ -69,7 +85,20 @@
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+    &:hover {
+      background-color: $dark-angels-5;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    @include tablet {
+      padding: 0.75rem 2.5rem;
+    }
+    @include desktop {
+      padding: 1rem 2.5rem;
+      font-size: 1.25rem;
+    }
   }
+
   &__label {
     display: flex;
     flex-direction: column;
