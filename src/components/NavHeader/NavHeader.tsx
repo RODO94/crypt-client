@@ -100,11 +100,17 @@ export default function NavHeader() {
               <NavLink
                 className={({ isActive }) => classNameFn(isActive)}
                 to={"/battles/completed"}
+                onClick={() => {
+                  setToggleBool(false);
+                }}
               >
                 Completed <br /> Battles
               </NavLink>{" "}
               <NavLink
                 className={({ isActive }) => classNameFn(isActive)}
+                onClick={() => {
+                  setToggleBool(false);
+                }}
                 to={"/battles/upcoming"}
               >
                 Upcoming <br /> Battles
@@ -119,12 +125,21 @@ export default function NavHeader() {
             <NavLink
               className={({ isActive }) => classNameFn(isActive)}
               to={"/user"}
+              onClick={() => {
+                setToggleBool(false);
+              }}
             >
               <PersonIcon style={{ width: "2.5rem", height: "2.5rem" }} />
               <p className="header-nav__icon-txt">Dashboard</p>
             </NavLink>{" "}
           </div>
-          <NavLink className={({ isActive }) => classNameFn(isActive)} to={"/"}>
+          <NavLink
+            className={({ isActive }) => classNameFn(isActive)}
+            to={"/"}
+            onClick={() => {
+              setToggleBool(false);
+            }}
+          >
             <img
               src={home}
               alt="fortress icon for home navigation"
@@ -152,12 +167,18 @@ export default function NavHeader() {
               }
             >
               <NavLink
+                onClick={() => {
+                  setToggleBool(false);
+                }}
                 className={({ isActive }) => classNameFn(isActive)}
                 to={"/rankings/40k"}
               >
                 40,000 <br /> Rankings
               </NavLink>{" "}
               <NavLink
+                onClick={() => {
+                  setToggleBool(false);
+                }}
                 className={({ isActive }) => classNameFn(isActive)}
                 to={"/rankings/fantasy"}
               >
@@ -172,6 +193,9 @@ export default function NavHeader() {
             }
           >
             <NavLink
+              onClick={() => {
+                setToggleBool(false);
+              }}
               className={({ isActive }) => classNameFn(isActive)}
               to={"/user/profile"}
             >
