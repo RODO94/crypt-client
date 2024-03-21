@@ -350,6 +350,7 @@ export default function CreateBattle() {
                 <DatePicker
                   name="date"
                   value={date}
+                  format="DD-MM-YYYY"
                   onChange={(newValue: any) => {
                     setDate(newValue);
                   }}
