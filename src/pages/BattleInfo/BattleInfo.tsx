@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import "./BattleInfo.scss";
 import { useEffect, useState } from "react";
 import { getUser } from "../../utils/UserRequests";
@@ -15,26 +15,21 @@ export default function BattleInfo() {
   const [playerTwoArray, setPlayerTwoArray] = useState([]);
   const [winnerValue, setWinnerValue] = useState("");
 
-  const navigate = useNavigate();
   const location = useLocation();
   const battleID = location.state.id;
-  const userToken = sessionStorage.getItem("token");
-  if (!userToken) {
-    navigate("/login");
-    return <h1>You need to log in</h1>;
-  }
+  let userToken = sessionStorage.getItem("token");
+
   useEffect(() => {
     const fetchData = async () => {
       // Fetch user data and set role
-      console.log(battleID);
-      const userData = await getUser(userToken);
-
-      setRole(userData.role);
+      if (userToken) {
+        const userData = await getUser(userToken);
+        setRole(userData.role);
+      } else {
+        setRole("public");
+      }
       // Fetch battle data
       const battleData = await getOneBattle(battleID);
-      if (!battleData) {
-        return navigate("/");
-      }
       setBattle(battleData);
       setPlayerOneArray(battleData.player_1);
       setPlayerTwoArray(battleData.player_2);
@@ -55,7 +50,7 @@ export default function BattleInfo() {
     fetchData();
   }, [userToken, battleID]);
 
-  if (!userToken || !battle || !role || !playerOneArray || !playerTwoArray) {
+  if (!battle || !role || !playerOneArray || !playerTwoArray) {
     return (
       <div>
         <h1>Content Loading</h1>

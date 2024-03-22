@@ -8,6 +8,8 @@
   gap: 1rem;
   width: 100%;
   background-color: $table-background--dark;
+  border-bottom: 2px solid $background-vanquished;
+
   &:hover {
     cursor: pointer;
     background-color: $table-background--hover;

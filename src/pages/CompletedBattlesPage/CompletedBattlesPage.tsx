@@ -194,7 +194,6 @@ export default function CompletedBattlesPage() {
             name="name"
             onChange={handleChange}
           >
-            <option value={""}>{nameFilter}</option>
             <option value={"all"}>All</option>
             {nameArray.map((name) => (
               <option key={crypto.randomUUID()} value={name}>
@@ -253,8 +252,6 @@ export default function CompletedBattlesPage() {
             onChange={handleChange}
             defaultValue={""}
           >
-            <option value={""}>{battleTypeFilter}</option>
-
             <option value="all">All</option>
             <option value="40k">40k</option>
             <option value="fantasy">Fantasy</option>

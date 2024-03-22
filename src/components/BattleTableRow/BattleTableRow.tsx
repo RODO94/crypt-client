@@ -4,6 +4,7 @@ import BattleCard from "../BattleCard/BattleCard";
 import BattleTypePill from "../BattleTypePill/BattleTypePill";
 import PlayerTypePill from "../PlayerTypePill/PlayerTypePill";
 import "./BattleTableRow.scss";
+import dayjs from "dayjs";
 
 interface BattleTableRow {
   battle_type: string;
@@ -35,7 +36,9 @@ export default function BattleTableRow({
     <section className="battle-row" onClick={handleClick}>
       <div className="battle-row__timing">
         <span className="battle-row__table">{table}</span>
-        <p className="battle-row__times"> {start} </p>
+        <p className="battle-row__times">
+          {dayjs(start, "HH:mm:ss").format("HH:mm")}{" "}
+        </p>
       </div>
       <article className="battle-row__combatants">
         <div className="battle-row__team">

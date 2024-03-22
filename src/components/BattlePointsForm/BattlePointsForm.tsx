@@ -17,7 +17,7 @@ interface BattlePoints {
   playerOnePoints: number | string;
   playerTwoPoints: number | string;
   battleID: string;
-  token: string | "";
+  token: string | null;
   result: string;
 }
 
@@ -64,21 +64,25 @@ export default function BattlePointsForm({
   }, []);
 
   const handleSubmit = async () => {
-    const response = await submitBattle(battleID, token);
-    if (response) {
-      window.location.reload();
+    if (token) {
+      const response = await submitBattle(battleID, token);
+      if (response) {
+        window.location.reload();
+      }
     }
   };
 
   const handleReSubmit = async () => {
-    const response = await reSubmitBattle(battleID, token);
-    if (response) {
-      window.location.reload();
+    if (token) {
+      const response = await reSubmitBattle(battleID, token);
+      if (response) {
+        window.location.reload();
+      }
     }
   };
 
   const handlePointChange = async (player: number) => {
-    if (player === 1) {
+    if (player === 1 && token) {
       const requestBody = { points: Number(playerOneVictoryPoints) };
       const response = await updateBattleDetail(
         battleID,
@@ -87,7 +91,7 @@ export default function BattlePointsForm({
         requestBody
       );
       return response;
-    } else if (player === 2) {
+    } else if (player === 2 && token) {
       const requestBody = { points: Number(playerTwoVictoryPoints) };
       const response = await updateBattleDetail(
         battleID,

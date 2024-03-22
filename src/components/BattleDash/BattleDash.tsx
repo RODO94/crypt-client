@@ -33,7 +33,7 @@ interface BattleComp {
   start: string | undefined;
   finish: string | undefined;
   battleID: string;
-  token: string;
+  token: string | null;
   setPlayerTwoArray: Function;
   setPlayerOneArray: Function;
 }
@@ -107,7 +107,7 @@ export default function BattleDash({
     if (!event.target) {
       return "No Target";
     }
-    if (player === 1) {
+    if (player === 1 && token) {
       userID = event.target.parentElement.children.users_1.value.split("+")[0];
       userName =
         event.target.parentElement.children.users_1.value.split("+")[1];
@@ -126,7 +126,7 @@ export default function BattleDash({
 
       let requestBody = { player_1: armyIDArrayOne, player_2: armyIDArrayTwo };
       await updateArmyCombatants(requestBody, battleID, token);
-    } else if (player === 2) {
+    } else if (player === 2 && token) {
       userID = event.target.parentElement.children.users_2.value.split("+")[0];
       userName =
         event.target.parentElement.children.users_2.value.split("+")[1];
@@ -151,7 +151,7 @@ export default function BattleDash({
 
   const removePlayer = async (event: any, player: any) => {
     let targetArmyID = event.target.parentElement.children[0].id;
-    if (player === 1) {
+    if (player === 1 && token) {
       let newArmyArray = playerOne.filter(
         (army) => army.army_id !== targetArmyID
       );
@@ -166,7 +166,7 @@ export default function BattleDash({
 
       let requestBody = { player_1: newIDArrayOne, player_2: newIDArrayTwo };
       await updateArmyCombatants(requestBody, battleID, token);
-    } else if (player === 2) {
+    } else if (player === 2 && token) {
       let newArmyArray = playerTwo.filter(
         (army) => army.army_id !== targetArmyID
       );
@@ -186,25 +186,25 @@ export default function BattleDash({
   };
 
   const handleChangeSubmit = async (detail: string, value?: any) => {
-    if (detail === "scenario") {
+    if (detail === "scenario" && token) {
       let requestBody = { scenario: scenarioValue };
       await updateBattleDetail(battleID, token, detail, requestBody);
-    } else if (detail === "pointsize") {
+    } else if (detail === "pointsize" && token) {
       let requestBody = { points_size: pointsSizeValue };
       await updateBattleDetail(battleID, token, detail, requestBody);
-    } else if (detail === "date") {
+    } else if (detail === "date" && token) {
       let requestBody = { date: dateValue };
       await updateBattleDetail(battleID, token, detail, requestBody);
-    } else if (detail === "start") {
+    } else if (detail === "start" && token) {
       let requestBody = { start: dayjs(startValue).format("HH:mm:ss") };
       await updateBattleDetail(battleID, token, detail, requestBody);
-    } else if (detail === "finish") {
+    } else if (detail === "finish" && token) {
       let requestBody = { finish: dayjs(finishValue).format("HH:mm:ss") };
       await updateBattleDetail(battleID, token, detail, requestBody);
-    } else if (detail === "table") {
+    } else if (detail === "table" && token) {
       let requestBody = { table: tableValue };
       await updateBattleDetail(battleID, token, detail, requestBody);
-    } else if (detail === "gametype") {
+    } else if (detail === "gametype" && token) {
       let requestBody = { battle_type: value };
       await updateBattleDetail(battleID, token, detail, requestBody);
     }

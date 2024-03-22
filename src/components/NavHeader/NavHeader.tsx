@@ -15,6 +15,8 @@ export default function NavHeader() {
   const [toggleBool, setToggleBool] = useState(false);
   const [battleToggle, setBattleToggle] = useState(false);
   const [rankingsToggle, setRankingsToggle] = useState(false);
+  const [battleActiveBool, setBattleActiveBool] = useState(false);
+  const [rankingActiveBool, setRankingActiveBool] = useState(false);
 
   const userToken = sessionStorage.getItem("token");
   const theme = createTheme({
@@ -59,8 +61,8 @@ export default function NavHeader() {
             <MenuOpenIcon
               color="primary"
               style={{
-                height: "2.75rem",
-                width: "2.75rem",
+                height: "2.25rem",
+                width: "2.25rem",
                 borderRadius: "12px",
               }}
             />
@@ -68,8 +70,8 @@ export default function NavHeader() {
             <MenuIcon
               color="primary"
               style={{
-                height: "2.75rem",
-                width: "2.75rem",
+                height: "2.25rem",
+                width: "2.25rem",
                 borderRadius: "12px",
               }}
             />
@@ -78,7 +80,13 @@ export default function NavHeader() {
         <nav
           className={toggleBool ? "header-nav__nav" : "header-nav__nav--hide"}
         >
-          <article className="header-nav__nav-container">
+          <article
+            className={
+              battleActiveBool
+                ? "header-nav__nav-container header-nav__nav-container--active"
+                : "header-nav__nav-container"
+            }
+          >
             <div
               className="header-nav__clickable-div"
               onClick={() => {
@@ -101,6 +109,10 @@ export default function NavHeader() {
                 className={({ isActive }) => classNameFn(isActive)}
                 to={"/battles/completed"}
                 onClick={() => {
+                  if (rankingActiveBool === true) {
+                    setRankingActiveBool(false);
+                  }
+                  setBattleActiveBool(true);
                   setToggleBool(false);
                 }}
               >
@@ -109,6 +121,10 @@ export default function NavHeader() {
               <NavLink
                 className={({ isActive }) => classNameFn(isActive)}
                 onClick={() => {
+                  if (rankingActiveBool === true) {
+                    setRankingActiveBool(false);
+                  }
+                  setBattleActiveBool(true);
                   setToggleBool(false);
                 }}
                 to={"/battles/upcoming"}
@@ -147,7 +163,13 @@ export default function NavHeader() {
             />
             <p className="header-nav__icon-txt">Home</p>
           </NavLink>{" "}
-          <article className="header-nav__nav-container">
+          <article
+            className={
+              rankingActiveBool
+                ? "header-nav__nav-container header-nav__nav-container--active"
+                : "header-nav__nav-container"
+            }
+          >
             <div
               className="header-nav__clickable-div"
               onClick={() => {
@@ -168,6 +190,10 @@ export default function NavHeader() {
             >
               <NavLink
                 onClick={() => {
+                  if (battleActiveBool === true) {
+                    setBattleActiveBool(false);
+                  }
+                  setRankingActiveBool(true);
                   setToggleBool(false);
                 }}
                 className={({ isActive }) => classNameFn(isActive)}
@@ -177,6 +203,10 @@ export default function NavHeader() {
               </NavLink>{" "}
               <NavLink
                 onClick={() => {
+                  if (battleActiveBool === true) {
+                    setBattleActiveBool(false);
+                  }
+                  setRankingActiveBool(true);
                   setToggleBool(false);
                 }}
                 className={({ isActive }) => classNameFn(isActive)}
