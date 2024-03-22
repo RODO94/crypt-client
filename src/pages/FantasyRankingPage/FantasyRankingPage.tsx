@@ -42,27 +42,30 @@ export default function FantasyRankingPage() {
         </Link>
       </header>
       <section className="fantasy-ranking-page__hero">
-        <h2 className="fantasy-ranking-page__subtitle">
-          Top Ranked Competitor
-        </h2>
-        <div className="fantasy-ranking-page__wrap">
-          <img src={crown} alt="crown" className="fantasy-ranking-page__logo" />
-          <p className="fantasy-ranking-page__txt">
-            {fantasyRankingArray[0].known_as}
-          </p>
-          <div className="fantasy-ranking-page__army-pill">
-            <ArmyPill
-              name={fantasyRankingArray[0].name}
-              known_as=""
-              ranking=""
+        <div className="fantasy-ranking-page__container">
+          <h2 className="fantasy-ranking-page__subtitle">
+            Top Ranked Competitor
+          </h2>
+          <div className="fantasy-ranking-page__wrap">
+            <img
+              src={crown}
+              alt="crown"
+              className="fantasy-ranking-page__logo"
             />
+            <p className="fantasy-ranking-page__txt">
+              {fantasyRankingArray[0].known_as}
+            </p>
+            <div className="fantasy-ranking-page__army-pill">
+              <ArmyPill
+                name={fantasyRankingArray[0].name}
+                known_as=""
+                ranking=""
+              />
+            </div>
           </div>
         </div>
       </section>
       <section className="fantasy-rankings">
-        <div className="fantasy-rankings__title-wrap">
-          <h2 className="fantasy-rankings__title">Fantasy Rankings</h2>
-        </div>
         <FiveColTableHeader />
         {fantasyRankingArray.map((army: RankObj, index: number) => {
           let colour = "dark";

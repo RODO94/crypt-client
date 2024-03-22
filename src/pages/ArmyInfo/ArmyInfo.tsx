@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import "./ArmyInfo.scss";
 import { useEffect, useState } from "react";
 import { getArmyInfo } from "../../utils/ArmyRequests";
@@ -14,22 +14,15 @@ export default function ArmyInfo() {
   const [armyRank, setArmyRank] = useState(0);
   const [owner, setOwner] = useState("");
 
-  const navigate = useNavigate();
   const location = useLocation();
 
   const armyID = location.state.id;
-  const userToken = sessionStorage.getItem("token");
-  if (!userToken) {
-    navigate("/login");
-    return <h1>You need to log in</h1>;
-  }
 
   useEffect(() => {
     const fetchData = async () => {
       if (!armyObj) {
-        const response = await getArmyInfo(armyID, userToken, 3);
-        console.log(response);
-        console.log(armyID);
+        const response = await getArmyInfo(armyID, 3);
+
         if (response) {
           setArmyObj(response.user);
           setBattleCount(response.battleCount);

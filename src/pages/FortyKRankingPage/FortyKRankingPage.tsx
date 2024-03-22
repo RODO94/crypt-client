@@ -42,20 +42,26 @@ export default function FortyKPage() {
         </Link>
       </header>
       <section className="fantasy-ranking-page__hero">
-        <h2 className="fantasy-ranking-page__subtitle">
-          Top Ranked Competitor
-        </h2>
-        <div className="fantasy-ranking-page__wrap">
-          <img src={crown} alt="crown" className="fantasy-ranking-page__logo" />
-          <p className="fantasy-ranking-page__txt">
-            {fortyKRankingArray[0].known_as}
-          </p>
-          <div className="fantasy-ranking-page__army-pill">
-            <ArmyPill
-              name={fortyKRankingArray[0].name}
-              known_as=""
-              ranking=""
+        <div className="fantasy-ranking-page__container">
+          <h2 className="fantasy-ranking-page__subtitle">
+            Top Ranked Competitor
+          </h2>
+          <div className="fantasy-ranking-page__wrap">
+            <img
+              src={crown}
+              alt="crown"
+              className="fantasy-ranking-page__logo"
             />
+            <p className="fantasy-ranking-page__txt">
+              {fortyKRankingArray[0].known_as}
+            </p>
+            <div className="fantasy-ranking-page__army-pill">
+              <ArmyPill
+                name={fortyKRankingArray[0].name}
+                known_as=""
+                ranking=""
+              />
+            </div>
           </div>
         </div>
       </section>

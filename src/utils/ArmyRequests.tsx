@@ -60,22 +60,14 @@ const getOneArmy = async (id: string, token: string) => {
   }
 };
 
-const getArmyInfo = async (
-  id: string,
-  token: string,
-  count: number
-): Promise<any | false> => {
+const getArmyInfo = async (id: string, count: number): Promise<any | false> => {
   try {
-    const { data } = await axios.get(`${baseURL}/armies/${id}/info`, {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    });
+    const { data } = await axios.get(`${baseURL}/armies/${id}/info`);
     return data;
   } catch (error) {
     count--;
     if (count > 0) {
-      return getArmyInfo(id, token, count);
+      return getArmyInfo(id, count);
     }
     console.error(error);
     return false;

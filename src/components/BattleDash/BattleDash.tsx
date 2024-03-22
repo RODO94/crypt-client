@@ -91,9 +91,11 @@ export default function BattleDash({
   const navigate = useNavigate();
 
   const handleClick = () => {
-    playerEditBool === false
-      ? setPlayerEditBool(true)
-      : setPlayerEditBool(false);
+    if (token) {
+      playerEditBool === false
+        ? setPlayerEditBool(true)
+        : setPlayerEditBool(false);
+    }
   };
 
   const addArmy = async (event: any, player: any) => {
@@ -528,6 +530,7 @@ export default function BattleDash({
               <PlayerTypePill player_type={gameType} />
               {editBattleTypeBool === true ? (
                 <select
+                  className="battle-dash__select"
                   name="battletype"
                   id=""
                   onChange={(event) => {
@@ -546,7 +549,9 @@ export default function BattleDash({
               ) : (
                 <div
                   onClick={() => {
-                    setEditBattleTypeBool(true);
+                    if (token) {
+                      setEditBattleTypeBool(true);
+                    }
                   }}
                 >
                   <BattleTypePill battle_type={battleTypeValue} />
@@ -558,7 +563,7 @@ export default function BattleDash({
             <h2 className="battle-dash__subheader">Scenario</h2>
             <div className="battle-dash__info">
               <input
-                value={!scenarioValue ? "---" : scenarioValue}
+                value={!scenarioValue ? " " : scenarioValue}
                 name="scenario"
                 maxLength={80}
                 className={
@@ -597,7 +602,9 @@ export default function BattleDash({
                     : "battle-dash__info-text--hide"
                 }
                 onClick={() => {
-                  setEditScenarioBool(true);
+                  if (token) {
+                    setEditScenarioBool(true);
+                  }
                 }}
               >
                 {!scenarioValue ? "---" : scenarioValue}
@@ -649,7 +656,9 @@ export default function BattleDash({
                     : "battle-dash__info-text--hide"
                 }
                 onClick={() => {
-                  setEditPointSizeBool(true);
+                  if (token) {
+                    setEditPointSizeBool(true);
+                  }
                 }}
               >
                 {pointsSizeValue}
@@ -677,7 +686,9 @@ export default function BattleDash({
             <div className="battle-dash__info">
               <div
                 onClick={() => {
-                  setEditTableBool(true);
+                  if (token) {
+                    setEditTableBool(true);
+                  }
                 }}
                 className={
                   userEditBool && editTableBool === false
@@ -766,7 +777,9 @@ export default function BattleDash({
                     : "battle-dash__info-text--hide"
                 }
                 onClick={() => {
-                  setEditDateBool(true);
+                  if (token) {
+                    setEditDateBool(true);
+                  }
                 }}
               >
                 {dateValue}
@@ -815,7 +828,9 @@ export default function BattleDash({
                     : "battle-dash__info-text--hide"
                 }
                 onClick={() => {
-                  setEditStartBool(true);
+                  if (token) {
+                    setEditStartBool(true);
+                  }
                 }}
               >
                 {startValue.format("HH:mm")}
@@ -864,7 +879,9 @@ export default function BattleDash({
                     : "battle-dash__info-text--hide"
                 }
                 onClick={() => {
-                  setEditFinishBool(true);
+                  if (token) {
+                    setEditFinishBool(true);
+                  }
                 }}
               >
                 {finishValue.format("HH:mm")}

@@ -23,7 +23,7 @@ export default function UpcomingBattlesPage() {
 
   useEffect(() => {
     const battleFn = async () => {
-      const data = await getUpcomingBattles();
+      const data = await getUpcomingBattles(3);
       setBattleArray(data);
       return data;
     };
@@ -43,7 +43,7 @@ export default function UpcomingBattlesPage() {
   useEffect(() => {
     let tempBattleArray: BattleArray = [];
     const filterFn = async () => {
-      const data = await getUpcomingBattles();
+      const data = await getUpcomingBattles(3);
       tempBattleArray = await data;
       let filterArray: any = [];
       if (nameFilter !== "Name" && nameFilter !== "all") {

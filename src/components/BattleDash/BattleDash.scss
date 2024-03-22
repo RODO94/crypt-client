@@ -42,6 +42,12 @@
     line-height: normal;
     margin: 0;
   }
+  &__select {
+    padding: 0.5rem;
+    border: 8px;
+    font-weight: 500;
+    font-family: "Roboto", "arial";
+  }
   &__select-wrap {
     &--hide {
       display: none;

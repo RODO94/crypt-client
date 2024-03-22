@@ -12,9 +12,18 @@ const getCompletedBattlesFive = async () => {
   return data;
 };
 
-const getUpcomingBattles = async () => {
-  const { data } = await axios.get(`${baseURL}/battles/upcoming`);
-  return data;
+const getUpcomingBattles = async (count: number): Promise<any | false> => {
+  try {
+    const { data } = await axios.get(`${baseURL}/battles/upcoming`);
+    return data;
+  } catch (error: any) {
+    count--;
+    if (count > 0) {
+      return getUpcomingBattles(count);
+    }
+    console.error(error);
+    return error.response;
+  }
 };
 
 const getCompletedBattles = async () => {
