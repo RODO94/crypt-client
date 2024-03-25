@@ -16,6 +16,7 @@ import UserDashboard from "./pages/UserDashboard/UserDashboard";
 import UserProfile from "./pages/UserProfile/UserProfile";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import NavHeader from "./components/NavHeader/NavHeader";
+import LogInRedirect from "./pages/LogInRedirect/LogInRedirect";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           {/* Global Routes */}
           <Route path="/" element={<Homepage />} />
           <Route path="/login" element={<LogIn />} />
+          <Route path="/login/redirect" element={<LogInRedirect />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset/:token" element={<ResetPassword />} />

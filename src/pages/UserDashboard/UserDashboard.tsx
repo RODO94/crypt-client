@@ -8,7 +8,7 @@ import UsersUpcomingBattles from "../../components/UsersUpcomingBattles/UsersUpc
 import "./UserDashboard.scss";
 import { Battle, RankObj, UsersObj } from "../../utils/Interfaces";
 import { getUsersBattles } from "../../utils/BattleRequests";
-import { getUserInfo } from "../../utils/UserRequests";
+import { getUserInfo, verifyUser } from "../../utils/UserRequests";
 import { useNavigate } from "react-router-dom";
 
 interface RankArray extends Array<RankObj> {}
@@ -37,22 +37,28 @@ export default function UserDashboard() {
     }
     const fetchData = async () => {
       if (token) {
-        const [infoResponse, battlesResponse] = await Promise.all([
-          getUserInfo(token, 5),
-          getUsersBattles(token, 5),
-        ]);
+        const response = await verifyUser(token, 2);
 
-        if (!infoResponse || !battlesResponse) {
-          return navigate("/login");
+        if (response) {
+          const [infoResponse, battlesResponse] = await Promise.all([
+            getUserInfo(token, 5),
+            getUsersBattles(token, 5),
+          ]);
+
+          if (!infoResponse || !battlesResponse) {
+            return navigate("/login");
+          }
+
+          setRankArray(infoResponse.rankArray);
+          setUpcomingBattles(battlesResponse.battleArray);
+          setUserResults(infoResponse.userResults);
+          setAlly(infoResponse.ally);
+          setNemesis(infoResponse.nemesis);
+          setUserObj(infoResponse.user);
+          setNextBattle(battlesResponse.battleArray[0]);
+        } else if (!response) {
+          return navigate("/login/redirect");
         }
-
-        setRankArray(infoResponse.rankArray);
-        setUpcomingBattles(battlesResponse.battleArray);
-        setUserResults(infoResponse.userResults);
-        setAlly(infoResponse.ally);
-        setNemesis(infoResponse.nemesis);
-        setUserObj(infoResponse.user);
-        setNextBattle(battlesResponse.battleArray[0]);
       }
     };
 

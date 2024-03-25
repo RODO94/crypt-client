@@ -1,7 +1,7 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./BattleInfo.scss";
 import { useEffect, useState } from "react";
-import { getUser } from "../../utils/UserRequests";
+import { getUser, verifyUser } from "../../utils/UserRequests";
 import { getOneBattle } from "../../utils/BattleRequests";
 import BattleDash from "../../components/BattleDash/BattleDash";
 import BattlePointsForm from "../../components/BattlePointsForm/BattlePointsForm";
@@ -16,6 +16,7 @@ export default function BattleInfo() {
   const [winnerValue, setWinnerValue] = useState("");
 
   const location = useLocation();
+  const navigate = useNavigate();
   const battleID = location.state.id;
   let userToken = sessionStorage.getItem("token");
 
@@ -23,8 +24,17 @@ export default function BattleInfo() {
     const fetchData = async () => {
       // Fetch user data and set role
       if (userToken) {
-        const userData = await getUser(userToken);
-        setRole(userData.role);
+        const response = await verifyUser(userToken, 2);
+        if (response) {
+          const userData = await getUser(userToken);
+          if (!userData) {
+            setRole("public");
+          } else {
+            setRole(userData.role);
+          }
+        } else if (!response) {
+          navigate("/login/redirect");
+        }
       } else {
         setRole("public");
       }

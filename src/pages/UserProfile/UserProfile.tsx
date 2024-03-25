@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
 import "./UserProfile.scss";
 import { useNavigate } from "react-router-dom";
-import { getAllUsers, getUser, makeAdmin } from "../../utils/UserRequests";
+import {
+  getAllUsers,
+  getUser,
+  makeAdmin,
+  verifyUser,
+} from "../../utils/UserRequests";
 import { getAllUserArmies } from "../../utils/ArmyRequests";
 import BattleCard from "../../components/BattleCard/BattleCard";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
@@ -89,10 +94,17 @@ export default function UserProfile() {
 
   useEffect(() => {
     const fetchUser = async (token: string) => {
-      const data = await getUser(token);
-      setRole(data.role);
-      setUser(data);
-      return data;
+      if (token) {
+        const response = await verifyUser(token, 2);
+        if (response) {
+          const data = await getUser(token);
+          setRole(data.role);
+          setUser(data);
+          return data;
+        } else if (!response) {
+          return navigate("/login/redirect");
+        }
+      }
     };
     fetchUser(userToken);
   }, []);

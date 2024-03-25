@@ -22,7 +22,6 @@ export default function ArmyInfo() {
     const fetchData = async () => {
       if (!armyObj) {
         const response = await getArmyInfo(armyID, 3);
-
         if (response) {
           setArmyObj(response.user);
           setBattleCount(response.battleCount);

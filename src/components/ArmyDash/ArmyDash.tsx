@@ -70,7 +70,6 @@ export default function ArmyDash({
           <h3 className="army-dash__label">Rank</h3>
           <p className="army-dash__stat">{armyRank}</p>
         </article>
-
         <article className="army-dash__stat-wrap">
           <h3 className="army-dash__label">Battles Completed</h3>
           <p className="army-dash__stat">{battleCount}</p>

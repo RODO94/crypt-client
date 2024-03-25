@@ -2,6 +2,20 @@ import axios from "axios";
 
 const baseURL = import.meta.env.VITE_SERVER_URL;
 
+const verifyUser = async (token: string, count: number) => {
+  try {
+    const { data } = await axios.get(`${baseURL}/users/authenticate/${token}`);
+    return data;
+  } catch (error) {
+    count--;
+    if (count > 0) {
+      verifyUser(token, count);
+    }
+    console.error(error);
+    return false;
+  }
+};
+
 const getAllUsersNames = async () => {
   const { data } = await axios.get(`${baseURL}/users/all`);
 
@@ -147,4 +161,5 @@ export {
   makeAdmin,
   removeUser,
   getUserInfo,
+  verifyUser,
 };
