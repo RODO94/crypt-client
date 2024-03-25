@@ -6,7 +6,7 @@ import {
   ArrowLeftIcon,
   DatePicker,
   LocalizationProvider,
-  TimePicker,
+  MobileTimePicker,
 } from "@mui/x-date-pickers";
 import { getAllArmies } from "../../utils/ArmyRequests";
 import { Armies, Player, Users } from "../../utils/Interfaces";
@@ -380,7 +380,7 @@ export default function CreateBattle() {
                 className="create-battle__label create-battle__label--date"
               >
                 Start
-                <TimePicker
+                <MobileTimePicker
                   name="start
                 "
                   ampm={false}
@@ -395,7 +395,7 @@ export default function CreateBattle() {
                 className="create-battle__label create-battle__label--date"
               >
                 Finish
-                <TimePicker
+                <MobileTimePicker
                   name="finish"
                   ampm={false}
                   value={finish}

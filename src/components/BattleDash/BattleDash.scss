@@ -13,7 +13,7 @@
     padding: 2rem 3rem;
   }
   @include desktop {
-    padding: 6rem 8rem 2rem;
+    padding: 6rem 8rem 5rem;
   }
 
   &__header {
@@ -64,18 +64,13 @@
     line-height: normal;
     margin: 0;
     @include tablet {
-      font-size: 0.9rem;
+      font-size: 1.4rem;
     }
     @include desktop {
-      font-size: 1rem;
+      font-size: 1.8rem;
     }
   }
-  &__select {
-    padding: 0.5rem;
-    border: 8px;
-    font-weight: 500;
-    font-family: "Roboto", "arial";
-  }
+
   &__select-wrap {
     &--hide {
       display: none;
@@ -108,6 +103,12 @@
       &--hide {
         display: none;
       }
+      @include tablet {
+        padding-bottom: 1.5rem;
+      }
+      @include tablet {
+        padding-bottom: 2rem;
+      }
       &--edit {
         display: flex;
         padding: 1rem;
@@ -119,6 +120,12 @@
         border-radius: 0.5rem;
         box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
         background-color: $space-wolves-4;
+        @include tablet {
+          padding: 1.5rem;
+        }
+        @include desktop {
+          padding: 2rem;
+        }
       }
     }
     &-container {
@@ -135,7 +142,7 @@
         gap: 1.5rem;
       }
       @include desktop {
-        padding-top: 3.5rem;
+        padding-top: 6rem;
         gap: 1.75rem;
       }
       &--edit {
@@ -155,20 +162,43 @@
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+    @include tablet {
+      font-size: 1.5rem;
+    }
+    @include desktop {
+      font-size: 1.75rem;
+    }
   }
   &__submit-button {
     outline: none;
     border: none;
     background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     &--hide {
       display: none;
     }
   }
   &__toggle-icon {
-    height: 1.5rem;
-    width: 1.5rem;
+    height: 1rem;
+    width: 1rem;
+    padding: 0.25rem;
     &--hide {
       display: none;
+    }
+    &:hover {
+      cursor: pointer;
+      background-color: $ultramarine-4;
+      border-radius: 8px;
+    }
+    @include tablet {
+      height: 1.5rem;
+      width: auto;
+    }
+    @include tablet {
+      height: 3rem;
+      width: auto;
     }
   }
   &__player-wrap {
@@ -183,6 +213,12 @@
     outline: none;
     padding: 0.65rem 0.8rem;
     border-radius: 0.5rem;
+    @include tablet {
+      font-size: 1.25rem;
+    }
+    @include desktop {
+      font-size: 1.5rem;
+    }
   }
   &__info {
     background-color: $space-wolves-4;
@@ -194,6 +230,12 @@
     flex-wrap: nowrap;
     min-width: 1rem;
     min-height: 62px;
+    @include tablet {
+      padding: 1.2rem 1.5rem;
+    }
+    @include desktop {
+      padding: 1.5rem 1.75rem;
+    }
 
     &-wrap {
       display: flex;
@@ -202,11 +244,16 @@
       gap: 1rem;
       align-self: stretch;
       flex-wrap: wrap;
+      @include tablet {
+        gap: 1.5rem;
+      }
+      @include desktop {
+        gap: 2.5rem;
+      }
     }
     &-container {
       display: flex;
       flex-direction: column;
-
       gap: 0.5rem;
     }
     &-text {
@@ -223,6 +270,12 @@
       width: fit-content;
       &--hide {
         display: none;
+      }
+      @include tablet {
+        font-size: 1.25rem;
+      }
+      @include desktop {
+        font-size: 1.75rem;
       }
     }
   }
@@ -242,6 +295,22 @@
     height: 2rem;
     background-color: $dark-angels-4;
     color: white;
+    &:hover {
+      font-weight: 600;
+      background-color: $dark-angels-6;
+      cursor: pointer;
+    }
+    @include tablet {
+      font-size: 1rem;
+      width: auto;
+      height: auto;
+      border-radius: 20px;
+      padding: 0.35rem 1.5rem;
+    }
+    @include tablet {
+      font-size: 1.5rem;
+      padding: 0.5rem 2rem;
+    }
   }
   &__loader {
     height: 100%;
@@ -265,8 +334,20 @@
     top: 8px;
     right: 8px;
     &:hover {
-      background-color: $ultramarine-2;
+      background-color: $ultramarine-4;
+      color: #fff;
+
       cursor: pointer;
+    }
+    @include tablet {
+      font-size: 1rem;
+      padding: 0.75rem 1.25rem;
+      top: 16px;
+      right: 12px;
+    }
+    @include desktop {
+      font-size: 1.25rem;
+      padding: 0.85rem 1.45rem;
     }
     &--hide {
       display: none;
@@ -279,6 +360,19 @@
     border-radius: 4px;
     font-family: "Roboto";
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+    &:hover {
+      box-shadow: 0px 4px 3px 0px rgba(0, 0, 0, 0.25);
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    @include tablet {
+      padding: 0.75rem;
+      font-size: 1rem;
+    }
+    @include desktop {
+      padding: 1rem 1.5rem;
+      font-size: 1.25rem;
+    }
   }
   &__back-arrow {
     position: absolute;

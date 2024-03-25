@@ -15,7 +15,7 @@ import {
   ArrowLeftIcon,
   DatePicker,
   LocalizationProvider,
-  TimePicker,
+  MobileTimePicker,
 } from "@mui/x-date-pickers";
 import { useNavigate } from "react-router-dom";
 
@@ -115,9 +115,17 @@ export default function BattleDash({
         event.target.parentElement.children.users_1.value.split("+")[1];
       armyName = event.target.parentElement.children.army_1.value.split("+")[1];
       armyID = event.target.parentElement.children.army_1.value.split("+")[0];
+      const armyObj = armyArray?.find((army) => army.id === armyID);
+      const armyEmblem = armyObj?.emblem;
       let newArray = [
         ...playerOne,
-        { id: userID, known_as: userName, name: armyName, army_id: armyID },
+        {
+          id: userID,
+          known_as: userName,
+          name: armyName,
+          army_id: armyID,
+          emblem: armyEmblem,
+        },
       ];
       setPlayerOneArray(newArray);
 
@@ -134,9 +142,17 @@ export default function BattleDash({
         event.target.parentElement.children.users_2.value.split("+")[1];
       armyName = event.target.parentElement.children.army_2.value.split("+")[1];
       armyID = event.target.parentElement.children.army_2.value.split("+")[0];
+      const armyObj = armyArray?.find((army) => army.id === armyID);
+      const armyEmblem = armyObj?.emblem;
       let newArray = [
         ...playerTwo,
-        { id: userID, known_as: userName, name: armyName, army_id: armyID },
+        {
+          id: userID,
+          known_as: userName,
+          name: armyName,
+          army_id: armyID,
+          emblem: armyEmblem,
+        },
       ];
       setPlayerTwoArray(newArray);
 
@@ -352,7 +368,7 @@ export default function BattleDash({
               }
               onClick={handleClick}
             >
-              {userEditBool && playerEditBool === true ? "Finish edit" : ""}
+              {userEditBool && playerEditBool === true ? "Finish editing" : ""}
             </button>
             <div className="battle-dash__combatant-container battle-dash__combatant-container--edit">
               {playerOne.map((player) => (
@@ -407,6 +423,7 @@ export default function BattleDash({
                   className="battle-dash__select"
                   id="army_1"
                   value={armyOne}
+                  disabled={userOne ? false : true}
                   onChange={(event) => {
                     setArmyOne(event.target.value);
                   }}
@@ -436,6 +453,7 @@ export default function BattleDash({
                   onClick={(event) => {
                     addArmy(event, 1);
                   }}
+                  disabled={userOne && armyOne ? false : true}
                 >
                   +
                 </button>
@@ -493,6 +511,7 @@ export default function BattleDash({
                   id="army_2"
                   className="battle-dash__select"
                   value={armyTwo}
+                  disabled={userTwo ? false : true}
                   onChange={(event) => {
                     setArmyTwo(event.target.value);
                   }}
@@ -516,6 +535,7 @@ export default function BattleDash({
                   onClick={(event) => {
                     addArmy(event, 2);
                   }}
+                  disabled={userTwo && armyTwo ? false : true}
                 >
                   +
                 </button>
@@ -782,7 +802,7 @@ export default function BattleDash({
                   }
                 }}
               >
-                {dateValue}
+                {dayjs(dateValue, "YYYY-MM-DD").format("DD/MM/YY")}
               </p>
             </div>
           </article>{" "}
@@ -796,7 +816,7 @@ export default function BattleDash({
                     : "battle-dash__info-text--hide"
                 }
               >
-                <TimePicker
+                <MobileTimePicker
                   sx={{ fontWeight: 900 }}
                   ampm={false}
                   value={startValue}
@@ -847,7 +867,7 @@ export default function BattleDash({
                     : "battle-dash__info-text--hide"
                 }
               >
-                <TimePicker
+                <MobileTimePicker
                   ampm={false}
                   value={finishValue}
                   minTime={startValue}

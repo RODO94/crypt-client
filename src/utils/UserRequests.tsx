@@ -4,7 +4,9 @@ const baseURL = import.meta.env.VITE_SERVER_URL;
 
 const verifyUser = async (token: string, count: number) => {
   try {
-    const { data } = await axios.get(`${baseURL}/users/authenticate/${token}`);
+    const { data } = await axios.get(
+      `${baseURL}/users/user/authenticate/${token}`
+    );
     return data;
   } catch (error) {
     count--;
