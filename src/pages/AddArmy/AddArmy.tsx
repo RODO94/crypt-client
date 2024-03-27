@@ -99,7 +99,11 @@ export default function AddArmy() {
   };
 
   if (!emblemArray) {
-    return <p> Content Loading </p>;
+    return (
+      <div className="loading-message">
+        <CircularProgress style={{ color: "green" }} />
+      </div>
+    );
   }
 
   return (

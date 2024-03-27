@@ -10,6 +10,7 @@ import { Battle, RankObj, UsersObj } from "../../utils/Interfaces";
 import { getUsersBattles } from "../../utils/BattleRequests";
 import { getUserInfo, verifyUser } from "../../utils/UserRequests";
 import { useNavigate } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
 
 interface RankArray extends Array<RankObj> {}
 
@@ -66,7 +67,11 @@ export default function UserDashboard() {
   }, []);
 
   if (!userObj) {
-    return <p>content loading</p>;
+    return (
+      <div className="loading-message">
+        <CircularProgress style={{ color: "white" }} />
+      </div>
+    );
   }
 
   if (!rankArray || !upcomingBattles || !userResults) {

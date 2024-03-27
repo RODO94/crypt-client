@@ -7,6 +7,7 @@ import { RankObj } from "../../utils/Interfaces";
 import { Link } from "react-router-dom";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { CircularProgress } from "@mui/material";
 
 interface RankArray extends Array<RankObj> {}
 
@@ -32,7 +33,11 @@ export default function FantasyTopFive() {
   };
 
   if (!fantasyRankingArray) {
-    return <p>Please wait while we load your content</p>;
+    return (
+      <div className="loading-message">
+        <CircularProgress style={{ color: "white" }} />
+      </div>
+    );
   }
 
   return (

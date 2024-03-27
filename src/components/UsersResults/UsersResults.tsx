@@ -9,8 +9,8 @@ export default function UsersResults({ battleArray }: any) {
   let currentDate = "";
   if (!battleArray) {
     return (
-      <div>
-        <CircularProgress />
+      <div className="loading-message">
+        <CircularProgress style={{ color: "white" }} />
       </div>
     );
   }

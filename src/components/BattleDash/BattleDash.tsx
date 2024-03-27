@@ -18,6 +18,7 @@ import {
   MobileTimePicker,
 } from "@mui/x-date-pickers";
 import { useNavigate } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
 
 interface BattleComp {
   playerOne: Player[];
@@ -284,7 +285,13 @@ export default function BattleDash({
   ]);
 
   if (!armyArray || !userArray || !playerOne || !playerTwo) {
-    return <p> Please wait while we load your content</p>;
+    return (
+      <section className="battle-dash">
+        <div className="loading-message">
+          <CircularProgress style={{ color: "white" }} />
+        </div>
+      </section>
+    );
   }
 
   return (

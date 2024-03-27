@@ -7,6 +7,7 @@ import { Player } from "../../utils/Interfaces";
 import { Link } from "react-router-dom";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { CircularProgress } from "@mui/material";
 
 interface Battle {
   id: string;
@@ -45,7 +46,11 @@ export default function UpcomingBattles() {
   };
 
   if (!battleArray) {
-    return <p>content loading... please wait</p>;
+    return (
+      <div className="loading-message">
+        <CircularProgress style={{ color: "white" }} />
+      </div>
+    );
   }
 
   return (

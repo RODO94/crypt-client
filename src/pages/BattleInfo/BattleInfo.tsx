@@ -6,6 +6,7 @@ import { getOneBattle } from "../../utils/BattleRequests";
 import BattleDash from "../../components/BattleDash/BattleDash";
 import BattlePointsForm from "../../components/BattlePointsForm/BattlePointsForm";
 import { Battle } from "../../utils/Interfaces";
+import { CircularProgress } from "@mui/material";
 
 export default function BattleInfo() {
   const [battle, setBattle] = useState<Battle>();
@@ -61,8 +62,8 @@ export default function BattleInfo() {
 
   if (!battle || !role || !playerOneArray || !playerTwoArray) {
     return (
-      <div>
-        <h1>Content Loading</h1>
+      <div className="loading-message">
+        <CircularProgress style={{ color: "white" }} />
       </div>
     );
   }

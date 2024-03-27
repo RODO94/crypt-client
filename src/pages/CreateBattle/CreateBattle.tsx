@@ -257,7 +257,9 @@ export default function CreateBattle() {
     return (
       <main className="create-battle">
         <section className="create-battle_section">
-          <p className="error-message">Content is loading... please wait</p>
+          <div className="loading-message">
+            <CircularProgress style={{ color: "green" }} />
+          </div>
         </section>
       </main>
     );

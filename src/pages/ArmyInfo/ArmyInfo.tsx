@@ -6,6 +6,7 @@ import ArmyDash from "../../components/ArmyDash/ArmyDash";
 import ArmyNemesis from "../../components/ArmyNemesis/ArmyNemesis";
 import ArmyAlly from "../../components/ArmyAlly/ArmyAlly";
 import { ArmyObj, Player } from "../../utils/Interfaces";
+import { CircularProgress } from "@mui/material";
 
 export default function ArmyInfo() {
   const [armyObj, setArmyObj] = useState<ArmyObj | null>(null);
@@ -40,7 +41,11 @@ export default function ArmyInfo() {
   }, [armyID]);
 
   if (!armyObj) {
-    return;
+    return (
+      <div className="loading-message">
+        <CircularProgress style={{ color: "white" }} />
+      </div>
+    );
   }
 
   return (

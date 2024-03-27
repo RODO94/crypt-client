@@ -7,8 +7,8 @@ import { CircularProgress } from "@mui/material";
 export default function UsersFortyRanking({ rankArray, user }: any) {
   if (!rankArray) {
     return (
-      <div>
-        <CircularProgress />
+      <div className="loading-message">
+        <CircularProgress style={{ color: "white" }} />
       </div>
     );
   }

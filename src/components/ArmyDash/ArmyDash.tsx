@@ -6,6 +6,7 @@ import BattleCard from "../BattleCard/BattleCard";
 import logo from "../../assets/logo.svg";
 import { ArrowLeftIcon } from "@mui/x-date-pickers";
 import { useNavigate } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
 
 interface armyDashObj {
   winPercent: string;
@@ -37,7 +38,13 @@ export default function ArmyDash({
   }, [armyObj]);
 
   if (!owner) {
-    return;
+    return (
+      <section className="army-dash">
+        <div className="loading-message">
+          <CircularProgress style={{ color: "white" }} />
+        </div>
+      </section>
+    );
   }
 
   return (

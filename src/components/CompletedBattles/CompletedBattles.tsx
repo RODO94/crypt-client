@@ -7,6 +7,7 @@ import "./CompletedBattles.scss";
 import { Link } from "react-router-dom";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { CircularProgress } from "@mui/material";
 
 interface CompletedBattleArray extends Array<CompletedBattle> {}
 
@@ -33,7 +34,11 @@ export default function CompletedBattles() {
   };
 
   if (!battleArray) {
-    return <p>Please wait while we load your content</p>;
+    return (
+      <div className="loading-message">
+        <CircularProgress style={{ color: "white" }} />
+      </div>
+    );
   }
 
   return (

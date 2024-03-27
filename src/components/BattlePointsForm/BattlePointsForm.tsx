@@ -10,6 +10,7 @@ import {
 } from "../../utils/BattleRequests";
 import { getUser } from "../../utils/UserRequests";
 import { useNavigate } from "react-router";
+import { CircularProgress } from "@mui/material";
 
 interface BattlePoints {
   playerOne: Player[];
@@ -104,7 +105,11 @@ export default function BattlePointsForm({
   };
 
   if (!playerOne || !playerTwo) {
-    return <h1>Loading Content, please wait</h1>;
+    return (
+      <div className="loading-message">
+        <CircularProgress style={{ color: "white" }} />
+      </div>
+    );
   }
 
   return (
