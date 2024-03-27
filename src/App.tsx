@@ -17,6 +17,7 @@ import UserProfile from "./pages/UserProfile/UserProfile";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import NavHeader from "./components/NavHeader/NavHeader";
 import LogInRedirect from "./pages/LogInRedirect/LogInRedirect";
+import NavFooter from "./components/NavFooter/NavFooter";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
           <Route path="/battles/create" element={<CreateBattle />} />
           <Route path="/armies/add" element={<AddArmy />} />
         </Routes>
+        <NavFooter />
       </div>
     </BrowserRouter>
   );

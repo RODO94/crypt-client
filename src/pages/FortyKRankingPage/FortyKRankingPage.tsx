@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 import logo from "../../assets/logo.svg";
 import crown from "../../assets/crown.svg";
 import ArmyPill from "../../components/ArmyPill/ArmyPill";
-import NavFooter from "../../components/NavFooter/NavFooter";
 
 interface RankArray extends Array<RankObj> {}
 
@@ -93,7 +92,6 @@ export default function FortyKPage() {
           );
         })}
       </section>
-      <NavFooter />
     </main>
   );
 }

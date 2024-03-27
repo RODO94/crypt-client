@@ -17,6 +17,8 @@ export default function NavHeader() {
   const [rankingsToggle, setRankingsToggle] = useState(false);
   const [battleActiveBool, setBattleActiveBool] = useState(false);
   const [rankingActiveBool, setRankingActiveBool] = useState(false);
+  const [battleSelected, setBattleSelected] = useState(false);
+  const [rankSelected, setRankSelected] = useState(false);
 
   const userToken = sessionStorage.getItem("token");
   const theme = createTheme({
@@ -88,7 +90,11 @@ export default function NavHeader() {
             }
           >
             <div
-              className="header-nav__clickable-div"
+              className={
+                battleSelected
+                  ? "header-nav__clickable-div header-nav__clickable-div--active"
+                  : "header-nav__clickable-div"
+              }
               onClick={() => {
                 handleToggle("battles");
               }}
@@ -106,25 +112,39 @@ export default function NavHeader() {
               }
             >
               <NavLink
-                className={({ isActive }) => classNameFn(isActive)}
+                className={({ isActive }) => {
+                  if (isActive) {
+                    setRankSelected(false);
+                    setBattleSelected(true);
+                  }
+                  return classNameFn(isActive);
+                }}
                 to={"/battles/completed"}
                 onClick={() => {
                   if (rankingActiveBool === true) {
                     setRankingActiveBool(false);
                   }
                   setBattleActiveBool(true);
+                  setBattleToggle(false);
                   setToggleBool(false);
                 }}
               >
                 Completed <br /> Battles
               </NavLink>{" "}
               <NavLink
-                className={({ isActive }) => classNameFn(isActive)}
+                className={({ isActive }) => {
+                  if (isActive) {
+                    setRankSelected(false);
+                    setBattleSelected(true);
+                  }
+                  return classNameFn(isActive);
+                }}
                 onClick={() => {
                   if (rankingActiveBool === true) {
                     setRankingActiveBool(false);
                   }
                   setBattleActiveBool(true);
+                  setBattleToggle(false);
                   setToggleBool(false);
                 }}
                 to={"/battles/upcoming"}
@@ -142,17 +162,25 @@ export default function NavHeader() {
               className={({ isActive }) => classNameFn(isActive)}
               to={"/user"}
               onClick={() => {
+                setBattleActiveBool(false);
+                setRankingActiveBool(false);
+                setRankSelected(false);
+                setBattleSelected(false);
                 setToggleBool(false);
               }}
             >
               <PersonIcon style={{ width: "2.5rem", height: "2.5rem" }} />
-              <p className="header-nav__icon-txt">Dashboard</p>
+              <p className="header-nav__icon-txt">User</p>
             </NavLink>{" "}
           </div>
           <NavLink
             className={({ isActive }) => classNameFn(isActive)}
             to={"/"}
             onClick={() => {
+              setBattleActiveBool(false);
+              setRankingActiveBool(false);
+              setRankSelected(false);
+              setBattleSelected(false);
               setToggleBool(false);
             }}
           >
@@ -171,7 +199,11 @@ export default function NavHeader() {
             }
           >
             <div
-              className="header-nav__clickable-div"
+              className={
+                rankSelected
+                  ? "header-nav__clickable-div header-nav__clickable-div--active"
+                  : "header-nav__clickable-div"
+              }
               onClick={() => {
                 handleToggle("rankings");
               }}
@@ -181,7 +213,7 @@ export default function NavHeader() {
                 alt="Armoured fist for ranking navigation"
                 className="header-nav__icons"
               />
-              <p className="header-nav__icon-txt">Rankings</p>
+              <p className="header-nav__icon-txt">Ranks</p>
             </div>
             <div
               className={
@@ -194,9 +226,16 @@ export default function NavHeader() {
                     setBattleActiveBool(false);
                   }
                   setRankingActiveBool(true);
+                  setRankingsToggle(false);
                   setToggleBool(false);
                 }}
-                className={({ isActive }) => classNameFn(isActive)}
+                className={({ isActive }) => {
+                  if (isActive) {
+                    setRankSelected(true);
+                    setBattleSelected(false);
+                  }
+                  return classNameFn(isActive);
+                }}
                 to={"/rankings/40k"}
               >
                 40,000 <br /> Rankings
@@ -207,9 +246,16 @@ export default function NavHeader() {
                     setBattleActiveBool(false);
                   }
                   setRankingActiveBool(true);
+                  setRankingsToggle(false);
                   setToggleBool(false);
                 }}
-                className={({ isActive }) => classNameFn(isActive)}
+                className={({ isActive }) => {
+                  if (isActive) {
+                    setRankSelected(true);
+                    setBattleSelected(false);
+                  }
+                  return classNameFn(isActive);
+                }}
                 to={"/rankings/fantasy"}
               >
                 Fantasy <br />
@@ -224,6 +270,10 @@ export default function NavHeader() {
           >
             <NavLink
               onClick={() => {
+                setBattleActiveBool(false);
+                setRankingActiveBool(false);
+                setRankSelected(false);
+                setBattleSelected(false);
                 setToggleBool(false);
               }}
               className={({ isActive }) => classNameFn(isActive)}

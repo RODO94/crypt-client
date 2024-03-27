@@ -4,7 +4,7 @@ import "./UpcomingBattlesPage.scss";
 import { Battle } from "../../utils/Interfaces";
 import DateTableHeader from "../../components/DateTableHeader/DateTableHeader";
 import BattleTableRow from "../../components/BattleTableRow/BattleTableRow";
-import NavFooter from "../../components/NavFooter/NavFooter";
+
 import { Link } from "react-router-dom";
 import { getAllUsersNames } from "../../utils/UserRequests";
 import logo from "../../assets/logo.svg";
@@ -227,7 +227,6 @@ export default function UpcomingBattlesPage() {
           })}
         </article>
       </section>
-      <NavFooter />
     </main>
   );
 }

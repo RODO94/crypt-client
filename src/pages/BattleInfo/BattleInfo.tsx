@@ -6,7 +6,6 @@ import { getOneBattle } from "../../utils/BattleRequests";
 import BattleDash from "../../components/BattleDash/BattleDash";
 import BattlePointsForm from "../../components/BattlePointsForm/BattlePointsForm";
 import { Battle } from "../../utils/Interfaces";
-import NavFooter from "../../components/NavFooter/NavFooter";
 
 export default function BattleInfo() {
   const [battle, setBattle] = useState<Battle>();
@@ -96,7 +95,6 @@ export default function BattleInfo() {
         battleID={battleID}
         token={userToken}
       />
-      <NavFooter />
     </main>
   );
 }

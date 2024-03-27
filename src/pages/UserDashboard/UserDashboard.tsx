@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import DashboardHero from "../../components/DashboardHero/DashboardHero";
-import NavFooter from "../../components/NavFooter/NavFooter";
+
 import UsersFantasyRanking from "../../components/UsersFantasyRanking/UsersFantasyRanking";
 import UsersFortyRanking from "../../components/UsersFortyRanking/UsersFortyRanking";
 import UsersResults from "../../components/UsersResults/UsersResults";
@@ -82,7 +82,6 @@ export default function UserDashboard() {
             fantasyRanked={rankArray?.fantasy[0]}
           />
         </section>
-        <NavFooter />
       </>
     );
   }
@@ -109,7 +108,6 @@ export default function UserDashboard() {
       />
       <UsersUpcomingBattles battleArray={upcomingBattles} />
       <UsersResults battleArray={userResults} />
-      <NavFooter />
     </>
   );
 }

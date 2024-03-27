@@ -1,6 +1,9 @@
 @use "../../partials/variables" as *;
 @use "../../partials/mixins" as *;
 .footer {
+  @include desktop {
+    display: none;
+  }
   position: sticky;
   bottom: 0;
   display: flex;
@@ -18,11 +21,12 @@
   }
   &-nav {
     display: flex;
-    flex-direction: row-reverse;
-    padding: 1.5rem 3rem;
+    flex-direction: row;
+    padding: 1.5rem 1rem;
     padding-bottom: 0.75rem;
     justify-content: space-around;
-    gap: 1rem;
+    gap: 0.5rem;
+    flex-wrap: nowrap;
     align-items: center;
     align-content: center;
     row-gap: 1rem;
@@ -37,7 +41,7 @@
       font-weight: 900;
       line-height: normal;
       text-align: center;
-      padding: 0.5rem 0.75rem;
+      padding: 0.5rem;
       &--active {
         border-radius: 0.5rem;
         background-color: $background-2;
@@ -83,6 +87,13 @@
       display: flex;
       justify-content: center;
       flex-direction: column;
+    }
+    &__nav-container {
+      padding: 0.5rem;
+      &--active {
+        border-radius: 0.5rem;
+        background-color: $background-2;
+      }
     }
   }
 }

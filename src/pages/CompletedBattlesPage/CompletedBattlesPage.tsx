@@ -3,7 +3,7 @@ import { getCompletedBattles } from "../../utils/BattleRequests";
 import "./CompletedBattlesPage.scss";
 import { CompletedBattle } from "../../utils/Interfaces";
 import DateTableHeader from "../../components/DateTableHeader/DateTableHeader";
-import NavFooter from "../../components/NavFooter/NavFooter";
+
 import { Link } from "react-router-dom";
 import { getAllUsersNames } from "../../utils/UserRequests";
 import logo from "../../assets/logo.svg";
@@ -342,7 +342,6 @@ export default function CompletedBattlesPage() {
           })}
         </article>
       </section>
-      <NavFooter />
     </main>
   );
 }
