@@ -112,6 +112,7 @@ export default function UserProfile() {
   useEffect(() => {
     const fetchArmies = async () => {
       const data = await getAllUserArmies(user?.id);
+      console.log(data);
       const fortykArray = data.filter((army: any) => army.type === "40k");
       const fantasyArray = data.filter((army: any) => army.type === "fantasy");
 

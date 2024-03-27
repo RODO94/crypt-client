@@ -30,6 +30,9 @@
     @include tablet {
       font-size: 1.35rem;
     }
+    @include desktop {
+      font-size: 1.5rem;
+    }
     &--rank {
       width: 15%;
       text-align: center;

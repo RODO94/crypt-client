@@ -1,4 +1,6 @@
 @use "../../partials/variables" as *;
+@use "../../partials/mixins" as *;
+
 .user-profile {
   &__dashboard {
     display: flex;
@@ -9,6 +11,15 @@
     border-radius: 0rem 0rem 2rem 2rem;
     background: $space-wolves-6;
     width: 100%;
+    @include tablet {
+      width: 100%;
+      padding: 2rem 3rem;
+      gap: 2.5rem;
+    }
+    @include desktop {
+      padding: 2rem 8rem 4rem;
+      gap: 3rem;
+    }
   }
   &__title {
     color: #fff;
@@ -17,6 +28,12 @@
     font-weight: 600;
     line-height: normal;
     margin: 0;
+    @include tablet {
+      font-size: 3rem;
+    }
+    @include desktop {
+      font-size: 4rem;
+    }
   }
   &__info {
     color: #000;
@@ -34,6 +51,15 @@
     border-radius: 0.5rem;
     background: #f2f2f2;
     margin: 0;
+    @include tablet {
+      padding: 0.75rem 1.2rem;
+      font-size: 1.4rem;
+    }
+    @include tablet {
+      padding: 1rem 1.4rem;
+      font-size: 1.8rem;
+    }
+
     &-container {
       display: flex;
       align-items: flex-start;
@@ -41,6 +67,12 @@
       gap: 1rem;
       align-self: stretch;
       flex-wrap: wrap;
+      @include tablet {
+        gap: 1.5rem;
+      }
+      @include desktop {
+        gap: 2.5rem;
+      }
     }
     &-card {
       display: flex;
@@ -65,6 +97,12 @@
       font-style: normal;
       font-weight: 800;
       line-height: normal;
+      @include tablet {
+        font-size: 1.2rem;
+      }
+      @include desktop {
+        font-size: 1.4rem;
+      }
     }
   }
   &__army {
@@ -76,6 +114,15 @@
       align-items: flex-start;
       gap: 1rem;
       width: 100%;
+      @include tablet {
+        width: 100%;
+        padding: 2rem 3rem;
+        gap: 1.5rem;
+      }
+      @include desktop {
+        padding: 2rem 8rem 2rem;
+        gap: 2rem;
+      }
     }
     &-card {
       display: flex;
@@ -86,10 +133,19 @@
       align-self: stretch;
       border-radius: 1rem;
       background: $table-background--dark;
+      @include tablet {
+        padding: 1.25rem;
+      }
+      @include desktop {
+        padding: 1.25rem 1.5rem;
+      }
     }
     &-wrap {
       display: flex;
       width: 55%;
+      @include tablet {
+        width: 60%;
+      }
     }
   }
   &__army-list#fortyk {
@@ -102,12 +158,25 @@
     font-style: normal;
     font-weight: 900;
     line-height: normal;
+    @include tablet {
+      font-size: 1.4rem;
+    }
+    @include desktop {
+      font-size: 1.8rem;
+    }
   }
   &__user-list {
     display: flex;
     flex-direction: column;
     width: 100%;
     padding: 2rem 1.5rem;
+    @include tablet {
+      width: 100%;
+      padding: 2rem 3rem;
+    }
+    @include desktop {
+      padding: 2rem 8rem 2rem;
+    }
   }
   &__user-headers {
     display: flex;
@@ -129,6 +198,15 @@
     font-style: normal;
     font-weight: 800;
     line-height: normal;
+    @include tablet {
+      font-size: 1.35rem;
+      padding: 0.5rem;
+    }
+    @include desktop {
+      font-size: 1.5rem;
+      padding: 1rem 0.5rem;
+    }
+
     &#user {
       width: 30%;
     }
@@ -168,6 +246,14 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    @include tablet {
+      font-size: 1.2rem;
+      padding: 0.5rem;
+    }
+    @include desktop {
+      font-size: 1.25rem;
+      padding: 0.75rem 0.5rem;
+    }
     &#user {
       width: 30%;
       font-weight: 600;
