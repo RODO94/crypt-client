@@ -88,6 +88,8 @@ export default function NavFooter() {
                 onClick={() => {
                   setBattleActiveBool(true);
                   setRankingActiveBool(false);
+                  setBattleToggle(false);
+                  setRankingsToggle(false);
                 }}
               >
                 Completed <br /> Battles
@@ -98,6 +100,8 @@ export default function NavFooter() {
                 onClick={() => {
                   setBattleActiveBool(true);
                   setRankingActiveBool(false);
+                  setBattleToggle(false);
+                  setRankingsToggle(false);
                 }}
               >
                 Upcoming <br /> Battles
@@ -109,12 +113,26 @@ export default function NavFooter() {
               userNavClassNameFn(userToken, isActive)
             }
             to={"/user"}
-            onClick={() => {}}
+            onClick={() => {
+              setBattleActiveBool(false);
+              setRankingActiveBool(false);
+              setBattleToggle(false);
+              setRankingsToggle(false);
+            }}
           >
             <PersonIcon style={{ width: "2.5rem", height: "2rem" }} />
             <p className="footer-nav__icon-txt">User</p>
           </NavLink>{" "}
-          <NavLink className={({ isActive }) => classNameFn(isActive)} to="/">
+          <NavLink
+            className={({ isActive }) => classNameFn(isActive)}
+            to="/"
+            onClick={() => {
+              setBattleActiveBool(false);
+              setRankingActiveBool(false);
+              setBattleToggle(false);
+              setRankingsToggle(false);
+            }}
+          >
             <img
               src={home}
               alt="fortress icon for home navigation"
@@ -134,6 +152,8 @@ export default function NavFooter() {
                 onClick={() => {
                   setBattleActiveBool(false);
                   setRankingActiveBool(true);
+                  setBattleToggle(false);
+                  setRankingsToggle(false);
                 }}
               >
                 40,000 <br /> Rankings
@@ -145,6 +165,8 @@ export default function NavFooter() {
                   console.log("triggered");
                   setBattleActiveBool(false);
                   setRankingActiveBool(true);
+                  setBattleToggle(false);
+                  setRankingsToggle(false);
                 }}
               >
                 Fantasy <br />
@@ -166,7 +188,12 @@ export default function NavFooter() {
             </div>
           </article>
           <NavLink
-            onClick={() => {}}
+            onClick={() => {
+              setBattleActiveBool(false);
+              setRankingActiveBool(false);
+              setBattleToggle(false);
+              setRankingsToggle(false);
+            }}
             className={({ isActive }) =>
               userNavClassNameFn(userToken, isActive)
             }
