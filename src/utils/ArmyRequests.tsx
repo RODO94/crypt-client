@@ -142,7 +142,7 @@ const updateArmyCombatants = async (
 const getArmyNemesis = async (id: string) => {
   try {
     const { data } = await axios.get(`${baseURL}/armies/${id}/nemesis`);
-
+    console.log(data);
     return data;
   } catch (error) {
     console.error(error);

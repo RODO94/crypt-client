@@ -1,47 +1,38 @@
-import { useEffect, useState } from "react";
 import "./ArmyNemesis.scss";
-import { getArmyNemesis } from "../../utils/ArmyRequests";
-import { AllyObj } from "../../utils/Interfaces";
+import { Player } from "../../utils/Interfaces";
 import BattleCard from "../BattleCard/BattleCard";
 
-interface ArmyNemesis {
-  armyID: string;
+interface NemesisObj {
+  nemesis: Player | null;
 }
 
-export default function ArmyNemesis({ armyID }: ArmyNemesis) {
-  const [nemesisObj, setNemesisObj] = useState<AllyObj | null>(null);
-
-  useEffect(() => {
-    const fetchArmyNemesis = async () => {
-      const response = await getArmyNemesis(armyID);
-      setNemesisObj(response);
-    };
-    fetchArmyNemesis();
-  }, []);
-
+export default function ArmyNemesis({ nemesis }: NemesisObj) {
   return (
     <section className="army-nemesis">
       <div className="army-nemesis__header">
         <h3 className="army-nemesis__title">
           {" "}
-          Nemesis (who you play with the most)
+          Nemesis <br />
+          <span className="army-ally__subtxt">who you play the most</span>
         </h3>
       </div>
       <article className="army-nemesis__army-card">
-        {nemesisObj?.count === undefined ? (
-          <p className="army-nemesis__undefined-text">You have no Nemesis!</p>
+        {nemesis?.count === undefined ? (
+          <p className="army-nemesis__undefined-text">
+            A Nemesis is yet to emerge...
+          </p>
         ) : (
           <>
             <div className="army-nemesis__army-wrap">
               <BattleCard
-                name={nemesisObj?.name}
-                known_as={nemesisObj?.known_as}
-                ranking={nemesisObj?.ranking}
-                army_id={nemesisObj?.armyID}
-                emblem={nemesisObj?.emblem}
+                name={nemesis?.name}
+                known_as={nemesis?.known_as}
+                ranking={nemesis?.ranking}
+                army_id={nemesis?.army_id}
+                emblem={nemesis?.emblem}
               />
             </div>
-            <p className="army-nemesis__txt">{`${nemesisObj?.count} games`}</p>
+            <p className="army-nemesis__txt">{`${nemesis?.count} games`}</p>
           </>
         )}
       </article>

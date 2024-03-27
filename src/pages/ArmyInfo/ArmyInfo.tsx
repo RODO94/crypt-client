@@ -5,7 +5,7 @@ import { getArmyInfo } from "../../utils/ArmyRequests";
 import ArmyDash from "../../components/ArmyDash/ArmyDash";
 import ArmyNemesis from "../../components/ArmyNemesis/ArmyNemesis";
 import ArmyAlly from "../../components/ArmyAlly/ArmyAlly";
-import { ArmyObj } from "../../utils/Interfaces";
+import { ArmyObj, Player } from "../../utils/Interfaces";
 
 export default function ArmyInfo() {
   const [armyObj, setArmyObj] = useState<ArmyObj | null>(null);
@@ -13,6 +13,8 @@ export default function ArmyInfo() {
   const [winPercent, setWinPercent] = useState("");
   const [armyRank, setArmyRank] = useState(0);
   const [owner, setOwner] = useState("");
+  const [nemesisObj, setNemesisObj] = useState<Player | null>(null);
+  const [allyObj, setAllyObj] = useState<Player | null>(null);
 
   const location = useLocation();
 
@@ -28,6 +30,8 @@ export default function ArmyInfo() {
           setWinPercent(response.winPercent);
           setArmyRank(Number(response.user.ranking));
           setOwner(response.user.known_as);
+          setNemesisObj(response.nemesis);
+          setAllyObj(response.ally);
         }
       }
     };
@@ -48,8 +52,12 @@ export default function ArmyInfo() {
         armyRank={armyRank}
         owner={owner}
       />
-      <ArmyNemesis armyID={armyObj.id} />
-      <ArmyAlly armyID={armyObj.id} />
+      <section className="army-info__nemesis-ally">
+        <div className="army-info__container">
+          <ArmyNemesis nemesis={nemesisObj} />
+          <ArmyAlly ally={allyObj} />
+        </div>
+      </section>
     </main>
   );
 }

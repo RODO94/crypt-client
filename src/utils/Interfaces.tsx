@@ -5,6 +5,7 @@ export interface Player {
   ranking?: string;
   army_id?: string;
   emblem?: string;
+  count?: number;
 }
 
 export interface AllyObj {
@@ -24,6 +25,7 @@ export interface ArmyObj {
   name: string;
   type: string;
   user_id: string;
+  army_id?: string;
 }
 
 export interface LogInBody {

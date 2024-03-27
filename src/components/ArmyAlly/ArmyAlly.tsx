@@ -1,43 +1,38 @@
-import { useEffect, useState } from "react";
 import "./ArmyAlly.scss";
-import { getArmyAlly } from "../../utils/ArmyRequests";
 import BattleCard from "../BattleCard/BattleCard";
-import { AllyObj } from "../../utils/Interfaces";
+import { Player } from "../../utils/Interfaces";
 
 interface ArmyID {
-  armyID: string;
+  ally: Player | null;
 }
 
-export default function ArmyAlly({ armyID }: ArmyID) {
-  const [allyObj, setAllyObj] = useState<AllyObj | null>(null);
-
-  useEffect(() => {
-    const fetchArmyAlly = async () => {
-      const response = await getArmyAlly(armyID);
-      setAllyObj(response);
-    };
-    fetchArmyAlly();
-  }, []);
+export default function ArmyAlly({ ally }: ArmyID) {
   return (
     <section className="army-ally">
       <div className="army-ally__header">
-        <h3 className="army-ally__title"> Ally (who you play with the most)</h3>
+        <h3 className="army-ally__title">
+          {" "}
+          Ally <br />
+          <span className="army-ally__subtxt">who you play with the most</span>
+        </h3>
       </div>
       <article className="army-ally__army-card">
-        {allyObj?.count === undefined ? (
-          <p className="army-ally__undefined-text">You have no Allies!</p>
+        {ally?.count === undefined ? (
+          <p className="army-ally__undefined-text">
+            This army does not need Allies.
+          </p>
         ) : (
           <>
             <div className="army-ally__army-wrap">
               <BattleCard
-                name={allyObj?.name}
-                known_as={allyObj?.known_as}
-                ranking={allyObj?.ranking}
-                army_id={allyObj?.armyID}
-                emblem={allyObj?.emblem}
+                name={ally?.name}
+                known_as={ally?.known_as}
+                ranking={ally?.ranking}
+                army_id={ally?.army_id}
+                emblem={ally?.emblem}
               />
             </div>
-            <p className="army-ally__txt">{`${allyObj?.count} games`}</p>
+            <p className="army-ally__txt">{`${ally?.count} games`}</p>
           </>
         )}
       </article>
