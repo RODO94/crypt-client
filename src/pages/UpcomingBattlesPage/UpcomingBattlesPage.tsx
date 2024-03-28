@@ -8,6 +8,7 @@ import BattleTableRow from "../../components/BattleTableRow/BattleTableRow";
 import { Link } from "react-router-dom";
 import { getAllUsersNames } from "../../utils/UserRequests";
 import logo from "../../assets/logo.svg";
+import { CircularProgress } from "@mui/material";
 
 interface BattleArray extends Array<Battle> {}
 interface NameArray extends Array<string> {}
@@ -15,9 +16,9 @@ interface NameArray extends Array<string> {}
 export default function UpcomingBattlesPage() {
   const [battleArray, setBattleArray] = useState<BattleArray>();
   const [nameArray, setNameArray] = useState<NameArray>();
-  const [nameFilter, setNameFilter] = useState<String>("Name");
+  const [nameFilter, setNameFilter] = useState<string>("Name");
   const [battleTypeFilter, setBattleTypeFilter] =
-    useState<String>("Battle Type");
+    useState<string>("Battle Type");
 
   let currentDate = "";
 
@@ -101,7 +102,11 @@ export default function UpcomingBattlesPage() {
   };
 
   if (!battleArray || !nameArray) {
-    return <p>content loading... please wait</p>;
+    return (
+      <div className="loading-message">
+        <CircularProgress style={{ color: "green" }} />
+      </div>
+    );
   }
 
   return (
@@ -124,8 +129,8 @@ export default function UpcomingBattlesPage() {
           <p className="upcomingbattlespage__filters-txt">Filter by Name</p>
           <select
             className="upcomingbattlespage__filters-box"
-            defaultValue={""}
             name="name"
+            value={nameFilter}
             onChange={handleChange}
           >
             <option className="upcomingbattlespage__option" value={"all"}>
@@ -150,7 +155,7 @@ export default function UpcomingBattlesPage() {
             className="upcomingbattlespage__filters-box"
             name="battle-type"
             onChange={handleChange}
-            defaultValue={""}
+            value={battleTypeFilter}
           >
             <option value="all">All</option>
             <option value="40k">40k</option>

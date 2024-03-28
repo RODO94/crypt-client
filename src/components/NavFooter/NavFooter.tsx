@@ -18,7 +18,6 @@ export default function NavFooter() {
     isActive ? "footer-nav__link footer-nav__link--active" : "footer-nav__link";
 
   const toggleClassNameFn = (isActive: boolean) => {
-    console.log(isActive);
     return isActive
       ? "footer-nav__nav-container footer-nav__nav-container--active"
       : "footer-nav__nav-container";
@@ -65,7 +64,11 @@ export default function NavFooter() {
         <nav className="footer-nav">
           <article className={toggleClassNameFn(battleActiveBool)}>
             <div
-              className="footer-nav__clickable-div"
+              className={
+                battleToggle
+                  ? "footer-nav__clickable-div footer-nav__clickable-div--active"
+                  : "footer-nav__clickable-div"
+              }
               onClick={() => {
                 handleToggle("battles");
               }}
@@ -108,21 +111,29 @@ export default function NavFooter() {
               </NavLink>
             </div>
           </article>
-          <NavLink
-            className={({ isActive }) =>
-              userNavClassNameFn(userToken, isActive)
+          <div
+            className={
+              userToken ? "footer-nav__user-nav" : "footer-nav__user-nav--hide"
             }
-            to={"/user"}
-            onClick={() => {
-              setBattleActiveBool(false);
-              setRankingActiveBool(false);
-              setBattleToggle(false);
-              setRankingsToggle(false);
-            }}
           >
-            <PersonIcon style={{ width: "2.5rem", height: "2rem" }} />
-            <p className="footer-nav__icon-txt">User</p>
-          </NavLink>{" "}
+            <NavLink
+              className={({ isActive }) =>
+                userNavClassNameFn(userToken, isActive)
+              }
+              to={"/user"}
+              onClick={() => {
+                setBattleActiveBool(false);
+                setRankingActiveBool(false);
+                setBattleToggle(false);
+                setRankingsToggle(false);
+              }}
+            >
+              <PersonIcon
+                style={{ width: "2.5rem", height: "2rem", color: "white" }}
+              />
+              <p className="footer-nav__icon-txt">User</p>
+            </NavLink>{" "}
+          </div>
           <NavLink
             className={({ isActive }) => classNameFn(isActive)}
             to="/"
@@ -162,7 +173,6 @@ export default function NavFooter() {
                 className={({ isActive }) => classNameFn(isActive)}
                 to={"/rankings/fantasy"}
                 onClick={() => {
-                  console.log("triggered");
                   setBattleActiveBool(false);
                   setRankingActiveBool(true);
                   setBattleToggle(false);
@@ -174,7 +184,11 @@ export default function NavFooter() {
               </NavLink>
             </div>
             <div
-              className="footer-nav__clickable-div"
+              className={
+                rankingsToggle
+                  ? "footer-nav__clickable-div footer-nav__clickable-div--active"
+                  : "footer-nav__clickable-div"
+              }
               onClick={() => {
                 handleToggle("rankings");
               }}
@@ -187,25 +201,31 @@ export default function NavFooter() {
               <p className="footer-nav__icon-txt">Rank</p>
             </div>
           </article>
-          <NavLink
-            onClick={() => {
-              setBattleActiveBool(false);
-              setRankingActiveBool(false);
-              setBattleToggle(false);
-              setRankingsToggle(false);
-            }}
-            className={({ isActive }) =>
-              userNavClassNameFn(userToken, isActive)
+          <div
+            className={
+              userToken ? "footer-nav__user-nav" : "footer-nav__user-nav--hide"
             }
-            to={"/user/profile"}
           >
-            <img
-              src={profile}
-              alt="fortress icon for home navigation"
-              className="footer-nav__icons"
-            />
-            <p className="footer-nav__icon-txt">Profile</p>
-          </NavLink>{" "}
+            <NavLink
+              onClick={() => {
+                setBattleActiveBool(false);
+                setRankingActiveBool(false);
+                setBattleToggle(false);
+                setRankingsToggle(false);
+              }}
+              className={({ isActive }) =>
+                userNavClassNameFn(userToken, isActive)
+              }
+              to={"/user/profile"}
+            >
+              <img
+                src={profile}
+                alt="fortress icon for home navigation"
+                className="footer-nav__icons"
+              />
+              <p className="footer-nav__icon-txt">Profile</p>
+            </NavLink>{" "}
+          </div>
         </nav>
       </footer>
     </ThemeProvider>

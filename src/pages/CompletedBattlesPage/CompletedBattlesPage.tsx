@@ -9,6 +9,7 @@ import { getAllUsersNames } from "../../utils/UserRequests";
 import logo from "../../assets/logo.svg";
 import BattleCompleteRow from "../../components/BattleCompleteRow/BattleCompleteRow";
 import dayjs from "dayjs";
+import { CircularProgress } from "@mui/material";
 
 interface BattleArray extends Array<CompletedBattle> {}
 interface NameArray extends Array<string> {}
@@ -18,11 +19,10 @@ export default function CompletedBattlesPage() {
   const [battleArray, setBattleArray] = useState<BattleArray>();
   const [nameArray, setNameArray] = useState<NameArray>();
   const [yearArray, setYearArray] = useState<yearArray>();
-  const [nameFilter, setNameFilter] = useState<String>("Name");
-  const [yearFilter, setYearFilter] = useState<String>("All");
-  const [monthFilter, setMonthFilter] = useState<String>("All");
-  const [battleTypeFilter, setBattleTypeFilter] =
-    useState<String>("Battle Type");
+  const [nameFilter, setNameFilter] = useState<string>("all");
+  const [yearFilter, setYearFilter] = useState<string>("all");
+  const [monthFilter, setMonthFilter] = useState<string>("all");
+  const [battleTypeFilter, setBattleTypeFilter] = useState<string>("all");
 
   let currentDate = "";
 
@@ -65,7 +65,7 @@ export default function CompletedBattlesPage() {
     const filterFn = async () => {
       const data = await getCompletedBattles();
       tempBattleArray = await data;
-      let filterArray: any = [];
+      let filterArray: Array<CompletedBattle> = [];
 
       if (nameFilter !== "Name" && nameFilter !== "all") {
         filterArray = tempBattleArray?.filter((battle) => {
@@ -88,31 +88,35 @@ export default function CompletedBattlesPage() {
           tempBattleArray = [];
         }
       }
-      if (monthFilter !== "All" && filterArray[0]) {
+      if (monthFilter !== "all" && filterArray[0]) {
         filterArray = filterArray.filter(
-          (battle: any) => dayjs(battle.date).month() === Number(monthFilter)
+          (battle: CompletedBattle) =>
+            dayjs(battle.date).month() === Number(monthFilter)
         );
         if (!filterArray[0]) {
           tempBattleArray = [];
         }
-      } else if (monthFilter !== "All") {
+      } else if (monthFilter !== "all") {
         filterArray = tempBattleArray.filter(
-          (battle: any) => dayjs(battle.date).month() === Number(monthFilter)
+          (battle: CompletedBattle) =>
+            dayjs(battle.date).month() === Number(monthFilter)
         );
         if (!filterArray[0]) {
           tempBattleArray = [];
         }
       }
-      if (yearFilter !== "All" && filterArray[0]) {
+      if (yearFilter !== "all" && filterArray[0]) {
         filterArray = filterArray.filter(
-          (battle: any) => dayjs(battle.date).year() === Number(yearFilter)
+          (battle: CompletedBattle) =>
+            dayjs(battle.date).year() === Number(yearFilter)
         );
         if (!filterArray[0]) {
           tempBattleArray = [];
         }
-      } else if (yearFilter !== "All") {
+      } else if (yearFilter !== "all") {
         filterArray = tempBattleArray.filter(
-          (battle: any) => dayjs(battle.date).year() === Number(yearFilter)
+          (battle: CompletedBattle) =>
+            dayjs(battle.date).year() === Number(yearFilter)
         );
         if (!filterArray[0]) {
           tempBattleArray = [];
@@ -125,7 +129,7 @@ export default function CompletedBattlesPage() {
         battleTypeFilter !== "all"
       ) {
         let battleFilterArray = filterArray?.filter(
-          (battle: any) => battle.battle_type === battleTypeFilter
+          (battle: CompletedBattle) => battle.battle_type === battleTypeFilter
         );
 
         filterArray = battleFilterArray;
@@ -167,7 +171,11 @@ export default function CompletedBattlesPage() {
   };
 
   if (!battleArray || !nameArray || !yearArray) {
-    return <p>content loading... please wait</p>;
+    return (
+      <div className="loading-message">
+        <CircularProgress style={{ color: "green" }} />
+      </div>
+    );
   }
 
   return (
@@ -190,10 +198,13 @@ export default function CompletedBattlesPage() {
           <p className="completed-battles-page__filters-txt">Filter by Name</p>
           <select
             className="completed-battles-page__filters-box"
-            defaultValue={""}
             name="name"
+            value={nameFilter}
             onChange={handleChange}
           >
+            <option hidden value={""}>
+              All
+            </option>
             <option value={"all"}>All</option>
             {nameArray.map((name) => (
               <option key={crypto.randomUUID()} value={name}>
@@ -208,9 +219,12 @@ export default function CompletedBattlesPage() {
             className="completed-battles-page__filters-box"
             name="month"
             onChange={handleChange}
-            defaultValue={""}
+            value={monthFilter}
           >
-            <option value={""}>{monthFilter}</option>
+            <option hidden value={""}>
+              All
+            </option>
+            <option value={"all"}>{"All"}</option>
             <option value={0}>Jan</option>
             <option value={1}>Feb</option>
             <option value={2}>Mar</option>
@@ -231,9 +245,8 @@ export default function CompletedBattlesPage() {
             className="completed-battles-page__filters-box"
             name="year"
             onChange={handleChange}
-            defaultValue={"all"}
+            value={yearFilter}
           >
-            <option value={yearFilter.toString()}>{yearFilter}</option>
             <option value="all">All</option>
             {yearArray.map((year, index) => (
               <option key={`${year} ${index}`} value={year.toString()}>
@@ -250,7 +263,7 @@ export default function CompletedBattlesPage() {
             className="completed-battles-page__filters-box"
             name="battle-type"
             onChange={handleChange}
-            defaultValue={""}
+            value={battleTypeFilter}
           >
             <option value="all">All</option>
             <option value="40k">40k</option>

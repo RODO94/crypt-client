@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import logo from "../../assets/logo.svg";
 import crown from "../../assets/crown.svg";
 import ArmyPill from "../../components/ArmyPill/ArmyPill";
+import { CircularProgress } from "@mui/material";
 
 interface RankArray extends Array<RankObj> {}
 
@@ -26,7 +27,11 @@ export default function FortyKPage() {
   }, []);
 
   if (!fortyKRankingArray) {
-    return <p>Please wait while we load your content</p>;
+    return (
+      <div className="loading-message">
+        <CircularProgress style={{ color: "green" }} />
+      </div>
+    );
   }
   return (
     <main>
@@ -57,6 +62,7 @@ export default function FortyKPage() {
             <div className="fantasy-ranking-page__army-pill">
               <ArmyPill
                 name={fortyKRankingArray[0].name}
+                emblem={fortyKRankingArray[0].emblem}
                 known_as=""
                 ranking=""
               />

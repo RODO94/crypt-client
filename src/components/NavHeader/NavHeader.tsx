@@ -113,10 +113,6 @@ export default function NavHeader() {
             >
               <NavLink
                 className={({ isActive }) => {
-                  if (isActive) {
-                    setRankSelected(false);
-                    setBattleSelected(true);
-                  }
                   return classNameFn(isActive);
                 }}
                 to={"/battles/completed"}
@@ -124,6 +120,8 @@ export default function NavHeader() {
                   if (rankingActiveBool === true) {
                     setRankingActiveBool(false);
                   }
+                  setRankSelected(false);
+                  setBattleSelected(true);
                   setBattleActiveBool(true);
                   setBattleToggle(false);
                   setToggleBool(false);
@@ -132,17 +130,13 @@ export default function NavHeader() {
                 Completed <br /> Battles
               </NavLink>{" "}
               <NavLink
-                className={({ isActive }) => {
-                  if (isActive) {
-                    setRankSelected(false);
-                    setBattleSelected(true);
-                  }
-                  return classNameFn(isActive);
-                }}
+                className={({ isActive }) => classNameFn(isActive)}
                 onClick={() => {
                   if (rankingActiveBool === true) {
                     setRankingActiveBool(false);
                   }
+                  setRankSelected(false);
+                  setBattleSelected(true);
                   setBattleActiveBool(true);
                   setBattleToggle(false);
                   setToggleBool(false);
@@ -225,17 +219,13 @@ export default function NavHeader() {
                   if (battleActiveBool === true) {
                     setBattleActiveBool(false);
                   }
+                  setRankSelected(true);
+                  setBattleSelected(false);
                   setRankingActiveBool(true);
                   setRankingsToggle(false);
                   setToggleBool(false);
                 }}
-                className={({ isActive }) => {
-                  if (isActive) {
-                    setRankSelected(true);
-                    setBattleSelected(false);
-                  }
-                  return classNameFn(isActive);
-                }}
+                className={({ isActive }) => classNameFn(isActive)}
                 to={"/rankings/40k"}
               >
                 40,000 <br /> Rankings
@@ -245,17 +235,13 @@ export default function NavHeader() {
                   if (battleActiveBool === true) {
                     setBattleActiveBool(false);
                   }
+                  setRankSelected(true);
+                  setBattleSelected(false);
                   setRankingActiveBool(true);
                   setRankingsToggle(false);
                   setToggleBool(false);
                 }}
-                className={({ isActive }) => {
-                  if (isActive) {
-                    setRankSelected(true);
-                    setBattleSelected(false);
-                  }
-                  return classNameFn(isActive);
-                }}
+                className={({ isActive }) => classNameFn(isActive)}
                 to={"/rankings/fantasy"}
               >
                 Fantasy <br />

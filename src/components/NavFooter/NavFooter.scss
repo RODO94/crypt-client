@@ -13,6 +13,7 @@
   gap: 1.5rem;
   width: 100%;
   background-color: transparent;
+  z-index: 5;
   @include desktop {
     display: none;
   }
@@ -63,7 +64,8 @@
       font-weight: 900;
       line-height: normal;
       text-align: center;
-      background-color: $background-4;
+      background-color: black;
+
       border-radius: 8px 8px 0px 0px;
       &--hide {
         display: none;
@@ -87,12 +89,21 @@
       display: flex;
       justify-content: center;
       flex-direction: column;
+      border-bottom: 3px solid transparent;
+      &--active {
+        border-bottom: 3px solid white;
+      }
     }
     &__nav-container {
       padding: 0.5rem;
       &--active {
         border-radius: 0.5rem;
         background-color: $background-2;
+      }
+    }
+    &__user-nav {
+      &--hide {
+        display: none;
       }
     }
   }
