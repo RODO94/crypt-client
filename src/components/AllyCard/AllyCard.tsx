@@ -6,7 +6,7 @@ interface AllyComp {
   ally: RankObj | undefined;
 }
 export default function AllyCard({ ally }: AllyComp) {
-  let allyComp = <p>No Ally Available</p>;
+  let allyComp = <p>An Ally is of no use...</p>;
 
   if (ally) {
     allyComp = (

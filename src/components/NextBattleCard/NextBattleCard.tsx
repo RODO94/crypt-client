@@ -9,7 +9,7 @@ interface nextBattleType {
 }
 
 export default function NextBattleCard({ nextBattle, id }: nextBattleType) {
-  let nextBattleComp = <p>No Upcoming Battles</p>;
+  let nextBattleComp = <p>A Challenger is yet to appear.</p>;
 
   const startTime = dayjs(nextBattle?.start, "HH:mm:ss").format("HH:mm");
 

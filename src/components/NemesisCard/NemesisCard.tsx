@@ -7,7 +7,7 @@ interface NemesisComp {
 }
 
 export default function NemesisCard({ nemesis }: NemesisComp) {
-  let nemesisComp = <p>No Nemesis Available</p>;
+  let nemesisComp = <p>A Nemesis has not made themselves known...</p>;
 
   if (nemesis) {
     nemesisComp = (
