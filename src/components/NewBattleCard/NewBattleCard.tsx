@@ -35,13 +35,15 @@ export default function NewBattleCard({
       <div
         className={`new-battle-card__player new-battle-card__player--${player_number}`}
       >
-        <div className="new-battle-card__player-details">
-          <div className="new-battle-card__player-details-name">
+        <div
+          className={`new-battle-card__player-details new-battle-card__player-details--${player_number}`}
+        >
+          <p className="new-battle-card__player-details-name">
             {player.known_as}
-          </div>
-          <div className="new-battle-card__player-details-rank">
+          </p>
+          <p className="new-battle-card__player-details-rank">
             {player.ranking}
-          </div>
+          </p>
         </div>
       </div>
     </div>

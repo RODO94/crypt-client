@@ -41,10 +41,10 @@ export default function NewBattleTableRow({
         ))}
       </div>
       <div className="new-battle-table-row__details">
-        <div className="new-battle-table-row__details-table">{table}</div>
-        <div className="new-battle-table-row__details-time">
+        <span className="new-battle-table-row__details-table">{table}</span>
+        <strong className="new-battle-table-row__details-time">
           {dayjs(start, "HH:mm:ss").format("HH:mm")}
-        </div>
+        </strong>
         <BattleTypePill battle_type={battle_type} />
       </div>
       <div className="new-battle-table-row__combatant-wrap">
