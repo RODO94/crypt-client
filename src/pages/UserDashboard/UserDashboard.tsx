@@ -92,7 +92,7 @@ export default function UserDashboard() {
   }
 
   return (
-    <>
+    <main className="user-dash__main">
       <section className="user-dash">
         <DashboardHero
           nextBattle={nextBattle}
@@ -103,16 +103,20 @@ export default function UserDashboard() {
           fantasyRanked={rankArray?.fantasy[0]}
         />
       </section>
-      <UsersFortyRanking
-        rankArray={rankArray?.fortyK}
-        user={userObj.known_as}
-      />
-      <UsersFantasyRanking
-        rankArray={rankArray?.fantasy}
-        user={userObj.known_as}
-      />
-      <UsersUpcomingBattles battleArray={upcomingBattles} />
-      <UsersResults battleArray={userResults} />
-    </>
+      <section className="user-ranking">
+        <UsersFortyRanking
+          rankArray={rankArray?.fortyK}
+          user={userObj.known_as}
+        />
+        <UsersFantasyRanking
+          rankArray={rankArray?.fantasy}
+          user={userObj.known_as}
+        />
+      </section>
+      <section className="user-battles">
+        <UsersUpcomingBattles battleArray={upcomingBattles} />
+        <UsersResults battleArray={userResults} />
+      </section>
+    </main>
   );
 }

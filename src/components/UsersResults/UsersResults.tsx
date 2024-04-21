@@ -15,7 +15,7 @@ export default function UsersResults({ battleArray }: any) {
     );
   }
   return (
-    <section className="completedbattles">
+    <section className="completedbattles user-completedbattles">
       <div className="completedbattles__header-wrap">
         <Link to={"/battles/completed"} className="completedbattles__header">
           Recent Results

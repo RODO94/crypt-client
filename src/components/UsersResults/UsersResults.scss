@@ -1,0 +1,8 @@
+@use "../../partials/variables" as *;
+@use "../../partials/mixins" as *;
+
+.user-completedbattles {
+  @include desktop {
+    width: 100%;
+  }
+}
