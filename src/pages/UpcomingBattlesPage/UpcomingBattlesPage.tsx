@@ -3,11 +3,11 @@ import { getUpcomingBattles } from "../../utils/BattleRequests";
 import "./UpcomingBattlesPage.scss";
 import { Battle } from "../../utils/Interfaces";
 import DateTableHeader from "../../components/DateTableHeader/DateTableHeader";
-import BattleTableRow from "../../components/BattleTableRow/BattleTableRow";
 
 import { Link } from "react-router-dom";
 import { getAllUsersNames } from "../../utils/UserRequests";
 import logo from "../../assets/logo.svg";
+import NewBattleTableRow from "../../components/NewBattleTableRow/NewBattleTableRow";
 import { CircularProgress } from "@mui/material";
 
 interface BattleArray extends Array<Battle> {}
@@ -177,10 +177,9 @@ export default function UpcomingBattlesPage() {
                     key={crypto.randomUUID()}
                     date={battle.date}
                   />
-                  <BattleTableRow
+                  <NewBattleTableRow
                     key={crypto.randomUUID()}
                     battle_type={battle.battle_type}
-                    player_type={battle.player_type}
                     player_1={battle.player_1}
                     player_2={battle.player_2}
                     id={battle.id}
@@ -192,10 +191,9 @@ export default function UpcomingBattlesPage() {
               );
             } else if (currentDate === battle.date) {
               return (
-                <BattleTableRow
+                <NewBattleTableRow
                   key={crypto.randomUUID()}
                   battle_type={battle.battle_type}
-                  player_type={battle.player_type}
                   player_1={battle.player_1}
                   player_2={battle.player_2}
                   id={battle.id}
@@ -215,7 +213,7 @@ export default function UpcomingBattlesPage() {
                     key={crypto.randomUUID()}
                     date={battle.date}
                   />
-                  <BattleTableRow
+                  <NewBattleTableRow
                     key={crypto.randomUUID()}
                     battle_type={battle.battle_type}
                     player_type={battle.player_type}

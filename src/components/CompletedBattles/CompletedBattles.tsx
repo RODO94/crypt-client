@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { getCompletedBattlesFive } from "../../utils/BattleRequests";
 import { CompletedBattle } from "../../utils/Interfaces";
-import BattleCompleteRow from "../BattleCompleteRow/BattleCompleteRow";
 import DateTableHeader from "../DateTableHeader/DateTableHeader";
 import "./CompletedBattles.scss";
 import { Link } from "react-router-dom";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { CircularProgress } from "@mui/material";
+import NewBattleCompleteTableRow from "../NewBattleTableCompleteRow copy/NewBattleCompleteTableRow";
 
 interface CompletedBattleArray extends Array<CompletedBattle> {}
 
@@ -76,10 +76,8 @@ export default function CompletedBattles() {
                 key={crypto.randomUUID()}
               >
                 <DateTableHeader key={crypto.randomUUID()} date={battle.date} />
-                <BattleCompleteRow
+                <NewBattleCompleteTableRow
                   key={crypto.randomUUID()}
-                  battle_type={battle.battle_type}
-                  player_type={battle.player_type}
                   player_1={battle.player_1}
                   player_2={battle.player_2}
                   combatant_1_id={
@@ -96,10 +94,8 @@ export default function CompletedBattles() {
             );
           } else if (currentDate === battle.date) {
             return (
-              <BattleCompleteRow
+              <NewBattleCompleteTableRow
                 key={crypto.randomUUID()}
-                battle_type={battle.battle_type}
-                player_type={battle.player_type}
                 player_1={battle.player_1}
                 player_2={battle.player_2}
                 combatant_1_id={
@@ -121,19 +117,17 @@ export default function CompletedBattles() {
                 key={crypto.randomUUID()}
               >
                 <DateTableHeader key={crypto.randomUUID()} date={battle.date} />
-                <BattleCompleteRow
+                <NewBattleCompleteTableRow
                   key={crypto.randomUUID()}
-                  battle_type={battle.battle_type}
-                  player_type={battle.player_type}
                   player_1={battle.player_1}
                   player_2={battle.player_2}
-                  result={battle.result}
                   combatant_1_id={
                     battle.combatant_1_id ? battle.combatant_1_id : ""
                   }
                   combatant_2_id={
                     battle.combatant_2_id ? battle.combatant_2_id : ""
                   }
+                  result={battle.result}
                   winner={battle.winner}
                   id={battle.id}
                 />

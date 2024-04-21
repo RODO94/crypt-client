@@ -1,9 +1,9 @@
 import { CircularProgress } from "@mui/material";
 import { CompletedBattle } from "../../utils/Interfaces";
-import BattleCompleteRow from "../BattleCompleteRow/BattleCompleteRow";
 import DateTableHeader from "../DateTableHeader/DateTableHeader";
 import "./UsersResults.scss";
 import { Link } from "react-router-dom";
+import NewBattleCompleteTableRow from "../NewBattleTableCompleteRow copy/NewBattleCompleteTableRow";
 
 export default function UsersResults({ battleArray }: any) {
   let currentDate = "";
@@ -15,7 +15,7 @@ export default function UsersResults({ battleArray }: any) {
     );
   }
   return (
-    <section className="completedbattles">
+    <section className="completedbattles user-completedbattles">
       <div className="completedbattles__header-wrap">
         <Link to={"/battles/completed"} className="completedbattles__header">
           Recent Results
@@ -34,7 +34,7 @@ export default function UsersResults({ battleArray }: any) {
                 key={crypto.randomUUID()}
               >
                 <DateTableHeader key={crypto.randomUUID()} date={battle.date} />
-                <BattleCompleteRow
+                <NewBattleCompleteTableRow
                   key={crypto.randomUUID()}
                   battle_type={battle.battle_type}
                   player_type={battle.player_type}
@@ -54,7 +54,7 @@ export default function UsersResults({ battleArray }: any) {
             );
           } else if (currentDate === battle.date) {
             return (
-              <BattleCompleteRow
+              <NewBattleCompleteTableRow
                 key={crypto.randomUUID()}
                 battle_type={battle.battle_type}
                 player_type={battle.player_type}
@@ -79,7 +79,7 @@ export default function UsersResults({ battleArray }: any) {
                 key={crypto.randomUUID()}
               >
                 <DateTableHeader key={crypto.randomUUID()} date={battle.date} />
-                <BattleCompleteRow
+                <NewBattleCompleteTableRow
                   key={crypto.randomUUID()}
                   battle_type={battle.battle_type}
                   player_type={battle.player_type}

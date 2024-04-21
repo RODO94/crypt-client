@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import { getUpcomingBattlesFive } from "../../utils/BattleRequests";
 import "./UpcomingBattles.scss";
 import DateTableHeader from "../DateTableHeader/DateTableHeader";
-import BattleTableRow from "../BattleTableRow/BattleTableRow";
 import { Player } from "../../utils/Interfaces";
 import { Link } from "react-router-dom";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { CircularProgress } from "@mui/material";
+import NewBattleTableRow from "../NewBattleTableRow/NewBattleTableRow";
 
 interface Battle {
   id: string;
@@ -90,10 +90,9 @@ export default function UpcomingBattles() {
                 key={crypto.randomUUID()}
               >
                 <DateTableHeader key={crypto.randomUUID()} date={battle.date} />
-                <BattleTableRow
+                <NewBattleTableRow
                   key={crypto.randomUUID()}
                   battle_type={battle.battle_type}
-                  player_type={battle.player_type}
                   player_1={battle.player_1}
                   player_2={battle.player_2}
                   id={battle.id}
@@ -105,10 +104,9 @@ export default function UpcomingBattles() {
             );
           } else if (currentDate === battle.date) {
             return (
-              <BattleTableRow
+              <NewBattleTableRow
                 key={crypto.randomUUID()}
                 battle_type={battle.battle_type}
-                player_type={battle.player_type}
                 player_1={battle.player_1}
                 player_2={battle.player_2}
                 id={battle.id}
@@ -125,10 +123,9 @@ export default function UpcomingBattles() {
                 key={crypto.randomUUID()}
               >
                 <DateTableHeader key={crypto.randomUUID()} date={battle.date} />
-                <BattleTableRow
+                <NewBattleTableRow
                   key={crypto.randomUUID()}
                   battle_type={battle.battle_type}
-                  player_type={battle.player_type}
                   player_1={battle.player_1}
                   player_2={battle.player_2}
                   id={battle.id}

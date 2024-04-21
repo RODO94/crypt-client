@@ -17,7 +17,10 @@
   }
 
   @include desktop {
-    padding: 4rem 8rem 6rem 8rem;
+    padding: 4rem 4rem;
+    order: 3;
+    width: 60%;
+    background: $background-4;
   }
   &__header {
     font-family: "Roboto", system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -37,6 +40,7 @@
     @include desktop {
       font-size: 3rem;
     }
+
     &-wrap {
       display: flex;
       align-items: flex-start;
@@ -52,6 +56,7 @@
     justify-content: center;
     align-items: center;
     align-self: stretch;
+    gap: 0.5rem;
     width: 100%;
   }
   &__container {
@@ -70,5 +75,11 @@
     @include desktop {
       width: 3.5rem;
     }
+  }
+  &__battle-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
   }
 }

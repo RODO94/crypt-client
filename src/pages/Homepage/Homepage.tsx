@@ -12,10 +12,14 @@ export default function Homepage() {
     <main>
       <Header />
       <HomeHero />
-      <FortyKTopFive />
-      <FantasyTopFive />
-      <UpcomingBattles />
-      <CompletedBattles />
+      <section className="homepage__content">
+        <div className="homepage__rankings">
+          <FortyKTopFive />
+          <FantasyTopFive />
+        </div>
+        <UpcomingBattles />
+        <CompletedBattles />
+      </section>
     </main>
   );
 }

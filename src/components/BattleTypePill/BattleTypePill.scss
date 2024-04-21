@@ -3,34 +3,27 @@
 
 .battle-type {
   display: flex;
-  padding: 0.25rem 0.5rem;
   justify-content: center;
   align-items: center;
   gap: 0.625rem;
   border-radius: 0.25rem;
   text-align: center;
   font-family: "Roboto", system-ui, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 0.625rem;
-  font-style: normal;
-  font-weight: 700;
+  font-size: 0.7rem;
+  font-weight: 600;
   line-height: normal;
-  text-transform: uppercase;
   @include tablet {
     font-size: 0.875rem;
-    padding: 0.35rem 0.75rem;
   }
   @include desktop {
     font-size: 1.2rem;
-    padding: 0.35rem 1rem;
   }
 
   &--40k {
-    border: 3px solid $ultramarine-4;
     color: $ultramarine-4;
   }
   &--fantasy {
-    border: 3px solid $space-wolves-2;
-    color: $space-wolves-2;
+    color: $dark-angels-2;
   }
   &__text {
     margin: 0;

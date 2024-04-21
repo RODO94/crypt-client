@@ -10,7 +10,7 @@
     padding: 3.5rem 3rem;
   }
   @include desktop {
-    padding: 4rem 8rem;
+    padding: 4rem 4rem;
   }
   &__title {
     color: #fff;
@@ -41,5 +41,7 @@
   }
   &--fantasy {
     background-color: $background-2;
+    @include desktop {
+    }
   }
 }

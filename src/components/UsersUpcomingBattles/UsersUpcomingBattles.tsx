@@ -1,9 +1,9 @@
 import "./UsersUpcomingBattles.scss";
 import DateTableHeader from "../DateTableHeader/DateTableHeader";
-import BattleTableRow from "../BattleTableRow/BattleTableRow";
 import { Link } from "react-router-dom";
 import { Battle } from "../../utils/Interfaces";
 import { CircularProgress } from "@mui/material";
+import NewBattleTableRow from "../NewBattleTableRow/NewBattleTableRow";
 
 export default function UsersUpcomingBattles({ battleArray }: any) {
   let currentDate = "";
@@ -31,7 +31,7 @@ export default function UsersUpcomingBattles({ battleArray }: any) {
                 key={crypto.randomUUID()}
               >
                 <DateTableHeader key={crypto.randomUUID()} date={battle.date} />
-                <BattleTableRow
+                <NewBattleTableRow
                   key={crypto.randomUUID()}
                   battle_type={battle.battle_type}
                   player_type={battle.player_type}
@@ -46,7 +46,7 @@ export default function UsersUpcomingBattles({ battleArray }: any) {
             );
           } else if (currentDate === battle.date) {
             return (
-              <BattleTableRow
+              <NewBattleTableRow
                 key={crypto.randomUUID()}
                 battle_type={battle.battle_type}
                 player_type={battle.player_type}
@@ -66,7 +66,7 @@ export default function UsersUpcomingBattles({ battleArray }: any) {
                 key={crypto.randomUUID()}
               >
                 <DateTableHeader key={crypto.randomUUID()} date={battle.date} />
-                <BattleTableRow
+                <NewBattleTableRow
                   key={crypto.randomUUID()}
                   battle_type={battle.battle_type}
                   player_type={battle.player_type}

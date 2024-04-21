@@ -13,10 +13,42 @@
     padding: 4rem 3rem;
     gap: 3rem;
     border-radius: 0rem 0rem 3rem 3rem;
+    width: 100%;
   }
   @include desktop {
     padding: 6rem 8rem;
     gap: 4rem;
     border-radius: 0rem 0rem 3.5rem 3.5rem;
+    margin: 0 auto;
+  }
+  &__main {
+    width: 100%;
+    @include desktop {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      margin: 0 auto;
+    }
+  }
+}
+
+.user-ranking {
+  width: 100%;
+  @include desktop {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 45%;
+    order: 3;
+    background-color: $background-1;
+  }
+}
+.user-battles {
+  width: 100%;
+  @include desktop {
+    display: flex;
+    flex-direction: column;
+    width: 55%;
+    order: 2;
   }
 }
