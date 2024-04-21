@@ -9,6 +9,7 @@ import { getAllUsersNames } from "../../utils/UserRequests";
 import logo from "../../assets/logo.svg";
 import dayjs from "dayjs";
 import NewBattleCompleteTableRow from "../../components/NewBattleTableCompleteRow copy/NewBattleCompleteTableRow";
+import { CircularProgress } from "@mui/material";
 
 interface BattleArray extends Array<CompletedBattle> {}
 interface NameArray extends Array<string> {}
