@@ -89,7 +89,7 @@ export default function AddArmy() {
           setSuccessBool(true);
           setTimeout(() => {
             navigate(`/armies/information`, { state: { id: response.id } });
-          }, 4000);
+          }, 1000);
         }
       }
     } catch (error: any) {

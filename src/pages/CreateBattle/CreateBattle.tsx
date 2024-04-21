@@ -237,7 +237,7 @@ export default function CreateBattle() {
         setSuccessBool(true);
         setTimeout(() => {
           navigate(`/battles/information`, { state: { id: response } });
-        }, 4000);
+        }, 1000);
       }
     } catch (error) {
       console.error(error);

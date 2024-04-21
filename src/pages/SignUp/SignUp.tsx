@@ -95,6 +95,7 @@ export default function SignUp() {
       first_name: firstName,
       last_name: lastName,
       known_as: knownAs,
+      user_emblem: emblemName,
     };
 
     const response = await signupAuthentication(requestObj);

@@ -15,7 +15,6 @@ export default function NextBattleCard({ nextBattle, id }: nextBattleType) {
 
   if (nextBattle) {
     const opponentBool = nextBattle.player_1.find((player) => player.id === id);
-    console.log(opponentBool);
     const battleOpponentArray = opponentBool
       ? nextBattle.player_2
       : nextBattle.player_1;

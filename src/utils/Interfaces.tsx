@@ -60,6 +60,7 @@ export interface SignUpBody {
   first_name: string;
   last_name: string;
   known_as: string;
+  user_emblem: string | undefined;
 }
 
 export interface Input {
