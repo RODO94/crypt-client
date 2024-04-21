@@ -17,6 +17,7 @@ main {
     }
   }
   &__rankings {
+    order: 2;
     @include desktop {
       display: flex;
       flex-direction: column;
