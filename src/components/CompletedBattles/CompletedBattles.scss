@@ -17,7 +17,10 @@
   }
 
   @include desktop {
-    padding: 4rem 8rem 6rem 8rem;
+    padding: 4rem 4rem;
+    order: 3;
+    width: 60%;
+    background: $background-4;
   }
   &__header {
     font-family: "Roboto", system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -34,9 +37,7 @@
     @include tablet {
       font-size: 2rem;
     }
-    @include desktop {
-      font-size: 3rem;
-    }
+
     &-wrap {
       display: flex;
       align-items: flex-start;

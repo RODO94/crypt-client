@@ -15,8 +15,12 @@
     gap: 1.5rem;
   }
   @include desktop {
-    padding: 4rem 8rem;
+    padding: 4rem 4rem;
+    width: 60%;
+    justify-content: flex-start;
+    order: 1;
     gap: 3rem;
+    background-color: $background-4;
   }
   &__header {
     font-family: "Roboto", system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -33,9 +37,7 @@
     @include tablet {
       font-size: 2rem;
     }
-    @include desktop {
-      font-size: 3rem;
-    }
+
     &-wrap {
       display: flex;
       align-items: flex-start;

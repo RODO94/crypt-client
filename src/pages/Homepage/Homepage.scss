@@ -16,6 +16,22 @@ main {
       background: $background-4;
     }
   }
+  &__rankings {
+    @include desktop {
+      display: flex;
+      flex-direction: column;
+      width: 40%;
+      order: 2;
+      background: $background-1;
+    }
+  }
+  &__content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
 }
 
 .section--hide {
