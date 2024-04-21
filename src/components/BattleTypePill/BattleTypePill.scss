@@ -10,10 +10,8 @@
   text-align: center;
   font-family: "Roboto", system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-size: 0.7rem;
-  font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
   line-height: normal;
-  text-transform: uppercase;
   @include tablet {
     font-size: 0.875rem;
   }
@@ -25,7 +23,7 @@
     color: $ultramarine-4;
   }
   &--fantasy {
-    color: $space-wolves-2;
+    color: $dark-angels-2;
   }
   &__text {
     margin: 0;
