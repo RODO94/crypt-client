@@ -7,8 +7,8 @@ import DateTableHeader from "../../components/DateTableHeader/DateTableHeader";
 import { Link } from "react-router-dom";
 import { getAllUsersNames } from "../../utils/UserRequests";
 import logo from "../../assets/logo.svg";
-import BattleCompleteRow from "../../components/BattleCompleteRow/BattleCompleteRow";
 import dayjs from "dayjs";
+import NewBattleCompleteTableRow from "../../components/NewBattleTableCompleteRow copy/NewBattleCompleteTableRow";
 
 interface BattleArray extends Array<CompletedBattle> {}
 interface NameArray extends Array<string> {}
@@ -272,7 +272,7 @@ export default function CompletedBattlesPage() {
                     key={crypto.randomUUID()}
                     date={battle.date}
                   />
-                  <BattleCompleteRow
+                  <NewBattleCompleteTableRow
                     key={crypto.randomUUID()}
                     battle_type={battle.battle_type}
                     player_type={battle.player_type}
@@ -292,7 +292,7 @@ export default function CompletedBattlesPage() {
               );
             } else if (currentDate === battle.date) {
               return (
-                <BattleCompleteRow
+                <NewBattleCompleteTableRow
                   key={crypto.randomUUID()}
                   battle_type={battle.battle_type}
                   player_type={battle.player_type}
@@ -320,7 +320,7 @@ export default function CompletedBattlesPage() {
                     key={crypto.randomUUID()}
                     date={battle.date}
                   />
-                  <BattleCompleteRow
+                  <NewBattleCompleteTableRow
                     key={crypto.randomUUID()}
                     battle_type={battle.battle_type}
                     player_type={battle.player_type}
