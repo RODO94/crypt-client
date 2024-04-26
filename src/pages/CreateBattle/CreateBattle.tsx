@@ -276,223 +276,352 @@ export default function CreateBattle() {
           }}
           className="create-battle__back-arrow"
         >
-          <ArrowLeftIcon />
+          <ArrowLeftIcon />{" "}
+          <p className="create-battle__back-arrow-txt">Go Back</p>
         </div>
         <form className="create-battle__form">
           <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <div className="create-battle__battletype">
-              <div id="battletype" className="create-battle__select-wrap">
-                <label htmlFor="battletype" className="create-battle__label">
-                  {" "}
-                  Battle Type*
-                </label>
-                <select
-                  name="battletype"
-                  onChange={(event) => {
-                    setBattleType(event.target.value);
-                  }}
-                  className="create-battle__select"
-                >
-                  <option hidden value={battleType}>
-                    {battleType}
-                  </option>
-                  <option value="fantasy">Fantasy</option>
-                  <option value="40k">40k</option>
-                </select>
-              </div>
-            </div>
-            <div className="create-battle__pointsize">
-              <label htmlFor="pointsize" className="create-battle__label">
-                Point Size*
-                <input
-                  type="number"
-                  className={
-                    pointSizeError
-                      ? "create-battle__input create-battle__input--error"
-                      : "create-battle__input"
-                  }
-                  name="pointsize"
-                  value={pointSize}
-                  onChange={(event) => {
-                    pointSizeError ? setPointSizeError(false) : pointSizeError;
-                    setPointSize(event.target.value);
-                  }}
-                />
-                <p
-                  className={
-                    pointSizeError
-                      ? "create-battle__error"
-                      : "create-battle__error--hide"
-                  }
-                >
-                  Please add a point size
-                </p>
-              </label>
-            </div>
-            <div className="create-battle__scenario">
-              <label htmlFor="scenario" className="create-battle__label">
-                Scenario
-                <input
-                  type="text"
-                  className="create-battle__input"
-                  name="scenario"
-                  value={scenario}
-                  onChange={(event) => {
-                    setScenario(event.target.value);
-                  }}
-                />
-              </label>
-            </div>
-            <div className="create-battle__date">
-              <label
-                htmlFor="date"
-                className="create-battle__label create-battle__label--date"
-              >
-                Date*
-                <DatePicker
-                  name="date"
-                  value={date}
-                  format="DD-MM-YYYY"
-                  onChange={(newValue: any) => {
-                    setDate(newValue);
-                  }}
-                />
-              </label>
-              <label
-                htmlFor="date"
-                className="create-battle__label create-battle__label--date"
-              >
-                Table
-                <select
-                  value={table}
-                  name="table"
-                  className="create-battle__select"
-                  onChange={(event) => {
-                    setTable(event.target.value);
-                  }}
-                >
-                  <option hidden>{table}</option>
-                  <option value="Table 1">Table 1</option>
-                  <option value="Table 2">Table 2</option>
-                  <option value="Table 3">Table 3</option>
-                </select>
-              </label>
-              <label
-                htmlFor="start"
-                className="create-battle__label create-battle__label--date"
-              >
-                Start
-                <MobileTimePicker
-                  name="start
-                "
-                  ampm={false}
-                  value={start}
-                  onChange={(newValue: any) => {
-                    setStart(newValue);
-                  }}
-                />
-              </label>
-              <label
-                htmlFor="finish"
-                className="create-battle__label create-battle__label--date"
-              >
-                Finish
-                <MobileTimePicker
-                  name="finish"
-                  ampm={false}
-                  value={finish}
-                  minTime={start}
-                  onChange={(newValue: any) => {
-                    setFinish(newValue);
-                  }}
-                />
-              </label>
-            </div>
-            <div id="1" className="create-battle__combatant">
-              <div className="create-battle__combatant-container">
-                <label className="create-battle__label" htmlFor="users_1">
-                  Player / Team 1
-                </label>
-                {playerOne.map((player) => (
-                  <article
-                    key={crypto.randomUUID()}
-                    className="create-battle__combatant-card"
-                  >
-                    <BattleCard
-                      key={crypto.randomUUID()}
-                      army_id={player.army_id}
-                      name={player.name}
-                      known_as={player.known_as}
-                      ranking={player.ranking}
-                      emblem={player.emblem}
-                    />
-                    <button
-                      key={crypto.randomUUID()}
-                      className="create-battle__remove"
-                      onClick={(event: any) => {
-                        const targetID =
-                          event.target.parentElement.children[0].id;
-                        removePlayer(event, targetID, 1);
-                      }}
-                    >
-                      Remove
-                    </button>
-                  </article>
-                ))}{" "}
-                <div className="create-battle__combatant-edit-row">
+            <div className="create-battle__form-section">
+              <div className="create-battle__battletype">
+                <div id="battletype" className="create-battle__select-wrap">
+                  <label htmlFor="battletype" className="create-battle__label">
+                    {" "}
+                    Battle Type*
+                  </label>
                   <select
-                    name="users_1"
-                    className={
-                      !playerOneError
-                        ? "create-battle__select"
-                        : "create-battle__select create-battle__select--error"
-                    }
-                    id="users_1"
-                    value={userOne}
+                    name="battletype"
                     onChange={(event) => {
-                      playerOneError
-                        ? setPlayerOneError(false)
-                        : playerOneError;
-                      setUserOneFilter(event.target.value.split("+")[0]);
-                      setUserOne(event.target.value);
+                      setBattleType(event.target.value);
+                    }}
+                    className="create-battle__select"
+                  >
+                    <option hidden value={battleType}>
+                      {battleType}
+                    </option>
+                    <option value="fantasy">Fantasy</option>
+                    <option value="40k">40k</option>
+                  </select>
+                </div>
+              </div>
+              <div className="create-battle__pointsize">
+                <label htmlFor="pointsize" className="create-battle__label">
+                  Point Size*
+                  <input
+                    type="number"
+                    className={
+                      pointSizeError
+                        ? "create-battle__input create-battle__input--error"
+                        : "create-battle__input"
+                    }
+                    name="pointsize"
+                    value={pointSize}
+                    onChange={(event) => {
+                      pointSizeError
+                        ? setPointSizeError(false)
+                        : pointSizeError;
+                      setPointSize(event.target.value);
+                    }}
+                  />
+                  <p
+                    className={
+                      pointSizeError
+                        ? "create-battle__error"
+                        : "create-battle__error--hide"
+                    }
+                  >
+                    Please add a point size
+                  </p>
+                </label>
+              </div>
+              <div className="create-battle__scenario">
+                <label htmlFor="scenario" className="create-battle__label">
+                  Scenario
+                  <input
+                    type="text"
+                    className="create-battle__input"
+                    name="scenario"
+                    value={scenario}
+                    onChange={(event) => {
+                      setScenario(event.target.value);
+                    }}
+                  />
+                </label>
+              </div>
+              <div className="create-battle__date">
+                <label
+                  htmlFor="date"
+                  className="create-battle__label create-battle__label--date"
+                >
+                  Date*
+                  <DatePicker
+                    name="date"
+                    value={date}
+                    format="DD-MM-YYYY"
+                    onChange={(newValue: any) => {
+                      setDate(newValue);
+                    }}
+                  />
+                </label>
+                <label
+                  htmlFor="date"
+                  className="create-battle__label create-battle__label--date"
+                >
+                  Table
+                  <select
+                    value={table}
+                    name="table"
+                    className="create-battle__select"
+                    onChange={(event) => {
+                      setTable(event.target.value);
                     }}
                   >
-                    <option hidden>Select User </option>
-                    {filteredUserArray?.map((user) => {
-                      return (
+                    <option hidden>{table}</option>
+                    <option value="Table 1">Table 1</option>
+                    <option value="Table 2">Table 2</option>
+                    <option value="Table 3">Table 3</option>
+                  </select>
+                </label>
+                <label
+                  htmlFor="start"
+                  className="create-battle__label create-battle__label--date"
+                >
+                  Start
+                  <MobileTimePicker
+                    name="start
+                "
+                    ampm={false}
+                    value={start}
+                    onChange={(newValue: any) => {
+                      setStart(newValue);
+                    }}
+                  />
+                </label>
+                <label
+                  htmlFor="finish"
+                  className="create-battle__label create-battle__label--date"
+                >
+                  Finish
+                  <MobileTimePicker
+                    name="finish"
+                    ampm={false}
+                    value={finish}
+                    minTime={start}
+                    onChange={(newValue: any) => {
+                      setFinish(newValue);
+                    }}
+                  />
+                </label>
+              </div>
+            </div>
+            <div className="create-battle__form-combatants">
+              <div id="1" className="create-battle__combatant">
+                <div className="create-battle__combatant-container">
+                  <label className="create-battle__label" htmlFor="users_1">
+                    Player / Team 1
+                  </label>
+                  {playerOne.map((player) => (
+                    <article
+                      key={crypto.randomUUID()}
+                      className="create-battle__combatant-card"
+                    >
+                      <BattleCard
+                        key={crypto.randomUUID()}
+                        army_id={player.army_id}
+                        name={player.name}
+                        known_as={player.known_as}
+                        ranking={player.ranking}
+                        emblem={player.emblem}
+                      />
+                      <button
+                        key={crypto.randomUUID()}
+                        className="create-battle__remove"
+                        onClick={(event: any) => {
+                          const targetID =
+                            event.target.parentElement.children[0].id;
+                          removePlayer(event, targetID, 1);
+                        }}
+                      >
+                        Remove
+                      </button>
+                    </article>
+                  ))}{" "}
+                  <div className="create-battle__combatant-edit-row">
+                    <select
+                      name="users_1"
+                      className={
+                        !playerOneError
+                          ? "create-battle__select"
+                          : "create-battle__select create-battle__select--error"
+                      }
+                      id="users_1"
+                      value={userOne}
+                      onChange={(event) => {
+                        playerOneError
+                          ? setPlayerOneError(false)
+                          : playerOneError;
+                        setUserOneFilter(event.target.value.split("+")[0]);
+                        setUserOne(event.target.value);
+                      }}
+                    >
+                      <option hidden>Select User </option>
+                      {filteredUserArray?.map((user) => {
+                        return (
+                          <option
+                            key={crypto.randomUUID()}
+                            value={`${user.id}+${user.known_as}`}
+                          >
+                            {user.known_as}
+                          </option>
+                        );
+                      })}
+                    </select>
+                    <select
+                      name="army_1"
+                      className={
+                        !playerOneError
+                          ? "create-battle__select"
+                          : "create-battle__select create-battle__select--error"
+                      }
+                      id="army_1"
+                      value={armyOne}
+                      disabled={!userOne ? true : false}
+                      onChange={(event) => {
+                        playerOneError
+                          ? setPlayerOneError(false)
+                          : playerOneError;
+                        setArmyOne(event.target.value);
+                      }}
+                    >
+                      <option hidden> Select Army </option>
+
+                      {armyArray.length === 0 ? (
+                        <option>No Armies for this User</option>
+                      ) : (
+                        filteredArmyArray?.map((army) => {
+                          if (army.user_id === userOneFilter) {
+                            return (
+                              <option
+                                key={crypto.randomUUID()}
+                                value={`${army.id}+${army.name}`}
+                              >
+                                {army.name}
+                              </option>
+                            );
+                          }
+                        })
+                      )}
+                    </select>
+
+                    <button
+                      className={
+                        armyOne
+                          ? "create-battle__add"
+                          : "create-battle__add--disabled"
+                      }
+                      onClick={(event) => {
+                        event?.preventDefault();
+                        playerOneError
+                          ? setPlayerOneError(false)
+                          : playerOneError;
+                        addArmy(event, 1);
+                      }}
+                      disabled={armyOne ? false : true}
+                    >
+                      + Add Army
+                    </button>
+                    <p
+                      className={
+                        !playerOneError
+                          ? "create-battle__error--hide"
+                          : "create-battle__error"
+                      }
+                    >
+                      Please add Player 1
+                    </p>
+                  </div>{" "}
+                </div>
+              </div>
+              <div id="2" className="create-battle__combatant">
+                <div className="create-battle__combatant-container">
+                  <label className="create-battle__label" htmlFor="users_1">
+                    Player / Team 2
+                  </label>
+                  {playerTwo.map((player) => (
+                    <article
+                      key={crypto.randomUUID()}
+                      className="create-battle__combatant-card"
+                    >
+                      <BattleCard
+                        key={player.army_id}
+                        army_id={player.army_id}
+                        name={player.name}
+                        known_as={player.known_as}
+                        ranking={player.ranking}
+                        emblem={player.emblem}
+                      />
+                      <button
+                        key={crypto.randomUUID()}
+                        className="create-battle__remove"
+                        onClick={(event: any) => {
+                          const targetID =
+                            event.target.parentElement.children[0].id;
+                          removePlayer(event, targetID, 2);
+                        }}
+                      >
+                        Remove
+                      </button>
+                    </article>
+                  ))}{" "}
+                  <div className="create-battle__combatant-edit-row">
+                    <select
+                      name="users_2"
+                      id="users_2"
+                      className={
+                        !playerTwoError
+                          ? "create-battle__select"
+                          : "create-battle__select create-battle__select--error"
+                      }
+                      value={userTwo}
+                      onChange={(event) => {
+                        playerTwoError
+                          ? setPlayerTwoError(false)
+                          : playerTwoError;
+                        setUserTwoFilter(event.target.value.split("+")[0]);
+
+                        setUserTwo(event.target.value);
+                      }}
+                    >
+                      {" "}
+                      <option hidden>Select User</option>
+                      {filteredUserArray?.map((user) => (
                         <option
                           key={crypto.randomUUID()}
                           value={`${user.id}+${user.known_as}`}
                         >
                           {user.known_as}
                         </option>
-                      );
-                    })}
-                  </select>
-                  <select
-                    name="army_1"
-                    className={
-                      !playerOneError
-                        ? "create-battle__select"
-                        : "create-battle__select create-battle__select--error"
-                    }
-                    id="army_1"
-                    value={armyOne}
-                    disabled={!userOne ? true : false}
-                    onChange={(event) => {
-                      playerOneError
-                        ? setPlayerOneError(false)
-                        : playerOneError;
-                      setArmyOne(event.target.value);
-                    }}
-                  >
-                    <option hidden> Select Army </option>
-
-                    {armyArray.length === 0 ? (
-                      <option>No Armies for this User</option>
-                    ) : (
-                      filteredArmyArray?.map((army) => {
-                        if (army.user_id === userOneFilter) {
+                      ))}
+                    </select>
+                    <select
+                      name="army_2"
+                      id="army_2"
+                      disabled={!userTwo ? true : false}
+                      className={
+                        !playerTwoError
+                          ? "create-battle__select"
+                          : "create-battle__select create-battle__select--error"
+                      }
+                      value={armyTwo}
+                      onChange={(event) => {
+                        playerTwoError
+                          ? setPlayerTwoError(false)
+                          : playerTwoError;
+                        setArmyTwo(event.target.value);
+                      }}
+                    >
+                      <option hidden> Select Army</option>
+                      {filteredArmyArray?.map((army) => {
+                        if (army.user_id === userTwoFilter) {
                           return (
                             <option
                               key={crypto.randomUUID()}
@@ -502,157 +631,35 @@ export default function CreateBattle() {
                             </option>
                           );
                         }
-                      })
-                    )}
-                  </select>
-
-                  <button
-                    className={
-                      armyOne
-                        ? "create-battle__add"
-                        : "create-battle__add--disabled"
-                    }
-                    onClick={(event) => {
-                      event?.preventDefault();
-                      playerOneError
-                        ? setPlayerOneError(false)
-                        : playerOneError;
-                      addArmy(event, 1);
-                    }}
-                    disabled={armyOne ? false : true}
-                  >
-                    + Add Army
-                  </button>
-                  <p
-                    className={
-                      !playerOneError
-                        ? "create-battle__error--hide"
-                        : "create-battle__error"
-                    }
-                  >
-                    Please add Player 1
-                  </p>
-                </div>{" "}
-              </div>
-            </div>
-            <div id="2" className="create-battle__combatant">
-              <div className="create-battle__combatant-container">
-                <label className="create-battle__label" htmlFor="users_1">
-                  Player / Team 2
-                </label>
-                {playerTwo.map((player) => (
-                  <article
-                    key={crypto.randomUUID()}
-                    className="create-battle__combatant-card"
-                  >
-                    <BattleCard
-                      key={player.army_id}
-                      army_id={player.army_id}
-                      name={player.name}
-                      known_as={player.known_as}
-                      ranking={player.ranking}
-                      emblem={player.emblem}
-                    />
+                      })}
+                    </select>
                     <button
-                      key={crypto.randomUUID()}
-                      className="create-battle__remove"
-                      onClick={(event: any) => {
-                        const targetID =
-                          event.target.parentElement.children[0].id;
-                        removePlayer(event, targetID, 2);
-                      }}
-                    >
-                      Remove
-                    </button>
-                  </article>
-                ))}{" "}
-                <div className="create-battle__combatant-edit-row">
-                  <select
-                    name="users_2"
-                    id="users_2"
-                    className={
-                      !playerTwoError
-                        ? "create-battle__select"
-                        : "create-battle__select create-battle__select--error"
-                    }
-                    value={userTwo}
-                    onChange={(event) => {
-                      playerTwoError
-                        ? setPlayerTwoError(false)
-                        : playerTwoError;
-                      setUserTwoFilter(event.target.value.split("+")[0]);
-
-                      setUserTwo(event.target.value);
-                    }}
-                  >
-                    {" "}
-                    <option hidden>Select User</option>
-                    {filteredUserArray?.map((user) => (
-                      <option
-                        key={crypto.randomUUID()}
-                        value={`${user.id}+${user.known_as}`}
-                      >
-                        {user.known_as}
-                      </option>
-                    ))}
-                  </select>
-                  <select
-                    name="army_2"
-                    id="army_2"
-                    disabled={!userTwo ? true : false}
-                    className={
-                      !playerTwoError
-                        ? "create-battle__select"
-                        : "create-battle__select create-battle__select--error"
-                    }
-                    value={armyTwo}
-                    onChange={(event) => {
-                      playerTwoError
-                        ? setPlayerTwoError(false)
-                        : playerTwoError;
-                      setArmyTwo(event.target.value);
-                    }}
-                  >
-                    <option hidden> Select Army</option>
-                    {filteredArmyArray?.map((army) => {
-                      if (army.user_id === userTwoFilter) {
-                        return (
-                          <option
-                            key={crypto.randomUUID()}
-                            value={`${army.id}+${army.name}`}
-                          >
-                            {army.name}
-                          </option>
-                        );
+                      className={
+                        armyTwo
+                          ? "create-battle__add"
+                          : "create-battle__add--disabled"
                       }
-                    })}
-                  </select>
-                  <button
-                    className={
-                      armyTwo
-                        ? "create-battle__add"
-                        : "create-battle__add--disabled"
-                    }
-                    onClick={(event) => {
-                      event.preventDefault();
-                      playerTwoError
-                        ? setPlayerTwoError(false)
-                        : playerTwoError;
-                      addArmy(event, 2);
-                    }}
-                    disabled={armyTwo ? false : true}
-                  >
-                    + Add Army
-                  </button>
-                  <p
-                    className={
-                      !playerTwoError
-                        ? "create-battle__error--hide"
-                        : "create-battle__error"
-                    }
-                  >
-                    Please add Player 2
-                  </p>
+                      onClick={(event) => {
+                        event.preventDefault();
+                        playerTwoError
+                          ? setPlayerTwoError(false)
+                          : playerTwoError;
+                        addArmy(event, 2);
+                      }}
+                      disabled={armyTwo ? false : true}
+                    >
+                      + Add Army
+                    </button>
+                    <p
+                      className={
+                        !playerTwoError
+                          ? "create-battle__error--hide"
+                          : "create-battle__error"
+                      }
+                    >
+                      Please add Player 2
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

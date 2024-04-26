@@ -12,6 +12,7 @@
   background: $background-2;
   width: 100%;
   order: 1;
+  max-width: 1440px;
   @include tablet {
     padding: 2rem 3rem;
     gap: 1.5rem;

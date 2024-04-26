@@ -25,12 +25,14 @@ main {
       order: 3;
       background: $background-1;
     }
+    @include widest {
+      margin: 0 auto;
+    }
   }
   &__content {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    max-width: 1440px;
     margin: 0 auto;
   }
 }
