@@ -68,6 +68,12 @@
     &--date {
       width: 48%;
     }
+    @include tablet {
+      font-size: 1rem;
+    }
+    @include desktop {
+      font-size: 1.2rem;
+    }
   }
   &__date {
     display: flex;
@@ -87,6 +93,12 @@
     border: 0.5px solid $space-wolves-3;
     &--error {
       border: 1px solid $blood-angels-5;
+    }
+    @include tablet {
+      font-size: 1.1rem;
+    }
+    @include desktop {
+      font-size: 1.25rem;
     }
 
     &-wrap {
@@ -114,6 +126,12 @@
     background: #fff;
     &--error {
       border: 1px solid $blood-angels-5;
+    }
+    @include tablet {
+      font-size: 1.15rem;
+    }
+    @include desktop {
+      font-size: 1.3rem;
     }
   }
   &__combatant {
@@ -209,6 +227,12 @@
     color: $blood-angels-2;
     &--hide {
       display: none;
+    }
+    @include tablet {
+      font-size: 0.85rem;
+    }
+    @include desktop {
+      font-size: 1rem;
     }
   }
 }
