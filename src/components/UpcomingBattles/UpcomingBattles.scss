@@ -18,11 +18,13 @@
   }
   @include desktop {
     padding: 4rem 4rem;
-    width: 60%;
     justify-content: flex-start;
     order: 1;
     gap: 3rem;
     background-color: $background-4;
+  }
+  @include widest {
+    margin: 0 auto;
   }
   &__header {
     font-family: "Roboto", system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -59,8 +61,11 @@
     align-items: center;
     align-self: stretch;
     gap: 0.5rem;
+    max-width: 1280px;
     &--hide {
       display: none;
+    }
+    @include desktop {
     }
   }
   &__container {

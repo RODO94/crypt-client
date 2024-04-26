@@ -164,7 +164,10 @@ export default function NavHeader() {
               }}
             >
               <PersonIcon style={{ width: "2.5rem", height: "2.5rem" }} />
-              <p className="header-nav__icon-txt">User</p>
+              <p className="header-nav__icon-txt">
+                Your <br />
+                Dash
+              </p>
             </NavLink>{" "}
           </div>
           <NavLink

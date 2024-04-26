@@ -163,7 +163,7 @@ export default function UpcomingBattlesPage() {
           </select>
         </div>
       </form>
-      <section className="upcomingbattles">
+      <section className="upcomingbattlespage-list">
         <article className="upcomingbattles__battle-list">
           {battleArray.map((battle: Battle, index: number) => {
             if (index === 0) {

@@ -19,9 +19,11 @@
 
   @include desktop {
     padding: 4rem 4rem;
-    order: 3;
-    width: 60%;
+    order: 4;
     background: $background-4;
+  }
+  @include widest {
+    margin: 0 auto;
   }
   &__header {
     font-family: "Roboto", system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -59,6 +61,7 @@
     align-self: stretch;
     gap: 0.5rem;
     width: 100%;
+    max-width: 1280px;
   }
   &__container {
     width: 100%;

@@ -9,6 +9,28 @@
   @include desktop {
     padding-top: 8rem;
   }
+  &-list {
+    display: flex;
+    padding: 2rem 1.5rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    align-self: stretch;
+    background: $background-3;
+    width: 100%;
+    order: 2;
+    @include tablet {
+      padding: 2rem 3rem 4rem 3rem;
+      gap: 3rem;
+    }
+
+    @include desktop {
+      padding: 4rem 4rem;
+      order: 3;
+      background: $background-4;
+    }
+  }
   &__header {
     font-size: 2rem;
     font-style: normal;

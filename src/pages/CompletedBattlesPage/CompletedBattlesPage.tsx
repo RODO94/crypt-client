@@ -271,7 +271,7 @@ export default function CompletedBattlesPage() {
           </select>
         </div>
       </form>
-      <section className="completedbattles">
+      <section className="completed-battles-page-list">
         <article className="completedbattles__battle-list">
           {battleArray.map((battle: CompletedBattle, index: number) => {
             if (index === 0) {

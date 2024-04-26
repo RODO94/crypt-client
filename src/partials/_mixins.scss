@@ -10,6 +10,11 @@
     @content;
   }
 }
+@mixin widest {
+  @media (min-width: $widest-breakpoint) {
+    @content;
+  }
+}
 
 @mixin army_colours {
   // 40k

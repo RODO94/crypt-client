@@ -7,6 +7,10 @@
   justify-content: center;
   align-items: stretch;
   width: 100%;
+  &:hover {
+    cursor: pointer;
+    background-color: $table-background--hover;
+  }
   &__combatant-wrap {
     display: flex;
     flex-direction: column;
