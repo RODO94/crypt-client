@@ -7,8 +7,8 @@ import { getRanking } from "../../utils/RankingRequests";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.svg";
 import crown from "../../assets/crown.svg";
-import ArmyPill from "../../components/ArmyPill/ArmyPill";
 import { CircularProgress } from "@mui/material";
+import NewBattleCard from "../../components/NewBattleCard/NewBattleCard";
 
 interface RankArray extends Array<RankObj> {}
 
@@ -51,22 +51,20 @@ export default function FortyKPage() {
             Top Ranked Competitor
           </h2>
           <div className="fantasy-ranking-page__wrap">
+            <div className="fantasy-ranking-page__army-pill">
+              <NewBattleCard
+                player={fortyKRankingArray[0]}
+                player_number={"one"}
+              />
+            </div>
             <img
               src={crown}
               alt="crown"
               className="fantasy-ranking-page__logo"
             />
-            <p className="fantasy-ranking-page__txt">
+            {/* <p className="fantasy-ranking-page__txt">
               {fortyKRankingArray[0].known_as}
-            </p>
-            <div className="fantasy-ranking-page__army-pill">
-              <ArmyPill
-                name={fortyKRankingArray[0].name}
-                emblem={fortyKRankingArray[0].emblem}
-                known_as=""
-                ranking=""
-              />
-            </div>
+            </p> */}
           </div>
         </div>
       </section>
