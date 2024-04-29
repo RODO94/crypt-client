@@ -7,6 +7,7 @@
   align-items: center;
   gap: 1.2rem;
   width: 100%;
+  height: auto;
   &--light {
     background-color: $table-background--light;
   }
@@ -29,6 +30,7 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    height: 100%;
     margin: 0;
     @include tablet {
       font-size: 1.2rem;
