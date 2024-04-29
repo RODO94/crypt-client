@@ -47,6 +47,59 @@
       font-size: 4rem;
     }
   }
+  &__edit-form {
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    gap: 1.5rem;
+  }
+  &__select {
+    display: flex;
+    padding: 1.1rem;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+    border-radius: 4px;
+    background: #fff;
+    font-size: 1rem;
+    border: 0.5px solid $space-wolves-3;
+    width: 100%;
+  }
+  &__update-button {
+    padding: 0.5rem 0.25rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    background-color: $space-wolves-5;
+    color: white;
+    outline: none;
+    border: none;
+    border-radius: 0.5rem;
+    width: 50%;
+    align-self: flex-end;
+    justify-self: flex-end;
+    border: 1px solid transparent;
+    z-index: 1;
+    &:hover {
+      font-weight: 600;
+      text-decoration: underline;
+      cursor: pointer;
+      border: 1px solid $space-wolves-1;
+    }
+    &--edit {
+      justify-self: flex-start;
+      align-self: flex-start;
+      width: 25%;
+      background-color: $space-wolves-3;
+      color: black;
+      font-weight: 600;
+      &:hover {
+        font-weight: 700;
+        text-decoration: none;
+        cursor: pointer;
+        border: 1px solid white;
+      }
+    }
+  }
   &__logo {
     height: 3rem;
     width: 3rem;

@@ -163,7 +163,7 @@ export default function AddArmy() {
                 Please add an Army Type
               </p>
             </label>
-            <label htmlFor="army-type" className="add-army__label">
+            <label htmlFor="army-emblem" className="add-army__label">
               Emblem
               <select
                 name="emblem"

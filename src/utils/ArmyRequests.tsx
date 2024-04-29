@@ -160,6 +160,36 @@ const getArmyAlly = async (id: string) => {
   }
 };
 
+const changeArmyField = async (
+  changeValue: string,
+  changeType: string,
+  id: string,
+  token: string
+) => {
+  try {
+    let requestBody = {};
+    switch (changeType) {
+      case "name":
+        requestBody = { name: changeValue };
+        break;
+      case "type":
+        requestBody = { type: changeValue };
+        break;
+      case "emblem":
+        requestBody = { emblemName: changeValue };
+    }
+
+    await axios.patch(`${baseURL}/armies/${id}/update`, requestBody, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+
+    return true;
+  } catch (error) {
+    return error;
+  }
+};
 export {
   getAllArmies,
   updateArmyCombatants,
@@ -172,4 +202,5 @@ export {
   getArmyAlly,
   getAllUserArmies,
   getArmyInfo,
+  changeArmyField,
 };
