@@ -40,6 +40,7 @@ export default function BattlePointsForm({
   const [userEditBool, setUserEditBool] = useState(false);
   const [battleOverBool, setBattleOverBool] = useState(false);
   const [adminBool, setAdminBool] = useState(false);
+  const [submitBool, setSubmitBool] = useState(false);
 
   const navigate = useNavigate();
 
@@ -231,7 +232,11 @@ export default function BattlePointsForm({
             : "battle-points__submit-button--hide"
         }
         type="submit"
-        onClick={handleReSubmit}
+        onClick={() => {
+          setSubmitBool(true);
+          handleReSubmit();
+        }}
+        disabled={submitBool ? true : false}
       >
         Re-Submit
       </button>
@@ -243,7 +248,11 @@ export default function BattlePointsForm({
             : "battle-points__submit-button--hide"
         }
         type="submit"
-        onClick={handleSubmit}
+        onClick={() => {
+          setSubmitBool(true);
+          handleSubmit();
+        }}
+        disabled={submitBool ? true : false}
       >
         Submit
       </button>
