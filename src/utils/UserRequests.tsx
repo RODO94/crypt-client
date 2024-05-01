@@ -55,6 +55,20 @@ const getUser = async (token: string) => {
   }
 };
 
+const getUserWithToken = async (token: string) => {
+  try {
+    const { data } = await axios.get(`${baseURL}/users/token`, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    return data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
 const getUserInfo = async (
   token: string,
   count: number
@@ -164,4 +178,5 @@ export {
   removeUser,
   getUserInfo,
   verifyUser,
+  getUserWithToken,
 };

@@ -186,8 +186,5 @@ export default function EmblemCard({ emblem }: EmblemType) {
     ? (emblemIcon = ultramarines)
     : (emblemIcon = necrons);
 
-  console.log(emblem + emblem.length);
-  console.log(emblemIcon);
-
   return <img className="emblem-card" src={emblemIcon} alt="army emblem" />;
 }

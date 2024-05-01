@@ -10,6 +10,7 @@ import { CircularProgress } from "@mui/material";
 import { emblemNameArray } from "../../utils/EmblemNames";
 import Emblem from "../Emblem/Emblem";
 import { changeArmyField } from "../../utils/ArmyRequests";
+import { getUserWithToken } from "../../utils/UserRequests";
 
 interface armyDashObj {
   winPercent: string;
@@ -32,6 +33,7 @@ export default function ArmyDash({
   owner,
 }: armyDashObj) {
   const [emblemName, setEmblemName] = useState(armyObj.emblem);
+  const [userBool, setUserBool] = useState(false);
   const [editBool, setEditBool] = useState(false);
   const [newName, setNewName] = useState(armyObj.name);
   const [newType, setNewType] = useState(armyObj.type);
@@ -82,6 +84,19 @@ export default function ArmyDash({
     formatEmblemArray();
   }, [newType]);
 
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (userToken) {
+        const response = await getUserWithToken(userToken);
+        response.id === armyObj.user_id
+          ? setUserBool(true)
+          : setUserBool(false);
+      }
+    };
+
+    fetchUserData();
+  }, [userToken]);
+
   if (!owner) {
     return (
       <section className="army-dash">
@@ -109,7 +124,6 @@ export default function ArmyDash({
     }
     return;
   };
-  console.log(successBool);
   return (
     <section className="army-dash">
       <EmblemHero emblem={newEmblem} />
@@ -125,15 +139,19 @@ export default function ArmyDash({
         <h2 className="army-dash__title">Army Information</h2>
         <img className="army-dash__logo" src={logo} alt="the crypt emblem" />
       </div>
-      <button
-        onClick={() => {
-          editBool ? setEditBool(false) : setEditBool(true);
-        }}
-        className="army-dash__update-button army-dash__update-button--edit"
-      >
-        {editBool ? "Finish Edit" : "Edit Army"}
-      </button>
-      {editBool && userToken ? (
+      {userBool ? (
+        <button
+          onClick={() => {
+            editBool ? setEditBool(false) : setEditBool(true);
+          }}
+          className="army-dash__update-button army-dash__update-button--edit"
+        >
+          {editBool ? "Finish Edit" : "Edit Army"}
+        </button>
+      ) : (
+        <></>
+      )}
+      {editBool && userBool ? (
         <section className="army-dash__edit-form">
           <article className="army-dash__stat-wrap">
             <label className="army-dash__label">Army Name</label>
