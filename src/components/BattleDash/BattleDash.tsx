@@ -696,7 +696,7 @@ export default function BattleDash({
             <h2 className="battle-dash__subheader">Result</h2>
             <div className="battle-dash__info">
               <p className="battle-dash__info-text">
-                {!result ? "TBC" : result}
+                {!result ? "TBC" : result === "victory" ? "Victory" : "Draw"}
               </p>
             </div>
           </article>
@@ -704,7 +704,11 @@ export default function BattleDash({
             <h2 className="battle-dash__subheader">Winner</h2>
             <div className="battle-dash__info">
               <p className="battle-dash__info-text">
-                {!winner ? "TBC" : winner}
+                {!winner && !result
+                  ? "TBC"
+                  : winner && result !== "draw"
+                  ? winner
+                  : "No Winners"}
               </p>
             </div>
           </article>
