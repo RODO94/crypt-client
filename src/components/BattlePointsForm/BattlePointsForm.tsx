@@ -243,7 +243,7 @@ export default function BattlePointsForm({
 
       <button
         className={
-          battleOverBool === false
+          battleOverBool === false || adminBool
             ? "battle-points__submit-button"
             : "battle-points__submit-button--hide"
         }
