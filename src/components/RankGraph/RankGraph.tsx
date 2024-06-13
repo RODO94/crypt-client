@@ -48,10 +48,11 @@ export default function RankGraph(props: {
 
   return (
     <article className="rank-graph">
+      <h2 className="rank-graph__title">Your Rank History</h2>
       <div className="rank-graph__wrap">
         <ResponsiveLine
           data={rankings}
-          margin={{ top: 20, right: 60, bottom: 120, left: 120 }}
+          margin={{ top: 20, right: 60, bottom: 50, left: 120 }}
           colors={"#222222"}
           theme={{
             background: "transparent",
@@ -85,7 +86,6 @@ export default function RankGraph(props: {
             },
           }}
           yFormat=" >-.2f"
-          xScale={{ type: "point" }}
           curve="natural"
           yScale={{
             type: "linear",
@@ -94,15 +94,7 @@ export default function RankGraph(props: {
             stacked: true,
             reverse: false,
           }}
-          axisBottom={{
-            tickSize: 5,
-            tickPadding: 16,
-            tickRotation: 0,
-            legend: "Date",
-            legendOffset: 80,
-            legendPosition: "middle",
-            truncateTickAt: 0,
-          }}
+          axisBottom={null}
           axisLeft={{
             tickSize: 5,
             tickPadding: 16,
@@ -118,9 +110,11 @@ export default function RankGraph(props: {
           pointBorderColor={{ from: "serieColor" }}
           pointLabel="data.yFormatted"
           pointLabelYOffset={-12}
-          enableSlices="x"
           enableTouchCrosshair={true}
           useMesh={true}
+          onClick={(event) => {
+            console.log(event);
+          }}
         />
       </div>
     </article>

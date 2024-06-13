@@ -67,31 +67,33 @@ export default function FantasyRankingPage() {
       </section>
       <section className="fantasy-rankings">
         <FiveColTableHeader />
-        {fantasyRankingArray.map((army: RankObj, index: number) => {
-          let colour = "dark";
-          if (index % 2 === 0) {
-            colour = "light";
-          }
-          return (
-            <FiveColTableRow
-              key={crypto.randomUUID()}
-              rank={`${index + 1}`}
-              known_as={army.known_as}
-              name={army.name}
-              ranking={army.ranking}
-              status={
-                Number(army.prev_ranking) < index + 1
-                  ? "decrease"
-                  : Number(army.prev_ranking) > index + 1
-                  ? "increase"
-                  : "no change"
-              }
-              colour={colour}
-              navTo="/armies/information"
-              id={army.army_id}
-            />
-          );
-        })}
+        {fantasyRankingArray
+          .filter((army) => army.prev_ranking !== "99.00")
+          .map((army: RankObj, index: number) => {
+            let colour = "dark";
+            if (index % 2 === 0) {
+              colour = "light";
+            }
+            return (
+              <FiveColTableRow
+                key={crypto.randomUUID()}
+                rank={`${index + 1}`}
+                known_as={army.known_as}
+                name={army.name}
+                ranking={army.ranking}
+                status={
+                  Number(army.prev_ranking) < index + 1
+                    ? "decrease"
+                    : Number(army.prev_ranking) > index + 1
+                    ? "increase"
+                    : "no change"
+                }
+                colour={colour}
+                navTo="/armies/information"
+                id={army.army_id}
+              />
+            );
+          })}
       </section>
     </main>
   );
