@@ -7,6 +7,7 @@ import ArmyNemesis from "../../components/ArmyNemesis/ArmyNemesis";
 import ArmyAlly from "../../components/ArmyAlly/ArmyAlly";
 import { ArmyObj, Player } from "../../utils/Interfaces";
 import { CircularProgress } from "@mui/material";
+import RankGraph from "../../components/RankGraph/RankGraph";
 
 export default function ArmyInfo() {
   const [armyObj, setArmyObj] = useState<ArmyObj | null>(null);
@@ -57,6 +58,7 @@ export default function ArmyInfo() {
         armyRank={armyRank}
         owner={owner}
       />
+      <RankGraph army_id={armyObj.army_id} name={armyObj.name} />
       <section className="army-info__nemesis-ally">
         <div className="army-info__container">
           <ArmyNemesis nemesis={nemesisObj} />

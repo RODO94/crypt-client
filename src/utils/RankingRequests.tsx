@@ -7,6 +7,11 @@ const getRankingTopFive = async () => {
   return data;
 };
 
+const getRankingsOneArmy = async (id: string) => {
+  const { data } = await axios.get(`${baseURL}/rankings/${id}/all`);
+  return data;
+};
+
 const getRanking = async (battleType: string) => {
   const { data } = await axios.get(`${baseURL}/rankings/all`);
 
@@ -64,4 +69,10 @@ const getAllUserRanking = async (
     }
   }
 };
-export { getRankingTopFive, getRanking, getUserRanking, getAllUserRanking };
+export {
+  getRankingTopFive,
+  getRanking,
+  getUserRanking,
+  getAllUserRanking,
+  getRankingsOneArmy,
+};
