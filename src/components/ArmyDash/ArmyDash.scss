@@ -199,6 +199,14 @@
     flex-direction: row;
     align-items: center;
     color: #fff;
+    padding: 0.25rem;
+    padding-right: 0.5rem;
+    border-radius: 4px;
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
+      background-color: $background-3;
+    }
     @include desktop {
       top: 8rem;
     }
