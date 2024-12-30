@@ -8,7 +8,7 @@ export default function BattleCard({
   army_id,
   emblem,
 }: Player) {
-  let nameArray: any[] = [];
+  let nameArray: string[] = [];
   if (emblem) {
     nameArray = emblem.toLowerCase().split(" ");
   }
