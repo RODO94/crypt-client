@@ -7,11 +7,11 @@ export default function NewBattleCard({
   player_number,
 }: {
   player: Player;
-  player_number: String;
+  player_number: string;
 }) {
   !player.emblem ? (player.emblem = "necrons") : player.emblem;
 
-  let nameArray: any[] = [];
+  let nameArray: string[] = [];
   if (player.emblem) {
     nameArray = player.emblem.toLowerCase().split(" ");
   }

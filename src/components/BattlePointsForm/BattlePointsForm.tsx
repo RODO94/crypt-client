@@ -9,8 +9,8 @@ import {
   updateBattleDetail,
 } from "../../utils/BattleRequests";
 import { getUser } from "../../utils/UserRequests";
-import { useNavigate } from "react-router";
 import { CircularProgress } from "@mui/material";
+import { redirect } from "react-router";
 
 interface BattlePoints {
   playerOne: Player[];
@@ -42,13 +42,11 @@ export default function BattlePointsForm({
   const [adminBool, setAdminBool] = useState(false);
   const [submitBool, setSubmitBool] = useState(false);
 
-  const navigate = useNavigate();
-
   useEffect(() => {
     const getUserRole = async (token: string) => {
       const response = await getUser(token);
       if (!response) {
-        return navigate("/");
+        return redirect("/");
       }
 
       if (response.role === "admin") {
