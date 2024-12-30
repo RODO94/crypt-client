@@ -22,7 +22,7 @@ import CreateBattleForm from "../../components/CreateBattleForm/CreateBattleForm
 
 interface UsersArray extends Array<Users> {}
 interface ArmiesArray extends Array<Armies> {}
-interface BattleInformation {
+export interface BattleInformation {
   battleType: "40k" | "fantasy";
   pointSize: number;
   scenario?: string;
@@ -49,7 +49,6 @@ export default function CreateBattle() {
     onSubmit: () => {},
   });
 
-  const [pointSizeError, setPointSizeError] = useState(false);
   const [playerOneError, setPlayerOneError] = useState(false);
   const [playerTwoError, setPlayerTwoError] = useState(false);
 

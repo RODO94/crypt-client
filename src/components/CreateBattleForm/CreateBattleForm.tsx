@@ -5,8 +5,10 @@ import {
 } from "@mui/x-date-pickers";
 import "./CreateBattleForm.scss";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { FormikProps } from "formik";
+import { BattleInformation } from "../../pages/CreateBattle/CreateBattle";
 
-export default function CreateBattleForm({ formik }) {
+export default function CreateBattleForm({ formik }:{formik: FormikProps<BattleInformation>}) {
   return (
     <section>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
