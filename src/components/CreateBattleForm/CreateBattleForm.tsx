@@ -47,7 +47,7 @@ export default function CreateBattleForm({ formik }:{formik: FormikProps<BattleI
               <input
                 type="number"
                 className={
-                  pointSizeError
+                  formik.errors.pointSize
                     ? "create-battle__input create-battle__input--error"
                     : "create-battle__input"
                 }
@@ -59,12 +59,12 @@ export default function CreateBattleForm({ formik }:{formik: FormikProps<BattleI
               />
               <p
                 className={
-                  pointSizeError
+                  formik.errors.pointSize
                     ? "create-battle__error"
                     : "create-battle__error--hide"
                 }
               >
-                Please add a point size
+                {formik.errors.pointSize}
               </p>
             </label>
           </div>
@@ -103,14 +103,14 @@ export default function CreateBattleForm({ formik }:{formik: FormikProps<BattleI
             >
               Table
               <select
-                value={table}
+                value={formik.values.table}
                 name="table"
                 className="create-battle__select"
                 onChange={(event) => {
-                  setTable(event.target.value);
+                  formik.setFieldValue("table", event.target.value);
                 }}
               >
-                <option hidden>{table}</option>
+                <option hidden>{formik.values.table}</option>
                 <option value="Table 1">Table 1</option>
                 <option value="Table 2">Table 2</option>
                 <option value="Table 3">Table 3</option>
@@ -125,9 +125,9 @@ export default function CreateBattleForm({ formik }:{formik: FormikProps<BattleI
                 name="start
                 "
                 ampm={false}
-                value={start}
-                onChange={(newValue: any) => {
-                  setStart(newValue);
+                value={formik.values.start}
+                onChange={(newValue) => {
+                  formik.setFieldValue("start",newValue);
                 }}
               />
             </label>
@@ -139,10 +139,10 @@ export default function CreateBattleForm({ formik }:{formik: FormikProps<BattleI
               <MobileTimePicker
                 name="finish"
                 ampm={false}
-                value={finish}
-                minTime={start}
-                onChange={(newValue: any) => {
-                  setFinish(newValue);
+                value={formik.values.finish}
+                minTime={formik.values.start}
+                onChange={(newValue) => {
+                  formik.setFieldValue("finish",newValue);
                 }}
               />
             </label>
