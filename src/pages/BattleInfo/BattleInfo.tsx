@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { redirect } from "react-router";
 import "./BattleInfo.scss";
 import { useEffect, useState } from "react";
 import { getUser, verifyUser } from "../../utils/UserRequests";
@@ -15,10 +15,9 @@ export default function BattleInfo() {
   const [playerTwoArray, setPlayerTwoArray] = useState([]);
   const [winnerValue, setWinnerValue] = useState("");
 
-  const location = useLocation();
-  const navigate = useNavigate();
-  const battleID = location.state.id;
-  let userToken = sessionStorage.getItem("token");
+  const pathName: string[] = window.location.pathname.split("/");
+  const battleID = pathName[pathName.length - 1];
+  const userToken = sessionStorage.getItem("token");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,7 +32,7 @@ export default function BattleInfo() {
             setRole(userData.role);
           }
         } else if (!response) {
-          navigate("/login/redirect");
+          redirect("/login/redirect");
         }
       } else {
         setRole("public");

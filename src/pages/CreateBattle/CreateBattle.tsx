@@ -4,13 +4,15 @@ import dayjs, { Dayjs } from "dayjs";
 import { ArrowLeftIcon } from "@mui/x-date-pickers";
 import { Player } from "../../utils/Interfaces";
 import { createBattleRequest } from "../../utils/BattleRequests";
-import { redirect, useNavigate } from "react-router";
+import { redirect } from "react-router";
 import { CircularProgress } from "@mui/material";
 import DoneIcon from "@mui/icons-material/Done";
 import Header from "../../components/Header/Header";
 import { useFormik } from "formik";
 import CreateBattleForm from "../../components/CreateBattleForm/CreateBattleForm";
 import CreateBattleCombatants from "../../components/CreateBattleCombatants/CreateBattleCombatants";
+import { battleFormValidationSchema } from "./CreateBattleValidSchema";
+import { red } from "@mui/material/colors";
 export interface BattleInformation {
   battleType: "40k" | "fantasy";
   pointSize: number;
@@ -39,12 +41,12 @@ export default function CreateBattle() {
   const formik = useFormik({
     initialValues: initialBattleValues,
     onSubmit: () => {},
+    validationSchema: battleFormValidationSchema,
+    validateOnBlur: true,
   });
 
   const [successBool, setSuccessBool] = useState(false);
   const [loadingBool, setLoadingBool] = useState(false);
-
-  const navigate = useNavigate();
 
   const userToken = sessionStorage.getItem("token");
   if (!userToken) {
@@ -95,7 +97,7 @@ export default function CreateBattle() {
         setLoadingBool(false);
         setSuccessBool(true);
         setTimeout(() => {
-          navigate(`/battles/information`, { state: { id: response } });
+          redirect(`/battles/information/${response}`);
         }, 1000);
       }
     } catch (error) {
@@ -119,7 +121,7 @@ export default function CreateBattle() {
         <h2 className="create-battle__header">Create New Battle</h2>
         <div
           onClick={() => {
-            navigate("/user");
+            redirect("/user");
           }}
           className="create-battle__back-arrow"
         >
