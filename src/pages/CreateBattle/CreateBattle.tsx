@@ -64,8 +64,6 @@ export default function CreateBattle() {
   }
 
   const createBattle = async () => {
-    await formik.validateForm();
-
     let playerType = "single";
     if (
       formik.values.playerOne.length > 1 ||
