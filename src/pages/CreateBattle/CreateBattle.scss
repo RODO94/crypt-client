@@ -18,6 +18,7 @@
   padding-top: 10rem;
   @include tablet {
     height: 200%;
+    padding: 2rem 1rem;
   }
   &__section {
     position: relative;
@@ -33,7 +34,6 @@
     max-width: 30rem;
     margin: 0 auto;
     @include desktop {
-      margin-top: 6rem;
       max-width: 60rem;
       padding-bottom: 3rem;
       gap: 3rem;
@@ -201,7 +201,9 @@
     border: none;
     outline: none;
     font-weight: 700;
-    padding: 1rem;
+    @include tablet {
+      padding: 1rem;
+    }
     &:hover {
       cursor: pointer;
       height: 100%;
