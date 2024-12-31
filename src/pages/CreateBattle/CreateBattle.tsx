@@ -55,8 +55,6 @@ export default function CreateBattle() {
   const [successBool, setSuccessBool] = useState(false);
   const [loadingBool, setLoadingBool] = useState(false);
 
-  const navigate = useNavigate();
-
   const userToken = sessionStorage.getItem("token");
   if (!userToken) {
     navigate("/login");
@@ -129,7 +127,7 @@ export default function CreateBattle() {
         <h2 className="create-battle__header">Create New Battle</h2>
         <div
           onClick={() => {
-            navigate("/user");
+            redirect("/user");
           }}
           className="create-battle__back-arrow"
         >
