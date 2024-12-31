@@ -1,7 +1,6 @@
 import { FormikProps } from "formik";
 import { addArmy, removePlayer } from "../../pages/CreateBattle/utils";
 import { Armies, Player, Users } from "../../utils/Interfaces";
-import BattleCard from "../BattleCard/BattleCard";
 import "./CreateBattleCombatants.scss";
 import { BattleInformation } from "../../pages/CreateBattle/CreateBattle";
 import { useEffect, useState } from "react";
@@ -9,6 +8,7 @@ import { getAllArmies } from "../../utils/ArmyRequests";
 import { getAllUsers } from "../../utils/UserRequests";
 import { filterArrays } from "../../pages/CreateBattle/filterFunctions";
 import { CircularProgress } from "@mui/material";
+import NewBattleCard from "../NewBattleCard/NewBattleCard";
 
 interface Props {
   formik: FormikProps<BattleInformation>;
@@ -77,13 +77,11 @@ export default function CreateBattleCombatants({ formik }: Props) {
               key={crypto.randomUUID()}
               className="create-battle__combatant-card"
             >
-              <BattleCard
+              <NewBattleCard
                 key={crypto.randomUUID()}
-                army_id={player.army_id}
-                name={player.name}
-                known_as={player.known_as}
-                ranking={player.ranking}
-                emblem={player.emblem}
+                player={player}
+                player_number="one"
+                id={player.army_id}
               />
               <button
                 key={crypto.randomUUID()}
@@ -198,13 +196,11 @@ export default function CreateBattleCombatants({ formik }: Props) {
               key={crypto.randomUUID()}
               className="create-battle__combatant-card"
             >
-              <BattleCard
-                key={player.army_id}
-                army_id={player.army_id}
-                name={player.name}
-                known_as={player.known_as}
-                ranking={player.ranking}
-                emblem={player.emblem}
+              <NewBattleCard
+                key={crypto.randomUUID()}
+                player={player}
+                player_number="one"
+                id={player.army_id}
               />
               <button
                 key={crypto.randomUUID()}

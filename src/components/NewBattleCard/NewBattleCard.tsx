@@ -5,9 +5,11 @@ import "./NewBattleCard.scss";
 export default function NewBattleCard({
   player,
   player_number,
+  id,
 }: {
   player: Player;
   player_number: string;
+  id?: string;
 }) {
   !player.emblem ? (player.emblem = "necrons") : player.emblem;
 
@@ -26,6 +28,7 @@ export default function NewBattleCard({
   return (
     <div
       className={`new-battle-card__combatant new-battle-card__combatant--${player_number}`}
+      id={id}
     >
       <div
         className={`new-battle-card__emblem-wrap new-battle-card__emblem-wrap--${player_number} ${nameColour} `}

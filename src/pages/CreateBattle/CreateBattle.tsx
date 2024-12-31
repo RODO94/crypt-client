@@ -64,8 +64,6 @@ export default function CreateBattle() {
   }
 
   const createBattle = async () => {
-    await formik.validateForm();
-
     let playerType = "single";
     if (
       formik.values.playerOne.length > 1 ||
@@ -103,12 +101,10 @@ export default function CreateBattle() {
     try {
       setLoadingBool(true);
       const response = await createBattleRequest(userToken, requestBody, 5);
-      console.log(response);
       if (response) {
         setLoadingBool(false);
         setSuccessBool(true);
         setTimeout(() => {
-          console.log("inside timeout");
           navigate(`/battles/information/${response}`);
         }, 1000);
       }
