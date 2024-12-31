@@ -1,9 +1,9 @@
-import { useNavigate } from "react-router-dom";
 import { Player } from "../../utils/Interfaces";
 import NewBattleCard from "../NewBattleCard/NewBattleCard";
 import "./NewBattleCompleteTableRow.scss";
 import { useEffect, useState } from "react";
 import crown from "../../assets/crown.svg";
+import NavigationLink from "../NavigationLink/NavigationLink";
 
 interface BattleTableRow {
   battle_type?: string;
@@ -38,70 +38,67 @@ export default function NewBattleCompleteTableRow({
     fetchWinner(winner);
   }, []);
 
-  const navigate = useNavigate();
-
-  const handleClick = () => {
-    navigate(`/battles/information`, { state: { id: id } });
-  };
   return (
-    <article className="new-battle-table-row" onClick={handleClick}>
-      <div className="new-battle-table-row__combatant-result new-battle-table-row__combatant-result--one">
-        <div
-          className={`new-battle-table-row__combatant-container  ${
-            winnerValue === "Player 2" || winnerValue === "Draw"
-              ? "loser"
-              : "winner"
-          }`}
-        >
-          {player_1.map((player) => (
-            <NewBattleCard
-              key={player.id}
-              player={player}
-              player_number={"one"}
-            />
-          ))}
+    <NavigationLink to={`/battles/information/${id}`}>
+      <article className="new-battle-table-row">
+        <div className="new-battle-table-row__combatant-result new-battle-table-row__combatant-result--one">
+          <div
+            className={`new-battle-table-row__combatant-container  ${
+              winnerValue === "Player 2" || winnerValue === "Draw"
+                ? "loser"
+                : "winner"
+            }`}
+          >
+            {player_1.map((player) => (
+              <NewBattleCard
+                key={player.id}
+                player={player}
+                player_number={"one"}
+              />
+            ))}
+          </div>
+          {winnerValue === "Player 2" || winnerValue === "Draw" ? (
+            ""
+          ) : (
+            <div className="new-battle-table-row__icon-wrap new-battle-table-row__icon-wrap--1">
+              <img
+                src={crown}
+                alt="crown depicting the winner of the battle"
+                className="new-battle-table-row__icon"
+              />
+            </div>
+          )}
         </div>
-        {winnerValue === "Player 2" || winnerValue === "Draw" ? (
-          ""
-        ) : (
-          <div className="new-battle-table-row__icon-wrap new-battle-table-row__icon-wrap--1">
-            <img
-              src={crown}
-              alt="crown depicting the winner of the battle"
-              className="new-battle-table-row__icon"
-            />
-          </div>
-        )}
-      </div>
-      <div className="new-battle-table-row__combatant-result">
-        {winnerValue === "Player 1" || winnerValue === "Draw" ? (
-          ""
-        ) : (
-          <div className="new-battle-table-row__icon-wrap">
-            <img
-              src={crown}
-              alt="crown depicting the winner of the battle"
-              className="new-battle-table-row__icon"
-            />
-          </div>
-        )}
+        <div className="new-battle-table-row__combatant-result">
+          {winnerValue === "Player 1" || winnerValue === "Draw" ? (
+            ""
+          ) : (
+            <div className="new-battle-table-row__icon-wrap">
+              <img
+                src={crown}
+                alt="crown depicting the winner of the battle"
+                className="new-battle-table-row__icon"
+              />
+            </div>
+          )}
 
-        <div
-          className={`new-battle-table-row__combatant-container ${
-            winnerValue === "Player 1" || winnerValue === "Draw"
-              ? "loser"
-              : "winner"
-          }`}
-        >
-          {player_2.map((player) => (
-            <NewBattleCard
-              key={player.id}
-              player={player}
-              player_number={"two"}
-            />
-          ))}
+          <div
+            className={`new-battle-table-row__combatant-container ${
+              winnerValue === "Player 1" || winnerValue === "Draw"
+                ? "loser"
+                : "winner"
+            }`}
+          >
+            {player_2.map((player) => (
+              <NewBattleCard
+                key={player.id}
+                player={player}
+                player_number={"two"}
+              />
+            ))}
+          </div>
         </div>
-      </div>
-    </article>
+      </article>
+    </NavigationLink>
   );
 }
