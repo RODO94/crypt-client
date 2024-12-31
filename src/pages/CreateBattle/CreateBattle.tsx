@@ -55,6 +55,8 @@ export default function CreateBattle() {
   const [successBool, setSuccessBool] = useState(false);
   const [loadingBool, setLoadingBool] = useState(false);
 
+  const navigate = useNavigate();
+
   const userToken = sessionStorage.getItem("token");
   if (!userToken) {
     navigate("/login");
@@ -62,6 +64,8 @@ export default function CreateBattle() {
   }
 
   const createBattle = async () => {
+    await formik.validateForm();
+
     let playerType = "single";
     if (
       formik.values.playerOne.length > 1 ||
@@ -119,6 +123,8 @@ export default function CreateBattle() {
       );
     }
   };
+
+  console.log(formik.errors);
 
   return (
     <main className="create-battle">
