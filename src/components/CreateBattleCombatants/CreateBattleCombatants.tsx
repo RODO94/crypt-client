@@ -65,9 +65,6 @@ export default function CreateBattleCombatants({ formik }: Props) {
     );
   }
 
-  console.log(formik.values.playerOne);
-  console.log(formik.values.playerTwo);
-
   return (
     <div className="create-battle__form-combatants">
       <div id="1" className="create-battle__combatant">

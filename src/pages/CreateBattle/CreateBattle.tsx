@@ -4,7 +4,6 @@ import dayjs, { Dayjs } from "dayjs";
 import { ArrowLeftIcon } from "@mui/x-date-pickers";
 import { Player } from "../../utils/Interfaces";
 import { createBattleRequest } from "../../utils/BattleRequests";
-import { redirect } from "react-router";
 import { CircularProgress } from "@mui/material";
 import DoneIcon from "@mui/icons-material/Done";
 import Header from "../../components/Header/Header";
@@ -12,13 +11,13 @@ import { useFormik } from "formik";
 import CreateBattleForm from "../../components/CreateBattleForm/CreateBattleForm";
 import CreateBattleCombatants from "../../components/CreateBattleCombatants/CreateBattleCombatants";
 import { battleFormValidationSchema } from "./CreateBattleValidSchema";
-import { red } from "@mui/material/colors";
+import { redirect, useNavigate } from "react-router-dom";
 export interface BattleInformation {
   battleType: "40k" | "fantasy";
   pointSize: number;
   scenario?: string;
   date: Dayjs;
-  table: "Table 0" | "Table 1" | "Table 2";
+  table: "Table 1" | "Table 2" | "Table 3";
   start: string | Dayjs;
   finish: string | Dayjs;
   playerOne: Player[] | [];
@@ -30,7 +29,7 @@ const initialBattleValues: BattleInformation = {
   pointSize: 0,
   scenario: "",
   date: dayjs(),
-  table: "Table 0",
+  table: "Table 1",
   start: dayjs(),
   finish: "",
   playerOne: [],
@@ -40,21 +39,32 @@ const initialBattleValues: BattleInformation = {
 export default function CreateBattle() {
   const formik = useFormik({
     initialValues: initialBattleValues,
-    onSubmit: () => {},
+    onSubmit: (values) => {
+      formik.validateForm(values);
+      if (!formik.isValid) {
+        console.log(formik.isValid);
+      }
+      createBattle();
+    },
     validationSchema: battleFormValidationSchema,
     validateOnBlur: true,
+    validateOnMount: false,
+    validateOnChange: false,
   });
 
   const [successBool, setSuccessBool] = useState(false);
   const [loadingBool, setLoadingBool] = useState(false);
 
+  const navigate = useNavigate();
+
   const userToken = sessionStorage.getItem("token");
   if (!userToken) {
-    redirect("/login");
-    return <h1>You need to log in</h1>;
+    return redirect("/login");
   }
 
   const createBattle = async () => {
+    await formik.validateForm();
+
     let playerType = "single";
     if (
       formik.values.playerOne.length > 1 ||
@@ -92,12 +102,13 @@ export default function CreateBattle() {
     try {
       setLoadingBool(true);
       const response = await createBattleRequest(userToken, requestBody, 5);
-
+      console.log(response);
       if (response) {
         setLoadingBool(false);
         setSuccessBool(true);
         setTimeout(() => {
-          redirect(`/battles/information/${response}`);
+          console.log("inside timeout");
+          navigate(`/battles/information/${response}`);
         }, 1000);
       }
     } catch (error) {
@@ -114,6 +125,8 @@ export default function CreateBattle() {
     }
   };
 
+  console.log(formik.errors);
+
   return (
     <main className="create-battle">
       <Header />{" "}
@@ -128,17 +141,11 @@ export default function CreateBattle() {
           <ArrowLeftIcon />{" "}
           <p className="create-battle__back-arrow-txt">Go Back</p>
         </div>
-        <form className="create-battle__form">
+        <form className="create-battle__form" onSubmit={formik.handleSubmit}>
           <CreateBattleForm formik={formik} />
           <CreateBattleCombatants formik={formik} />
           {!successBool && !loadingBool ? (
-            <button
-              onClick={(event) => {
-                event.preventDefault();
-                createBattle();
-              }}
-              className="create-battle__create"
-            >
+            <button type="submit" className="create-battle__create">
               Create Battle
             </button>
           ) : loadingBool && !successBool ? (

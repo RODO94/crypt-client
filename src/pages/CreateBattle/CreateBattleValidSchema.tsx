@@ -1,14 +1,19 @@
-import { string, number, date } from "yup";
+import * as Yup from "yup";
+const { string, number, date } = Yup;
 
-export const battleFormValidationSchema = {
+export const battleFormValidationSchema = Yup.object().shape({
   battleType: string().matches(/40k|fantasy/, "Value should be 40k or fantasy"),
-  pointSize: number().positive("Points should be a positive value").optional(),
+  pointSize: number()
+    .required("Enter a point size")
+    .positive("Points should be a positive value"),
   scenario: string().length(254, "Maximum character length is 254").optional(),
   date: date().required("Enter a date for the battle"),
-  table: string().matches(
-    /Table 0 | Table 1 | Table 2/,
-    "Select from Table 0, 1, or 2"
-  ),
+  table: string()
+    .optional()
+    .matches(/Table 1| Table 2| Table 3/, "Select from Table 1, 2, or 3"),
+
   start: string().required("Enter a start date for the battle"),
   finish: string().optional(),
-};
+  playerOne: Yup.array().min(1, "Add an army for player one"),
+  playerTwo: Yup.array().min(1, "Add an army for player two"),
+});
