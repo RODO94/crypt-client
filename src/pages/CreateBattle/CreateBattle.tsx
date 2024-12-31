@@ -59,7 +59,8 @@ export default function CreateBattle() {
 
   const userToken = sessionStorage.getItem("token");
   if (!userToken) {
-    return redirect("/login");
+    navigate("/login");
+    return <p>Please login</p>;
   }
 
   const createBattle = async () => {
@@ -124,8 +125,6 @@ export default function CreateBattle() {
       );
     }
   };
-
-  console.log(formik.errors);
 
   return (
     <main className="create-battle">
