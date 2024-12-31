@@ -6,7 +6,7 @@ export const battleFormValidationSchema = Yup.object().shape({
   pointSize: number()
     .required("Enter a point size")
     .positive("Points should be a positive value"),
-  scenario: string().length(254, "Maximum character length is 254").optional(),
+  scenario: string().optional(),
   date: date().required("Enter a date for the battle"),
   table: string()
     .optional()
