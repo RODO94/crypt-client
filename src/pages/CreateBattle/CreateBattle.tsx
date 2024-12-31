@@ -124,8 +124,6 @@ export default function CreateBattle() {
     }
   };
 
-  console.log(formik.errors);
-
   return (
     <main className="create-battle">
       <Header />{" "}
