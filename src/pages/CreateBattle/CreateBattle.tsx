@@ -129,7 +129,7 @@ export default function CreateBattle() {
         <h2 className="create-battle__header">Create New Battle</h2>
         <div
           onClick={() => {
-            redirect("/user");
+            navigate("/user");
           }}
           className="create-battle__back-arrow"
         >
