@@ -51,8 +51,8 @@ export interface Users {
   id: string;
 }
 
-export type password = Omit<LogInBody, "email">;
-export type email = Omit<LogInBody, "password">;
+export type Password = Pick<LogInBody, "password">;
+export type Email = Pick<LogInBody, "email">;
 
 export interface SignUpBody {
   email: string;
@@ -67,8 +67,7 @@ export interface Input {
   name: string;
   label: string;
   type: string;
-  onChange?: Function;
-  required: Boolean;
+  required: boolean;
 }
 
 export interface RankObj {

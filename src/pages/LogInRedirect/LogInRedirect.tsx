@@ -8,13 +8,14 @@ import {
   loginAuthentication,
 } from "../../utils/UserAuth";
 import { useState } from "react";
+import { useUserStore } from "../../store/user";
 
 export default function LogInRedirect() {
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [errorClass, setErrorClass] = useState<string>(
     "login__error login__error--hidden"
   );
-
+  const { setUserRole } = useUserStore();
   const navigate = useNavigate();
 
   const handleSubmit = async (event: any) => {
@@ -23,6 +24,7 @@ export default function LogInRedirect() {
     const password = event.target.password.value;
     const requestObj = { email: email, password: password };
     const response = await loginAuthentication(requestObj);
+    setUserRole(response.role);
 
     if (response === "Invalid Password") {
       setErrorClass("login__error login__error--visible");
