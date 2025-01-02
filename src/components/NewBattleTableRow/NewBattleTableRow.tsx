@@ -6,10 +6,10 @@ import dayjs from "dayjs";
 import NavigationLink from "../NavigationLink/NavigationLink";
 
 interface BattleTableRow {
-  battle_type: string;
+  battle_type: "40k" | "fantasy";
   player_type?: string;
-  player_1: Array<Player>;
-  player_2: Array<Player>;
+  player_1: Player[];
+  player_2: Player[];
   id: string;
   table: string;
   start: string;
