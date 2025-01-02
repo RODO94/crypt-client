@@ -10,7 +10,7 @@ const loginAuthentication = async (body: LogInBody) => {
       await axios.post(`${baseURL}/users/login`, body);
     sessionStorage.setItem("token", data.token);
     return data;
-  } catch (error) {
+  } catch (error: any) {
     console.error(error);
     return error.response.data;
   }

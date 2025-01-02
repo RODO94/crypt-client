@@ -4,7 +4,7 @@ import "./ResetPassword.scss";
 import logo from "../../assets/logo.svg";
 import { resetPasswordAuthentication } from "../../utils/UserAuth";
 import { useState } from "react";
-import { password } from "../../utils/Interfaces";
+import { Password } from "../../utils/Interfaces";
 
 export default function ResetPassword() {
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -41,7 +41,7 @@ export default function ResetPassword() {
       );
     }
 
-    const requestObj: password = {
+    const requestObj: Password = {
       password: password,
     };
 
