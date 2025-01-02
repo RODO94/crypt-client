@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Battle } from "./Interfaces";
 
 const baseURL = import.meta.env.VITE_SERVER_URL;
 
@@ -10,6 +11,26 @@ const getUpcomingBattlesFive = async () => {
 const getCompletedBattlesFive = async () => {
   const { data } = await axios.get(`${baseURL}/battles/completed/5`);
   return data;
+};
+
+export const getUserLastFiveBattles = async (
+  token: string
+): Promise<string[] | false> => {
+  try {
+    const { data } = await axios.get(`${baseURL}/battles/user/last/5`, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+
+    const mappedData = data.map(
+      (battle: Battle & { userResult: string }) => battle.userResult
+    );
+    return mappedData;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
 };
 
 const getUpcomingBattles = async (count: number): Promise<any | false> => {

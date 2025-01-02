@@ -5,7 +5,8 @@ import "./DashboardHero.scss";
 import Emblem from "../Emblem/Emblem";
 import NavButton from "../NavButton/NavButton";
 import { Battle, RankObj, UsersObj } from "../../utils/Interfaces";
-import BattleCard from "../BattleCard/BattleCard";
+import BattleResultBanner from "../BattleResultBanner/BattleResultBanner";
+import NewBattleCard from "../NewBattleCard/NewBattleCard";
 
 interface dashboardType {
   userObj: UsersObj;
@@ -24,6 +25,7 @@ export default function DashboardHero({
   fortykRanked,
   fantasyRanked,
 }: dashboardType) {
+  console.log(fantasyRanked);
   return (
     <section className="dashboard-hero">
       <div className="dashboard-hero__container">
@@ -33,7 +35,8 @@ export default function DashboardHero({
       <div className="dashboard-hero__content">
         <div className="dashboard-hero__info">
           <div className="dashboard-hero__battle-wrap">
-            <article className="dashboard-hero__next-battle">
+            <article className="dashboard-hero__armies">
+              <BattleResultBanner />
               <NextBattleCard nextBattle={nextBattle} id={userObj.id} />
             </article>
             <article className="dashboard-hero__armies">
@@ -43,25 +46,27 @@ export default function DashboardHero({
           </div>
         </div>
         <div className="dashboard-hero__topcombatant">
+          <p className="dashboard-hero__topcombatant-title">Top Armies</p>
           <article className="dashboard-hero__combatant-wrap">
-            <p className="dashboard-hero__topcombatant-title">Top Armies</p>
             <div className="dashboard-hero__combatant">
-              <BattleCard
-                name={fortykRanked?.name}
-                emblem={fortykRanked?.emblem}
-                ranking={fortykRanked?.ranking}
-                known_as={userObj.known_as}
-              />
+              {fortykRanked ? (
+                <NewBattleCard
+                  player_number="one"
+                  player={{ ...fortykRanked, known_as: userObj.known_as }}
+                />
+              ) : (
+                <p>You have no top ranked 40,000 armies</p>
+              )}
             </div>
-          </article>
-          <article className="dashboard-hero__combatant-wrap">
             <div className="dashboard-hero__combatant">
-              <BattleCard
-                name={fantasyRanked?.name}
-                emblem={fantasyRanked?.emblem}
-                ranking={fantasyRanked?.ranking}
-                known_as={userObj.known_as}
-              />
+              {fantasyRanked ? (
+                <NewBattleCard
+                  player_number="one"
+                  player={{ ...fantasyRanked, known_as: userObj.known_as }}
+                />
+              ) : (
+                <p>You have no top ranked Fantasy armies</p>
+              )}
             </div>
           </article>
         </div>
