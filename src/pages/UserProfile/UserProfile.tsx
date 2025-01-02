@@ -18,9 +18,54 @@ import {
   alpha,
   styled,
 } from "@mui/material";
+import { useUserStore } from "../../store/user";
+import { ArmyObj, UsersObj } from "../../utils/Interfaces";
+
+type UserArmies = ArmyObj & { count: number };
+
+const StyledMenu = styled((props: MenuProps) => (
+  <Menu
+    elevation={0}
+    anchorOrigin={{
+      vertical: "bottom",
+      horizontal: "right",
+    }}
+    transformOrigin={{
+      vertical: "top",
+      horizontal: "right",
+    }}
+    {...props}
+  />
+))(({ theme }) => ({
+  "& .MuiPaper-root": {
+    borderRadius: 6,
+    marginTop: theme.spacing(1),
+    minWidth: 60,
+    color:
+      theme.palette.mode === "light"
+        ? "rgb(55, 65, 81)"
+        : theme.palette.grey[300],
+    boxShadow:
+      "rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px",
+    "& .MuiMenu-list": {
+      padding: "8px 0",
+    },
+    "& .MuiMenuItem-root": {
+      "& .MuiSvgIcon-root": {
+        color: theme.palette.text.secondary,
+        marginRight: theme.spacing(1.5),
+      },
+      "&:active": {
+        backgroundColor: alpha(
+          theme.palette.primary.main,
+          theme.palette.action.selectedOpacity
+        ),
+      },
+    },
+  },
+}));
 
 export default function UserProfile() {
-  const [role, setRole] = useState<string>("");
   const [user, setUser] = useState<any>();
   const [fantasyArmyArray, setFantasyArmyArray] = useState([]);
   const [fortykArmyArray, setFortykArmyArray] = useState([]);
@@ -37,60 +82,21 @@ export default function UserProfile() {
     setAnchorEl(null);
   };
 
+  const { userRole } = useUserStore();
+  const isAdmin = userRole === "admin";
+
   const userToken = sessionStorage.getItem("token");
+
   if (!userToken) {
     navigate("/login");
-    return <h1>You need to log in</h1>;
   }
 
   const handleAdmin = async () => {
-    if (targetUser) {
+    if (targetUser && userToken) {
       await makeAdmin(targetUser, userToken);
     }
     window.location.reload();
   };
-
-  const StyledMenu = styled((props: MenuProps) => (
-    <Menu
-      elevation={0}
-      anchorOrigin={{
-        vertical: "bottom",
-        horizontal: "right",
-      }}
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      {...props}
-    />
-  ))(({ theme }) => ({
-    "& .MuiPaper-root": {
-      borderRadius: 6,
-      marginTop: theme.spacing(1),
-      minWidth: 60,
-      color:
-        theme.palette.mode === "light"
-          ? "rgb(55, 65, 81)"
-          : theme.palette.grey[300],
-      boxShadow:
-        "rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px",
-      "& .MuiMenu-list": {
-        padding: "8px 0",
-      },
-      "& .MuiMenuItem-root": {
-        "& .MuiSvgIcon-root": {
-          color: theme.palette.text.secondary,
-          marginRight: theme.spacing(1.5),
-        },
-        "&:active": {
-          backgroundColor: alpha(
-            theme.palette.primary.main,
-            theme.palette.action.selectedOpacity
-          ),
-        },
-      },
-    },
-  }));
 
   useEffect(() => {
     const fetchUser = async (token: string) => {
@@ -98,7 +104,6 @@ export default function UserProfile() {
         const response = await verifyUser(token, 2);
         if (response) {
           const data = await getUser(token);
-          setRole(data.role);
           setUser(data);
           return data;
         } else if (!response) {
@@ -106,15 +111,18 @@ export default function UserProfile() {
         }
       }
     };
-    fetchUser(userToken);
+    userToken && fetchUser(userToken);
   }, []);
 
   useEffect(() => {
     const fetchArmies = async () => {
       const data = await getAllUserArmies(user?.id);
-      console.log(data);
-      const fortykArray = data.filter((army: any) => army.type === "40k");
-      const fantasyArray = data.filter((army: any) => army.type === "fantasy");
+      const fortykArray = data.filter(
+        (army: UserArmies) => army.type === "40k"
+      );
+      const fantasyArray = data.filter(
+        (army: UserArmies) => army.type === "fantasy"
+      );
 
       setFantasyArmyArray(fantasyArray);
       setFortykArmyArray(fortykArray);
@@ -132,7 +140,13 @@ export default function UserProfile() {
     fetchUsers();
   }, []);
 
-  if (!fantasyArmyArray || !fortykArmyArray || !user || !role || !userArray) {
+  if (
+    !fantasyArmyArray ||
+    !fortykArmyArray ||
+    !user ||
+    !userRole ||
+    !userArray
+  ) {
     return <p> Loading Content</p>;
   }
   return (
@@ -149,7 +163,7 @@ export default function UserProfile() {
           <article className="user-profile__info-card">
             <h3 className="user-profile__info-header">Access</h3>
             <div className="user-profile__info-wrap">
-              <strong className="user-profile__info">{role}</strong>
+              <strong className="user-profile__info">{userRole}</strong>
             </div>
           </article>{" "}
           <article className="user-profile__info-card">
@@ -162,7 +176,7 @@ export default function UserProfile() {
       </section>
       <section className="user-profile__army-list">
         <h2 className="user-profile__subheader">Fantasy Armies</h2>
-        {fantasyArmyArray.map((army: any) => {
+        {fantasyArmyArray.map((army: UserArmies) => {
           return (
             <article
               key={`article${army.army_id}`}
@@ -197,7 +211,7 @@ export default function UserProfile() {
       </section>{" "}
       <section id="fortyk" className="user-profile__army-list">
         <h2 className="user-profile__subheader">40k Armies</h2>
-        {fortykArmyArray.map((army: any) => {
+        {fortykArmyArray.map((army: UserArmies) => {
           return (
             <article
               key={`article${army.army_id}`}
@@ -242,11 +256,13 @@ export default function UserProfile() {
           <p id="role" className="user-profile__user-header">
             Role
           </p>
-          <p id="action" className="user-profile__user-header">
-            Action
-          </p>
+          {isAdmin && (
+            <p id="action" className="user-profile__user-header">
+              Action
+            </p>
+          )}
         </div>
-        {userArray.map((user: any, index: number) => {
+        {userArray.map((user: UsersObj, index: number) => {
           return (
             <article
               key={`article${user.id}`}
@@ -278,7 +294,7 @@ export default function UserProfile() {
               >
                 {user.role}
               </p>
-              {user.role !== "admin" ? (
+              {isAdmin && (
                 <div
                   key={`div${user.id}`}
                   className="user-profile__user-record--action"
@@ -328,8 +344,6 @@ export default function UserProfile() {
                     </MenuItem>
                   </StyledMenu>
                 </div>
-              ) : (
-                <div className="user-profile__user-record--action">...</div>
               )}
             </article>
           );
