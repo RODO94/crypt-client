@@ -18,6 +18,7 @@
   padding-top: 10rem;
   @include tablet {
     height: 200%;
+    padding: 2rem 1rem;
   }
   &__section {
     position: relative;
@@ -28,12 +29,11 @@
     gap: 1.5rem;
     align-self: stretch;
     border-radius: 1rem;
-    background: rgba(255, 255, 255, 0.85);
+    background: whitesmoke;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     max-width: 30rem;
     margin: 0 auto;
     @include desktop {
-      margin-top: 6rem;
       max-width: 60rem;
       padding-bottom: 3rem;
       gap: 3rem;
@@ -132,7 +132,6 @@
     gap: 1.5rem;
     align-self: stretch;
     @include desktop {
-      flex-direction: row;
       align-items: flex-start;
       gap: 3rem;
     }
@@ -187,7 +186,7 @@
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
-      gap: 1.5rem;
+      gap: 1rem;
       width: 100%;
     }
     &-edit-row {
@@ -202,6 +201,15 @@
     border: none;
     outline: none;
     font-weight: 700;
+    @include tablet {
+      padding: 1rem;
+    }
+    &:hover {
+      cursor: pointer;
+      height: 100%;
+      background-color: #fff;
+      text-decoration: underline;
+    }
   }
 
   &__add {

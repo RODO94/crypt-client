@@ -36,7 +36,7 @@ function App() {
           <Route path="/rankings/fantasy" element={<FantasyRankingPage />} />
           <Route path="/battles/completed" element={<CompletedBattlesPage />} />
           <Route path="/battles/upcoming" element={<UpcomingBattlesPage />} />
-          <Route path="/battles/information" element={<BattleInfo />} />
+          <Route path="/battles/information/:id" element={<BattleInfo />} />
           <Route path="/armies/information" element={<ArmyInfo />} />
           {/* User Routes */}
           <Route path="/user" element={<UserDashboard />} />

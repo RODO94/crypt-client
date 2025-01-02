@@ -8,7 +8,11 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { FormikProps } from "formik";
 import { BattleInformation } from "../../pages/CreateBattle/CreateBattle";
 
-export default function CreateBattleForm({ formik }:{formik: FormikProps<BattleInformation>}) {
+export default function CreateBattleForm({
+  formik,
+}: {
+  formik: FormikProps<BattleInformation>;
+}) {
   return (
     <section>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -111,9 +115,24 @@ export default function CreateBattleForm({ formik }:{formik: FormikProps<BattleI
                 }}
               >
                 <option hidden>{formik.values.table}</option>
-                <option value="Table 1">Table 1</option>
-                <option value="Table 2">Table 2</option>
-                <option value="Table 3">Table 3</option>
+                <option
+                  hidden={formik.values.table === "Table 1"}
+                  value="Table 1"
+                >
+                  Table 1
+                </option>
+                <option
+                  hidden={formik.values.table === "Table 2"}
+                  value="Table 2"
+                >
+                  Table 2
+                </option>
+                <option
+                  hidden={formik.values.table === "Table 3"}
+                  value="Table 3"
+                >
+                  Table 3
+                </option>
               </select>
             </label>
             <label
@@ -127,7 +146,7 @@ export default function CreateBattleForm({ formik }:{formik: FormikProps<BattleI
                 ampm={false}
                 value={formik.values.start}
                 onChange={(newValue) => {
-                  formik.setFieldValue("start",newValue);
+                  formik.setFieldValue("start", newValue);
                 }}
               />
             </label>
@@ -142,7 +161,7 @@ export default function CreateBattleForm({ formik }:{formik: FormikProps<BattleI
                 value={formik.values.finish}
                 minTime={formik.values.start}
                 onChange={(newValue) => {
-                  formik.setFieldValue("finish",newValue);
+                  formik.setFieldValue("finish", newValue);
                 }}
               />
             </label>

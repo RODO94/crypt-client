@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { Player } from "../../utils/Interfaces";
 import BattleCard from "../BattleCard/BattleCard";
 import BattleTypePill from "../BattleTypePill/BattleTypePill";
@@ -6,6 +5,7 @@ import PlayerTypePill from "../PlayerTypePill/PlayerTypePill";
 import "./BattleCompleteRow.scss";
 import { useEffect, useState } from "react";
 import crown from "../../assets/crown.svg";
+import NavigationLink from "../NavigationLink/NavigationLink";
 
 interface BattleTableRow {
   battle_type: string;
@@ -45,8 +45,6 @@ export default function BattleCompleteRow({
     fetchWinner(winner);
   }, []);
 
-  const navigate = useNavigate();
-
   winnerValue === "Player 1"
     ? (resultStatementOne = (
         <div className="completedbattle-row__icon-wrap">
@@ -75,56 +73,48 @@ export default function BattleCompleteRow({
     ? (resultStatementTwo = "")
     : (resultStatementTwo = "Draw");
 
-  const handleClick = () => {
-    navigate(`/battles/information`, { state: { id: id } });
-  };
+  // //const handleClick = () => {
+  //   navigate(`/battles/information`, { state: { id: id } });
+  // };
 
   return (
-    <section className="completedbattle-row" onClick={handleClick}>
-      <article className="completedbattle-row__combatants">
-        <div
-          className={
-            winnerValue === "Player 1"
-              ? "completedbattle-row__team completedbattle-row__team--winner"
-              : winnerValue === "Player 2"
-              ? "completedbattle-row__team completedbattle-row__team--vanquished"
-              : "completedbattle-row__team completedbattle-row__team--draw"
-          }
-        >
-          <span
+    <NavigationLink to={`/battles/information/${id}`}>
+      <section className="completedbattle-row">
+        <article className="completedbattle-row__combatants">
+          <div
             className={
               winnerValue === "Player 1"
                 ? "completedbattle-row__team completedbattle-row__team--winner"
                 : winnerValue === "Player 2"
                 ? "completedbattle-row__team completedbattle-row__team--vanquished"
-                : "completedbattle-row__team--draw"
+                : "completedbattle-row__team completedbattle-row__team--draw"
             }
           >
-            {resultStatementOne}
-          </span>
-          {player_1.map((player) => {
-            return (
-              <BattleCard
-                key={crypto.randomUUID()}
-                name={player.name}
-                known_as={player.known_as}
-                ranking={player.ranking}
-                emblem={player.emblem}
-              />
-            );
-          })}
-        </div>
-        <p className="completedbattle-row__versus">VS</p>
-        <div
-          className={
-            winnerValue === "Player 2"
-              ? "completedbattle-row__team completedbattle-row__team--winner"
-              : winnerValue === "Player 1"
-              ? "completedbattle-row__team completedbattle-row__team--vanquished"
-              : "completedbattle-row__team completedbattle-row__team--draw"
-          }
-        >
-          <span
+            <span
+              className={
+                winnerValue === "Player 1"
+                  ? "completedbattle-row__team completedbattle-row__team--winner"
+                  : winnerValue === "Player 2"
+                  ? "completedbattle-row__team completedbattle-row__team--vanquished"
+                  : "completedbattle-row__team--draw"
+              }
+            >
+              {resultStatementOne}
+            </span>
+            {player_1.map((player) => {
+              return (
+                <BattleCard
+                  key={crypto.randomUUID()}
+                  name={player.name}
+                  known_as={player.known_as}
+                  ranking={player.ranking}
+                  emblem={player.emblem}
+                />
+              );
+            })}
+          </div>
+          <p className="completedbattle-row__versus">VS</p>
+          <div
             className={
               winnerValue === "Player 2"
                 ? "completedbattle-row__team completedbattle-row__team--winner"
@@ -133,25 +123,35 @@ export default function BattleCompleteRow({
                 : "completedbattle-row__team completedbattle-row__team--draw"
             }
           >
-            {resultStatementTwo}
-          </span>
-          {player_2.map((player) => {
-            return (
-              <BattleCard
-                key={crypto.randomUUID()}
-                name={player.name}
-                known_as={player.known_as}
-                ranking={player.ranking}
-                emblem={player.emblem}
-              />
-            );
-          })}
+            <span
+              className={
+                winnerValue === "Player 2"
+                  ? "completedbattle-row__team completedbattle-row__team--winner"
+                  : winnerValue === "Player 1"
+                  ? "completedbattle-row__team completedbattle-row__team--vanquished"
+                  : "completedbattle-row__team completedbattle-row__team--draw"
+              }
+            >
+              {resultStatementTwo}
+            </span>
+            {player_2.map((player) => {
+              return (
+                <BattleCard
+                  key={crypto.randomUUID()}
+                  name={player.name}
+                  known_as={player.known_as}
+                  ranking={player.ranking}
+                  emblem={player.emblem}
+                />
+              );
+            })}
+          </div>
+        </article>
+        <div className="completedbattle-row__details">
+          <BattleTypePill key={crypto.randomUUID()} battle_type={battle_type} />
+          <PlayerTypePill key={crypto.randomUUID()} player_type={player_type} />
         </div>
-      </article>
-      <div className="completedbattle-row__details">
-        <BattleTypePill key={crypto.randomUUID()} battle_type={battle_type} />
-        <PlayerTypePill key={crypto.randomUUID()} player_type={player_type} />
-      </div>
-    </section>
+      </section>
+    </NavigationLink>
   );
 }
