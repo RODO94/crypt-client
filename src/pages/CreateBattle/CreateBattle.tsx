@@ -11,7 +11,7 @@ import { useFormik } from "formik";
 import CreateBattleForm from "../../components/CreateBattleForm/CreateBattleForm";
 import CreateBattleCombatants from "../../components/CreateBattleCombatants/CreateBattleCombatants";
 import { battleFormValidationSchema } from "./CreateBattleValidSchema";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 export interface BattleInformation {
   battleType: "40k" | "fantasy";
   pointSize: number;

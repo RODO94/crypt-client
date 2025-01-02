@@ -8,6 +8,7 @@ import {
   loginAuthentication,
 } from "../../utils/UserAuth";
 import { useState } from "react";
+import { useUserStore } from "../../store/user";
 
 export default function LogIn() {
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -15,14 +16,17 @@ export default function LogIn() {
     "login__error login__error--hidden"
   );
 
+  const { setUserRole } = useUserStore();
+
   const navigate = useNavigate();
 
-  const handleSubmit = async (event: any) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const email = event.target.email.value;
     const password = event.target.password.value;
     const requestObj = { email: email, password: password };
     const response = await loginAuthentication(requestObj);
+    setUserRole(response.role);
 
     if (response === "Invalid Password") {
       setErrorClass("login__error login__error--visible");
@@ -35,7 +39,7 @@ export default function LogIn() {
     }
 
     setErrorClass("login__error login__error--hidden");
-
+    console.log(response);
     navigate("/user");
   };
 

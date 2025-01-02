@@ -1,14 +1,16 @@
 import axios from "axios";
-import { LogInBody, SignUpBody, email, password } from "./Interfaces";
+import { LogInBody, SignUpBody, Email, Password } from "./Interfaces";
+import { UserRole } from "../store/user";
 
 const baseURL = import.meta.env.VITE_SERVER_URL;
 
 const loginAuthentication = async (body: LogInBody) => {
   try {
-    const { data } = await axios.post(`${baseURL}/users/login`, body);
-    sessionStorage.setItem("token", data);
+    const { data }: { data: { token: string; role: UserRole } } =
+      await axios.post(`${baseURL}/users/login`, body);
+    sessionStorage.setItem("token", data.token);
     return data;
-  } catch (error: any) {
+  } catch (error) {
     console.error(error);
     return error.response.data;
   }
@@ -25,7 +27,7 @@ const signupAuthentication = async (body: SignUpBody) => {
   }
 };
 
-const forgotPasswordAuthentication = async (body: email) => {
+const forgotPasswordAuthentication = async (body: Email) => {
   try {
     const { data } = await axios.post(`${baseURL}/users/forgot-password`, body);
     return data;
@@ -35,7 +37,7 @@ const forgotPasswordAuthentication = async (body: email) => {
   }
 };
 
-const resetPasswordAuthentication = async (token: string, body: password) => {
+const resetPasswordAuthentication = async (token: string, body: Password) => {
   try {
     const { data } = await axios.patch(`${baseURL}/users/reset/${token}`, body);
 
