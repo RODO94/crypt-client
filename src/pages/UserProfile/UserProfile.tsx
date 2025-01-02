@@ -66,7 +66,7 @@ const StyledMenu = styled((props: MenuProps) => (
 }));
 
 export default function UserProfile() {
-  const [user, setUser] = useState<any>();
+  const [user, setUser] = useState<UsersObj>();
   const [fantasyArmyArray, setFantasyArmyArray] = useState([]);
   const [fortykArmyArray, setFortykArmyArray] = useState([]);
   const [userArray, setUserArray] = useState([]);
@@ -116,7 +116,7 @@ export default function UserProfile() {
 
   useEffect(() => {
     const fetchArmies = async () => {
-      const data = await getAllUserArmies(user?.id);
+      const data = user?.id && (await getAllUserArmies(user.id));
       const fortykArray = data.filter(
         (army: UserArmies) => army.type === "40k"
       );
