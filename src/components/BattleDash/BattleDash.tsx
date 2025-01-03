@@ -936,7 +936,7 @@ export default function BattleDash({
           </article>
         </div>
       </LocalizationProvider>
-      {userRole === "admin" && !winner && (
+      {userRole === "admin" && !result && (
         <button
           disabled={deleteClicked}
           className={"battle-dash__delete"}
