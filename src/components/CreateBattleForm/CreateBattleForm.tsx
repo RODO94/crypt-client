@@ -141,8 +141,7 @@ export default function CreateBattleForm({
             >
               Start
               <MobileTimePicker
-                name="start
-                "
+                name="start"
                 ampm={false}
                 value={formik.values.start}
                 onChange={(newValue) => {

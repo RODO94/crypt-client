@@ -253,6 +253,7 @@
     line-height: normal;
     height: 100%;
     align-self: flex-end;
+    width: 100%;
     &:hover {
       background-color: $dark-angels-5;
       cursor: pointer;
@@ -280,9 +281,11 @@
   }
   &__error {
     font-size: 0.65rem;
-    font-style: italic;
     font-weight: 600;
-    color: $blood-angels-2;
+    color: $blood-angels-5;
+    border: 1px solid $blood-angels-5;
+    padding: 0.5rem;
+    border-radius: 5px;
     &--hide {
       display: none;
     }

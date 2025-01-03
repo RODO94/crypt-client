@@ -137,9 +137,23 @@ export default function CreateBattle() {
           <CreateBattleForm formik={formik} />
           <CreateBattleCombatants formik={formik} />
           {!successBool && !loadingBool ? (
-            <button type="submit" className="create-battle__create">
-              Create Battle
-            </button>
+            <div style={{ width: "100%" }}>
+              <button type="submit" className="create-battle__create">
+                Create Battle
+              </button>
+              {Object.keys(formik.errors).length !== 0 && (
+                <p
+                  className={
+                    formik.errors
+                      ? "create-battle__error"
+                      : "create-battle__error--hide"
+                  }
+                >
+                  There's an error in the form, review the inputs for any error
+                  messages
+                </p>
+              )}
+            </div>
           ) : loadingBool && !successBool ? (
             <div className="create-battle__success-message">
               <CircularProgress />

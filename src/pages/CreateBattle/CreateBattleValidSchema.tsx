@@ -10,7 +10,7 @@ export const battleFormValidationSchema = Yup.object().shape({
   date: date().required("Enter a date for the battle"),
   table: string()
     .optional()
-    .matches(/Table 1| Table 2| Table 3/, "Select from Table 1, 2, or 3"),
+    .matches(/Table 1|Table 2|Table 3/, "Select from Table 1, 2, or 3"),
 
   start: string().required("Enter a start date for the battle"),
   finish: string().optional(),
