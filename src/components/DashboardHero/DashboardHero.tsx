@@ -29,14 +29,15 @@ export default function DashboardHero({
   return (
     <section className="dashboard-hero">
       <div className="dashboard-hero__container">
-        <h1 className="dashboard-hero__header">{`Hey ${userObj?.known_as}!`}</h1>
+        <h1 className="dashboard-hero__header">
+          {`Hey ${userObj?.known_as}!`}
+        </h1>
         <Emblem emblem={userObj.user_emblem} />
       </div>
       <div className="dashboard-hero__content">
         <div className="dashboard-hero__info">
           <div className="dashboard-hero__battle-wrap">
             <article className="dashboard-hero__armies">
-              <BattleResultBanner />
               <NextBattleCard nextBattle={nextBattle} id={userObj.id} />
             </article>
             <article className="dashboard-hero__armies">

@@ -18,7 +18,7 @@ export default function BattleResultBanner() {
   const chipSize = screen.width < 768 ? "small" : "medium";
   return (
     <article className="result-card">
-      <h3 className="result-card__header">Recent Results</h3>
+      {/* <h3 className="result-card__header">Recent Results</h3> */}
       <div className="result-card__wrap">
         {resultArray?.map((result) => {
           switch (result) {
