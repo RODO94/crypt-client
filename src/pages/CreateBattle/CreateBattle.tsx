@@ -26,7 +26,7 @@ export interface BattleInformation {
 
 const initialBattleValues: BattleInformation = {
   battleType: "40k",
-  pointSize: 0,
+  pointSize: 100,
   scenario: "",
   date: dayjs(),
   table: "Table 1",
