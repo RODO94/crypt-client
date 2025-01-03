@@ -8,7 +8,10 @@ import BattleTypePill from "../BattleTypePill/BattleTypePill";
 import { useEffect, useState } from "react";
 import { getAllUsers } from "../../utils/UserRequests";
 import { getAllArmies, updateArmyCombatants } from "../../utils/ArmyRequests";
-import { updateBattleDetail } from "../../utils/BattleRequests";
+import {
+  deleteBattleRequest,
+  updateBattleDetail,
+} from "../../utils/BattleRequests";
 import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import {
@@ -19,6 +22,7 @@ import {
 } from "@mui/x-date-pickers";
 import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
+import { useUserStore } from "../../store/user";
 
 interface BattleComp {
   playerOne: Player[];
@@ -35,8 +39,8 @@ interface BattleComp {
   finish: string | undefined;
   battleID: string;
   token: string | null;
-  setPlayerTwoArray: Function;
-  setPlayerOneArray: Function;
+  setPlayerTwoArray: () => void;
+  setPlayerOneArray: () => void;
 }
 
 interface UsersArray extends Array<Users> {}
@@ -89,7 +93,11 @@ export default function BattleDash({
   const [armyTwo, setArmyTwo] = useState("");
   const [userTwo, setUserTwo] = useState("");
 
+  const [deleteClicked, setDeleteClicked] = useState(false);
+
   const navigate = useNavigate();
+
+  const { userRole } = useUserStore();
 
   const handleClick = () => {
     if (token) {
@@ -226,6 +234,13 @@ export default function BattleDash({
     } else if (detail === "gametype" && token) {
       let requestBody = { battle_type: value };
       await updateBattleDetail(battleID, token, detail, requestBody);
+    }
+  };
+
+  const deleteBattle = async () => {
+    if (!result && token) {
+      const response = await deleteBattleRequest(battleID, token);
+      response && navigate(-1);
     }
   };
 
@@ -921,6 +936,38 @@ export default function BattleDash({
           </article>
         </div>
       </LocalizationProvider>
+      {userRole === "admin" && (
+        <button
+          disabled={deleteClicked}
+          className={"battle-dash__delete"}
+          onClick={() => {
+            setDeleteClicked(true);
+          }}
+        >
+          Delete battle
+        </button>
+      )}
+      {deleteClicked && (
+        <div className="battle-dash__delete-wrap">
+          <button
+            className={"battle-dash__delete"}
+            onClick={() => {
+              setDeleteClicked(false);
+              deleteBattle();
+            }}
+          >
+            Click to confirm
+          </button>
+          <button
+            className={"battle-dash__delete battle-dash__delete--cancel"}
+            onClick={() => {
+              setDeleteClicked(false);
+            }}
+          >
+            Cancel
+          </button>
+        </div>
+      )}
     </section>
   );
 }

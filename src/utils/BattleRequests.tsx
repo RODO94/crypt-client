@@ -193,6 +193,20 @@ const createBattleRequest = async (
   }
 };
 
+const deleteBattleRequest = async (id: string, token: string) => {
+  try {
+    const { data } = await axios.delete(`${baseURL}/battles/${id}/delete`, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    return data;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+};
+
 export {
   getUpcomingBattlesFive,
   getUpcomingBattles,
@@ -205,4 +219,5 @@ export {
   submitBattle,
   reSubmitBattle,
   createBattleRequest,
+  deleteBattleRequest,
 };
