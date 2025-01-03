@@ -55,7 +55,7 @@ export default function ArmyDash({
 
   const userToken = sessionStorage.getItem("token");
   const { userRole } = useUserStore();
-  const isAdmin = userRole === "admin";
+  const isAdmin = userRole === "admin" && userToken;
   const canEdit = isAdmin || userBool;
 
   useEffect(() => {
