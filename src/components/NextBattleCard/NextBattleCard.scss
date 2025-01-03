@@ -6,6 +6,9 @@
   align-items: flex-start;
   gap: 0.5rem;
   width: 100%;
+  @include desktop {
+    width: auto;
+  }
   &__header {
     font-size: 0.8125rem;
     font-style: normal;
@@ -65,7 +68,7 @@
       font-size: 2rem;
     }
     @include desktop {
-      font-size: 3rem;
+      font-size: 2rem;
     }
   }
   &__versus {

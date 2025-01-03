@@ -392,4 +392,40 @@
       top: 7rem;
     }
   }
+  &__delete {
+    background-color: $blood-angels-2;
+    outline: none;
+    box-shadow: none;
+    border-radius: 8px;
+    font-size: 0.5rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border: 2px solid transparent;
+    &:hover {
+      cursor: pointer;
+      border: 2px solid $blood-angels-1;
+    }
+    @include tablet {
+      font-size: 1rem;
+      padding: 0.75rem 1.25rem;
+    }
+    @include desktop {
+      font-size: 1.25rem;
+      padding: 0.85rem 1.45rem;
+    }
+    &-wrap {
+      display: flex;
+      flex-direction: row;
+      gap: 0.5rem;
+      @include desktop {
+        gap: 1rem;
+      }
+    }
+    &--cancel {
+      background-color: $dark-angels-4;
+      &:hover {
+        border: 2px solid $dark-angels-5;
+      }
+    }
+  }
 }

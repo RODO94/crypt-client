@@ -1,0 +1,48 @@
+@use "../../partials/variables" as *;
+@use "../../partials/mixins" as *;
+
+.result-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.25rem;
+  border-radius: 0.5rem;
+  background-color: $dark-angels-6;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  padding: 0.5rem;
+  @include desktop {
+    margin-top: 0.5rem;
+    width: 100%;
+    padding: 1rem;
+  }
+
+  &__wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: space-between;
+    align-items: center;
+    @include tablet {
+      flex-direction: row;
+      gap: 0.75rem;
+    }
+    @include desktop {
+      gap: 1rem;
+    }
+  }
+  &__header {
+    font-size: 0.5rem;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    color: black;
+    margin: 0;
+    @include tablet {
+      font-size: 0.75rem;
+    }
+    @include desktop {
+      font-size: 1rem;
+    }
+  }
+}

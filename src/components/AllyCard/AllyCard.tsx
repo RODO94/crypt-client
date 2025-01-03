@@ -1,7 +1,6 @@
 import "./AllyCard.scss";
-
-import BattleCard from "../BattleCard/BattleCard";
 import { RankObj } from "../../utils/Interfaces";
+import NewBattleCard from "../NewBattleCard/NewBattleCard";
 interface AllyComp {
   ally: RankObj | undefined;
 }
@@ -10,12 +9,10 @@ export default function AllyCard({ ally }: AllyComp) {
 
   if (ally) {
     allyComp = (
-      <BattleCard
+      <NewBattleCard
         key={crypto.randomUUID()}
-        name={ally.name}
-        known_as={ally.known_as}
-        ranking={ally.ranking}
-        emblem={ally.emblem}
+        player={ally}
+        player_number="one"
       />
     );
   }

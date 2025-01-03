@@ -1,6 +1,6 @@
 import "./NemesisCard.scss";
 import { RankObj } from "../../utils/Interfaces";
-import BattleCard from "../BattleCard/BattleCard";
+import NewBattleCard from "../NewBattleCard/NewBattleCard";
 
 interface NemesisComp {
   nemesis: RankObj | undefined;
@@ -11,12 +11,10 @@ export default function NemesisCard({ nemesis }: NemesisComp) {
 
   if (nemesis) {
     nemesisComp = (
-      <BattleCard
+      <NewBattleCard
         key={crypto.randomUUID()}
-        name={nemesis.name}
-        known_as={nemesis.known_as}
-        ranking={nemesis.ranking}
-        emblem={nemesis.emblem}
+        player={nemesis}
+        player_number="one"
       />
     );
   }

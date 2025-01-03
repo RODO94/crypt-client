@@ -5,14 +5,14 @@ import { getUser, verifyUser } from "../../utils/UserRequests";
 import { getOneBattle } from "../../utils/BattleRequests";
 import BattleDash from "../../components/BattleDash/BattleDash";
 import BattlePointsForm from "../../components/BattlePointsForm/BattlePointsForm";
-import { Battle } from "../../utils/Interfaces";
+import { Battle, Player } from "../../utils/Interfaces";
 import { CircularProgress } from "@mui/material";
 
 export default function BattleInfo() {
   const [battle, setBattle] = useState<Battle>();
   const [role, setRole] = useState<string>("");
-  const [playerOneArray, setPlayerOneArray] = useState([]);
-  const [playerTwoArray, setPlayerTwoArray] = useState([]);
+  const [playerOneArray, setPlayerOneArray] = useState<Player[]>();
+  const [playerTwoArray, setPlayerTwoArray] = useState<Player[]>();
   const [winnerValue, setWinnerValue] = useState("");
 
   const pathName: string[] = window.location.pathname.split("/");
