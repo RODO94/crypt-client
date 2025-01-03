@@ -109,9 +109,6 @@ export default function RankGraph(props: {
           pointLabelYOffset={-12}
           enableTouchCrosshair={true}
           useMesh={true}
-          onClick={(event) => {
-            console.log(event);
-          }}
         />
       </div>
     </article>

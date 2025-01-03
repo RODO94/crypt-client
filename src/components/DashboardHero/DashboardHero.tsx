@@ -25,7 +25,6 @@ export default function DashboardHero({
   fortykRanked,
   fantasyRanked,
 }: dashboardType) {
-  console.log(fantasyRanked);
   return (
     <section className="dashboard-hero">
       <div className="dashboard-hero__container">

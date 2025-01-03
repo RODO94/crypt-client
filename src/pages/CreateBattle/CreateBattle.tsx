@@ -41,9 +41,6 @@ export default function CreateBattle() {
     initialValues: initialBattleValues,
     onSubmit: (values) => {
       formik.validateForm(values);
-      if (!formik.isValid) {
-        console.log(formik.isValid);
-      }
       createBattle();
     },
     validationSchema: battleFormValidationSchema,

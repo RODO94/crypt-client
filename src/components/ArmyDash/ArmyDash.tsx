@@ -135,7 +135,6 @@ export default function ArmyDash({
           setSuccessBool({ ...successBool, type: true });
           break;
         case "user":
-          console.log("set success");
           setSuccessBool({ ...successBool, user: true });
           break;
         case "emblem":
