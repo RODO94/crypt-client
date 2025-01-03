@@ -5,7 +5,6 @@ import "./DashboardHero.scss";
 import Emblem from "../Emblem/Emblem";
 import NavButton from "../NavButton/NavButton";
 import { Battle, RankObj, UsersObj } from "../../utils/Interfaces";
-import BattleResultBanner from "../BattleResultBanner/BattleResultBanner";
 import NewBattleCard from "../NewBattleCard/NewBattleCard";
 
 interface dashboardType {

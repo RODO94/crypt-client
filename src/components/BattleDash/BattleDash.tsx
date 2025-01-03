@@ -39,8 +39,8 @@ interface BattleComp {
   finish: string | undefined;
   battleID: string;
   token: string | null;
-  setPlayerTwoArray: () => void;
-  setPlayerOneArray: () => void;
+  setPlayerTwoArray: React.Dispatch<React.SetStateAction<Player[] | undefined>>;
+  setPlayerOneArray: React.Dispatch<React.SetStateAction<Player[] | undefined>>;
 }
 
 interface UsersArray extends Array<Users> {}
