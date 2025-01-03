@@ -35,9 +35,6 @@ export default function RankGraph(props: {
           (a: { x: number; y: number }, b: { x: number; y: number }) =>
             a.y - b.y
         );
-
-        console.log({ response, mappedResponse, army_id: props.army_id });
-
         setRankings([{ id: props.name, data: mappedResponse }]);
         setMinValue(sortedArray[0].y * 0.95);
         setMaxValue(sortedArray[sortedArray.length - 1].y * 1.05);

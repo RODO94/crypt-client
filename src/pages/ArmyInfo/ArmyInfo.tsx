@@ -5,16 +5,27 @@ import { getArmyInfo } from "../../utils/ArmyRequests";
 import ArmyDash from "../../components/ArmyDash/ArmyDash";
 import ArmyNemesis from "../../components/ArmyNemesis/ArmyNemesis";
 import ArmyAlly from "../../components/ArmyAlly/ArmyAlly";
-import { ArmyObj, Player } from "../../utils/Interfaces";
+import { Player } from "../../utils/Interfaces";
 import { CircularProgress } from "@mui/material";
 import RankGraph from "../../components/RankGraph/RankGraph";
 
+export interface ArmyInformation {
+  id: string;
+  ranking: string;
+  user_id: string;
+  emblem_id: string;
+  rn: number;
+  type: "fantasy" | "40k";
+  name: string;
+  emblem: string;
+  known_as: string;
+}
+
 export default function ArmyInfo() {
-  const [armyObj, setArmyObj] = useState<ArmyObj | null>(null);
+  const [armyObj, setArmyObj] = useState<ArmyInformation>();
   const [battleCount, setBattleCount] = useState(0);
   const [winPercent, setWinPercent] = useState("");
   const [armyRank, setArmyRank] = useState(0);
-  const [owner, setOwner] = useState("");
   const [nemesisObj, setNemesisObj] = useState<Player | null>(null);
   const [allyObj, setAllyObj] = useState<Player | null>(null);
 
@@ -31,7 +42,6 @@ export default function ArmyInfo() {
           setBattleCount(response.battleCount);
           setWinPercent(response.winPercent);
           setArmyRank(Number(response.user.ranking));
-          setOwner(response.user.known_as);
           setNemesisObj(response.nemesis);
           setAllyObj(response.ally);
         }
@@ -56,9 +66,8 @@ export default function ArmyInfo() {
         battleCount={battleCount}
         armyObj={armyObj}
         armyRank={armyRank}
-        owner={owner}
       />
-      <RankGraph army_id={armyObj.army_id} name={armyObj.name} />
+      <RankGraph army_id={armyObj.id} name={armyObj.name} />
       <section className="army-info__nemesis-ally">
         <div className="army-info__container">
           <ArmyNemesis nemesis={nemesisObj} />

@@ -175,17 +175,24 @@ const changeArmyField = async (
       case "type":
         requestBody = { type: changeValue };
         break;
+      case "user":
+        requestBody = { userId: changeValue };
+        break;
       case "emblem":
         requestBody = { emblemName: changeValue };
     }
 
-    await axios.patch(`${baseURL}/armies/${id}/update`, requestBody, {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    });
+    const response = await axios.patch(
+      `${baseURL}/armies/${id}/update`,
+      requestBody,
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
 
-    return true;
+    return response;
   } catch (error) {
     return error;
   }
