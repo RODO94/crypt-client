@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { ArmyObj } from "../../utils/Interfaces";
+import { ChangeEvent, useEffect, useState } from "react";
+import { Users, UsersObj } from "../../utils/Interfaces";
 import "./ArmyDash.scss";
 import EmblemHero from "../EmblemHero/EmblemHero";
 import BattleCard from "../BattleCard/BattleCard";
@@ -10,16 +10,17 @@ import { CircularProgress } from "@mui/material";
 import { emblemNameArray } from "../../utils/EmblemNames";
 import Emblem from "../Emblem/Emblem";
 import { changeArmyField } from "../../utils/ArmyRequests";
-import { getUserWithToken } from "../../utils/UserRequests";
-
+import { getAllUsers, getUserWithToken } from "../../utils/UserRequests";
+import { useUserStore } from "../../store/user";
+import { ArmyInformation } from "../../pages/ArmyInfo/ArmyInfo";
 interface armyDashObj {
   winPercent: string;
   battleCount: number;
-  armyObj: ArmyObj;
+  armyObj: ArmyInformation;
   armyRank: number;
-  owner: string;
 }
 
+type UserSelect = Pick<Users, "known_as" | "id">;
 interface EmblemNameObj {
   lowercase: string;
   original: string;
@@ -30,34 +31,41 @@ export default function ArmyDash({
   battleCount,
   armyObj,
   armyRank,
-  owner,
 }: armyDashObj) {
   const [emblemName, setEmblemName] = useState(armyObj.emblem);
+  const [userArray, setUserArray] = useState<UsersObj[]>();
+  const [selectedUser, setSelectedUser] = useState<UserSelect>({
+    known_as: armyObj.known_as,
+    id: armyObj.id,
+  });
   const [userBool, setUserBool] = useState(false);
   const [editBool, setEditBool] = useState(false);
-  const [newName, setNewName] = useState(armyObj.name);
+  const [newName, setNewName] = useState<string>(armyObj.name);
   const [newType, setNewType] = useState(armyObj.type);
-  const [newEmblem, setNewEmblem] = useState(armyObj.emblem);
+  const [newEmblem, setNewEmblem] = useState<string>(armyObj.emblem);
   const [emblemArray, setEmblemArray] = useState<null | EmblemNameObj[]>(null);
   const [successBool, setSuccessBool] = useState({
     name: false,
     type: false,
     emblem: false,
+    user: false,
   });
 
   const navigate = useNavigate();
 
   const userToken = sessionStorage.getItem("token");
+  const { userRole } = useUserStore();
+  const isAdmin = userRole === "admin";
+  const canEdit = isAdmin || userBool;
 
   useEffect(() => {
-    const stringArray = emblemName.split(" ");
-    let newString = [];
-    for (let i = 0; i < stringArray.length; i++) {
-      let lowerCaseString = stringArray[i].toLowerCase();
-      newString.push(lowerCaseString);
+    if (!emblemName) {
+      return;
     }
-    setEmblemName(newString.join(""));
-  }, [armyObj]);
+    const stringArray = emblemName.toLowerCase().split(" ").join("");
+    setEmblemName(stringArray);
+    setNewEmblem(stringArray);
+  }, [emblemName]);
 
   useEffect(() => {
     const formatEmblemArray = () => {
@@ -79,7 +87,6 @@ export default function ArmyDash({
       );
 
       setEmblemArray(sortedArray);
-      setEmblemName(sortedArray[0].lowercase);
     };
     formatEmblemArray();
   }, [newType]);
@@ -93,11 +100,19 @@ export default function ArmyDash({
           : setUserBool(false);
       }
     };
-
+    const fetchUsers = async () => {
+      const userResponse = await getAllUsers(3);
+      userResponse && setUserArray(userResponse);
+      const armyUser = userResponse.find(
+        (user: UsersObj) => user.id === armyObj.user_id
+      );
+      setSelectedUser(armyUser);
+    };
+    fetchUsers();
     fetchUserData();
-  }, [userToken]);
+  }, [userToken, armyObj.user_id]);
 
-  if (!owner) {
+  if (!armyObj) {
     return (
       <section className="army-dash">
         <div className="loading-message">
@@ -108,8 +123,9 @@ export default function ArmyDash({
   }
 
   const handleChange = async (changeType: string, changeValue: string) => {
-    if (userToken) {
-      await changeArmyField(changeValue, changeType, armyObj.id, userToken);
+    const { id } = armyObj;
+    if (userToken && id) {
+      await changeArmyField(changeValue, changeType, id, userToken);
 
       switch (changeType) {
         case "name":
@@ -118,12 +134,16 @@ export default function ArmyDash({
         case "type":
           setSuccessBool({ ...successBool, type: true });
           break;
+        case "user":
+          setSuccessBool({ ...successBool, user: true });
+          break;
         case "emblem":
           setSuccessBool({ ...successBool, emblem: true });
       }
     }
     return;
   };
+
   return (
     <section className="army-dash">
       <EmblemHero emblem={newEmblem} />
@@ -139,7 +159,7 @@ export default function ArmyDash({
         <h2 className="army-dash__title">Army Information</h2>
         <img className="army-dash__logo" src={logo} alt="the crypt emblem" />
       </div>
-      {userBool ? (
+      {canEdit && (
         <button
           onClick={() => {
             editBool ? setEditBool(false) : setEditBool(true);
@@ -148,10 +168,8 @@ export default function ArmyDash({
         >
           {editBool ? "Finish Edit" : "Edit Army"}
         </button>
-      ) : (
-        <></>
       )}
-      {editBool && userBool ? (
+      {editBool && canEdit ? (
         <section className="army-dash__edit-form">
           <article className="army-dash__stat-wrap">
             <label className="army-dash__label">Army Name</label>
@@ -161,7 +179,12 @@ export default function ArmyDash({
               value={newName}
               type="text"
               onChange={(event) => {
-                setSuccessBool({ name: false, type: false, emblem: false });
+                setSuccessBool({
+                  name: false,
+                  type: false,
+                  emblem: false,
+                  user: false,
+                });
                 setNewName(event.target.value);
               }}
             />
@@ -179,11 +202,60 @@ export default function ArmyDash({
             </button>
           </article>
           <article className="army-dash__stat-wrap">
+            <label className="army-dash__label">User</label>
+            <select
+              name="user"
+              className="army-dash__select"
+              value={selectedUser?.id || armyObj.id}
+              onChange={(event: ChangeEvent<HTMLSelectElement>) => {
+                const newUser: UsersObj | undefined = userArray?.find(
+                  (user: UsersObj) => user.id === event.target.value
+                );
+                newUser &&
+                  setSelectedUser({
+                    known_as: newUser.known_as,
+                    id: newUser.id!,
+                  });
+                setSuccessBool({
+                  name: false,
+                  type: false,
+                  emblem: false,
+                  user: false,
+                });
+              }}
+            >
+              {userArray?.map((user: UsersObj) => {
+                return (
+                  <option key={user.id} value={user.id}>
+                    {user.known_as}
+                  </option>
+                );
+              })}
+            </select>
+            <button
+              onClick={() => {
+                selectedUser?.id && handleChange("user", selectedUser?.id);
+              }}
+              className="army-dash__update-button"
+            >
+              {!successBool.user
+                ? "Update User"
+                : successBool.user
+                ? "Success!"
+                : "Update User"}{" "}
+            </button>
+          </article>
+          <article className="army-dash__stat-wrap">
             <label className="army-dash__label">Army Type</label>
             <select
               className="army-dash__stat"
-              onChange={(e) => {
-                setSuccessBool({ name: false, type: false, emblem: false });
+              onChange={(e: any) => {
+                setSuccessBool({
+                  name: false,
+                  type: false,
+                  emblem: false,
+                  user: false,
+                });
 
                 setNewType(e.target.value);
               }}
@@ -210,9 +282,14 @@ export default function ArmyDash({
               <select
                 name="emblem"
                 className="army-dash__select"
-                value={newEmblem}
+                value={newEmblem || emblemName}
                 onChange={(e) => {
-                  setSuccessBool({ name: false, type: false, emblem: false });
+                  setSuccessBool({
+                    name: false,
+                    type: false,
+                    emblem: false,
+                    user: false,
+                  });
                   setNewEmblem(e.target.value);
                   setEmblemName(e.target.value);
                   return;
@@ -255,7 +332,9 @@ export default function ArmyDash({
           <div className="army-dash__stat-container">
             <article className="army-dash__stat-wrap">
               <h3 className="army-dash__label">Owner</h3>
-              <p className="army-dash__stat">{owner}</p>
+              <p className="army-dash__stat">
+                {selectedUser?.known_as || armyObj.known_as}
+              </p>
             </article>
             <article className="army-dash__stat-wrap">
               <h3 className="army-dash__label">Rank</h3>

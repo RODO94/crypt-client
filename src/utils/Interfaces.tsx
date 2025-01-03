@@ -27,7 +27,6 @@ export interface ArmyObj {
   user_id: string;
   army_id?: string;
 }
-
 export interface LogInBody {
   email: string;
   password: string;

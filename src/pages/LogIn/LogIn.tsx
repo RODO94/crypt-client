@@ -39,7 +39,6 @@ export default function LogIn() {
     }
 
     setErrorClass("login__error login__error--hidden");
-    console.log(response);
     navigate("/user");
   };
 

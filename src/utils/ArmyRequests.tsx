@@ -52,7 +52,6 @@ const getOneArmy = async (id: string, token: string) => {
         Authorization: "Bearer " + token,
       },
     });
-    console.log(data);
     return data;
   } catch (error) {
     console.error(error);
@@ -142,7 +141,6 @@ const updateArmyCombatants = async (
 const getArmyNemesis = async (id: string) => {
   try {
     const { data } = await axios.get(`${baseURL}/armies/${id}/nemesis`);
-    console.log(data);
     return data;
   } catch (error) {
     console.error(error);
@@ -175,17 +173,24 @@ const changeArmyField = async (
       case "type":
         requestBody = { type: changeValue };
         break;
+      case "user":
+        requestBody = { userId: changeValue };
+        break;
       case "emblem":
         requestBody = { emblemName: changeValue };
     }
 
-    await axios.patch(`${baseURL}/armies/${id}/update`, requestBody, {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    });
+    const response = await axios.patch(
+      `${baseURL}/armies/${id}/update`,
+      requestBody,
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
 
-    return true;
+    return response;
   } catch (error) {
     return error;
   }

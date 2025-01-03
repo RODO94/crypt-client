@@ -1,7 +1,7 @@
 import "./NextBattleCard.scss";
 import { Battle, Player } from "../../utils/Interfaces";
-import BattleCard from "../BattleCard/BattleCard";
 import dayjs from "dayjs";
+import NewBattleCard from "../NewBattleCard/NewBattleCard";
 
 interface nextBattleType {
   nextBattle: Battle | undefined;
@@ -29,12 +29,10 @@ export default function NextBattleCard({ nextBattle, id }: nextBattleType) {
         <p className="next-battle-card__versus">vs</p>
         <div className="next-battle-card__container--50">
           {battleOpponentArray.map((player: Player) => (
-            <BattleCard
+            <NewBattleCard
               key={crypto.randomUUID()}
-              name={player.name}
-              known_as={player.known_as}
-              ranking={player.ranking}
-              emblem={player.emblem}
+              player={player}
+              player_number="two"
             />
           ))}
         </div>
