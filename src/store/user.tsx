@@ -24,8 +24,6 @@ interface UserState {
   } | null;
   allUsers: UsersObj[];
   token: string | null;
-  isLoading: boolean;
-  error: string | null;
 
   // Actions
   setUserRole: (role: UserRole) => void;
@@ -44,8 +42,6 @@ export const useUserStore = create<UserState>()(
       userInfo: null,
       allUsers: [],
       token: sessionStorage.getItem("token"),
-      isLoading: false,
-      error: null,
 
       setUserRole: (role) => set({ userRole: role }),
 
@@ -59,7 +55,6 @@ export const useUserStore = create<UserState>()(
       },
 
       fetchCurrentUser: async (token) => {
-        set({ isLoading: true, error: null });
         try {
           const isValid = await verifyUser(token, 2);
           if (isValid) {
@@ -67,15 +62,12 @@ export const useUserStore = create<UserState>()(
             set({
               currentUser: user,
               userRole: user.role as UserRole,
-              isLoading: false,
             });
           } else {
             throw new Error("Invalid token");
           }
         } catch (error) {
           set({
-            error: String(error),
-            isLoading: false,
             userRole: "guest",
             currentUser: null,
             token: null,
@@ -85,22 +77,20 @@ export const useUserStore = create<UserState>()(
       },
 
       fetchUserInfo: async (token) => {
-        set({ isLoading: true, error: null });
         try {
           const info = await getUserInfo(token, 5);
-          set({ userInfo: info, isLoading: false });
+          set({ userInfo: info });
         } catch (error) {
-          set({ error: String(error), isLoading: false });
+          console.error(error);
         }
       },
 
       fetchAllUsers: async () => {
-        set({ isLoading: true, error: null });
         try {
           const users = await getAllUsers(2);
-          set({ allUsers: users, isLoading: false });
+          set({ allUsers: users });
         } catch (error) {
-          set({ error: String(error), isLoading: false });
+          console.error(error);
         }
       },
 
