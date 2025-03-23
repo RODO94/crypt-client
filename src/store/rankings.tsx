@@ -5,9 +5,9 @@ import { Rank } from "../utils/Interfaces";
 import { getRanking, getRankingTopFive } from "../utils/RankingRequests";
 
 interface RankingsState {
-  fortyKRankings: Rank[];
-  fantasyRankings: Rank[];
-  topRankings: { fortyK: Rank[]; fantasy: Rank[] };
+  fortyKRankings: Rank[] | null;
+  fantasyRankings: Rank[] | null;
+  topRankings: { fortyK: Rank[] | null; fantasy: Rank[] | null };
 
   // Actions
   fetchFortyKRankings: () => Promise<void>;
@@ -19,9 +19,9 @@ interface RankingsState {
 export const useRankingsStore = create<RankingsState>()(
   persist(
     (set) => ({
-      fortyKRankings: [],
-      fantasyRankings: [],
-      topRankings: { fortyK: [], fantasy: [] },
+      fortyKRankings: null,
+      fantasyRankings: null,
+      topRankings: { fortyK: null, fantasy: null },
 
       fetchFortyKRankings: async () => {
         try {

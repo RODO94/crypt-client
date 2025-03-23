@@ -51,9 +51,9 @@ function App() {
     if (!completedBattles[0]) {
       fetchCompletedBattles();
     }
-    if (!fantasyRankings[0]) fetchFantasyRankings();
-    if (!fortyKRankings[0]) fetchFortyKRankings();
-    if (!topRankings.fantasy[0]) fetchTopRankings();
+    if (!fantasyRankings) fetchFantasyRankings();
+    if (!fortyKRankings) fetchFortyKRankings();
+    if (!topRankings.fantasy) fetchTopRankings();
   });
 
   return (
