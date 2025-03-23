@@ -1,22 +1,22 @@
-// src/store/armies.tsx
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { Army } from "../utils/Interfaces";
+import { Army, UsersArmyInfo } from "../utils/Interfaces";
 import {
   getAllArmies,
   getAllUserArmies,
   getArmyInfo,
 } from "../utils/ArmyRequests";
 
+export type UserArmies = Army & { count: number };
+
 interface ArmiesState {
   armies: Army[];
-  userArmies: Army[];
-  selectedArmy: Army | null;
+  userArmies: UserArmies[];
+  selectedArmy: UsersArmyInfo | null;
 
-  // Actions
   fetchAllArmies: () => Promise<void>;
   fetchUserArmies: (userId: string) => Promise<void>;
-  fetchArmyDetails: (armyId: string) => Promise<void>;
+  fetchArmyDetails: (armyId: string) => Promise<UsersArmyInfo | false>;
   clearArmies: () => void;
 }
 
@@ -30,7 +30,8 @@ export const useArmiesStore = create<ArmiesState>()(
       fetchAllArmies: async () => {
         try {
           const armies = await getAllArmies(2);
-          set({ armies });
+          console.log(armies);
+          armies && set({ armies });
         } catch (error) {
           console.error(error);
         }
@@ -48,9 +49,11 @@ export const useArmiesStore = create<ArmiesState>()(
       fetchArmyDetails: async (armyId: string) => {
         try {
           const armyDetails = await getArmyInfo(armyId, 3);
-          set({ selectedArmy: armyDetails.user });
+          armyDetails && set({ selectedArmy: armyDetails });
+          return armyDetails;
         } catch (error) {
           console.error(error);
+          return false;
         }
       },
 

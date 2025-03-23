@@ -11,6 +11,7 @@ import { getUsersBattles } from "../../utils/BattleRequests";
 import { getUserInfo, verifyUser } from "../../utils/UserRequests";
 import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
+import { useArmiesStore } from "../../store/armies";
 
 interface RankArray extends Array<Rank> {}
 
@@ -29,6 +30,7 @@ export default function UserDashboard() {
   const [nextBattle, setNextBattle] = useState<Battle | undefined>();
 
   const token = sessionStorage.getItem("token");
+  const { fetchUserArmies } = useArmiesStore();
 
   const navigate = useNavigate();
 
@@ -49,6 +51,8 @@ export default function UserDashboard() {
           if (!infoResponse || !battlesResponse) {
             return navigate("/login");
           }
+
+          fetchUserArmies(infoResponse.user.id);
 
           setRankArray(infoResponse.rankArray);
           setUpcomingBattles(battlesResponse.battleArray);

@@ -7,7 +7,6 @@ import {
   makeAdmin,
   verifyUser,
 } from "../../utils/UserRequests";
-import { getAllUserArmies } from "../../utils/ArmyRequests";
 import BattleCard from "../../components/BattleCard/BattleCard";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import {
@@ -19,9 +18,8 @@ import {
   styled,
 } from "@mui/material";
 import { useUserStore } from "../../store/user";
-import { Army, UsersObj } from "../../utils/Interfaces";
-
-type UserArmies = Army & { count: number };
+import { UsersObj } from "../../utils/Interfaces";
+import { useArmiesStore, UserArmies } from "../../store/armies";
 
 const StyledMenu = styled((props: MenuProps) => (
   <Menu
@@ -67,8 +65,8 @@ const StyledMenu = styled((props: MenuProps) => (
 
 export default function UserProfile() {
   const [user, setUser] = useState<UsersObj>();
-  const [fantasyArmyArray, setFantasyArmyArray] = useState([]);
-  const [fortykArmyArray, setFortykArmyArray] = useState([]);
+  const [fantasyArmyArray, setFantasyArmyArray] = useState<UserArmies[]>([]);
+  const [fortykArmyArray, setFortykArmyArray] = useState<UserArmies[]>([]);
   const [userArray, setUserArray] = useState([]);
   const [targetUser, setTargetUser] = useState();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -83,6 +81,7 @@ export default function UserProfile() {
   };
 
   const { userRole } = useUserStore();
+  const { userArmies } = useArmiesStore();
   const isAdmin = userRole === "admin";
 
   const userToken = sessionStorage.getItem("token");
@@ -116,11 +115,10 @@ export default function UserProfile() {
 
   useEffect(() => {
     const fetchArmies = async () => {
-      const data = user?.id && (await getAllUserArmies(user.id));
-      const fortykArray = data.filter(
+      const fortykArray = userArmies.filter(
         (army: UserArmies) => army.type === "40k"
       );
-      const fantasyArray = data.filter(
+      const fantasyArray = userArmies.filter(
         (army: UserArmies) => army.type === "fantasy"
       );
 
@@ -130,7 +128,7 @@ export default function UserProfile() {
     if (user) {
       fetchArmies();
     }
-  }, [user]);
+  }, [user, userArmies]);
 
   useEffect(() => {
     const fetchUsers = async () => {

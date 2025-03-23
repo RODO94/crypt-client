@@ -1,11 +1,11 @@
 import axios from "axios";
+import { Army, UsersArmyInfo } from "./Interfaces";
 
 const baseURL = import.meta.env.VITE_SERVER_URL;
 
-const getAllArmies = async (count: number): Promise<any | false> => {
+const getAllArmies = async (count: number): Promise<Army[] | false> => {
   try {
     const { data } = await axios.get(`${baseURL}/armies/all`);
-
     return data;
   } catch (error) {
     count--;
@@ -24,9 +24,9 @@ const getAllUserArmies = async (id: string) => {
 
 const addArmyRequest = async (
   token: string,
-  requestBody: any,
+  requestBody: Pick<Army, "name" | "type" | "emblem" | "emblem_id">,
   count: number
-): Promise<any | false> => {
+): Promise<Army | false> => {
   try {
     const { data } = await axios.post(`${baseURL}/armies/create`, requestBody, {
       headers: {
@@ -59,7 +59,10 @@ const getOneArmy = async (id: string, token: string) => {
   }
 };
 
-const getArmyInfo = async (id: string, count: number): Promise<any | false> => {
+const getArmyInfo = async (
+  id: string,
+  count: number
+): Promise<UsersArmyInfo | false> => {
   try {
     const { data } = await axios.get(`${baseURL}/armies/${id}/info`);
     return data;
@@ -116,8 +119,8 @@ const getArmyRank = async (id: string) => {
 };
 
 const updateArmyCombatants = async (
-  requestBody: any,
-  battleID: any,
+  requestBody: { player_1: Army; player_2: Army },
+  battleID: string,
   token: string
 ) => {
   try {

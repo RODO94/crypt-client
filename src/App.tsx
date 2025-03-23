@@ -18,8 +18,16 @@ import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import NavHeader from "./components/NavHeader/NavHeader";
 import LogInRedirect from "./pages/LogInRedirect/LogInRedirect";
 import NavFooter from "./components/NavFooter/NavFooter";
+import { useArmiesStore } from "./store/armies";
+import { useEffect } from "react";
 
 function App() {
+  const { armies, fetchAllArmies } = useArmiesStore();
+  useEffect(() => {
+    if (!armies[0]) {
+      fetchAllArmies();
+    }
+  });
   return (
     <BrowserRouter>
       <div className="App">
