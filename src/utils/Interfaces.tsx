@@ -69,7 +69,7 @@ export interface Input {
   required: boolean;
 }
 
-export interface RankObj {
+export interface Rank {
   rank: string;
   known_as: string;
   name: string;
@@ -82,8 +82,8 @@ export interface RankObj {
 }
 
 export interface allRankObjs {
-  fortyK: RankObj;
-  fantays: RankObj;
+  fortyK: Rank;
+  fantays: Rank;
 }
 
 export interface UsersObj {

@@ -6,13 +6,13 @@ import UsersFortyRanking from "../../components/UsersFortyRanking/UsersFortyRank
 import UsersResults from "../../components/UsersResults/UsersResults";
 import UsersUpcomingBattles from "../../components/UsersUpcomingBattles/UsersUpcomingBattles";
 import "./UserDashboard.scss";
-import { Battle, RankObj, UsersObj } from "../../utils/Interfaces";
+import { Battle, Rank, UsersObj } from "../../utils/Interfaces";
 import { getUsersBattles } from "../../utils/BattleRequests";
 import { getUserInfo, verifyUser } from "../../utils/UserRequests";
 import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 
-interface RankArray extends Array<RankObj> {}
+interface RankArray extends Array<Rank> {}
 
 interface AllRankArray {
   fortyK: RankArray;
@@ -23,8 +23,8 @@ export default function UserDashboard() {
   const [rankArray, setRankArray] = useState<AllRankArray>();
   const [upcomingBattles, setUpcomingBattles] = useState();
   const [userResults, setUserResults] = useState();
-  const [ally, setAlly] = useState<RankObj | undefined>();
-  const [nemesis, setNemesis] = useState<RankObj | undefined>();
+  const [ally, setAlly] = useState<Rank | undefined>();
+  const [nemesis, setNemesis] = useState<Rank | undefined>();
   const [userObj, setUserObj] = useState<UsersObj>();
   const [nextBattle, setNextBattle] = useState<Battle | undefined>();
 

@@ -4,16 +4,16 @@ import NextBattleCard from "../NextBattleCard/NextBattleCard";
 import "./DashboardHero.scss";
 import Emblem from "../Emblem/Emblem";
 import NavButton from "../NavButton/NavButton";
-import { Battle, RankObj, UsersObj } from "../../utils/Interfaces";
+import { Battle, Rank, UsersObj } from "../../utils/Interfaces";
 import NewBattleCard from "../NewBattleCard/NewBattleCard";
 
 interface dashboardType {
   userObj: UsersObj;
-  nemesis: RankObj | undefined;
-  ally: RankObj | undefined;
+  nemesis: Rank | undefined;
+  ally: Rank | undefined;
   nextBattle: Battle | undefined;
-  fortykRanked: RankObj | undefined;
-  fantasyRanked: RankObj | undefined;
+  fortykRanked: Rank | undefined;
+  fantasyRanked: Rank | undefined;
 }
 
 export default function DashboardHero({

@@ -3,13 +3,13 @@ import FiveColTableHeader from "../FiveColTableHeader/FiveColTableHeader";
 import FiveColTableRow from "../FiveColTableRow/FiveColTableRow";
 import "./FantasyTopFive .scss";
 import { getRankingTopFive } from "../../utils/RankingRequests";
-import { RankObj } from "../../utils/Interfaces";
+import { Rank } from "../../utils/Interfaces";
 import { Link } from "react-router-dom";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { CircularProgress } from "@mui/material";
 
-interface RankArray extends Array<RankObj> {}
+interface RankArray extends Array<Rank> {}
 
 export default function FantasyTopFive() {
   const [fantasyRankingArray, setFantasyRankingArray] = useState<RankArray>();
@@ -66,7 +66,7 @@ export default function FantasyTopFive() {
         <FiveColTableHeader />
         {fantasyRankingArray
           .filter((army) => army.prev_ranking !== "99.00")
-          .map((army: RankObj, index: number) => {
+          .map((army: Rank, index: number) => {
             let colour = "dark";
             if (index % 2 === 0) {
               colour = "light";

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { RankObj } from "../../utils/Interfaces";
+import { Rank } from "../../utils/Interfaces";
 import "./FantasyRankingPage.scss";
 import FiveColTableHeader from "../../components/FiveColTableHeader/FiveColTableHeader";
 import FiveColTableRow from "../../components/FiveColTableRow/FiveColTableRow";
@@ -10,7 +10,7 @@ import crown from "../../assets/crown.svg";
 import { CircularProgress } from "@mui/material";
 import NewBattleCard from "../../components/NewBattleCard/NewBattleCard";
 
-interface RankArray extends Array<RankObj> {}
+interface RankArray extends Array<Rank> {}
 
 export default function FantasyRankingPage() {
   const [fantasyRankingArray, setFantasyRankingArray] = useState<RankArray>();
@@ -69,7 +69,7 @@ export default function FantasyRankingPage() {
         <FiveColTableHeader />
         {fantasyRankingArray
           .filter((army) => army.prev_ranking !== "99.00")
-          .map((army: RankObj, index: number) => {
+          .map((army: Rank, index: number) => {
             let colour = "dark";
             if (index % 2 === 0) {
               colour = "light";
