@@ -9,6 +9,7 @@ import { emblemNameArray } from "../../utils/EmblemNames";
 import Emblem from "../../components/Emblem/Emblem";
 import { addArmyRequest } from "../../utils/ArmyRequests";
 import { useUserStore } from "../../store/user";
+import { useArmiesStore } from "../../store/armies";
 
 interface EmblemNameObj {
   lowercase: string;
@@ -30,7 +31,10 @@ export default function AddArmy() {
   const [emblemArray, setEmblemArray] = useState<null | EmblemNameObj[]>(null);
 
   const navigate = useNavigate();
-  const { token } = useUserStore();
+
+  const { fetchAllArmies, fetchArmyDetails, fetchUserArmies } =
+    useArmiesStore();
+  const { token, currentUser } = useUserStore();
   useEffect(() => {
     if (!token) {
       return navigate("/login");
@@ -87,6 +91,11 @@ export default function AddArmy() {
         if (response) {
           setLoadingBool(false);
           setSuccessBool(true);
+          fetchAllArmies();
+          if (currentUser?.id) {
+            fetchUserArmies(currentUser?.id);
+          }
+          fetchArmyDetails(response.id);
           setTimeout(() => {
             navigate(`/armies/information`, { state: { id: response.id } });
           }, 1000);

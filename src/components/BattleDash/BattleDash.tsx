@@ -23,6 +23,7 @@ import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import { useUserStore } from "../../store/user";
 import { useArmiesStore } from "../../store/armies";
+import { useBattlesStore } from "../../store/battles";
 
 interface BattleComp {
   playerOne: Player[];
@@ -92,6 +93,8 @@ export default function BattleDash({
 
   const { userRole, token, allUsers } = useUserStore();
   const { armies } = useArmiesStore();
+  const { fetchUpcomingBattles, fetchUserBattles, fetchCompletedBattles } =
+    useBattlesStore();
 
   const handleClick = () => {
     if (token) {
@@ -244,6 +247,9 @@ export default function BattleDash({
   const deleteBattle = async () => {
     if (!result && token) {
       const response = await deleteBattleRequest(battleID, token);
+      fetchUpcomingBattles();
+      fetchCompletedBattles();
+      fetchUserBattles(token);
       response && navigate(-1);
     }
   };

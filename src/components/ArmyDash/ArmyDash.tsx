@@ -11,6 +11,7 @@ import { emblemNameArray } from "../../utils/EmblemNames";
 import Emblem from "../Emblem/Emblem";
 import { changeArmyField } from "../../utils/ArmyRequests";
 import { useUserStore } from "../../store/user";
+import { useArmiesStore } from "../../store/armies";
 interface armyDashObj {
   winPercent: string;
   battleCount: number;
@@ -51,6 +52,8 @@ export default function ArmyDash({
   const navigate = useNavigate();
 
   const { userRole, allUsers, token: userToken, currentUser } = useUserStore();
+  const { fetchArmyDetails, fetchAllArmies, fetchUserArmies } =
+    useArmiesStore();
   const isAdmin = userRole === "admin" && userToken;
   const canEdit = isAdmin || userBool;
 
@@ -134,6 +137,9 @@ export default function ArmyDash({
           setSuccessBool({ ...successBool, emblem: true });
       }
     }
+    fetchAllArmies();
+    fetchArmyDetails(armyObj.id);
+    currentUser?.id && fetchUserArmies(currentUser?.id);
     return;
   };
 
