@@ -7,9 +7,11 @@ import {
   getArmyInfo,
 } from "../utils/ArmyRequests";
 
+export type UserArmies = Army & { count: number };
+
 interface ArmiesState {
   armies: Army[];
-  userArmies: Army[];
+  userArmies: UserArmies[];
   selectedArmy: Army | null;
 
   fetchAllArmies: () => Promise<void>;
