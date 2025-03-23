@@ -1,7 +1,6 @@
-// src/store/user.tsx (enhanced)
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { UsersObj, Rank } from "../utils/Interfaces";
+import { Rank, Users, Battle } from "../utils/Interfaces";
 import {
   getUserInfo,
   verifyUser,
@@ -13,19 +12,20 @@ export type UserRole = "admin" | "user" | "guest";
 
 interface UserState {
   userRole: UserRole;
-  currentUser: UsersObj | null;
+  currentUser: Users | null;
   userInfo: {
+    user: Users;
     ally: Rank | undefined;
     nemesis: Rank | undefined;
     rankArray: {
       fortyK: Rank[];
       fantasy: Rank[];
     };
+    userResults: Battle[];
   } | null;
-  allUsers: UsersObj[];
+  allUsers: Users[];
   token: string | null;
 
-  // Actions
   setUserRole: (role: UserRole) => void;
   setToken: (token: string | null) => void;
   fetchCurrentUser: (token: string) => Promise<void>;
