@@ -4,11 +4,11 @@ import { Battle } from "../../utils/Interfaces";
 import DateTableHeader from "../../components/DateTableHeader/DateTableHeader";
 
 import { Link } from "react-router-dom";
-import { getAllUsersNames } from "../../utils/UserRequests";
 import logo from "../../assets/logo.svg";
 import NewBattleTableRow from "../../components/NewBattleTableRow/NewBattleTableRow";
 import { CircularProgress } from "@mui/material";
 import { useBattlesStore } from "../../store/battles";
+import { useUserStore } from "../../store/user";
 
 interface BattleArray extends Array<Battle> {}
 interface NameArray extends Array<string> {}
@@ -24,14 +24,16 @@ export default function UpcomingBattlesPage() {
 
   let currentDate = "";
 
+  const { allUsers } = useUserStore();
+
   useEffect(() => {
     const nameFn = async () => {
-      const data = await getAllUsersNames();
-      setNameArray(data);
-      return data;
+      const userNames = allUsers?.map((user) => user.known_as);
+      setNameArray(userNames);
+      return userNames;
     };
     nameFn();
-  }, []);
+  }, [allUsers]);
 
   useEffect(() => {
     let tempBattleArray: BattleArray = [];
@@ -81,7 +83,7 @@ export default function UpcomingBattlesPage() {
       } else setBattleArray(tempBattleArray);
     };
     filterFn();
-  }, [nameFilter, battleTypeFilter]);
+  }, [nameFilter, battleTypeFilter, upcomingBattles]);
 
   const handleChange = (event: any) => {
     if (event.target.name === "battle-type") {

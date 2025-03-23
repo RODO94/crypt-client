@@ -4,11 +4,11 @@ import { Armies, Player, Users } from "../../utils/Interfaces";
 import "./CreateBattleCombatants.scss";
 import { BattleInformation } from "../../pages/CreateBattle/CreateBattle";
 import { useEffect, useState } from "react";
-import { getAllUsers } from "../../utils/UserRequests";
 import { filterArrays } from "../../pages/CreateBattle/filterFunctions";
 import { CircularProgress } from "@mui/material";
 import NewBattleCard from "../NewBattleCard/NewBattleCard";
 import { useArmiesStore } from "../../store/armies";
+import { useUserStore } from "../../store/user";
 
 interface Props {
   formik: FormikProps<BattleInformation>;
@@ -19,44 +19,42 @@ export type SelectedPlayer = {
   army?: Armies;
 };
 export default function CreateBattleCombatants({ formik }: Props) {
-  const [userArray, setUserArray] = useState<Users[]>([]);
   const [filteredArmyArray, setFilteredArmyArray] = useState<Armies[]>([]);
   const [filteredUserArray, setFilteredUserArray] = useState<Users[]>([]);
   const [selectedPlayerOne, setSelectedPlayerOne] = useState<SelectedPlayer>();
   const [selectedPlayerTwo, setSelectedPlayerTwo] = useState<SelectedPlayer>();
 
   const { armies } = useArmiesStore();
+  const { allUsers } = useUserStore();
 
   useEffect(() => {
     const fetchData = async () => {
-      const userResponse = await getAllUsers(3);
-
-      setUserArray(userResponse);
       setFilteredArmyArray(armies);
-      setFilteredUserArray(userResponse);
+      allUsers && setFilteredUserArray(allUsers);
     };
 
     fetchData();
   }, []);
 
   useEffect(() => {
-    filterArrays(
-      userArray,
-      armies,
-      setFilteredArmyArray,
-      setFilteredUserArray,
-      formik
-    );
+    allUsers &&
+      filterArrays(
+        allUsers,
+        armies,
+        setFilteredArmyArray,
+        setFilteredUserArray,
+        formik
+      );
   }, [
     formik.values.battleType,
     armies,
-    userArray,
+    allUsers,
     formik,
     formik.values.playerOne,
     formik.values.playerTwo,
   ]);
 
-  if (!armies || !userArray) {
+  if (!armies || !allUsers) {
     return (
       <div className="loading-message">
         <CircularProgress style={{ color: "green" }} />
@@ -109,7 +107,7 @@ export default function CreateBattleCombatants({ formik }: Props) {
               value={selectedPlayerOne?.user?.id}
               onChange={(event) => {
                 const userId = event.target.value;
-                const user = userArray.find((user) => user.id === userId);
+                const user = allUsers.find((user) => user.id === userId);
                 setSelectedPlayerOne({ ...selectedPlayerOne, user: user });
               }}
             >
@@ -226,7 +224,7 @@ export default function CreateBattleCombatants({ formik }: Props) {
               value={selectedPlayerTwo?.user?.id}
               onChange={(event) => {
                 const userId = event.target.value;
-                const user = userArray.find((user) => user.id === userId);
+                const user = allUsers.find((user) => user.id === userId);
                 setSelectedPlayerTwo({ ...selectedPlayerTwo, user: user });
               }}
             >

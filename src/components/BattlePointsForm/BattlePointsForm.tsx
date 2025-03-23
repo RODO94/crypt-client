@@ -8,9 +8,8 @@ import {
   submitBattle,
   updateBattleDetail,
 } from "../../utils/BattleRequests";
-import { getUser } from "../../utils/UserRequests";
 import { CircularProgress } from "@mui/material";
-import { redirect } from "react-router";
+import { useUserStore } from "../../store/user";
 
 interface BattlePoints {
   playerOne: Player[];
@@ -18,7 +17,6 @@ interface BattlePoints {
   playerOnePoints: number | string;
   playerTwoPoints: number | string;
   battleID: string;
-  token: string | null;
   result: string;
 }
 
@@ -29,7 +27,6 @@ export default function BattlePointsForm({
   playerTwoPoints,
   result,
   battleID,
-  token,
 }: BattlePoints) {
   const [playerOneVictoryPoints, setPlayerOneVictoryPoints] =
     useState(playerOnePoints);
@@ -39,23 +36,13 @@ export default function BattlePointsForm({
   const [editPlayerTwoBool, setEditPlayerTwoBool] = useState(false);
   const [userEditBool, setUserEditBool] = useState(false);
   const [battleOverBool, setBattleOverBool] = useState(false);
-  const [adminBool, setAdminBool] = useState(false);
   const [submitBool, setSubmitBool] = useState(false);
 
-  useEffect(() => {
-    const getUserRole = async (token: string) => {
-      const response = await getUser(token);
-      if (!response) {
-        return redirect("/");
-      }
+  const { token, userRole } = useUserStore();
 
-      if (response.role === "admin") {
-        setAdminBool(true);
-      }
-    };
+  useEffect(() => {
     if (token) {
       setUserEditBool(true);
-      getUserRole(token);
     }
     if (result === "victory" || result === "draw") {
       setUserEditBool(false);
@@ -111,6 +98,7 @@ export default function BattlePointsForm({
     );
   }
 
+  const isAdmin = userRole === "admin";
   return (
     <section className="battle-points">
       <div className="battle-points__header-wrap">
@@ -137,7 +125,7 @@ export default function BattlePointsForm({
           step={"any"}
           value={playerOneVictoryPoints}
           readOnly={
-            editPlayerOneBool && (userEditBool || adminBool) === true
+            editPlayerOneBool && (userEditBool || isAdmin) === true
               ? false
               : true
           }
@@ -154,7 +142,7 @@ export default function BattlePointsForm({
         />
         <button
           className={
-            (userEditBool || adminBool) && editPlayerOneBool === true
+            (userEditBool || isAdmin) && editPlayerOneBool === true
               ? "battle-dash__submit-button"
               : "battle-dash__submit-button battle-dash__submit-button--hide"
           }
@@ -190,7 +178,7 @@ export default function BattlePointsForm({
           className="battle-points__point-input"
           value={playerTwoVictoryPoints}
           readOnly={
-            editPlayerTwoBool && (userEditBool || adminBool) === true
+            editPlayerTwoBool && (userEditBool || isAdmin) === true
               ? false
               : true
           }
@@ -207,7 +195,7 @@ export default function BattlePointsForm({
         />
         <button
           className={
-            (userEditBool || adminBool) && editPlayerTwoBool === true
+            (userEditBool || isAdmin) && editPlayerTwoBool === true
               ? "battle-dash__submit-button"
               : "battle-dash__submit-button battle-dash__submit-button--hide"
           }
@@ -225,7 +213,7 @@ export default function BattlePointsForm({
       </article>
       <button
         className={
-          battleOverBool && adminBool === true
+          battleOverBool && isAdmin === true
             ? "battle-points__submit-button"
             : "battle-points__submit-button--hide"
         }

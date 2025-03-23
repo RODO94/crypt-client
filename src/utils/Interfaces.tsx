@@ -68,19 +68,14 @@ export interface Users {
   email: string;
   role: string;
   id: string;
+  user_emblem?: string;
+  "password-reset-token"?: string;
 }
 
 export type Password = Pick<LogInBody, "password">;
 export type Email = Pick<LogInBody, "email">;
 
-export interface SignUpBody {
-  email: string;
-  password: string;
-  first_name: string;
-  last_name: string;
-  known_as: string;
-  user_emblem: string | undefined;
-}
+export interface SignUpBody extends Users {}
 
 export interface Input {
   name: string;
@@ -104,16 +99,6 @@ export interface Rank {
 export interface allRankObjs {
   fortyK: Rank;
   fantays: Rank;
-}
-
-export interface UsersObj {
-  first_name: string;
-  last_name: string;
-  email: string;
-  role: string;
-  known_as: string;
-  user_emblem: string;
-  id?: string;
 }
 
 export interface CompletedBattle {

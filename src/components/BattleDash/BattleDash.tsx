@@ -6,7 +6,6 @@ import BattleCard from "../BattleCard/BattleCard";
 import PlayerTypePill from "../PlayerTypePill/PlayerTypePill";
 import BattleTypePill from "../BattleTypePill/BattleTypePill";
 import { useEffect, useState } from "react";
-import { getAllUsers } from "../../utils/UserRequests";
 import { updateArmyCombatants } from "../../utils/ArmyRequests";
 import {
   deleteBattleRequest,
@@ -39,7 +38,6 @@ interface BattleComp {
   start: string | undefined;
   finish: string | undefined;
   battleID: string;
-  token: string | null;
   setPlayerTwoArray: React.Dispatch<React.SetStateAction<Player[] | undefined>>;
   setPlayerOneArray: React.Dispatch<React.SetStateAction<Player[] | undefined>>;
 }
@@ -58,7 +56,6 @@ export default function BattleDash({
   start,
   finish,
   battleID,
-  token,
   setPlayerOneArray,
   setPlayerTwoArray,
 }: BattleComp) {
@@ -79,7 +76,6 @@ export default function BattleDash({
   const [editStartBool, setEditStartBool] = useState(false);
   const [editFinishBool, setEditFinishBool] = useState(false);
 
-  const [userArray, setUserArray] = useState<Users[]>();
   const [filteredArmyArray, setFilteredArmyArray] = useState<Armies[]>();
   const [filteredUserArray, setFilteredUserArray] = useState<Users[]>();
 
@@ -94,7 +90,7 @@ export default function BattleDash({
 
   const navigate = useNavigate();
 
-  const { userRole } = useUserStore();
+  const { userRole, token, allUsers } = useUserStore();
   const { armies } = useArmiesStore();
 
   const handleClick = () => {
@@ -253,15 +249,8 @@ export default function BattleDash({
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const userResponse = await getAllUsers(2);
-
-      setUserArray(await userResponse);
-      setFilteredArmyArray(armies);
-      setFilteredUserArray(await userResponse);
-    };
-
-    fetchData();
+    setFilteredArmyArray(armies);
+    setFilteredUserArray(allUsers);
   }, []);
 
   useEffect(() => {
@@ -270,7 +259,7 @@ export default function BattleDash({
     setFilteredArmyArray(filteredArmyArray);
 
     // Filter the user list based on if a user has an army in the army array
-    const filteredResponse = userArray?.filter((user: Player) => {
+    const filteredResponse = allUsers.filter((user: Player) => {
       const army = filteredArmyArray?.find((army) => army.user_id === user.id);
       return army;
     });
@@ -294,7 +283,7 @@ export default function BattleDash({
     setFilteredUserArray(secondFilteredResponse);
   }, [battleType, playerOne, playerTwo, userOne, userTwo, armyOne, armyTwo]);
 
-  if (!userArray || !playerOne || !playerTwo) {
+  if (!allUsers || !playerOne || !playerTwo) {
     return (
       <section className="battle-dash">
         <div className="loading-message">

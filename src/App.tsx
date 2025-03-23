@@ -22,8 +22,10 @@ import { useArmiesStore } from "./store/armies";
 import { useEffect } from "react";
 import { useBattlesStore } from "./store/battles";
 import { useRankingsStore } from "./store/rankings";
+import { useUserStore } from "./store/user";
 
 function App() {
+  const { fetchAllUsers, allUsers } = useUserStore();
   const { armies, fetchAllArmies } = useArmiesStore();
   const {
     upcomingBattles,
@@ -54,6 +56,7 @@ function App() {
     if (!fantasyRankings) fetchFantasyRankings();
     if (!fortyKRankings) fetchFortyKRankings();
     if (!topRankings.fantasy) fetchTopRankings();
+    if (!allUsers) fetchAllUsers();
   });
 
   return (

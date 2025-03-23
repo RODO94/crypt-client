@@ -1,25 +1,18 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import "./UserSelectInput.scss";
-import { getAllUsers } from "../../utils/UserRequests";
-import { UsersObj } from "../../utils/Interfaces";
+import { Users } from "../../utils/Interfaces";
+import { useUserStore } from "../../store/user";
 
 export default function UserSelectInput({
   initialUser,
   setNewUser,
 }: {
-  initialUser: UsersObj;
-  setNewUser: React.Dispatch<React.SetStateAction<UsersObj>>;
+  initialUser: Users;
+  setNewUser: React.Dispatch<React.SetStateAction<Users>>;
 }) {
-  const [userArray, setUserArray] = useState<UsersObj[]>();
-  const [selectedUser, setSelectedUser] = useState<UsersObj>(initialUser);
+  const [selectedUser, setSelectedUser] = useState<Users>(initialUser);
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      const userResponse = await getAllUsers(3);
-      userResponse && setUserArray(userArray);
-    };
-    fetchUsers();
-  }, [userArray]);
+  const { allUsers } = useUserStore();
 
   return (
     <select
@@ -28,14 +21,14 @@ export default function UserSelectInput({
       className="user-select"
       value={selectedUser.known_as}
       onChange={(event: ChangeEvent<HTMLSelectElement>) => {
-        const newUser: UsersObj | undefined = userArray?.find(
-          (user: UsersObj) => user.id === event.target.value
+        const newUser: Users | undefined = allUsers?.find(
+          (user: Users) => user.id === event.target.value
         );
         newUser && setSelectedUser(newUser);
         newUser && setNewUser(newUser);
       }}
     >
-      {userArray?.map((user: UsersObj) => (
+      {allUsers?.map((user: Users) => (
         <option value={user.id}>{user.known_as}</option>
       ))}
     </select>

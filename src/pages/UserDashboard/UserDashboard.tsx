@@ -6,28 +6,20 @@ import UsersFortyRanking from "../../components/UsersFortyRanking/UsersFortyRank
 import UsersResults from "../../components/UsersResults/UsersResults";
 import UsersUpcomingBattles from "../../components/UsersUpcomingBattles/UsersUpcomingBattles";
 import "./UserDashboard.scss";
-import { Rank, UsersObj } from "../../utils/Interfaces";
-import { getUserInfo, verifyUser } from "../../utils/UserRequests";
+import { Rank } from "../../utils/Interfaces";
 import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
-import { useArmiesStore } from "../../store/armies";
 import { useBattlesStore } from "../../store/battles";
-
-interface AllRanks {
-  fortyK: Rank[];
-  fantasy: Rank[];
-}
+import { useUserStore } from "../../store/user";
+import { useArmiesStore } from "../../store/armies";
 
 export default function UserDashboard() {
-  const [rankArray, setRankArray] = useState<AllRanks>();
-  const [userResults, setUserResults] = useState();
   const [ally, setAlly] = useState<Rank | undefined>();
   const [nemesis, setNemesis] = useState<Rank | undefined>();
-  const [userObj, setUserObj] = useState<UsersObj>();
 
-  const token = sessionStorage.getItem("token");
-  const { fetchUserArmies } = useArmiesStore();
+  const { token, userInfo, fetchUserInfo } = useUserStore();
   const { fetchUserBattles, userBattles } = useBattlesStore();
+  const { fetchUserArmies, userArmies } = useArmiesStore();
 
   const navigate = useNavigate();
 
@@ -35,57 +27,20 @@ export default function UserDashboard() {
     if (!token) {
       return navigate("/login");
     }
-    const fetchData = async () => {
-      if (token) {
-        const response = await verifyUser(token, 2);
 
-        if (response) {
-          const infoResponse = await getUserInfo(token, 5);
+    if (!userInfo) fetchUserInfo(token);
+    if (!userBattles) fetchUserBattles(token);
+    if (!userArmies && userInfo?.user) fetchUserArmies(userInfo?.user.id);
 
-          if (!infoResponse) {
-            return navigate("/login");
-          }
-
-          if (!userBattles) fetchUserBattles(token);
-
-          fetchUserArmies(infoResponse.user.id);
-
-          setRankArray(infoResponse.rankArray);
-          setUserResults(infoResponse.userResults);
-          setAlly(infoResponse.ally);
-          setNemesis(infoResponse.nemesis);
-          setUserObj(infoResponse.user);
-        } else if (!response) {
-          return navigate("/login/redirect");
-        }
-      }
-    };
-
-    fetchData();
+    setAlly(userInfo?.ally);
+    setNemesis(userInfo?.nemesis);
   }, []);
 
-  if (!userObj) {
+  if (!userInfo) {
     return (
       <div className="loading-message">
         <CircularProgress style={{ color: "white" }} />
       </div>
-    );
-  }
-
-  if (!rankArray || !userResults) {
-    return (
-      <>
-        <section className="user-dash">
-          <DashboardHero
-            userObj={userObj}
-            nemesis={nemesis}
-            ally={ally}
-            nextBattle={userBattles?.battleArray[0]}
-            fortykRanked={rankArray?.fortyK[0]}
-            fantasyRanked={rankArray?.fantasy[0]}
-          />
-        </section>
-      </>
     );
   }
 
@@ -94,26 +49,26 @@ export default function UserDashboard() {
       <section className="user-dash">
         <DashboardHero
           nextBattle={userBattles?.battleArray[0]}
-          userObj={userObj}
+          userObj={userInfo.user}
           nemesis={nemesis}
           ally={ally}
-          fortykRanked={rankArray?.fortyK[0]}
-          fantasyRanked={rankArray?.fantasy[0]}
+          fortykRanked={userInfo.rankArray.fortyK[0]}
+          fantasyRanked={userInfo.rankArray.fantasy[0]}
         />
       </section>
       <section className="user-ranking">
         <UsersFortyRanking
-          rankArray={rankArray?.fortyK}
-          user={userObj.known_as}
+          rankArray={userInfo.rankArray.fortyK}
+          user={userInfo.user.known_as}
         />
         <UsersFantasyRanking
-          rankArray={rankArray?.fantasy}
-          user={userObj.known_as}
+          rankArray={userInfo.rankArray.fantasy}
+          user={userInfo.user.known_as}
         />
       </section>
       <section className="user-battles">
         <UsersUpcomingBattles battleArray={userBattles?.battleArray} />
-        <UsersResults battleArray={userResults} />
+        <UsersResults battleArray={userInfo.userResults} />
       </section>
     </main>
   );
