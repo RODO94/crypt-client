@@ -32,6 +32,14 @@ export interface LogInBody {
   password: string;
 }
 
+export interface UsersArmyInfo {
+  nemesis: Army;
+  ally: Army;
+  user: Army;
+  battleCount: number;
+  winPercent: string;
+}
+
 export interface Armies {
   id: string;
   name: string;
