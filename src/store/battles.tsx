@@ -11,7 +11,7 @@ import {
 interface BattlesState {
   upcomingBattles: Battle[];
   completedBattles: CompletedBattle[];
-  userBattles: { battleArray: Battle[]; userResults: CompletedBattle[] };
+  userBattles: { battleArray: Battle[]; userResults: CompletedBattle[] } | null;
   selectedBattle: Battle | null;
 
   fetchUpcomingBattles: () => Promise<void>;
@@ -26,7 +26,7 @@ export const useBattlesStore = create<BattlesState>()(
     (set) => ({
       upcomingBattles: [],
       completedBattles: [],
-      userBattles: { battleArray: [], userResults: [] },
+      userBattles: null,
       selectedBattle: null,
 
       fetchUpcomingBattles: async () => {
