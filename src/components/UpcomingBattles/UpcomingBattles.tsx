@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { getUpcomingBattlesFive } from "../../utils/BattleRequests";
+import { useState } from "react";
 import "./UpcomingBattles.scss";
 import DateTableHeader from "../DateTableHeader/DateTableHeader";
 import { Player } from "../../utils/Interfaces";
@@ -8,6 +7,7 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { CircularProgress } from "@mui/material";
 import NewBattleTableRow from "../NewBattleTableRow/NewBattleTableRow";
+import { useBattlesStore } from "../../store/battles";
 
 interface Battle {
   id: string;
@@ -21,23 +21,12 @@ interface Battle {
   finish: string;
 }
 
-interface BattleArray extends Array<Battle> {}
-
 export default function UpcomingBattles() {
-  const [battleArray, setBattleArray] = useState<BattleArray>();
   const [hideSectionBool, setHideSectionBool] = useState<boolean>(false);
 
+  const { upcomingBattles } = useBattlesStore();
+
   let currentDate = "";
-
-  useEffect(() => {
-    const battleFn = async () => {
-      const data = await getUpcomingBattlesFive();
-      setBattleArray(data);
-      return data;
-    };
-
-    battleFn();
-  }, []);
 
   const handleClick = () => {
     hideSectionBool === false
@@ -45,7 +34,7 @@ export default function UpcomingBattles() {
       : setHideSectionBool(false);
   };
 
-  if (!battleArray) {
+  if (!upcomingBattles) {
     return (
       <div className="loading-message">
         <CircularProgress style={{ color: "white" }} />
@@ -78,8 +67,8 @@ export default function UpcomingBattles() {
             : "section--hide"
         }
       >
-        {battleArray.map((battle: Battle, index: number) => {
-          if (index > 5) {
+        {upcomingBattles.map((battle: Battle, index: number) => {
+          if (index > 4) {
             return;
           }
           if (index === 0) {

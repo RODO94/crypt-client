@@ -20,12 +20,25 @@ import LogInRedirect from "./pages/LogInRedirect/LogInRedirect";
 import NavFooter from "./components/NavFooter/NavFooter";
 import { useArmiesStore } from "./store/armies";
 import { useEffect } from "react";
+import { useBattlesStore } from "./store/battles";
 
 function App() {
   const { armies, fetchAllArmies } = useArmiesStore();
+  const {
+    upcomingBattles,
+    completedBattles,
+    fetchUpcomingBattles,
+    fetchCompletedBattles,
+  } = useBattlesStore();
   useEffect(() => {
     if (!armies[0]) {
       fetchAllArmies();
+    }
+    if (!upcomingBattles[0]) {
+      fetchUpcomingBattles();
+    }
+    if (!completedBattles[0]) {
+      fetchCompletedBattles;
     }
   });
   return (

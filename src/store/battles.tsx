@@ -14,7 +14,6 @@ interface BattlesState {
   userBattles: { battleArray: Battle[]; userResults: CompletedBattle[] };
   selectedBattle: Battle | null;
 
-  // Actions
   fetchUpcomingBattles: () => Promise<void>;
   fetchCompletedBattles: () => Promise<void>;
   fetchUserBattles: (token: string) => Promise<void>;
@@ -33,6 +32,7 @@ export const useBattlesStore = create<BattlesState>()(
       fetchUpcomingBattles: async () => {
         try {
           const battles = await getUpcomingBattles(3);
+          console.log("store", battles);
           set({ upcomingBattles: battles });
         } catch (error) {
           console.error(error);
