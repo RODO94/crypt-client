@@ -32,7 +32,6 @@ export const useBattlesStore = create<BattlesState>()(
       fetchUpcomingBattles: async () => {
         try {
           const battles = await getUpcomingBattles(3);
-          console.log("store", battles);
           set({ upcomingBattles: battles });
         } catch (error) {
           console.error(error);

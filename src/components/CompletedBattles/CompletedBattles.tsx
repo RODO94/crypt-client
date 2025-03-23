@@ -1,45 +1,25 @@
-import { useEffect, useState } from "react";
-import { getCompletedBattlesFive } from "../../utils/BattleRequests";
+import { useState } from "react";
 import { CompletedBattle } from "../../utils/Interfaces";
 import DateTableHeader from "../DateTableHeader/DateTableHeader";
 import "./CompletedBattles.scss";
 import { Link } from "react-router-dom";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { CircularProgress } from "@mui/material";
 import NewBattleCompleteTableRow from "../NewBattleTableCompleteRow copy/NewBattleCompleteTableRow";
-
-interface CompletedBattleArray extends Array<CompletedBattle> {}
+import { useBattlesStore } from "../../store/battles";
 
 export default function CompletedBattles() {
-  const [battleArray, setBattleArray] = useState<CompletedBattleArray>();
   const [hideSectionBool, setHideSectionBool] = useState<boolean>(false);
 
+  const { completedBattles } = useBattlesStore();
+
   let currentDate = "";
-
-  useEffect(() => {
-    const battleFn = async () => {
-      const data = await getCompletedBattlesFive();
-      setBattleArray(data);
-      return data;
-    };
-
-    battleFn();
-  }, []);
 
   const handleClick = () => {
     hideSectionBool === false
       ? setHideSectionBool(true)
       : setHideSectionBool(false);
   };
-
-  if (!battleArray) {
-    return (
-      <div className="loading-message">
-        <CircularProgress style={{ color: "white" }} />
-      </div>
-    );
-  }
 
   return (
     <section className="completedbattles">
@@ -64,8 +44,8 @@ export default function CompletedBattles() {
           hideSectionBool === false ? "completedbattles-list" : "section--hide"
         }
       >
-        {battleArray.map((battle: CompletedBattle, index: number) => {
-          if (index > 5) {
+        {completedBattles.map((battle: CompletedBattle, index: number) => {
+          if (index > 4) {
             return;
           }
           if (index === 0) {
