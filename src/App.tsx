@@ -38,7 +38,7 @@ function App() {
       fetchUpcomingBattles();
     }
     if (!completedBattles[0]) {
-      fetchCompletedBattles;
+      fetchCompletedBattles();
     }
   });
   return (
