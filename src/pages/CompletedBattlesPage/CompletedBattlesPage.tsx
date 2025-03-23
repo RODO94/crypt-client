@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { getCompletedBattles } from "../../utils/BattleRequests";
 import "./CompletedBattlesPage.scss";
 import { CompletedBattle } from "../../utils/Interfaces";
 import DateTableHeader from "../../components/DateTableHeader/DateTableHeader";
@@ -10,15 +9,18 @@ import logo from "../../assets/logo.svg";
 import dayjs from "dayjs";
 import NewBattleCompleteTableRow from "../../components/NewBattleTableCompleteRow copy/NewBattleCompleteTableRow";
 import { CircularProgress } from "@mui/material";
+import { useBattlesStore } from "../../store/battles";
 
 interface BattleArray extends Array<CompletedBattle> {}
 interface NameArray extends Array<string> {}
-interface yearArray extends Array<number> {}
+interface YearArray extends Array<number> {}
 
 export default function CompletedBattlesPage() {
-  const [battleArray, setBattleArray] = useState<BattleArray>();
+  const { completedBattles } = useBattlesStore();
+  const [battleArray, setBattleArray] =
+    useState<CompletedBattle[]>(completedBattles);
   const [nameArray, setNameArray] = useState<NameArray>();
-  const [yearArray, setYearArray] = useState<yearArray>();
+  const [yearArray, setYearArray] = useState<YearArray>();
   const [nameFilter, setNameFilter] = useState<string>("all");
   const [yearFilter, setYearFilter] = useState<string>("all");
   const [monthFilter, setMonthFilter] = useState<string>("all");
@@ -27,23 +29,13 @@ export default function CompletedBattlesPage() {
   let currentDate = "";
 
   useEffect(() => {
-    const battleFn = async () => {
-      const data = await getCompletedBattles();
-      setBattleArray(data);
-      return data;
-    };
-
-    battleFn();
-  }, []);
-
-  useEffect(() => {
     const nameFn = async () => {
       const data = await getAllUsersNames();
       setNameArray(data);
       return data;
     };
     nameFn();
-    let dateArray: yearArray = [];
+    let dateArray: YearArray = [];
     if (battleArray !== undefined) {
       dateArray = battleArray?.map((battle) => {
         if (dateArray.includes(dayjs(battle.date).year())) {
@@ -63,18 +55,17 @@ export default function CompletedBattlesPage() {
   useEffect(() => {
     let tempBattleArray: BattleArray = [];
     const filterFn = async () => {
-      const data = await getCompletedBattles();
-      tempBattleArray = await data;
+      tempBattleArray = completedBattles;
       let filterArray: Array<CompletedBattle> = [];
 
       if (nameFilter !== "Name" && nameFilter !== "all") {
         filterArray = tempBattleArray?.filter((battle) => {
-          let playerOneArray = battle.player_1.map((player) => {
+          const playerOneArray = battle.player_1.map((player) => {
             if (player.known_as === nameFilter) {
               return true;
             }
           });
-          let playerTwoArray = battle.player_2.map((player) => {
+          const playerTwoArray = battle.player_2.map((player) => {
             if (player.known_as === nameFilter) {
               return true;
             }
@@ -128,7 +119,7 @@ export default function CompletedBattlesPage() {
         filterArray[0] &&
         battleTypeFilter !== "all"
       ) {
-        let battleFilterArray = filterArray?.filter(
+        const battleFilterArray = filterArray?.filter(
           (battle: CompletedBattle) => battle.battle_type === battleTypeFilter
         );
 
@@ -153,7 +144,7 @@ export default function CompletedBattlesPage() {
       } else setBattleArray(tempBattleArray);
     };
     filterFn();
-  }, [nameFilter, battleTypeFilter, yearFilter, monthFilter]);
+  }, [nameFilter, battleTypeFilter, yearFilter, monthFilter, completedBattles]);
 
   const handleChange = (event: any) => {
     if (event.target.name === "battle-type") {

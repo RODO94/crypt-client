@@ -6,31 +6,28 @@ import UsersFortyRanking from "../../components/UsersFortyRanking/UsersFortyRank
 import UsersResults from "../../components/UsersResults/UsersResults";
 import UsersUpcomingBattles from "../../components/UsersUpcomingBattles/UsersUpcomingBattles";
 import "./UserDashboard.scss";
-import { Battle, Rank, UsersObj } from "../../utils/Interfaces";
-import { getUsersBattles } from "../../utils/BattleRequests";
+import { Rank, UsersObj } from "../../utils/Interfaces";
 import { getUserInfo, verifyUser } from "../../utils/UserRequests";
 import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import { useArmiesStore } from "../../store/armies";
+import { useBattlesStore } from "../../store/battles";
 
-interface RankArray extends Array<Rank> {}
-
-interface AllRankArray {
-  fortyK: RankArray;
-  fantasy: RankArray;
+interface AllRanks {
+  fortyK: Rank[];
+  fantasy: Rank[];
 }
 
 export default function UserDashboard() {
-  const [rankArray, setRankArray] = useState<AllRankArray>();
-  const [upcomingBattles, setUpcomingBattles] = useState();
+  const [rankArray, setRankArray] = useState<AllRanks>();
   const [userResults, setUserResults] = useState();
   const [ally, setAlly] = useState<Rank | undefined>();
   const [nemesis, setNemesis] = useState<Rank | undefined>();
   const [userObj, setUserObj] = useState<UsersObj>();
-  const [nextBattle, setNextBattle] = useState<Battle | undefined>();
 
   const token = sessionStorage.getItem("token");
   const { fetchUserArmies } = useArmiesStore();
+  const { fetchUserBattles, userBattles } = useBattlesStore();
 
   const navigate = useNavigate();
 
@@ -43,24 +40,21 @@ export default function UserDashboard() {
         const response = await verifyUser(token, 2);
 
         if (response) {
-          const [infoResponse, battlesResponse] = await Promise.all([
-            getUserInfo(token, 5),
-            getUsersBattles(token, 5),
-          ]);
+          const infoResponse = await getUserInfo(token, 5);
 
-          if (!infoResponse || !battlesResponse) {
+          if (!infoResponse) {
             return navigate("/login");
           }
+
+          if (!userBattles) fetchUserBattles(token);
 
           fetchUserArmies(infoResponse.user.id);
 
           setRankArray(infoResponse.rankArray);
-          setUpcomingBattles(battlesResponse.battleArray);
           setUserResults(infoResponse.userResults);
           setAlly(infoResponse.ally);
           setNemesis(infoResponse.nemesis);
           setUserObj(infoResponse.user);
-          setNextBattle(battlesResponse.battleArray[0]);
         } else if (!response) {
           return navigate("/login/redirect");
         }
@@ -78,7 +72,7 @@ export default function UserDashboard() {
     );
   }
 
-  if (!rankArray || !upcomingBattles || !userResults) {
+  if (!rankArray || !userResults) {
     return (
       <>
         <section className="user-dash">
@@ -86,7 +80,7 @@ export default function UserDashboard() {
             userObj={userObj}
             nemesis={nemesis}
             ally={ally}
-            nextBattle={nextBattle}
+            nextBattle={userBattles?.battleArray[0]}
             fortykRanked={rankArray?.fortyK[0]}
             fantasyRanked={rankArray?.fantasy[0]}
           />
@@ -99,7 +93,7 @@ export default function UserDashboard() {
     <main className="user-dash__main">
       <section className="user-dash">
         <DashboardHero
-          nextBattle={nextBattle}
+          nextBattle={userBattles?.battleArray[0]}
           userObj={userObj}
           nemesis={nemesis}
           ally={ally}
@@ -118,7 +112,7 @@ export default function UserDashboard() {
         />
       </section>
       <section className="user-battles">
-        <UsersUpcomingBattles battleArray={upcomingBattles} />
+        <UsersUpcomingBattles battleArray={userBattles?.battleArray} />
         <UsersResults battleArray={userResults} />
       </section>
     </main>
