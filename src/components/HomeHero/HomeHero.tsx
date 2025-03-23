@@ -1,26 +1,10 @@
 import "./HomeHero.scss";
 import NavButton from "../NavButton/NavButton";
 import logo from "../../assets/logo.svg";
-import { useEffect, useState } from "react";
-import { verifyUser } from "../../utils/UserRequests";
+import { useUserStore } from "../../store/user";
 
 export default function HomeHero() {
-  const userToken = sessionStorage.getItem("token");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    const userValidation = async () => {
-      if (userToken) {
-        const response = await verifyUser(userToken, 2);
-        if (response) {
-          setIsLoggedIn(true);
-        } else {
-          setIsLoggedIn(false);
-        }
-      }
-    };
-    userValidation();
-  }, []);
+  const { currentUser } = useUserStore();
 
   return (
     <section className="hero">
@@ -31,7 +15,7 @@ export default function HomeHero() {
         <img src={logo} alt="the crest of the Crypt" className="hero__logo" />
       </div>
       <div className="hero__button-wrap">
-        {!isLoggedIn ? (
+        {!currentUser ? (
           <>
             <NavButton colour="blue" text="Log In" page="/login" />
             <NavButton colour="dark" text="Sign Up" page="/signup" />

@@ -23,7 +23,7 @@ interface UserState {
     };
     userResults: Battle[];
   } | null;
-  allUsers: Users[];
+  allUsers: Users[] | null;
   token: string | null;
 
   setUserRole: (role: UserRole) => void;
@@ -40,7 +40,7 @@ export const useUserStore = create<UserState>()(
       userRole: "guest",
       currentUser: null,
       userInfo: null,
-      allUsers: [],
+      allUsers: null,
       token: sessionStorage.getItem("token"),
 
       setUserRole: (role) => set({ userRole: role }),
