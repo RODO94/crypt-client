@@ -21,6 +21,7 @@ import NavFooter from "./components/NavFooter/NavFooter";
 import { useArmiesStore } from "./store/armies";
 import { useEffect } from "react";
 import { useBattlesStore } from "./store/battles";
+import { useRankingsStore } from "./store/rankings";
 
 function App() {
   const { armies, fetchAllArmies } = useArmiesStore();
@@ -30,6 +31,16 @@ function App() {
     fetchUpcomingBattles,
     fetchCompletedBattles,
   } = useBattlesStore();
+
+  const {
+    fetchFantasyRankings,
+    fetchFortyKRankings,
+    fetchTopRankings,
+    fantasyRankings,
+    fortyKRankings,
+    topRankings,
+  } = useRankingsStore();
+
   useEffect(() => {
     if (!armies[0]) {
       fetchAllArmies();
@@ -40,7 +51,11 @@ function App() {
     if (!completedBattles[0]) {
       fetchCompletedBattles();
     }
+    if (!fantasyRankings) fetchFantasyRankings();
+    if (!fortyKRankings) fetchFortyKRankings();
+    if (!topRankings.fantasy) fetchTopRankings();
   });
+
   return (
     <BrowserRouter>
       <div className="App">
