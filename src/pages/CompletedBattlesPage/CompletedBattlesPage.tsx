@@ -4,12 +4,12 @@ import { CompletedBattle } from "../../utils/Interfaces";
 import DateTableHeader from "../../components/DateTableHeader/DateTableHeader";
 
 import { Link } from "react-router-dom";
-import { getAllUsersNames } from "../../utils/UserRequests";
 import logo from "../../assets/logo.svg";
 import dayjs from "dayjs";
 import NewBattleCompleteTableRow from "../../components/NewBattleTableCompleteRow copy/NewBattleCompleteTableRow";
 import { CircularProgress } from "@mui/material";
 import { useBattlesStore } from "../../store/battles";
+import { useUserStore } from "../../store/user";
 
 interface BattleArray extends Array<CompletedBattle> {}
 interface NameArray extends Array<string> {}
@@ -28,11 +28,13 @@ export default function CompletedBattlesPage() {
 
   let currentDate = "";
 
+  const { allUsers } = useUserStore();
+
   useEffect(() => {
     const nameFn = async () => {
-      const data = await getAllUsersNames();
-      setNameArray(data);
-      return data;
+      const userNames = allUsers?.map((user) => user.known_as);
+      setNameArray(userNames);
+      return userNames;
     };
     nameFn();
     let dateArray: YearArray = [];
@@ -50,7 +52,7 @@ export default function CompletedBattlesPage() {
 
       setYearArray(dateArray);
     }
-  }, [battleArray]);
+  }, [battleArray, allUsers]);
 
   useEffect(() => {
     let tempBattleArray: BattleArray = [];

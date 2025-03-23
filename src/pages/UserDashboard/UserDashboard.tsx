@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import { useBattlesStore } from "../../store/battles";
 import { useUserStore } from "../../store/user";
+import { useArmiesStore } from "../../store/armies";
 
 export default function UserDashboard() {
   const [ally, setAlly] = useState<Rank | undefined>();
@@ -18,6 +19,7 @@ export default function UserDashboard() {
 
   const { token, userInfo, fetchUserInfo } = useUserStore();
   const { fetchUserBattles, userBattles } = useBattlesStore();
+  const { fetchUserArmies, userArmies } = useArmiesStore();
 
   const navigate = useNavigate();
 
@@ -28,6 +30,7 @@ export default function UserDashboard() {
 
     if (!userInfo) fetchUserInfo(token);
     if (!userBattles) fetchUserBattles(token);
+    if (!userArmies && userInfo?.user) fetchUserArmies(userInfo?.user.id);
 
     setAlly(userInfo?.ally);
     setNemesis(userInfo?.nemesis);
