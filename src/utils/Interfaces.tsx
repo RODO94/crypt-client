@@ -20,7 +20,7 @@ export interface AllyObj {
 
 export interface Army {
   emblem: string;
-  emblem_id: string;
+  emblem_id?: string;
   id: string;
   name: string;
   type: string;
@@ -66,8 +66,8 @@ export interface Users {
   first_name: string;
   last_name: string;
   email: string;
-  role: string;
-  id: string;
+  role?: string;
+  id?: string;
   user_emblem?: string;
   "password-reset-token"?: string;
 }
@@ -75,7 +75,9 @@ export interface Users {
 export type Password = Pick<LogInBody, "password">;
 export type Email = Pick<LogInBody, "email">;
 
-export interface SignUpBody extends Users {}
+export interface SignUpBody extends Users {
+  password: Password;
+}
 
 export interface Input {
   name: string;

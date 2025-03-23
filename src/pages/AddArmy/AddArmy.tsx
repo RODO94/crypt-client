@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { emblemNameArray } from "../../utils/EmblemNames";
 import Emblem from "../../components/Emblem/Emblem";
 import { addArmyRequest } from "../../utils/ArmyRequests";
+import { useUserStore } from "../../store/user";
 
 interface EmblemNameObj {
   lowercase: string;
@@ -29,20 +30,19 @@ export default function AddArmy() {
   const [emblemArray, setEmblemArray] = useState<null | EmblemNameObj[]>(null);
 
   const navigate = useNavigate();
-  const userToken = sessionStorage.getItem("token");
-
+  const { token } = useUserStore();
   useEffect(() => {
-    if (!userToken) {
+    if (!token) {
       return navigate("/login");
     }
     const formatEmblemArray = () => {
       const filteredArray =
         type === "40k" ? emblemNameArray[0].fortyk : emblemNameArray[0].fantasy;
       const formattedArray = filteredArray.map((emblem) => {
-        let newString = [];
+        const newString = [];
         const splitString = emblem.split(" ");
         for (let i = 0; i < splitString.length; i++) {
-          let lowerCaseString = splitString[i].toLowerCase();
+          const lowerCaseString = splitString[i].toLowerCase();
           newString.push(lowerCaseString);
         }
         return { lowercase: newString.join(""), original: emblem };
@@ -78,12 +78,12 @@ export default function AddArmy() {
       return;
     }
 
-    const requestBody = { name: name, type: type, emblemName: emblemName };
+    const requestBody = { name: name, type: type, emblem: emblemName };
 
     try {
       setLoadingBool(true);
-      if (userToken) {
-        const response = await addArmyRequest(userToken, requestBody, 2);
+      if (token) {
+        const response = await addArmyRequest(token, requestBody, 2);
         if (response) {
           setLoadingBool(false);
           setSuccessBool(true);

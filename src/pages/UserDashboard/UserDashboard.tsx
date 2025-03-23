@@ -30,7 +30,7 @@ export default function UserDashboard() {
 
     if (!userInfo) fetchUserInfo(token);
     if (!userBattles) fetchUserBattles(token);
-    if (!userArmies && userInfo?.user) fetchUserArmies(userInfo?.user.id);
+    if (!userArmies && userInfo?.user.id) fetchUserArmies(userInfo?.user.id);
 
     setAlly(userInfo?.ally);
     setNemesis(userInfo?.nemesis);
@@ -49,7 +49,7 @@ export default function UserDashboard() {
       <section className="user-dash">
         <DashboardHero
           nextBattle={userBattles?.battleArray[0]}
-          userObj={userInfo.user}
+          user={userInfo.user}
           nemesis={nemesis}
           ally={ally}
           fortykRanked={userInfo.rankArray.fortyK[0]}
