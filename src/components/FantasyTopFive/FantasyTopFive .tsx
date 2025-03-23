@@ -1,30 +1,18 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import FiveColTableHeader from "../FiveColTableHeader/FiveColTableHeader";
 import FiveColTableRow from "../FiveColTableRow/FiveColTableRow";
 import "./FantasyTopFive .scss";
-import { getRankingTopFive } from "../../utils/RankingRequests";
 import { Rank } from "../../utils/Interfaces";
 import { Link } from "react-router-dom";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { CircularProgress } from "@mui/material";
-
-interface RankArray extends Array<Rank> {}
+import { useRankingsStore } from "../../store/rankings";
 
 export default function FantasyTopFive() {
-  const [fantasyRankingArray, setFantasyRankingArray] = useState<RankArray>();
   const [hideSectionBool, setHideSectionBool] = useState<boolean>(false);
 
-  useEffect(() => {
-    const fetchTopFiveRanking = async () => {
-      const response = await getRankingTopFive();
-      const sortedResponse = response.fantasy.sort(
-        (a: any, b: any) => b.ranking - a.ranking
-      );
-      setFantasyRankingArray(sortedResponse);
-    };
-    fetchTopFiveRanking();
-  }, []);
+  const { fantasy: fantasyRankings } = useRankingsStore().topRankings;
 
   const handleClick = () => {
     hideSectionBool === false
@@ -32,7 +20,7 @@ export default function FantasyTopFive() {
       : setHideSectionBool(false);
   };
 
-  if (!fantasyRankingArray) {
+  if (!fantasyRankings) {
     return (
       <div className="loading-message">
         <CircularProgress style={{ color: "white" }} />
@@ -64,7 +52,7 @@ export default function FantasyTopFive() {
         }
       >
         <FiveColTableHeader />
-        {fantasyRankingArray
+        {fantasyRankings
           .filter((army) => army.prev_ranking !== "99.00")
           .map((army: Rank, index: number) => {
             let colour = "dark";
