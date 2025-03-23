@@ -6,12 +6,13 @@
   justify-content: center;
   align-items: center;
   gap: 0.625rem;
-  border-radius: 0.25rem;
   text-align: center;
   font-family: "Roboto", system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-size: 0.7rem;
   font-weight: 600;
   line-height: normal;
+  width: 100%;
+  padding: 0.25rem 0.75rem;
   @include tablet {
     font-size: 0.875rem;
   }
@@ -20,10 +21,12 @@
   }
 
   &--40k {
-    color: $ultramarine-4;
+    background-color: $ultramarine-4;
+    color: whitesmoke;
   }
   &--fantasy {
-    color: $dark-angels-2;
+    background-color: $dark-angels-2;
+    color: whitesmoke;
   }
   &__text {
     margin: 0;
