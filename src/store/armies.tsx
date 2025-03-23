@@ -1,4 +1,3 @@
-// src/store/armies.tsx
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { Army } from "../utils/Interfaces";
@@ -13,7 +12,6 @@ interface ArmiesState {
   userArmies: Army[];
   selectedArmy: Army | null;
 
-  // Actions
   fetchAllArmies: () => Promise<void>;
   fetchUserArmies: (userId: string) => Promise<void>;
   fetchArmyDetails: (armyId: string) => Promise<void>;
@@ -30,6 +28,7 @@ export const useArmiesStore = create<ArmiesState>()(
       fetchAllArmies: async () => {
         try {
           const armies = await getAllArmies(2);
+          console.log(armies);
           armies && set({ armies });
         } catch (error) {
           console.error(error);
