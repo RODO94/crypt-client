@@ -20,7 +20,7 @@ export default function ArmyInfo() {
     };
 
     fetchData();
-  }, [armyID, selectedArmy, fetchArmyDetails]);
+  }, [armyID, fetchArmyDetails]);
 
   if (!selectedArmy) {
     return (
