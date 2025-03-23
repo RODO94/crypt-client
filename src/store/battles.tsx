@@ -5,19 +5,16 @@ import {
   getUpcomingBattles,
   getCompletedBattles,
   getUsersBattles,
-  getOneBattle,
 } from "../utils/BattleRequests";
 
 interface BattlesState {
   upcomingBattles: Battle[];
   completedBattles: CompletedBattle[];
   userBattles: { battleArray: Battle[]; userResults: CompletedBattle[] } | null;
-  selectedBattle: Battle | null;
 
   fetchUpcomingBattles: () => Promise<void>;
   fetchCompletedBattles: () => Promise<void>;
   fetchUserBattles: (token: string) => Promise<void>;
-  fetchBattleDetails: (battleId: string) => Promise<void>;
   clearBattles: () => void;
 }
 
@@ -56,21 +53,11 @@ export const useBattlesStore = create<BattlesState>()(
         }
       },
 
-      fetchBattleDetails: async (battleId: string) => {
-        try {
-          const battle = await getOneBattle(battleId);
-          set({ selectedBattle: battle });
-        } catch (error) {
-          console.error(error);
-        }
-      },
-
       clearBattles: () => {
         set({
           upcomingBattles: [],
           completedBattles: [],
           userBattles: { battleArray: [], userResults: [] },
-          selectedBattle: null,
         });
       },
     }),
@@ -80,7 +67,6 @@ export const useBattlesStore = create<BattlesState>()(
         upcomingBattles: state.upcomingBattles,
         completedBattles: state.completedBattles,
         userBattles: state.userBattles,
-        selectedBattle: state.selectedBattle,
       }),
     }
   )

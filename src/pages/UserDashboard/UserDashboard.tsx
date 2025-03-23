@@ -13,15 +13,13 @@ import { CircularProgress } from "@mui/material";
 import { useArmiesStore } from "../../store/armies";
 import { useBattlesStore } from "../../store/battles";
 
-interface RankArray extends Array<Rank> {}
-
-interface AllRankArray {
-  fortyK: RankArray;
-  fantasy: RankArray;
+interface AllRanks {
+  fortyK: Rank[];
+  fantasy: Rank[];
 }
 
 export default function UserDashboard() {
-  const [rankArray, setRankArray] = useState<AllRankArray>();
+  const [rankArray, setRankArray] = useState<AllRanks>();
   const [userResults, setUserResults] = useState();
   const [ally, setAlly] = useState<Rank | undefined>();
   const [nemesis, setNemesis] = useState<Rank | undefined>();
@@ -30,7 +28,6 @@ export default function UserDashboard() {
   const token = sessionStorage.getItem("token");
   const { fetchUserArmies } = useArmiesStore();
   const { fetchUserBattles, userBattles } = useBattlesStore();
-  console.log(userBattles);
 
   const navigate = useNavigate();
 
