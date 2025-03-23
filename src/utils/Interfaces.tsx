@@ -35,9 +35,21 @@ export interface LogInBody {
 export interface UsersArmyInfo {
   nemesis: Army;
   ally: Army;
-  user: Army;
+  user: ArmyInformation;
   battleCount: number;
   winPercent: string;
+}
+
+export interface ArmyInformation {
+  id: string;
+  ranking: string;
+  user_id: string;
+  emblem_id: string;
+  rn: number;
+  type: "fantasy" | "40k";
+  name: string;
+  emblem: string;
+  known_as: string;
 }
 
 export interface Armies {
