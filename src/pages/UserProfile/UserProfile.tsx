@@ -19,9 +19,9 @@ import {
   styled,
 } from "@mui/material";
 import { useUserStore } from "../../store/user";
-import { ArmyObj, UsersObj } from "../../utils/Interfaces";
+import { Army, UsersObj } from "../../utils/Interfaces";
 
-type UserArmies = ArmyObj & { count: number };
+type UserArmies = Army & { count: number };
 
 const StyledMenu = styled((props: MenuProps) => (
   <Menu

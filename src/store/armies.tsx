@@ -1,7 +1,7 @@
 // src/store/armies.tsx
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { ArmyObj } from "../utils/Interfaces";
+import { Army } from "../utils/Interfaces";
 import {
   getAllArmies,
   getAllUserArmies,
@@ -9,9 +9,9 @@ import {
 } from "../utils/ArmyRequests";
 
 interface ArmiesState {
-  armies: ArmyObj[];
-  userArmies: ArmyObj[];
-  selectedArmy: ArmyObj | null;
+  armies: Army[];
+  userArmies: Army[];
+  selectedArmy: Army | null;
 
   // Actions
   fetchAllArmies: () => Promise<void>;

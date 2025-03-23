@@ -18,7 +18,7 @@ export interface AllyObj {
   emblem: string;
 }
 
-export interface ArmyObj {
+export interface Army {
   emblem: string;
   emblem_id: string;
   id: string;
