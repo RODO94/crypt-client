@@ -13,13 +13,14 @@ import { useBattlesStore } from "../../store/battles";
 
 interface BattleArray extends Array<CompletedBattle> {}
 interface NameArray extends Array<string> {}
-interface yearArray extends Array<number> {}
+interface YearArray extends Array<number> {}
 
 export default function CompletedBattlesPage() {
   const { completedBattles } = useBattlesStore();
-  const [battleArray, setBattleArray] = useState<BattleArray>(completedBattles);
+  const [battleArray, setBattleArray] =
+    useState<CompletedBattle[]>(completedBattles);
   const [nameArray, setNameArray] = useState<NameArray>();
-  const [yearArray, setYearArray] = useState<yearArray>();
+  const [yearArray, setYearArray] = useState<YearArray>();
   const [nameFilter, setNameFilter] = useState<string>("all");
   const [yearFilter, setYearFilter] = useState<string>("all");
   const [monthFilter, setMonthFilter] = useState<string>("all");
@@ -34,7 +35,7 @@ export default function CompletedBattlesPage() {
       return data;
     };
     nameFn();
-    let dateArray: yearArray = [];
+    let dateArray: YearArray = [];
     if (battleArray !== undefined) {
       dateArray = battleArray?.map((battle) => {
         if (dateArray.includes(dayjs(battle.date).year())) {
