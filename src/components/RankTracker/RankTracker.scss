@@ -1,0 +1,10 @@
+@use "../../partials/variables" as *;
+@use "../../partials/mixins" as *;
+
+.rank-tracker {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1.5rem;
+}

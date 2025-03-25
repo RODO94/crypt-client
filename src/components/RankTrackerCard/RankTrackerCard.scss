@@ -1,0 +1,55 @@
+@use "../../partials/variables" as *;
+@use "../../partials/mixins" as *;
+
+.rank-tracker-card {
+  background: none;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 1rem 1rem;
+  width: 135px;
+
+  &__main {
+    display: flex;
+    border-radius: 1rem 1rem 0rem 0rem;
+    gap: 0.5rem;
+    background: #fdfdfd;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    &-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+  &__ranking {
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0 0;
+  }
+  &__old-ranking {
+    color: #8f8f8f;
+    font-size: 0.625rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0 0;
+  }
+  &__banner {
+    display: flex;
+    padding: 0.25rem 1rem;
+    justify-content: space-between;
+    background: $background-3;
+    border-radius: 0rem 0rem 1rem 1rem;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #fdfdfd;
+    font-size: 0.625rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+}
