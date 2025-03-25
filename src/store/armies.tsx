@@ -30,7 +30,6 @@ export const useArmiesStore = create<ArmiesState>()(
       fetchAllArmies: async () => {
         try {
           const armies = await getAllArmies(2);
-          console.log(armies);
           armies && set({ armies });
         } catch (error) {
           console.error(error);
