@@ -79,6 +79,7 @@
     justify-self: flex-end;
     border: 1px solid transparent;
     z-index: 1;
+    max-width: 150px;
     &:hover {
       font-weight: 600;
       text-decoration: underline;
@@ -92,6 +93,8 @@
       background-color: $space-wolves-3;
       color: black;
       font-weight: 600;
+      max-width: 150;
+
       &:hover {
         font-weight: 700;
         text-decoration: none;
