@@ -96,6 +96,9 @@ export interface Rank {
   status?: string;
   current_position?: number;
   emblem?: string;
+  rn?: number;
+  date?: string;
+  id?: string;
 }
 
 export interface allRankObjs {
