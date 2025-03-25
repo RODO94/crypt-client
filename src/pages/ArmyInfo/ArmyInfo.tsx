@@ -43,11 +43,7 @@ export default function ArmyInfo() {
         armyObj={selectedArmy.user}
         armyRank={Number(selectedArmy.user.ranking)}
       />
-      <section className="army-info__rank-tracker">
-        <div className="army-info__rank-tracker-container">
-          <RankTracker rankings={selectedArmyRankings || []} />
-        </div>
-      </section>
+      <RankTracker rankings={selectedArmyRankings || []} />
       <section className="army-info__nemesis-ally">
         <div className="army-info__container">
           <ArmyNemesis nemesis={selectedArmy.nemesis} />

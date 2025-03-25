@@ -29,19 +29,19 @@ export default function RankTrackerCard({
       return {
         message: "Increase",
         color: "success",
-        icon: <TrendingUpIcon color={"success"} />,
+        icon: <TrendingUpIcon sx={{ fontSize: "inherit" }} color={"success"} />,
       };
     if (rankNumber < prevRankNumber)
       return {
         message: "Decrease",
         color: "error",
-        icon: <TrendingDownIcon color="error" />,
+        icon: <TrendingDownIcon sx={{ fontSize: "inherit" }} color="error" />,
       };
 
     return {
       message: "Unchanged",
       color: "info",
-      icon: <TrendingFlatIcon color="info" />,
+      icon: <TrendingFlatIcon sx={{ fontSize: "inherit" }} color="info" />,
     };
   };
 

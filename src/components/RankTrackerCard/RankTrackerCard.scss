@@ -6,6 +6,12 @@
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   border-radius: 1rem 1rem;
   width: 135px;
+  @include tablet {
+    width: 160px;
+  }
+  @include desktop {
+    width: 220px;
+  }
 
   &__main {
     display: flex;
@@ -15,10 +21,21 @@
     align-items: center;
     justify-content: space-between;
     padding: 0.5rem 1rem;
+    font-size: 1.5rem;
     &-text {
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
+    }
+    @include tablet {
+      padding: 0.75rem 1.25rem;
+
+      font-size: 2rem;
+    }
+    @include desktop {
+      padding: 0.75rem 1.5rem;
+
+      font-size: 2.5rem;
     }
   }
   &__ranking {
@@ -27,6 +44,12 @@
     font-weight: 600;
     line-height: normal;
     margin: 0 0;
+    @include tablet {
+      font-size: 1rem;
+    }
+    @include desktop {
+      font-size: 1.5rem;
+    }
   }
   &__old-ranking {
     color: #8f8f8f;
@@ -35,6 +58,12 @@
     font-weight: 400;
     line-height: normal;
     margin: 0 0;
+    @include tablet {
+      font-size: 0.875rem;
+    }
+    @include desktop {
+      font-size: 1rem;
+    }
   }
   &__banner {
     display: flex;
@@ -51,5 +80,13 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    @include tablet {
+      padding: 0.5rem 1.25rem;
+      font-size: 0.8rem;
+    }
+    @include desktop {
+      padding: 0.5rem 1.5rem;
+      font-size: 1rem;
+    }
   }
 }
