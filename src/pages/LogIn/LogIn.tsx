@@ -16,7 +16,8 @@ export default function LogIn() {
     "login__error login__error--hidden"
   );
 
-  const { setUserRole } = useUserStore();
+  const { setUserRole, setToken, fetchUserInfo, fetchCurrentUser } =
+    useUserStore();
 
   const navigate = useNavigate();
 
@@ -27,6 +28,9 @@ export default function LogIn() {
     const requestObj = { email: email, password: password };
     const response = await loginAuthentication(requestObj);
     setUserRole(response.role);
+    setToken(response.token);
+    fetchUserInfo(response.token);
+    fetchCurrentUser(response.token);
 
     if (response === "Invalid Password") {
       setErrorClass("login__error login__error--visible");

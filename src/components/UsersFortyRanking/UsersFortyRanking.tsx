@@ -1,4 +1,4 @@
-import { RankObj } from "../../utils/Interfaces";
+import { Rank } from "../../utils/Interfaces";
 import "./UsersFortyRanking.scss";
 import FiveColTableHeader from "../FiveColTableHeader/FiveColTableHeader";
 import FiveColTableRow from "../FiveColTableRow/FiveColTableRow";
@@ -18,7 +18,7 @@ export default function UsersFortyRanking({ rankArray, user }: any) {
         <h2 className="user-dash-rankings__title">40k Rankings</h2>
       </div>
       <FiveColTableHeader />
-      {rankArray.map((army: RankObj, index: number) => {
+      {rankArray.map((army: Rank, index: number) => {
         let colour = "dark";
         if (index % 2 === 0) {
           colour = "light";

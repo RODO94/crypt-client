@@ -1,13 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./UserProfile.scss";
 import { useNavigate } from "react-router-dom";
-import {
-  getAllUsers,
-  getUser,
-  makeAdmin,
-  verifyUser,
-} from "../../utils/UserRequests";
-import { getAllUserArmies } from "../../utils/ArmyRequests";
+import { makeAdmin } from "../../utils/UserRequests";
 import BattleCard from "../../components/BattleCard/BattleCard";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import {
@@ -19,9 +13,8 @@ import {
   styled,
 } from "@mui/material";
 import { useUserStore } from "../../store/user";
-import { ArmyObj, UsersObj } from "../../utils/Interfaces";
-
-type UserArmies = ArmyObj & { count: number };
+import { useArmiesStore, UserArmies } from "../../store/armies";
+import { Users } from "../../utils/Interfaces";
 
 const StyledMenu = styled((props: MenuProps) => (
   <Menu
@@ -66,10 +59,6 @@ const StyledMenu = styled((props: MenuProps) => (
 }));
 
 export default function UserProfile() {
-  const [user, setUser] = useState<UsersObj>();
-  const [fantasyArmyArray, setFantasyArmyArray] = useState([]);
-  const [fortykArmyArray, setFortykArmyArray] = useState([]);
-  const [userArray, setUserArray] = useState([]);
   const [targetUser, setTargetUser] = useState();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const navigate = useNavigate();
@@ -82,73 +71,25 @@ export default function UserProfile() {
     setAnchorEl(null);
   };
 
-  const { userRole } = useUserStore();
+  const { userRole, token, currentUser, allUsers, fetchCurrentUser } =
+    useUserStore();
+  const { userArmies } = useArmiesStore();
   const isAdmin = userRole === "admin";
 
-  const userToken = sessionStorage.getItem("token");
-
-  if (!userToken) {
+  if (!token) {
     navigate("/login");
   }
 
   const handleAdmin = async () => {
-    if (targetUser && userToken) {
-      await makeAdmin(targetUser, userToken);
+    if (targetUser && token) {
+      await makeAdmin(targetUser, token);
+      fetchCurrentUser(token);
     }
     window.location.reload();
   };
 
-  useEffect(() => {
-    const fetchUser = async (token: string) => {
-      if (token) {
-        const response = await verifyUser(token, 2);
-        if (response) {
-          const data = await getUser(token);
-          setUser(data);
-          return data;
-        } else if (!response) {
-          return navigate("/login/redirect");
-        }
-      }
-    };
-    userToken && fetchUser(userToken);
-  }, []);
+  if (!currentUser?.id) return <p>Loading</p>;
 
-  useEffect(() => {
-    const fetchArmies = async () => {
-      const data = user?.id && (await getAllUserArmies(user.id));
-      const fortykArray = data.filter(
-        (army: UserArmies) => army.type === "40k"
-      );
-      const fantasyArray = data.filter(
-        (army: UserArmies) => army.type === "fantasy"
-      );
-
-      setFantasyArmyArray(fantasyArray);
-      setFortykArmyArray(fortykArray);
-    };
-    if (user) {
-      fetchArmies();
-    }
-  }, [user]);
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-      const response = await getAllUsers(2);
-      setUserArray(response);
-    };
-    fetchUsers();
-  }, []);
-
-  if (
-    !fantasyArmyArray ||
-    !fortykArmyArray ||
-    !user ||
-    !userRole ||
-    !userArray
-  ) {
-    return <p> Loading Content</p>;
-  }
   return (
     <main className="user-profile">
       <section className="user-profile__dashboard">
@@ -157,7 +98,7 @@ export default function UserProfile() {
           <article className="user-profile__info-card">
             <h3 className="user-profile__info-header">Name</h3>
             <div className="user-profile__info-wrap">
-              <strong className="user-profile__info">{`${user.first_name} ${user.last_name}`}</strong>
+              <strong className="user-profile__info">{`${currentUser.first_name} ${currentUser.last_name}`}</strong>
             </div>
           </article>{" "}
           <article className="user-profile__info-card">
@@ -169,81 +110,87 @@ export default function UserProfile() {
           <article className="user-profile__info-card">
             <h3 className="user-profile__info-header">Email</h3>
             <div className="user-profile__info-wrap">
-              <strong className="user-profile__info">{user.email}</strong>
+              <strong className="user-profile__info">
+                {currentUser.email}
+              </strong>
             </div>
           </article>
         </div>
       </section>
       <section className="user-profile__army-list">
         <h2 className="user-profile__subheader">Fantasy Armies</h2>
-        {fantasyArmyArray.map((army: UserArmies) => {
-          return (
-            <article
-              key={`article${army.army_id}`}
-              className="user-profile__army-card"
-            >
-              <div
-                key={`div2${army.army_id}`}
-                className="user-profile__army-wrap"
+        {userArmies
+          .filter((army) => army.type === "fantasy")
+          .map((army: UserArmies) => {
+            return (
+              <article
+                key={`article${army.army_id}`}
+                className="user-profile__army-card"
               >
-                <BattleCard
-                  key={`battlecard${army.army_id}`}
-                  name={army.name}
-                  emblem={army.emblem}
-                />
-              </div>
-              <div
-                key={`div${army.army_id}`}
-                className="user-profile__count-wrap"
-              >
-                <strong
-                  key={`strong${army.army_id}`}
-                  className="user-profile__info"
+                <div
+                  key={`div2${army.army_id}`}
+                  className="user-profile__army-wrap"
                 >
-                  {army.count > 1 || army.count === 0
-                    ? `${army.count} games`
-                    : `${army.count} game`}
-                </strong>
-              </div>
-            </article>
-          );
-        })}
+                  <BattleCard
+                    key={`battlecard${army.army_id}`}
+                    name={army.name}
+                    emblem={army.emblem}
+                  />
+                </div>
+                <div
+                  key={`div${army.army_id}`}
+                  className="user-profile__count-wrap"
+                >
+                  <strong
+                    key={`strong${army.army_id}`}
+                    className="user-profile__info"
+                  >
+                    {army.count > 1 || army.count === 0
+                      ? `${army.count} games`
+                      : `${army.count} game`}
+                  </strong>
+                </div>
+              </article>
+            );
+          })}
       </section>{" "}
       <section id="fortyk" className="user-profile__army-list">
         <h2 className="user-profile__subheader">40k Armies</h2>
-        {fortykArmyArray.map((army: UserArmies) => {
-          return (
-            <article
-              key={`article${army.army_id}`}
-              className="user-profile__army-card"
-            >
-              {" "}
-              <div
-                key={`div2${army.army_id}`}
-                className="user-profile__army-wrap"
+        {userArmies
+          .filter((army) => army.type === "40k")
+          .map((army: UserArmies) => {
+            return (
+              <article
+                key={`article${army.army_id}`}
+                className="user-profile__army-card"
               >
-                <BattleCard
-                  key={`battlecard${army.army_id}`}
-                  name={army.name}
-                  emblem={army.emblem}
-                />
-              </div>
-              <div
-                key={`div${army.army_id}`}
-                className="user-profile__count-wrap"
-              >
-                <strong
-                  key={`strong${army.army_id}`}
-                  className="user-profile__info"
+                {" "}
+                <div
+                  key={`div2${army.army_id}`}
+                  className="user-profile__army-wrap"
                 >
-                  {army.count > 1 || army.count === 0
-                    ? `${army.count} games`
-                    : `${army.count} game`}
-                </strong>
-              </div>
-            </article>
-          );
-        })}
+                  <BattleCard
+                    key={`battlecard${army.army_id}`}
+                    name={army.name}
+                    emblem={army.emblem}
+                  />
+                </div>
+                <div
+                  key={`div${army.army_id}`}
+                  className="user-profile__count-wrap"
+                >
+                  <strong
+                    key={`strong${army.army_id}`}
+                    className="user-profile__info"
+                  >
+                    {army.count > 1 || army.count === 0
+                      ? `${army.count} games`
+                      : `${army.count} game`}
+                  </strong>
+                </div>
+              </article>
+            );
+          })}
       </section>
       <section className="user-profile__user-list">
         <div className="user-profile__user-headers">
@@ -262,7 +209,7 @@ export default function UserProfile() {
             </p>
           )}
         </div>
-        {userArray.map((user: UsersObj, index: number) => {
+        {allUsers?.map((user: Users, index: number) => {
           return (
             <article
               key={`article${user.id}`}

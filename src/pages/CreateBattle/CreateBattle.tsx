@@ -12,6 +12,8 @@ import CreateBattleForm from "../../components/CreateBattleForm/CreateBattleForm
 import CreateBattleCombatants from "../../components/CreateBattleCombatants/CreateBattleCombatants";
 import { battleFormValidationSchema } from "./CreateBattleValidSchema";
 import { useNavigate } from "react-router-dom";
+import { useUserStore } from "../../store/user";
+import { useBattlesStore } from "../../store/battles";
 export interface BattleInformation {
   battleType: "40k" | "fantasy";
   pointSize: number;
@@ -54,7 +56,9 @@ export default function CreateBattle() {
 
   const navigate = useNavigate();
 
-  const userToken = sessionStorage.getItem("token");
+  const { token: userToken } = useUserStore();
+  const { fetchUpcomingBattles } = useBattlesStore();
+
   if (!userToken) {
     navigate("/login");
     return <p>Please login</p>;
@@ -101,6 +105,7 @@ export default function CreateBattle() {
       if (response) {
         setLoadingBool(false);
         setSuccessBool(true);
+        fetchUpcomingBattles();
         setTimeout(() => {
           navigate(`/battles/information/${response}`);
         }, 1000);

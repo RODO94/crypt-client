@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { RankObj } from "../../utils/Interfaces";
+import { Rank } from "../../utils/Interfaces";
 import "./FiveColTableRow.scss";
 
-interface rankObjTable extends RankObj {
+interface rankObjTable extends Rank {
   colour: string;
   navTo?: string;
   id: string | undefined;

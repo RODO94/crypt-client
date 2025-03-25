@@ -18,8 +18,38 @@ import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import NavHeader from "./components/NavHeader/NavHeader";
 import LogInRedirect from "./pages/LogInRedirect/LogInRedirect";
 import NavFooter from "./components/NavFooter/NavFooter";
+import { useArmiesStore } from "./store/armies";
+import { useEffect } from "react";
+import { useBattlesStore } from "./store/battles";
+import { useRankingsStore } from "./store/rankings";
+import { useUserStore } from "./store/user";
 
 function App() {
+  const { fetchAllUsers } = useUserStore();
+  const { fetchAllArmies } = useArmiesStore();
+  const { fetchUpcomingBattles, fetchCompletedBattles } = useBattlesStore();
+
+  const { fetchFantasyRankings, fetchFortyKRankings, fetchTopRankings } =
+    useRankingsStore();
+
+  useEffect(() => {
+    fetchAllArmies();
+    fetchUpcomingBattles();
+    fetchCompletedBattles();
+    fetchFantasyRankings();
+    fetchFortyKRankings();
+    fetchTopRankings();
+    fetchAllUsers();
+  }, [
+    fetchAllArmies,
+    fetchAllUsers,
+    fetchCompletedBattles,
+    fetchFantasyRankings,
+    fetchFortyKRankings,
+    fetchTopRankings,
+    fetchUpcomingBattles,
+  ]);
+
   return (
     <BrowserRouter>
       <div className="App">

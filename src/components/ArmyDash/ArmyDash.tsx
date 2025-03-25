@@ -1,5 +1,5 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { Users, UsersObj } from "../../utils/Interfaces";
+import { ArmyInformation, Users } from "../../utils/Interfaces";
 import "./ArmyDash.scss";
 import EmblemHero from "../EmblemHero/EmblemHero";
 import BattleCard from "../BattleCard/BattleCard";
@@ -10,9 +10,8 @@ import { CircularProgress } from "@mui/material";
 import { emblemNameArray } from "../../utils/EmblemNames";
 import Emblem from "../Emblem/Emblem";
 import { changeArmyField } from "../../utils/ArmyRequests";
-import { getAllUsers, getUserWithToken } from "../../utils/UserRequests";
 import { useUserStore } from "../../store/user";
-import { ArmyInformation } from "../../pages/ArmyInfo/ArmyInfo";
+import { useArmiesStore } from "../../store/armies";
 interface armyDashObj {
   winPercent: string;
   battleCount: number;
@@ -33,7 +32,6 @@ export default function ArmyDash({
   armyRank,
 }: armyDashObj) {
   const [emblemName, setEmblemName] = useState(armyObj.emblem);
-  const [userArray, setUserArray] = useState<UsersObj[]>();
   const [selectedUser, setSelectedUser] = useState<UserSelect>({
     known_as: armyObj.known_as,
     id: armyObj.id,
@@ -53,8 +51,9 @@ export default function ArmyDash({
 
   const navigate = useNavigate();
 
-  const userToken = sessionStorage.getItem("token");
-  const { userRole } = useUserStore();
+  const { userRole, allUsers, token: userToken, currentUser } = useUserStore();
+  const { fetchArmyDetails, fetchAllArmies, fetchUserArmies } =
+    useArmiesStore();
   const isAdmin = userRole === "admin" && userToken;
   const canEdit = isAdmin || userBool;
 
@@ -74,10 +73,10 @@ export default function ArmyDash({
           ? emblemNameArray[0].fortyk
           : emblemNameArray[0].fantasy;
       const formattedArray = filteredArray.map((emblem) => {
-        let newString = [];
+        const newString = [];
         const splitString = emblem.split(" ");
         for (let i = 0; i < splitString.length; i++) {
-          let lowerCaseString = splitString[i].toLowerCase();
+          const lowerCaseString = splitString[i].toLowerCase();
           newString.push(lowerCaseString);
         }
         return { lowercase: newString.join(""), original: emblem };
@@ -94,23 +93,20 @@ export default function ArmyDash({
   useEffect(() => {
     const fetchUserData = async () => {
       if (userToken) {
-        const response = await getUserWithToken(userToken);
-        response.id === armyObj.user_id
+        currentUser?.id === armyObj.user_id
           ? setUserBool(true)
           : setUserBool(false);
       }
     };
     const fetchUsers = async () => {
-      const userResponse = await getAllUsers(3);
-      userResponse && setUserArray(userResponse);
-      const armyUser = userResponse.find(
-        (user: UsersObj) => user.id === armyObj.user_id
+      const armyUser = allUsers?.find(
+        (user: Users) => user.id === armyObj.user_id
       );
-      setSelectedUser(armyUser);
+      armyUser && setSelectedUser(armyUser);
     };
     fetchUsers();
     fetchUserData();
-  }, [userToken, armyObj.user_id]);
+  }, [userToken, armyObj.user_id, allUsers, currentUser]);
 
   if (!armyObj) {
     return (
@@ -141,6 +137,9 @@ export default function ArmyDash({
           setSuccessBool({ ...successBool, emblem: true });
       }
     }
+    fetchAllArmies();
+    fetchArmyDetails(armyObj.id);
+    currentUser?.id && fetchUserArmies(currentUser?.id);
     return;
   };
 
@@ -208,8 +207,8 @@ export default function ArmyDash({
               className="army-dash__select"
               value={selectedUser?.id || armyObj.id}
               onChange={(event: ChangeEvent<HTMLSelectElement>) => {
-                const newUser: UsersObj | undefined = userArray?.find(
-                  (user: UsersObj) => user.id === event.target.value
+                const newUser: Users | undefined = allUsers?.find(
+                  (user: Users) => user.id === event.target.value
                 );
                 newUser &&
                   setSelectedUser({
@@ -224,7 +223,7 @@ export default function ArmyDash({
                 });
               }}
             >
-              {userArray?.map((user: UsersObj) => {
+              {allUsers?.map((user: Users) => {
                 return (
                   <option key={user.id} value={user.id}>
                     {user.known_as}

@@ -1,32 +1,18 @@
-import { useEffect, useState } from "react";
-import { RankObj } from "../../utils/Interfaces";
+import { Rank } from "../../utils/Interfaces";
 import "./FortyKRankingPage.scss";
 import FiveColTableHeader from "../../components/FiveColTableHeader/FiveColTableHeader";
 import FiveColTableRow from "../../components/FiveColTableRow/FiveColTableRow";
-import { getRanking } from "../../utils/RankingRequests";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.svg";
 import crown from "../../assets/crown.svg";
 import { CircularProgress } from "@mui/material";
 import NewBattleCard from "../../components/NewBattleCard/NewBattleCard";
-
-interface RankArray extends Array<RankObj> {}
+import { useRankingsStore } from "../../store/rankings";
 
 export default function FortyKPage() {
-  const [fortyKRankingArray, setFortyKRankingArray] = useState<RankArray>();
+  const { fortyKRankings } = useRankingsStore();
 
-  useEffect(() => {
-    const fetchRanking = async () => {
-      const response = await getRanking("fortyk");
-      const sortedResponse = response.sort(
-        (a: any, b: any) => b.ranking - a.ranking
-      );
-      setFortyKRankingArray(sortedResponse);
-    };
-    fetchRanking();
-  }, []);
-
-  if (!fortyKRankingArray) {
+  if (!fortyKRankings) {
     return (
       <div className="loading-message">
         <CircularProgress style={{ color: "green" }} />
@@ -52,27 +38,21 @@ export default function FortyKPage() {
           </h2>
           <div className="fantasy-ranking-page__wrap">
             <div className="fantasy-ranking-page__army-pill">
-              <NewBattleCard
-                player={fortyKRankingArray[0]}
-                player_number={"one"}
-              />
+              <NewBattleCard player={fortyKRankings[0]} player_number={"one"} />
             </div>
             <img
               src={crown}
               alt="crown"
               className="fantasy-ranking-page__logo"
             />
-            {/* <p className="fantasy-ranking-page__txt">
-              {fortyKRankingArray[0].known_as}
-            </p> */}
           </div>
         </div>
       </section>
       <section className="fantasy-rankings">
         <FiveColTableHeader />
-        {fortyKRankingArray
+        {fortyKRankings
           .filter((army) => army.prev_ranking !== "99.00")
-          .map((army: RankObj, index: number) => {
+          .map((army: Rank, index: number) => {
             let colour = "dark";
             if (index % 2 === 0) {
               colour = "light";

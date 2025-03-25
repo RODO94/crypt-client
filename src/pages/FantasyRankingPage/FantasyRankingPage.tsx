@@ -1,32 +1,18 @@
-import { useEffect, useState } from "react";
-import { RankObj } from "../../utils/Interfaces";
+import { Rank } from "../../utils/Interfaces";
 import "./FantasyRankingPage.scss";
 import FiveColTableHeader from "../../components/FiveColTableHeader/FiveColTableHeader";
 import FiveColTableRow from "../../components/FiveColTableRow/FiveColTableRow";
-import { getRanking } from "../../utils/RankingRequests";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.svg";
 import crown from "../../assets/crown.svg";
 import { CircularProgress } from "@mui/material";
 import NewBattleCard from "../../components/NewBattleCard/NewBattleCard";
-
-interface RankArray extends Array<RankObj> {}
+import { useRankingsStore } from "../../store/rankings";
 
 export default function FantasyRankingPage() {
-  const [fantasyRankingArray, setFantasyRankingArray] = useState<RankArray>();
+  const { fantasyRankings } = useRankingsStore();
 
-  useEffect(() => {
-    const fetchRanking = async () => {
-      const response = await getRanking("fantasy");
-      const sortedResponse = response.sort(
-        (a: any, b: any) => b.ranking - a.ranking
-      );
-      setFantasyRankingArray(sortedResponse);
-    };
-    fetchRanking();
-  }, []);
-
-  if (!fantasyRankingArray) {
+  if (!fantasyRankings) {
     return (
       <div className="loading-message">
         <CircularProgress style={{ color: "green" }} />
@@ -53,7 +39,7 @@ export default function FantasyRankingPage() {
           <div className="fantasy-ranking-page__wrap">
             <div className="fantasy-ranking-page__army-pill">
               <NewBattleCard
-                player={fantasyRankingArray[0]}
+                player={fantasyRankings[0]}
                 player_number={"one"}
               />
             </div>
@@ -67,9 +53,9 @@ export default function FantasyRankingPage() {
       </section>
       <section className="fantasy-rankings">
         <FiveColTableHeader />
-        {fantasyRankingArray
+        {fantasyRankings
           .filter((army) => army.prev_ranking !== "99.00")
-          .map((army: RankObj, index: number) => {
+          .map((army: Rank, index: number) => {
             let colour = "dark";
             if (index % 2 === 0) {
               colour = "light";

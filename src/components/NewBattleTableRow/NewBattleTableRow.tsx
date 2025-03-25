@@ -30,7 +30,7 @@ export default function NewBattleTableRow({
         <div className="new-battle-table-row__combatant-wrap">
           {player_1.map((player: Player) => (
             <NewBattleCard
-              key={player.id}
+              key={player.army_id}
               player={player}
               player_number={"one"}
             />
@@ -46,7 +46,7 @@ export default function NewBattleTableRow({
         <div className="new-battle-table-row__combatant-wrap">
           {player_2.map((player) => (
             <NewBattleCard
-              key={player.id}
+              key={player.army_id}
               player={player}
               player_number={"two"}
             />

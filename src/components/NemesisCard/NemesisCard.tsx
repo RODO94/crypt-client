@@ -1,9 +1,9 @@
 import "./NemesisCard.scss";
-import { RankObj } from "../../utils/Interfaces";
+import { Rank } from "../../utils/Interfaces";
 import NewBattleCard from "../NewBattleCard/NewBattleCard";
 
 interface NemesisComp {
-  nemesis: RankObj | undefined;
+  nemesis: Rank | undefined;
 }
 
 export default function NemesisCard({ nemesis }: NemesisComp) {

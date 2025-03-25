@@ -1,42 +1,24 @@
-import { redirect } from "react-router";
 import "./BattleInfo.scss";
 import { useEffect, useState } from "react";
-import { getUser, verifyUser } from "../../utils/UserRequests";
 import { getOneBattle } from "../../utils/BattleRequests";
 import BattleDash from "../../components/BattleDash/BattleDash";
 import BattlePointsForm from "../../components/BattlePointsForm/BattlePointsForm";
 import { Battle, Player } from "../../utils/Interfaces";
 import { CircularProgress } from "@mui/material";
+import { useUserStore } from "../../store/user";
 
 export default function BattleInfo() {
   const [battle, setBattle] = useState<Battle>();
-  const [role, setRole] = useState<string>("");
   const [playerOneArray, setPlayerOneArray] = useState<Player[]>();
   const [playerTwoArray, setPlayerTwoArray] = useState<Player[]>();
   const [winnerValue, setWinnerValue] = useState("");
 
   const pathName: string[] = window.location.pathname.split("/");
   const battleID = pathName[pathName.length - 1];
-  const userToken = sessionStorage.getItem("token");
+  const { token: userToken, userRole } = useUserStore();
 
   useEffect(() => {
     const fetchData = async () => {
-      // Fetch user data and set role
-      if (userToken) {
-        const response = await verifyUser(userToken, 2);
-        if (response) {
-          const userData = await getUser(userToken);
-          if (!userData) {
-            setRole("public");
-          } else {
-            setRole(userData.role);
-          }
-        } else if (!response) {
-          redirect("/login/redirect");
-        }
-      } else {
-        setRole("public");
-      }
       // Fetch battle data
       const battleData = await getOneBattle(battleID);
       setBattle(battleData);
@@ -59,7 +41,7 @@ export default function BattleInfo() {
     fetchData();
   }, [userToken, battleID]);
 
-  if (!battle || !role || !playerOneArray || !playerTwoArray) {
+  if (!battle || !userRole || !playerOneArray || !playerTwoArray) {
     return (
       <div className="loading-message">
         <CircularProgress style={{ color: "white" }} />
@@ -84,7 +66,6 @@ export default function BattleInfo() {
         start={battle.start}
         finish={battle.finish}
         battleID={battleID}
-        token={userToken}
       />
       <BattlePointsForm
         playerOne={playerOneArray}
@@ -93,7 +74,6 @@ export default function BattleInfo() {
         playerTwoPoints={battle.player_2_points}
         result={battle.result}
         battleID={battleID}
-        token={userToken}
       />
     </main>
   );

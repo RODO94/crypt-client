@@ -1,8 +1,8 @@
 import "./AllyCard.scss";
-import { RankObj } from "../../utils/Interfaces";
+import { Rank } from "../../utils/Interfaces";
 import NewBattleCard from "../NewBattleCard/NewBattleCard";
 interface AllyComp {
-  ally: RankObj | undefined;
+  ally: Rank | undefined;
 }
 export default function AllyCard({ ally }: AllyComp) {
   let allyComp = <p>An Ally is of no use...</p>;

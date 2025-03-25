@@ -34,10 +34,10 @@ export default function SignUp() {
         ...emblemNameArray[0].fantasy,
       ];
       const formattedArray = filteredArray.map((emblem) => {
-        let newString = [];
+        const newString = [];
         const splitString = emblem.split(" ");
         for (let i = 0; i < splitString.length; i++) {
-          let lowerCaseString = splitString[i].toLowerCase();
+          const lowerCaseString = splitString[i].toLowerCase();
           newString.push(lowerCaseString);
         }
         return { lowercase: newString.join(""), original: emblem };

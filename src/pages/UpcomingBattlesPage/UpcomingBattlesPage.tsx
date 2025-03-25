@@ -1,20 +1,22 @@
 import { useEffect, useState } from "react";
-import { getUpcomingBattles } from "../../utils/BattleRequests";
 import "./UpcomingBattlesPage.scss";
 import { Battle } from "../../utils/Interfaces";
 import DateTableHeader from "../../components/DateTableHeader/DateTableHeader";
 
 import { Link } from "react-router-dom";
-import { getAllUsersNames } from "../../utils/UserRequests";
 import logo from "../../assets/logo.svg";
 import NewBattleTableRow from "../../components/NewBattleTableRow/NewBattleTableRow";
 import { CircularProgress } from "@mui/material";
+import { useBattlesStore } from "../../store/battles";
+import { useUserStore } from "../../store/user";
 
 interface BattleArray extends Array<Battle> {}
 interface NameArray extends Array<string> {}
 
 export default function UpcomingBattlesPage() {
-  const [battleArray, setBattleArray] = useState<BattleArray>();
+  const { upcomingBattles } = useBattlesStore();
+
+  const [battleArray, setBattleArray] = useState<BattleArray>(upcomingBattles);
   const [nameArray, setNameArray] = useState<NameArray>();
   const [nameFilter, setNameFilter] = useState<string>("Name");
   const [battleTypeFilter, setBattleTypeFilter] =
@@ -22,39 +24,30 @@ export default function UpcomingBattlesPage() {
 
   let currentDate = "";
 
-  useEffect(() => {
-    const battleFn = async () => {
-      const data = await getUpcomingBattles(3);
-      setBattleArray(data);
-      return data;
-    };
-
-    battleFn();
-  }, []);
+  const { allUsers } = useUserStore();
 
   useEffect(() => {
     const nameFn = async () => {
-      const data = await getAllUsersNames();
-      setNameArray(data);
-      return data;
+      const userNames = allUsers?.map((user) => user.known_as);
+      setNameArray(userNames);
+      return userNames;
     };
     nameFn();
-  }, []);
+  }, [allUsers]);
 
   useEffect(() => {
     let tempBattleArray: BattleArray = [];
     const filterFn = async () => {
-      const data = await getUpcomingBattles(3);
-      tempBattleArray = await data;
+      tempBattleArray = upcomingBattles;
       let filterArray: any = [];
       if (nameFilter !== "Name" && nameFilter !== "all") {
         filterArray = tempBattleArray?.filter((battle) => {
-          let playerOneArray = battle.player_1.map((player) => {
+          const playerOneArray = battle.player_1.map((player) => {
             if (player.known_as === nameFilter) {
               return true;
             }
           });
-          let playerTwoArray = battle.player_2.map((player) => {
+          const playerTwoArray = battle.player_2.map((player) => {
             if (player.known_as === nameFilter) {
               return true;
             }
@@ -71,7 +64,7 @@ export default function UpcomingBattlesPage() {
         filterArray[0] &&
         battleTypeFilter !== "all"
       ) {
-        let battleFilterArray = filterArray?.filter(
+        const battleFilterArray = filterArray?.filter(
           (battle: any) => battle.battle_type === battleTypeFilter
         );
 
@@ -90,7 +83,7 @@ export default function UpcomingBattlesPage() {
       } else setBattleArray(tempBattleArray);
     };
     filterFn();
-  }, [nameFilter, battleTypeFilter]);
+  }, [nameFilter, battleTypeFilter, upcomingBattles]);
 
   const handleChange = (event: any) => {
     if (event.target.name === "battle-type") {

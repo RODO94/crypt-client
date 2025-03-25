@@ -6,8 +6,7 @@ import BattleCard from "../BattleCard/BattleCard";
 import PlayerTypePill from "../PlayerTypePill/PlayerTypePill";
 import BattleTypePill from "../BattleTypePill/BattleTypePill";
 import { useEffect, useState } from "react";
-import { getAllUsers } from "../../utils/UserRequests";
-import { getAllArmies, updateArmyCombatants } from "../../utils/ArmyRequests";
+import { updateArmyCombatants } from "../../utils/ArmyRequests";
 import {
   deleteBattleRequest,
   updateBattleDetail,
@@ -23,6 +22,8 @@ import {
 import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import { useUserStore } from "../../store/user";
+import { useArmiesStore } from "../../store/armies";
+import { useBattlesStore } from "../../store/battles";
 
 interface BattleComp {
   playerOne: Player[];
@@ -38,13 +39,9 @@ interface BattleComp {
   start: string | undefined;
   finish: string | undefined;
   battleID: string;
-  token: string | null;
   setPlayerTwoArray: React.Dispatch<React.SetStateAction<Player[] | undefined>>;
   setPlayerOneArray: React.Dispatch<React.SetStateAction<Player[] | undefined>>;
 }
-
-interface UsersArray extends Array<Users> {}
-interface ArmiesArray extends Array<Armies> {}
 
 export default function BattleDash({
   playerOne,
@@ -60,7 +57,6 @@ export default function BattleDash({
   start,
   finish,
   battleID,
-  token,
   setPlayerOneArray,
   setPlayerTwoArray,
 }: BattleComp) {
@@ -81,10 +77,8 @@ export default function BattleDash({
   const [editStartBool, setEditStartBool] = useState(false);
   const [editFinishBool, setEditFinishBool] = useState(false);
 
-  const [userArray, setUserArray] = useState<UsersArray>();
-  const [armyArray, setArmyArray] = useState<ArmiesArray>();
-  const [filteredArmyArray, setFilteredArmyArray] = useState<ArmiesArray>();
-  const [filteredUserArray, setFilteredUserArray] = useState<UsersArray>();
+  const [filteredArmyArray, setFilteredArmyArray] = useState<Armies[]>();
+  const [filteredUserArray, setFilteredUserArray] = useState<Users[]>();
 
   const [userOneFilter, setUserOneFilter] = useState("");
   const [userTwoFilter, setUserTwoFilter] = useState("");
@@ -97,7 +91,10 @@ export default function BattleDash({
 
   const navigate = useNavigate();
 
-  const { userRole } = useUserStore();
+  const { userRole, token, allUsers } = useUserStore();
+  const { armies } = useArmiesStore();
+  const { fetchUpcomingBattles, fetchUserBattles, fetchCompletedBattles } =
+    useBattlesStore();
 
   const handleClick = () => {
     if (token) {
@@ -107,7 +104,7 @@ export default function BattleDash({
     }
   };
 
-  const addArmy = async (event: any, player: any) => {
+  const addArmy = async (event: any, player: number) => {
     event.preventDefault();
 
     let userID = "1";
@@ -124,9 +121,9 @@ export default function BattleDash({
         event.target.parentElement.children.users_1.value.split("+")[1];
       armyName = event.target.parentElement.children.army_1.value.split("+")[1];
       armyID = event.target.parentElement.children.army_1.value.split("+")[0];
-      const armyObj = armyArray?.find((army) => army.id === armyID);
+      const armyObj = armies.find((army) => army.id === armyID);
       const armyEmblem = armyObj?.emblem;
-      let newArray = [
+      const newArray = [
         ...playerOne,
         {
           id: userID,
@@ -138,12 +135,17 @@ export default function BattleDash({
       ];
       setPlayerOneArray(newArray);
 
-      let armyIDArrayOne = newArray.map((army) => ({ army_id: army.army_id }));
-      let armyIDArrayTwo = playerTwo.map((army) => ({
+      const armyIDArrayOne = newArray.map((army) => ({
+        army_id: army.army_id,
+      }));
+      const armyIDArrayTwo = playerTwo.map((army) => ({
         army_id: army.army_id,
       }));
 
-      let requestBody = { player_1: armyIDArrayOne, player_2: armyIDArrayTwo };
+      const requestBody = {
+        player_1: armyIDArrayOne,
+        player_2: armyIDArrayTwo,
+      };
       await updateArmyCombatants(requestBody, battleID, token);
     } else if (player === 2 && token) {
       userID = event.target.parentElement.children.users_2.value.split("+")[0];
@@ -151,9 +153,9 @@ export default function BattleDash({
         event.target.parentElement.children.users_2.value.split("+")[1];
       armyName = event.target.parentElement.children.army_2.value.split("+")[1];
       armyID = event.target.parentElement.children.army_2.value.split("+")[0];
-      const armyObj = armyArray?.find((army) => army.id === armyID);
+      const armyObj = armies.find((army) => army.id === armyID);
       const armyEmblem = armyObj?.emblem;
-      let newArray = [
+      const newArray = [
         ...playerTwo,
         {
           id: userID,
@@ -165,48 +167,53 @@ export default function BattleDash({
       ];
       setPlayerTwoArray(newArray);
 
-      let armyIDArrayTwo = newArray.map((army) => ({ army_id: army.army_id }));
-      let armyIDArrayOne = playerOne.map((army) => ({
+      const armyIDArrayTwo = newArray.map((army) => ({
+        army_id: army.army_id,
+      }));
+      const armyIDArrayOne = playerOne.map((army) => ({
         army_id: army.army_id,
       }));
 
-      let requestBody = { player_1: armyIDArrayOne, player_2: armyIDArrayTwo };
+      const requestBody = {
+        player_1: armyIDArrayOne,
+        player_2: armyIDArrayTwo,
+      };
 
       await updateArmyCombatants(requestBody, battleID, token);
     }
   };
 
-  const removePlayer = async (event: any, player: any) => {
-    let targetArmyID = event.target.parentElement.children[0].id;
+  const removePlayer = async (event: any, player: number) => {
+    const targetArmyID = event.target.parentElement.children[0].id;
     if (player === 1 && token) {
-      let newArmyArray = playerOne.filter(
+      const newArmyArray = playerOne.filter(
         (army) => army.army_id !== targetArmyID
       );
       setPlayerOneArray(newArmyArray);
 
-      let newIDArrayOne = newArmyArray.map((army) => ({
+      const newIDArrayOne = newArmyArray.map((army) => ({
         army_id: army.army_id,
       }));
-      let newIDArrayTwo = playerTwo.map((army) => ({
+      const newIDArrayTwo = playerTwo.map((army) => ({
         army_id: army.army_id,
       }));
 
-      let requestBody = { player_1: newIDArrayOne, player_2: newIDArrayTwo };
+      const requestBody = { player_1: newIDArrayOne, player_2: newIDArrayTwo };
       await updateArmyCombatants(requestBody, battleID, token);
     } else if (player === 2 && token) {
-      let newArmyArray = playerTwo.filter(
+      const newArmyArray = playerTwo.filter(
         (army) => army.army_id !== targetArmyID
       );
       setPlayerTwoArray(newArmyArray);
 
-      let newIDArrayTwo = newArmyArray.map((army) => ({
+      const newIDArrayTwo = newArmyArray.map((army) => ({
         army_id: army.army_id,
       }));
-      let newIDArrayOne = playerOne.map((army) => ({
+      const newIDArrayOne = playerOne.map((army) => ({
         army_id: army.army_id,
       }));
 
-      let requestBody = { player_1: newIDArrayOne, player_2: newIDArrayTwo };
+      const requestBody = { player_1: newIDArrayOne, player_2: newIDArrayTwo };
 
       await updateArmyCombatants(requestBody, battleID, token);
     }
@@ -214,25 +221,25 @@ export default function BattleDash({
 
   const handleChangeSubmit = async (detail: string, value?: any) => {
     if (detail === "scenario" && token) {
-      let requestBody = { scenario: scenarioValue };
+      const requestBody = { scenario: scenarioValue };
       await updateBattleDetail(battleID, token, detail, requestBody);
     } else if (detail === "pointsize" && token) {
-      let requestBody = { points_size: pointsSizeValue };
+      const requestBody = { points_size: pointsSizeValue };
       await updateBattleDetail(battleID, token, detail, requestBody);
     } else if (detail === "date" && token) {
-      let requestBody = { date: dateValue };
+      const requestBody = { date: dateValue };
       await updateBattleDetail(battleID, token, detail, requestBody);
     } else if (detail === "start" && token) {
-      let requestBody = { start: dayjs(startValue).format("HH:mm:ss") };
+      const requestBody = { start: dayjs(startValue).format("HH:mm:ss") };
       await updateBattleDetail(battleID, token, detail, requestBody);
     } else if (detail === "finish" && token) {
-      let requestBody = { finish: dayjs(finishValue).format("HH:mm:ss") };
+      const requestBody = { finish: dayjs(finishValue).format("HH:mm:ss") };
       await updateBattleDetail(battleID, token, detail, requestBody);
     } else if (detail === "table" && token) {
-      let requestBody = { table: tableValue };
+      const requestBody = { table: tableValue };
       await updateBattleDetail(battleID, token, detail, requestBody);
     } else if (detail === "gametype" && token) {
-      let requestBody = { battle_type: value };
+      const requestBody = { battle_type: value };
       await updateBattleDetail(battleID, token, detail, requestBody);
     }
   };
@@ -240,33 +247,25 @@ export default function BattleDash({
   const deleteBattle = async () => {
     if (!result && token) {
       const response = await deleteBattleRequest(battleID, token);
+      fetchUpcomingBattles();
+      fetchCompletedBattles();
+      fetchUserBattles(token);
       response && navigate(-1);
     }
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const armyResponse = await getAllArmies(2);
-      const userResponse = await getAllUsers(2);
-
-      setArmyArray(await armyResponse);
-      setUserArray(await userResponse);
-      setFilteredArmyArray(await armyResponse);
-      setFilteredUserArray(await userResponse);
-    };
-
-    fetchData();
+    setFilteredArmyArray(armies);
+    allUsers && setFilteredUserArray(allUsers);
   }, []);
 
   useEffect(() => {
-    const filteredArmyArray = armyArray?.filter(
-      (army) => army.type === battleType
-    );
+    const filteredArmyArray = armies.filter((army) => army.type === battleType);
 
     setFilteredArmyArray(filteredArmyArray);
 
     // Filter the user list based on if a user has an army in the army array
-    const filteredResponse = userArray?.filter((user: Player) => {
+    const filteredResponse = allUsers?.filter((user: Player) => {
       const army = filteredArmyArray?.find((army) => army.user_id === user.id);
       return army;
     });
@@ -288,18 +287,9 @@ export default function BattleDash({
     }
 
     setFilteredUserArray(secondFilteredResponse);
-  }, [
-    battleType,
-    armyArray,
-    playerOne,
-    playerTwo,
-    userOne,
-    userTwo,
-    armyOne,
-    armyTwo,
-  ]);
+  }, [battleType, playerOne, playerTwo, userOne, userTwo, armyOne, armyTwo]);
 
-  if (!armyArray || !userArray || !playerOne || !playerTwo) {
+  if (!allUsers || !playerOne || !playerTwo) {
     return (
       <section className="battle-dash">
         <div className="loading-message">
@@ -452,7 +442,7 @@ export default function BattleDash({
                 >
                   <option hidden> --- Army ---</option>
 
-                  {armyArray.length === 0 ? (
+                  {armies.length === 0 ? (
                     <option>No Armies for this User</option>
                   ) : (
                     filteredArmyArray?.map((army) => {

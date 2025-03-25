@@ -18,9 +18,9 @@ export interface AllyObj {
   emblem: string;
 }
 
-export interface ArmyObj {
+export interface Army {
   emblem: string;
-  emblem_id: string;
+  emblem_id?: string;
   id: string;
   name: string;
   type: string;
@@ -30,6 +30,26 @@ export interface ArmyObj {
 export interface LogInBody {
   email: string;
   password: string;
+}
+
+export interface UsersArmyInfo {
+  nemesis: Army;
+  ally: Army;
+  user: ArmyInformation;
+  battleCount: number;
+  winPercent: string;
+}
+
+export interface ArmyInformation {
+  id: string;
+  ranking: string;
+  user_id: string;
+  emblem_id: string;
+  rn: number;
+  type: "fantasy" | "40k";
+  name: string;
+  emblem: string;
+  known_as: string;
 }
 
 export interface Armies {
@@ -46,20 +66,17 @@ export interface Users {
   first_name: string;
   last_name: string;
   email: string;
-  role: string;
-  id: string;
+  role?: string;
+  id?: string;
+  user_emblem?: string;
+  "password-reset-token"?: string;
 }
 
 export type Password = Pick<LogInBody, "password">;
 export type Email = Pick<LogInBody, "email">;
 
-export interface SignUpBody {
-  email: string;
-  password: string;
-  first_name: string;
-  last_name: string;
-  known_as: string;
-  user_emblem: string | undefined;
+export interface SignUpBody extends Users {
+  password: Password;
 }
 
 export interface Input {
@@ -69,7 +86,7 @@ export interface Input {
   required: boolean;
 }
 
-export interface RankObj {
+export interface Rank {
   rank: string;
   known_as: string;
   name: string;
@@ -82,18 +99,8 @@ export interface RankObj {
 }
 
 export interface allRankObjs {
-  fortyK: RankObj;
-  fantays: RankObj;
-}
-
-export interface UsersObj {
-  first_name: string;
-  last_name: string;
-  email: string;
-  role: string;
-  known_as: string;
-  user_emblem: string;
-  id?: string;
+  fortyK: Rank;
+  fantays: Rank;
 }
 
 export interface CompletedBattle {
