@@ -2,17 +2,23 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { Rank } from "../utils/Interfaces";
-import { getRanking, getRankingTopFive } from "../utils/RankingRequests";
+import {
+  getRanking,
+  getRankingsOneArmy,
+  getRankingTopFive,
+} from "../utils/RankingRequests";
 
 interface RankingsState {
   fortyKRankings: Rank[] | null;
   fantasyRankings: Rank[] | null;
   topRankings: { fortyK: Rank[] | null; fantasy: Rank[] | null };
+  selectedArmyRankings: Rank[] | null;
 
   // Actions
   fetchFortyKRankings: () => Promise<void>;
   fetchFantasyRankings: () => Promise<void>;
   fetchTopRankings: () => Promise<void>;
+  fetchSingleRanking: (armyId: string) => Promise<void>;
   clearRankings: () => void;
 }
 
@@ -22,6 +28,7 @@ export const useRankingsStore = create<RankingsState>()(
       fortyKRankings: null,
       fantasyRankings: null,
       topRankings: { fortyK: null, fantasy: null },
+      selectedArmyRankings: null,
 
       fetchFortyKRankings: async () => {
         try {
@@ -53,6 +60,16 @@ export const useRankingsStore = create<RankingsState>()(
           set({ topRankings: rankings });
         } catch (error) {
           console.error(error);
+        }
+      },
+
+      fetchSingleRanking: async (armyId) => {
+        try {
+          const rankings = await getRankingsOneArmy(armyId);
+          set({ selectedArmyRankings: rankings });
+        } catch (error) {
+          console.error(error);
+          set({ selectedArmyRankings: null });
         }
       },
 

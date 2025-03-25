@@ -5,22 +5,25 @@ import ArmyDash from "../../components/ArmyDash/ArmyDash";
 import ArmyNemesis from "../../components/ArmyNemesis/ArmyNemesis";
 import ArmyAlly from "../../components/ArmyAlly/ArmyAlly";
 import { CircularProgress } from "@mui/material";
-import RankGraph from "../../components/RankGraph/RankGraph";
 import { useArmiesStore } from "../../store/armies";
+import { useRankingsStore } from "../../store/rankings";
+import RankTracker from "../../components/RankTracker/RankTracker";
 
 export default function ArmyInfo() {
   const location = useLocation();
   const { fetchArmyDetails, selectedArmy } = useArmiesStore();
+  const { fetchSingleRanking, selectedArmyRankings } = useRankingsStore();
 
   const armyID = location.state.id;
 
   useEffect(() => {
     const fetchData = async () => {
       await fetchArmyDetails(armyID);
+      await fetchSingleRanking(armyID);
     };
 
     fetchData();
-  }, [armyID, fetchArmyDetails]);
+  }, [armyID, fetchArmyDetails, fetchSingleRanking]);
 
   if (!selectedArmy) {
     return (
@@ -30,6 +33,8 @@ export default function ArmyInfo() {
     );
   }
 
+  console.log(selectedArmyRankings);
+
   return (
     <main className="army-info">
       <ArmyDash
@@ -38,7 +43,11 @@ export default function ArmyInfo() {
         armyObj={selectedArmy.user}
         armyRank={Number(selectedArmy.user.ranking)}
       />
-      <RankGraph army_id={selectedArmy.user.id} name={selectedArmy.user.name} />
+      <section className="army-info__rank-tracker">
+        <div className="army-info__rank-tracker-container">
+          <RankTracker rankings={selectedArmyRankings || []} />
+        </div>
+      </section>
       <section className="army-info__nemesis-ally">
         <div className="army-info__container">
           <ArmyNemesis nemesis={selectedArmy.nemesis} />
