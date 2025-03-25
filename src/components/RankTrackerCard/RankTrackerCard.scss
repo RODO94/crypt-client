@@ -3,14 +3,14 @@
 
 .rank-tracker-card {
   background: none;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
   border-radius: 1rem 1rem;
-  width: 135px;
+  width: 100px;
   @include tablet {
-    width: 160px;
+    width: 130px;
   }
   @include desktop {
-    width: 220px;
+    width: 160px;
   }
 
   &__main {
@@ -20,7 +20,7 @@
     background: #fdfdfd;
     align-items: center;
     justify-content: space-between;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 0.75rem;
     font-size: 1.5rem;
     &-text {
       display: flex;
@@ -68,10 +68,9 @@
   &__banner {
     display: flex;
     padding: 0.25rem 1rem;
-    justify-content: space-between;
+    justify-content: center;
     background: $background-3;
     border-radius: 0rem 0rem 1rem 1rem;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -81,12 +80,16 @@
     font-weight: 400;
     line-height: normal;
     @include tablet {
-      padding: 0.5rem 1.25rem;
+      padding: 0.5rem 1rem;
       font-size: 0.8rem;
     }
     @include desktop {
-      padding: 0.5rem 1.5rem;
+      padding: 0.5rem 1rem;
       font-size: 1rem;
     }
+  }
+  &__date {
+    font-size: inherit;
+    margin: 0 0;
   }
 }

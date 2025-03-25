@@ -1,7 +1,6 @@
 import dayjs from "dayjs";
 import { Rank } from "../../utils/Interfaces";
 import "./RankTrackerCard.scss";
-import Chip, { ChipOwnProps } from "@mui/material/Chip";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import TrendingDownIcon from "@mui/icons-material/TrendingDown";
 import TrendingFlatIcon from "@mui/icons-material/TrendingFlat";
@@ -13,7 +12,6 @@ interface RankCardProps {
 
 interface RankMessage {
   message: "Increase" | "Decrease" | "Unchanged";
-  color: ChipOwnProps["color"];
   icon: JSX.Element | null;
 }
 
@@ -28,19 +26,16 @@ export default function RankTrackerCard({
     if (rankNumber > prevRankNumber)
       return {
         message: "Increase",
-        color: "success",
-        icon: <TrendingUpIcon sx={{ fontSize: "inherit" }} color={"success"} />,
+        icon: <TrendingUpIcon sx={{ fontSize: "inherit" }} color="success" />,
       };
     if (rankNumber < prevRankNumber)
       return {
         message: "Decrease",
-        color: "error",
         icon: <TrendingDownIcon sx={{ fontSize: "inherit" }} color="error" />,
       };
 
     return {
       message: "Unchanged",
-      color: "info",
       icon: <TrendingFlatIcon sx={{ fontSize: "inherit" }} color="info" />,
     };
   };
@@ -57,13 +52,9 @@ export default function RankTrackerCard({
         {handleRankChangeMessage().icon}
       </div>
       <div className="rank-tracker-card__banner">
-        <p>{dayjs(ranking.date).format("DD/MM")}</p>
-        <Chip
-          label={handleRankChangeMessage().message}
-          variant="filled"
-          color={handleRankChangeMessage().color}
-          sx={{ font: "inherit", height: "auto", paddingY: "0.25rem" }}
-        />
+        <p className="rank-tracker-card__date">
+          {dayjs(ranking.date).format("DD/MM")}
+        </p>
       </div>
     </article>
   );

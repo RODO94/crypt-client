@@ -5,17 +5,20 @@ import "./RankTracker.scss";
 export default function RankTracker({ rankings }: { rankings: Rank[] }) {
   return (
     <section className="rank-tracker">
-      {rankings.sort(sortRankings()).map((ranking: Rank, index: number) => {
-        const previousRanking = rankings[index + 1] || null;
+      {rankings
+        .sort(sortRankings())
+        .slice(0, 7)
+        .map((ranking: Rank, index: number) => {
+          const previousRanking = rankings[index + 1] || null;
 
-        return (
-          <RankTrackerCard
-            key={ranking.id}
-            ranking={ranking}
-            previousRanking={previousRanking}
-          />
-        );
-      })}
+          return (
+            <RankTrackerCard
+              key={ranking.id}
+              ranking={ranking}
+              previousRanking={previousRanking}
+            />
+          );
+        })}
     </section>
   );
 }
