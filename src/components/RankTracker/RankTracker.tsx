@@ -4,10 +4,10 @@ import "./RankTracker.scss";
 
 export default function RankTracker({ rankings }: { rankings: Rank[] }) {
   return (
-    <>
+    <section className="rank-tracker__wrap">
       <div className="rank-tracker__container">
         <h3 className="rank-tracker__header">Rank History</h3>
-        <section className="rank-tracker">
+        <div className="rank-tracker">
           {rankings
             .sort(sortRankings())
             .slice(0, 7)
@@ -22,9 +22,9 @@ export default function RankTracker({ rankings }: { rankings: Rank[] }) {
                 />
               );
             })}
-        </section>
+        </div>
       </div>
-    </>
+    </section>
   );
 }
 function sortRankings(): ((a: Rank, b: Rank) => number) | undefined {

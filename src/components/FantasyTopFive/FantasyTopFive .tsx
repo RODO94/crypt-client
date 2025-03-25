@@ -68,9 +68,9 @@ export default function FantasyTopFive() {
                 ranking={army.ranking}
                 status={
                   Number(army.prev_ranking) < index + 1
-                    ? "decrease"
-                    : Number(army.prev_ranking) > index + 1
                     ? "increase"
+                    : Number(army.prev_ranking) > index + 1
+                    ? "decrease"
                     : "no change"
                 }
                 colour={colour}
