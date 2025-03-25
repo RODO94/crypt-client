@@ -25,39 +25,30 @@ import { useRankingsStore } from "./store/rankings";
 import { useUserStore } from "./store/user";
 
 function App() {
-  const { fetchAllUsers, allUsers } = useUserStore();
-  const { armies, fetchAllArmies } = useArmiesStore();
-  const {
-    upcomingBattles,
-    completedBattles,
-    fetchUpcomingBattles,
-    fetchCompletedBattles,
-  } = useBattlesStore();
+  const { fetchAllUsers } = useUserStore();
+  const { fetchAllArmies } = useArmiesStore();
+  const { fetchUpcomingBattles, fetchCompletedBattles } = useBattlesStore();
 
-  const {
+  const { fetchFantasyRankings, fetchFortyKRankings, fetchTopRankings } =
+    useRankingsStore();
+
+  useEffect(() => {
+    fetchAllArmies();
+    fetchUpcomingBattles();
+    fetchCompletedBattles();
+    fetchFantasyRankings();
+    fetchFortyKRankings();
+    fetchTopRankings();
+    fetchAllUsers();
+  }, [
+    fetchAllArmies,
+    fetchAllUsers,
+    fetchCompletedBattles,
     fetchFantasyRankings,
     fetchFortyKRankings,
     fetchTopRankings,
-    fantasyRankings,
-    fortyKRankings,
-    topRankings,
-  } = useRankingsStore();
-
-  useEffect(() => {
-    if (!armies[0]) {
-      fetchAllArmies();
-    }
-    if (!upcomingBattles[0]) {
-      fetchUpcomingBattles();
-    }
-    if (!completedBattles[0]) {
-      fetchCompletedBattles();
-    }
-    if (!fantasyRankings) fetchFantasyRankings();
-    if (!fortyKRankings) fetchFortyKRankings();
-    if (!topRankings.fantasy) fetchTopRankings();
-    if (!allUsers) fetchAllUsers();
-  });
+    fetchUpcomingBattles,
+  ]);
 
   return (
     <BrowserRouter>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import DashboardHero from "../../components/DashboardHero/DashboardHero";
 
 import UsersFantasyRanking from "../../components/UsersFantasyRanking/UsersFantasyRanking";
@@ -6,7 +6,6 @@ import UsersFortyRanking from "../../components/UsersFortyRanking/UsersFortyRank
 import UsersResults from "../../components/UsersResults/UsersResults";
 import UsersUpcomingBattles from "../../components/UsersUpcomingBattles/UsersUpcomingBattles";
 import "./UserDashboard.scss";
-import { Rank } from "../../utils/Interfaces";
 import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import { useBattlesStore } from "../../store/battles";
@@ -14,12 +13,9 @@ import { useUserStore } from "../../store/user";
 import { useArmiesStore } from "../../store/armies";
 
 export default function UserDashboard() {
-  const [ally, setAlly] = useState<Rank | undefined>();
-  const [nemesis, setNemesis] = useState<Rank | undefined>();
-
   const { token, userInfo, fetchUserInfo } = useUserStore();
   const { fetchUserBattles, userBattles } = useBattlesStore();
-  const { fetchUserArmies, userArmies } = useArmiesStore();
+  const { fetchUserArmies } = useArmiesStore();
 
   const navigate = useNavigate();
 
@@ -28,12 +24,9 @@ export default function UserDashboard() {
       return navigate("/login");
     }
 
-    if (!userInfo) fetchUserInfo(token);
-    if (!userBattles) fetchUserBattles(token);
-    if (!userArmies && userInfo?.user.id) fetchUserArmies(userInfo?.user.id);
-
-    setAlly(userInfo?.ally);
-    setNemesis(userInfo?.nemesis);
+    fetchUserInfo(token);
+    fetchUserBattles(token);
+    userInfo?.user.id && fetchUserArmies(userInfo?.user.id);
   }, []);
 
   if (!userInfo) {
@@ -50,8 +43,8 @@ export default function UserDashboard() {
         <DashboardHero
           nextBattle={userBattles?.battleArray[0]}
           user={userInfo.user}
-          nemesis={nemesis}
-          ally={ally}
+          nemesis={userInfo.nemesis}
+          ally={userInfo.ally}
           fortykRanked={userInfo.rankArray.fortyK[0]}
           fantasyRanked={userInfo.rankArray.fantasy[0]}
         />

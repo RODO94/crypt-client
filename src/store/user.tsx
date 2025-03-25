@@ -64,6 +64,7 @@ export const useUserStore = create<UserState>()(
               userRole: user.role as UserRole,
             });
           } else {
+            sessionStorage.removeItem("token");
             throw new Error("Invalid token");
           }
         } catch (error) {
