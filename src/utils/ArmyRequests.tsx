@@ -1,9 +1,9 @@
 import axios from "axios";
-import { Army, UsersArmyInfo } from "./Interfaces";
+import { Armies, Army, UsersArmyInfo } from "./Interfaces";
 
 const baseURL = import.meta.env.VITE_SERVER_URL;
 
-const getAllArmies = async (count: number): Promise<Army[] | false> => {
+const getAllArmies = async (count: number): Promise<Armies[] | false> => {
   try {
     const { data } = await axios.get(`${baseURL}/armies/all`);
     return data;
@@ -119,7 +119,10 @@ const getArmyRank = async (id: string) => {
 };
 
 const updateArmyCombatants = async (
-  requestBody: { player_1: Army; player_2: Army },
+  requestBody: {
+    player_1: { army_id?: string }[];
+    player_2: { army_id?: string }[];
+  },
   battleID: string,
   token: string
 ) => {

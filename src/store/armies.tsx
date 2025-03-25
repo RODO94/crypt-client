@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { Army, UsersArmyInfo } from "../utils/Interfaces";
+import { Armies, Army, UsersArmyInfo } from "../utils/Interfaces";
 import {
   getAllArmies,
   getAllUserArmies,
@@ -10,7 +10,7 @@ import {
 export type UserArmies = Army & { count: number };
 
 interface ArmiesState {
-  armies: Army[];
+  armies: Armies[];
   userArmies: UserArmies[];
   selectedArmy: UsersArmyInfo | null;
 
@@ -30,7 +30,6 @@ export const useArmiesStore = create<ArmiesState>()(
       fetchAllArmies: async () => {
         try {
           const armies = await getAllArmies(2);
-          console.log(armies);
           armies && set({ armies });
         } catch (error) {
           console.error(error);

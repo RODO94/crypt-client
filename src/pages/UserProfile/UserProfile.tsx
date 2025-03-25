@@ -71,7 +71,8 @@ export default function UserProfile() {
     setAnchorEl(null);
   };
 
-  const { userRole, token, currentUser, allUsers } = useUserStore();
+  const { userRole, token, currentUser, allUsers, fetchCurrentUser } =
+    useUserStore();
   const { userArmies } = useArmiesStore();
   const isAdmin = userRole === "admin";
 
@@ -82,6 +83,7 @@ export default function UserProfile() {
   const handleAdmin = async () => {
     if (targetUser && token) {
       await makeAdmin(targetUser, token);
+      fetchCurrentUser(token);
     }
     window.location.reload();
   };

@@ -10,6 +10,7 @@ import {
 } from "../../utils/BattleRequests";
 import { CircularProgress } from "@mui/material";
 import { useUserStore } from "../../store/user";
+import { useBattlesStore } from "../../store/battles";
 
 interface BattlePoints {
   playerOne: Player[];
@@ -39,6 +40,7 @@ export default function BattlePointsForm({
   const [submitBool, setSubmitBool] = useState(false);
 
   const { token, userRole } = useUserStore();
+  const { fetchCompletedBattles } = useBattlesStore();
 
   useEffect(() => {
     if (token) {
@@ -54,6 +56,7 @@ export default function BattlePointsForm({
     if (token) {
       const response = await submitBattle(battleID, token);
       if (response) {
+        fetchCompletedBattles();
         window.location.reload();
       }
     }

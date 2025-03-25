@@ -23,6 +23,7 @@ import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import { useUserStore } from "../../store/user";
 import { useArmiesStore } from "../../store/armies";
+import { useBattlesStore } from "../../store/battles";
 
 interface BattleComp {
   playerOne: Player[];
@@ -92,6 +93,8 @@ export default function BattleDash({
 
   const { userRole, token, allUsers } = useUserStore();
   const { armies } = useArmiesStore();
+  const { fetchUpcomingBattles, fetchUserBattles, fetchCompletedBattles } =
+    useBattlesStore();
 
   const handleClick = () => {
     if (token) {
@@ -101,7 +104,7 @@ export default function BattleDash({
     }
   };
 
-  const addArmy = async (event: SubmitEvent, player: number) => {
+  const addArmy = async (event: any, player: number) => {
     event.preventDefault();
 
     let userID = "1";
@@ -180,7 +183,7 @@ export default function BattleDash({
     }
   };
 
-  const removePlayer = async (event: any, player: any) => {
+  const removePlayer = async (event: any, player: number) => {
     const targetArmyID = event.target.parentElement.children[0].id;
     if (player === 1 && token) {
       const newArmyArray = playerOne.filter(
@@ -244,13 +247,16 @@ export default function BattleDash({
   const deleteBattle = async () => {
     if (!result && token) {
       const response = await deleteBattleRequest(battleID, token);
+      fetchUpcomingBattles();
+      fetchCompletedBattles();
+      fetchUserBattles(token);
       response && navigate(-1);
     }
   };
 
   useEffect(() => {
     setFilteredArmyArray(armies);
-    setFilteredUserArray(allUsers);
+    allUsers && setFilteredUserArray(allUsers);
   }, []);
 
   useEffect(() => {
@@ -259,7 +265,7 @@ export default function BattleDash({
     setFilteredArmyArray(filteredArmyArray);
 
     // Filter the user list based on if a user has an army in the army array
-    const filteredResponse = allUsers.filter((user: Player) => {
+    const filteredResponse = allUsers?.filter((user: Player) => {
       const army = filteredArmyArray?.find((army) => army.user_id === user.id);
       return army;
     });
