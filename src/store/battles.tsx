@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { createJSONStorage, persist } from "zustand/middleware";
 import { Battle, CompletedBattle } from "../utils/Interfaces";
 import {
   getUpcomingBattles,
@@ -68,6 +68,7 @@ export const useBattlesStore = create<BattlesState>()(
         completedBattles: state.completedBattles,
         userBattles: state.userBattles,
       }),
+      storage: createJSONStorage(() => sessionStorage), // Correct way to use sessionStorage
     }
   )
 );

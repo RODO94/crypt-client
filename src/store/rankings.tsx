@@ -1,6 +1,6 @@
 // src/store/rankings.tsx
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { createJSONStorage, persist } from "zustand/middleware";
 import { Rank } from "../utils/Interfaces";
 import {
   getRanking,
@@ -88,6 +88,7 @@ export const useRankingsStore = create<RankingsState>()(
         fantasyRankings: state.fantasyRankings,
         topRankings: state.topRankings,
       }),
+      storage: createJSONStorage(() => sessionStorage), // Correct way to use sessionStorage
     }
   )
 );

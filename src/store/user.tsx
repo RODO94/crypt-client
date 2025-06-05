@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { createJSONStorage, persist } from "zustand/middleware";
 import { Rank, Users, Battle } from "../utils/Interfaces";
 import {
   getUserInfo,
@@ -111,8 +111,8 @@ export const useUserStore = create<UserState>()(
         userRole: state.userRole,
         currentUser: state.currentUser,
         userInfo: state.userInfo,
-        token: state.token,
       }),
+      storage: createJSONStorage(() => sessionStorage), // Correct way to use sessionStorage
     }
   )
 );
