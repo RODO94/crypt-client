@@ -1,4 +1,5 @@
 import { EmblemCard } from "../../../../shared";
+import { Emblems } from "../../../../utils/emblems";
 import { Player } from "../../../../utils/Interfaces";
 import "./NewBattleCard.scss";
 
@@ -33,7 +34,7 @@ export default function NewBattleCard({
       <div
         className={`new-battle-card__emblem-wrap new-battle-card__emblem-wrap--${player_number} ${nameColour} `}
       >
-        <EmblemCard emblem={nameColour} />
+        <EmblemCard emblem={nameColour as Emblems} />
       </div>
       <div
         className={`new-battle-card__player new-battle-card__player--${player_number}`}
