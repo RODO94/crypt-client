@@ -6,8 +6,8 @@ import { useState } from "react";
 import { emblemNameArray } from "../../../utils/EmblemNames";
 import { Emblem } from "../../../shared";
 import { useEffect } from "react";
-import { signUpAuthentication } from "../../../utils/UserAuth";
-import { SignUpBody } from "../../../utils/Interfaces";
+import { signUpAuthentication } from "../../../../utils/UserAuth";
+import { SignUpBody } from "../../../../utils/Interfaces";
 
 interface EmblemNameObj {
   lowercase: string;
@@ -116,49 +116,49 @@ export default function SignUp() {
   };
 
   return (
-    <main className="signup">
+    <main className='signup'>
       <NavLink to={"/"}>
-        <img src={logo} className="signup__logo" />
+        <img src={logo} className='signup__logo' />
       </NavLink>
-      <form className="signup__form" onSubmit={handleSubmit}>
-        <h1 className="signup__form-title">Sign Up</h1>
-        <InputBox name="email" label="Email" type="email" required={true} />
+      <form className='signup__form' onSubmit={handleSubmit}>
+        <h1 className='signup__form-title'>Sign Up</h1>
+        <InputBox name='email' label='Email' type='email' required={true} />
         <InputBox
-          name="firstname"
-          label="First Name"
-          type="text"
+          name='firstname'
+          label='First Name'
+          type='text'
           required={true}
         />{" "}
         <InputBox
-          name="lastname"
-          label="Last Name"
-          type="text"
+          name='lastname'
+          label='Last Name'
+          type='text'
           required={true}
         />{" "}
-        <InputBox name="knownas" label="Known As" type="text" required={true} />
+        <InputBox name='knownas' label='Known As' type='text' required={true} />
         <InputBox
-          name="password"
-          label="Password"
-          type="password"
+          name='password'
+          label='Password'
+          type='password'
           required={true}
         />
         <InputBox
-          name="confirmpassword"
-          label="Confirm Password"
-          type="password"
+          name='confirmpassword'
+          label='Confirm Password'
+          type='password'
           required={true}
         />{" "}
         <InputBox
-          name="cryptcode"
-          label="Crypt Code"
-          type="password"
+          name='cryptcode'
+          label='Crypt Code'
+          type='password'
           required={true}
         />
-        <label htmlFor="emblem-type" className="signup__label">
+        <label htmlFor='emblem-type' className='signup__label'>
           Emblem
           <select
-            name="emblem"
-            className="signup__select"
+            name='emblem'
+            className='signup__select'
             value={emblemName ? emblemName : "adeptasororitas"}
             onChange={(event) => {
               setEmblemName(event.target.value);
@@ -167,7 +167,7 @@ export default function SignUp() {
             {emblemArray?.map((emblem, index) => {
               return (
                 <option
-                  className="signup__option"
+                  className='signup__option'
                   key={index}
                   value={emblem.lowercase}
                 >
@@ -177,12 +177,12 @@ export default function SignUp() {
             })}
           </select>
         </label>
-        <div className="signup__emblem-wrap">
+        <div className='signup__emblem-wrap'>
           <Emblem emblem={emblemName ? emblemName : "adeptasororitas"} />
         </div>
         <h2 className={errorClass}>{errorMessage}</h2>
         <h2 className={successClass}>Sign Up Successful</h2>
-        <button type="submit" className="signup__submit-button">
+        <button type='submit' className='signup__submit-button'>
           Sign Up
         </button>
       </form>
