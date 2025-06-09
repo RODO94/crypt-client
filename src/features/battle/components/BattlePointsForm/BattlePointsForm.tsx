@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./BattlePointsForm.scss";
 import BattleCard from "../BattleCard/BattleCard";
-import save from "../../assets/save.svg";
+import save from "../../../../assets/save.svg";
 import { CircularProgress } from "@mui/material";
 import { Player } from "../../../../utils/Interfaces";
 import { useUserStore } from "../../../../store/user";

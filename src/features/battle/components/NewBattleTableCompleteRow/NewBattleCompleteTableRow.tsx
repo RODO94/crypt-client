@@ -1,7 +1,7 @@
 import NewBattleCard from "../NewBattleCard/NewBattleCard";
 import "./NewBattleCompleteTableRow.scss";
 import { useEffect, useState } from "react";
-import crown from "../../assets/crown.svg";
+import crown from "../../../../assets/crown.svg";
 import { Player } from "../../../../utils/Interfaces";
 import { NavigationLink } from "../../../../shared";
 

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./FantasyTopFive .scss";
+import "./FantasyTopFive.scss";
 import { Link } from "react-router-dom";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";

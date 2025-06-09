@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import "./ArmyDash.scss";
-import logo from "../../assets/logo.svg";
+import logo from "../../../../assets/logo.svg";
 import { ArrowLeftIcon } from "@mui/x-date-pickers";
 import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
@@ -247,7 +247,7 @@ export default function ArmyDash({
             <label className='army-dash__label'>Army Type</label>
             <select
               className='army-dash__stat'
-              onChange={(e: unknown) => {
+              onChange={(e) => {
                 setSuccessBool({
                   name: false,
                   type: false,
@@ -255,7 +255,7 @@ export default function ArmyDash({
                   user: false,
                 });
 
-                setNewType(e.target.value);
+                setNewType(e.target.value as "40k" | "fantasy");
               }}
             >
               <option value='40k'>40k</option>

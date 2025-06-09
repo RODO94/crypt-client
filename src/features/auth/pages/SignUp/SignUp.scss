@@ -1,12 +1,13 @@
-@use "../../partials/variables" as *;
-@use "../../partials/mixins" as *;
+@use "../../../../partials/variables" as *;
+@use "../../../../partials/mixins" as *;
 .signup {
   background: linear-gradient(
       0deg,
       rgba(0, 0, 0, 0.2) 0%,
       rgba(0, 0, 0, 0.2) 100%
     ),
-    url("../../assets/battle-scene-4.jpg"), lightgray 50% / contain no-repeat;
+    url("../../../../assets/battle-scene-4.jpg"),
+    lightgray 50% / contain no-repeat;
   object-fit: contain;
   background-position: right;
   background-size: cover;

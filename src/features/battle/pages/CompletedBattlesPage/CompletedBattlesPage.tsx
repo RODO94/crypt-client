@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./CompletedBattlesPage.scss";
 
 import { Link } from "react-router-dom";
-import logo from "../../assets/logo.svg";
+import logo from "../../../../assets/logo.svg";
 import dayjs from "dayjs";
 import NewBattleCompleteTableRow from "../../components/NewBattleTableCompleteRow/NewBattleCompleteTableRow";
 import { CircularProgress } from "@mui/material";

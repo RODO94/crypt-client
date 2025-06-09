@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from "react";
 import "./UserSelectInput.scss";
-import { Users } from "../../utils/Interfaces";
-import { useUserStore } from "../../store/user";
+import { Users } from "../../../../utils/Interfaces";
+import { useUserStore } from "../../../../store/user";
 
 export default function UserSelectInput({
   initialUser,
@@ -16,9 +16,9 @@ export default function UserSelectInput({
 
   return (
     <select
-      name="user"
-      id="user-select"
-      className="user-select"
+      name='user'
+      id='user-select'
+      className='user-select'
       value={selectedUser.known_as}
       onChange={(event: ChangeEvent<HTMLSelectElement>) => {
         const newUser: Users | undefined = allUsers?.find(

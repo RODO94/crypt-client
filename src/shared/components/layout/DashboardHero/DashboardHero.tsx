@@ -1,11 +1,9 @@
-import AllyCard from "../AllyCard/AllyCard";
-import NemesisCard from "../NemesisCard/NemesisCard";
-import NextBattleCard from "../NextBattleCard/NextBattleCard";
 import "./DashboardHero.scss";
-import Emblem from "../Emblem/Emblem";
 import NavButton from "../NavButton/NavButton";
-import { Battle, Rank, Users } from "../../utils/Interfaces";
-import NewBattleCard from "../NewBattleCard/NewBattleCard";
+import { Battle, Rank, Users } from "../../../../utils/Interfaces";
+import Emblem from "../../ui/Emblem/Emblem";
+import { NewBattleCard, NextBattleCard } from "../../../../features/battle";
+import { AllyCard, NemesisCard } from "../../../../features/army";
 
 interface DashboardType {
   user: Users;
@@ -25,40 +23,40 @@ export default function DashboardHero({
   fantasyRanked,
 }: DashboardType) {
   return (
-    <section className="dashboard-hero">
-      <div className="dashboard-hero__container">
-        <h1 className="dashboard-hero__header">{`Hey ${user?.known_as}!`}</h1>
+    <section className='dashboard-hero'>
+      <div className='dashboard-hero__container'>
+        <h1 className='dashboard-hero__header'>{`Hey ${user?.known_as}!`}</h1>
         <Emblem emblem={user.user_emblem || ""} />
       </div>
-      <div className="dashboard-hero__content">
-        <div className="dashboard-hero__info">
-          <div className="dashboard-hero__battle-wrap">
-            <article className="dashboard-hero__armies">
+      <div className='dashboard-hero__content'>
+        <div className='dashboard-hero__info'>
+          <div className='dashboard-hero__battle-wrap'>
+            <article className='dashboard-hero__armies'>
               <NextBattleCard nextBattle={nextBattle} id={user.id} />
             </article>
-            <article className="dashboard-hero__armies">
+            <article className='dashboard-hero__armies'>
               <NemesisCard nemesis={nemesis} />
               <AllyCard ally={ally} />
             </article>
           </div>
         </div>
-        <div className="dashboard-hero__topcombatant">
-          <p className="dashboard-hero__topcombatant-title">Top Armies</p>
-          <article className="dashboard-hero__combatant-wrap">
-            <div className="dashboard-hero__combatant">
+        <div className='dashboard-hero__topcombatant'>
+          <p className='dashboard-hero__topcombatant-title'>Top Armies</p>
+          <article className='dashboard-hero__combatant-wrap'>
+            <div className='dashboard-hero__combatant'>
               {fortykRanked ? (
                 <NewBattleCard
-                  player_number="one"
+                  player_number='one'
                   player={{ ...fortykRanked, known_as: user.known_as }}
                 />
               ) : (
                 <p>You have no top ranked 40,000 armies</p>
               )}
             </div>
-            <div className="dashboard-hero__combatant">
+            <div className='dashboard-hero__combatant'>
               {fantasyRanked ? (
                 <NewBattleCard
-                  player_number="one"
+                  player_number='one'
                   player={{ ...fantasyRanked, known_as: user.known_as }}
                 />
               ) : (
@@ -68,13 +66,13 @@ export default function DashboardHero({
           </article>
         </div>
       </div>
-      <div className="dashboard-hero__actions">
-        <div className="dashboard-hero__buttons">
-          <NavButton colour="blue" text="Add an Army" page="/armies/add" />
+      <div className='dashboard-hero__actions'>
+        <div className='dashboard-hero__buttons'>
+          <NavButton colour='blue' text='Add an Army' page='/armies/add' />
           <NavButton
-            colour="dark"
-            text="Create a Battle"
-            page="/battles/create"
+            colour='dark'
+            text='Create a Battle'
+            page='/battles/create'
           />
         </div>
       </div>

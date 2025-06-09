@@ -1,6 +1,6 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import "./LogIn.scss";
-import logo from "../../../assets/logo.svg";
+import logo from "../../../../assets/logo.svg";
 import { useState } from "react";
 import { useUserStore } from "../../../../store/user";
 import {

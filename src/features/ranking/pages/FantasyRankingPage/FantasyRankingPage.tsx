@@ -1,7 +1,7 @@
 import "./FantasyRankingPage.scss";
 import { Link } from "react-router-dom";
-import logo from "../../assets/logo.svg";
-import crown from "../../assets/crown.svg";
+import logo from "../../../../assets/logo.svg";
+import crown from "../../../../assets/crown.svg";
 import { CircularProgress } from "@mui/material";
 import { useRankingsStore } from "../../../../store/rankings";
 import { NewBattleCard } from "../../../battle";

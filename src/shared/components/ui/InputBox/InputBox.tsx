@@ -1,4 +1,4 @@
-import { Input } from "../../utils/Interfaces";
+import { Input } from "../../../../utils/Interfaces";
 import "./InputBox.scss";
 
 export default function InputBox({ name, label, type, required }: Input) {
@@ -6,8 +6,8 @@ export default function InputBox({ name, label, type, required }: Input) {
 
   required === true ? (requiredBool = true) : false;
   return (
-    <div className="field">
-      <label htmlFor={name} className="field__label">
+    <div className='field'>
+      <label htmlFor={name} className='field__label'>
         {label}
       </label>
       <input
@@ -15,7 +15,7 @@ export default function InputBox({ name, label, type, required }: Input) {
         type={type}
         id={name}
         name={name}
-        className="field__input"
+        className='field__input'
         required={requiredBool}
       />
     </div>

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./UpcomingBattlesPage.scss";
 
 import { Link } from "react-router-dom";
-import logo from "../../assets/logo.svg";
+import logo from "../../../../assets/logo.svg";
 import NewBattleTableRow from "../../components/NewBattleTableRow/NewBattleTableRow";
 import { CircularProgress } from "@mui/material";
 import { Battle } from "../../../../utils/Interfaces";

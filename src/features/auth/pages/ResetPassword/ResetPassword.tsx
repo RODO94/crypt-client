@@ -1,6 +1,6 @@
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import "./ResetPassword.scss";
-import logo from "../../../assets/logo.svg";
+import logo from "../../../../assets/logo.svg";
 import { useState } from "react";
 import { Password } from "../../../../utils/Interfaces";
 import { resetPasswordAuthentication } from "../../../../utils/UserAuth";

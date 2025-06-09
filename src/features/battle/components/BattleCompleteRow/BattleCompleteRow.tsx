@@ -2,7 +2,7 @@ import BattleCard from "../BattleCard/BattleCard";
 import BattleTypePill from "../BattleTypePill/BattleTypePill";
 import "./BattleCompleteRow.scss";
 import { useEffect, useState } from "react";
-import crown from "../../assets/crown.svg";
+import crown from "../../../../assets/crown.svg";
 import { Player } from "../../../../utils/Interfaces";
 import { NavigationLink, PlayerTypePill } from "../../../../shared";
 

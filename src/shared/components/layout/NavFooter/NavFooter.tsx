@@ -3,11 +3,11 @@ import "./NavFooter.scss";
 import { useState } from "react";
 import { ThemeProvider } from "@emotion/react";
 import { createTheme } from "@mui/material";
-import rankings from "../../assets/rankings.svg";
-import home from "../../assets/home.svg";
-import battles from "../../assets/battles.svg";
+import rankings from "../../../../assets/rankings.svg";
+import home from "../../../../assets/home.svg";
+import battles from "../../../../assets/battles.svg";
 import PersonIcon from "@mui/icons-material/Person";
-import profile from "../../assets/profile.svg";
+import profile from "../../../../assets/profile.svg";
 
 export default function NavFooter() {
   const [battleToggle, setBattleToggle] = useState(false);
@@ -23,7 +23,7 @@ export default function NavFooter() {
       : "footer-nav__nav-container";
   };
 
-  const userNavClassNameFn = (token: string | null, isActive: Boolean) => {
+  const userNavClassNameFn = (token: string | null, isActive: boolean) => {
     return token && isActive
       ? "footer-nav__link footer-nav__link--active"
       : token && !isActive
@@ -61,7 +61,7 @@ export default function NavFooter() {
   return (
     <ThemeProvider theme={theme}>
       <footer className={"footer"}>
-        <nav className="footer-nav">
+        <nav className='footer-nav'>
           <article className={toggleClassNameFn(battleActiveBool)}>
             <div
               className={
@@ -75,10 +75,10 @@ export default function NavFooter() {
             >
               <img
                 src={battles}
-                alt="two swords crossed for battle navigation"
-                className="footer-nav__icons"
+                alt='two swords crossed for battle navigation'
+                className='footer-nav__icons'
               />
-              <p className="footer-nav__icon-txt">Battles</p>
+              <p className='footer-nav__icon-txt'>Battles</p>
             </div>
             <div
               className={
@@ -131,12 +131,12 @@ export default function NavFooter() {
               <PersonIcon
                 style={{ width: "2.5rem", height: "2rem", color: "white" }}
               />
-              <p className="footer-nav__icon-txt">User</p>
+              <p className='footer-nav__icon-txt'>User</p>
             </NavLink>{" "}
           </div>
           <NavLink
             className={({ isActive }) => classNameFn(isActive)}
-            to="/"
+            to='/'
             onClick={() => {
               setBattleActiveBool(false);
               setRankingActiveBool(false);
@@ -146,10 +146,10 @@ export default function NavFooter() {
           >
             <img
               src={home}
-              alt="fortress icon for home navigation"
-              className="footer-nav__icons"
+              alt='fortress icon for home navigation'
+              className='footer-nav__icons'
             />
-            <p className="footer-nav__icon-txt">Home</p>
+            <p className='footer-nav__icon-txt'>Home</p>
           </NavLink>{" "}
           <article className={toggleClassNameFn(rankingActiveBool)}>
             <div
@@ -195,10 +195,10 @@ export default function NavFooter() {
             >
               <img
                 src={rankings}
-                alt="Armoured fist for ranking navigation"
-                className="footer-nav__icons"
+                alt='Armoured fist for ranking navigation'
+                className='footer-nav__icons'
               />
-              <p className="footer-nav__icon-txt">Rank</p>
+              <p className='footer-nav__icon-txt'>Rank</p>
             </div>
           </article>
           <div
@@ -220,10 +220,10 @@ export default function NavFooter() {
             >
               <img
                 src={profile}
-                alt="fortress icon for home navigation"
-                className="footer-nav__icons"
+                alt='fortress icon for home navigation'
+                className='footer-nav__icons'
               />
-              <p className="footer-nav__icon-txt">Profile</p>
+              <p className='footer-nav__icon-txt'>Profile</p>
             </NavLink>{" "}
           </div>
         </nav>

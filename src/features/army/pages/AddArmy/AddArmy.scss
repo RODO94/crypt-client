@@ -1,5 +1,5 @@
-@use "../../partials/variables" as *;
-@use "../../partials/mixins" as *;
+@use "../../../../partials/variables" as *;
+@use "../../../../partials/mixins" as *;
 
 .add-army {
   background: linear-gradient(
@@ -7,7 +7,7 @@
       rgba(0, 0, 0, 0.2) 0%,
       rgba(0, 0, 0, 0.2) 100%
     ),
-    url("../../assets/battleground-scene.jpg"),
+    url("../../../../assets/battleground-scene.jpg"),
     lightgray 50% / contain no-repeat;
   object-fit: fill;
   background-position: center;

@@ -1,15 +1,15 @@
 import { useState } from "react";
 import "./NavHeader.scss";
 import { NavLink } from "react-router-dom";
-import rankings from "../../assets/rankings.svg";
-import home from "../../assets/home.svg";
-import battles from "../../assets/battles.svg";
+import rankings from "../../../../assets/rankings.svg";
+import home from "../../../../assets/home.svg";
+import battles from "../../../../assets/battles.svg";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import { ThemeProvider } from "@emotion/react";
 import { createTheme } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
-import profile from "../../assets/profile.svg";
+import profile from "../../../../assets/profile.svg";
 
 export default function NavHeader() {
   const [toggleBool, setToggleBool] = useState(false);
@@ -58,10 +58,10 @@ export default function NavHeader() {
       <header
         className={toggleBool ? "header-nav header-nav--toggled" : "header-nav"}
       >
-        <div onClick={handleClick} className="header-nav__toggle">
+        <div onClick={handleClick} className='header-nav__toggle'>
           {toggleBool ? (
             <MenuOpenIcon
-              color="primary"
+              color='primary'
               style={{
                 height: "2.25rem",
                 width: "2.25rem",
@@ -70,7 +70,7 @@ export default function NavHeader() {
             />
           ) : (
             <MenuIcon
-              color="primary"
+              color='primary'
               style={{
                 height: "2.25rem",
                 width: "2.25rem",
@@ -101,10 +101,10 @@ export default function NavHeader() {
             >
               <img
                 src={battles}
-                alt="two swords crossed for battle navigation"
-                className="header-nav__icons"
+                alt='two swords crossed for battle navigation'
+                className='header-nav__icons'
               />
-              <p className="header-nav__icon-txt">Battles</p>
+              <p className='header-nav__icon-txt'>Battles</p>
             </div>
             <div
               className={
@@ -164,7 +164,7 @@ export default function NavHeader() {
               }}
             >
               <PersonIcon style={{ width: "2.5rem", height: "2.5rem" }} />
-              <p className="header-nav__icon-txt">
+              <p className='header-nav__icon-txt'>
                 Your <br />
                 Dash
               </p>
@@ -183,10 +183,10 @@ export default function NavHeader() {
           >
             <img
               src={home}
-              alt="fortress icon for home navigation"
-              className="header-nav__icons"
+              alt='fortress icon for home navigation'
+              className='header-nav__icons'
             />
-            <p className="header-nav__icon-txt">Home</p>
+            <p className='header-nav__icon-txt'>Home</p>
           </NavLink>{" "}
           <article
             className={
@@ -207,10 +207,10 @@ export default function NavHeader() {
             >
               <img
                 src={rankings}
-                alt="Armoured fist for ranking navigation"
-                className="header-nav__icons"
+                alt='Armoured fist for ranking navigation'
+                className='header-nav__icons'
               />
-              <p className="header-nav__icon-txt">Ranks</p>
+              <p className='header-nav__icon-txt'>Ranks</p>
             </div>
             <div
               className={
@@ -270,10 +270,10 @@ export default function NavHeader() {
             >
               <img
                 src={profile}
-                alt="fortress icon for home navigation"
-                className="header-nav__icons"
+                alt='fortress icon for home navigation'
+                className='header-nav__icons'
               />
-              <p className="header-nav__icon-txt">Profile</p>
+              <p className='header-nav__icon-txt'>Profile</p>
             </NavLink>{" "}
           </div>
         </nav>

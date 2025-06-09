@@ -1,6 +1,6 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import "./SignUp.scss";
-import logo from "../../../assets/logo.svg";
+import logo from "../../../../assets/logo.svg";
 import { useState } from "react";
 import { Emblem, InputBox } from "../../../../shared";
 import { useEffect } from "react";

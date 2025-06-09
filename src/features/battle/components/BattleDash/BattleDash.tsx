@@ -1,6 +1,6 @@
 import "./BattleDash.scss";
-import logo from "../../assets/logo.svg";
-import save from "../../assets/save.svg";
+import logo from "../../../../assets/logo.svg";
+import save from "../../../../assets/save.svg";
 import BattleCard from "../BattleCard/BattleCard";
 import BattleTypePill from "../BattleTypePill/BattleTypePill";
 import { useEffect, useState } from "react";
