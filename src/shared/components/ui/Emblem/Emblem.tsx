@@ -1,6 +1,6 @@
 import { Emblems, emblems } from "../../../../utils/emblems";
 import "./Emblem.scss";
-import metalica from "../assets/emblems/metalica.svg";
+import metalica from "../../../../assets/emblems/metalica.svg";
 
 type EmblemType = {
   emblem: Emblems;
