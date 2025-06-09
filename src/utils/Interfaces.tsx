@@ -1,3 +1,5 @@
+import { Emblems } from "./emblems";
+
 export interface Player {
   id?: string;
   name?: string;
@@ -48,7 +50,7 @@ export interface ArmyInformation {
   rn: number;
   type: "fantasy" | "40k";
   name: string;
-  emblem: string;
+  emblem: Emblems;
   known_as: string;
 }
 
