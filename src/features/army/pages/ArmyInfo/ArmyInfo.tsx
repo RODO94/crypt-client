@@ -1,13 +1,11 @@
 import { useLocation } from "react-router-dom";
 import "./ArmyInfo.scss";
 import { useEffect } from "react";
-import ArmyDash from "../../components/ArmyDash/ArmyDash";
-import ArmyNemesis from "../../components/ArmyNemesis/ArmyNemesis";
-import ArmyAlly from "../../components/ArmyAlly/ArmyAlly";
+import { ArmyDash, ArmyNemesis, ArmyAlly } from "../../index";
 import { CircularProgress } from "@mui/material";
-import { useArmiesStore } from "../../store/armies";
-import { useRankingsStore } from "../../store/rankings";
-import RankTracker from "../../components/RankTracker/RankTracker";
+import { useArmiesStore } from "../../../store/armies";
+import { useRankingsStore } from "../../../store/rankings";
+import { RankTracker } from "../../../features/ranking";
 
 export default function ArmyInfo() {
   const location = useLocation();

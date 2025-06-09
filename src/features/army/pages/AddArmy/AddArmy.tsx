@@ -1,15 +1,15 @@
 import { ArrowLeftIcon } from "@mui/x-date-pickers";
-import Header from "../../components/Header/Header";
+import { Header } from "../../../shared";
 import "./AddArmy.scss";
 import { useNavigate } from "react-router-dom";
 import DoneIcon from "@mui/icons-material/Done";
 import { CircularProgress } from "@mui/material";
 import { useEffect, useState } from "react";
-import { emblemNameArray } from "../../utils/EmblemNames";
-import Emblem from "../../components/Emblem/Emblem";
-import { addArmyRequest } from "../../utils/ArmyRequests";
-import { useUserStore } from "../../store/user";
-import { useArmiesStore } from "../../store/armies";
+import { emblemNameArray } from "../../../utils/EmblemNames";
+import { Emblem } from "../../../shared";
+import { addArmyRequest } from "../../../utils/ArmyRequests";
+import { useUserStore } from "../../../store/user";
+import { useArmiesStore } from "../../../store/armies";
 
 interface EmblemNameObj {
   lowercase: string;

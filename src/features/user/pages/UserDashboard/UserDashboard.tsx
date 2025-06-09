@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import DashboardHero from "../../components/DashboardHero/DashboardHero";
 
 import UsersFantasyRanking from "../../components/UsersFantasyRanking/UsersFantasyRanking";
 import UsersFortyRanking from "../../components/UsersFortyRanking/UsersFortyRanking";
@@ -8,9 +7,6 @@ import UsersUpcomingBattles from "../../components/UsersUpcomingBattles/UsersUpc
 import "./UserDashboard.scss";
 import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
-import { useBattlesStore } from "../../store/battles";
-import { useUserStore } from "../../store/user";
-import { useArmiesStore } from "../../store/armies";
 
 export default function UserDashboard() {
   const { token, userInfo, fetchUserInfo } = useUserStore();
@@ -31,15 +27,15 @@ export default function UserDashboard() {
 
   if (!userInfo) {
     return (
-      <div className="loading-message">
+      <div className='loading-message'>
         <CircularProgress style={{ color: "white" }} />
       </div>
     );
   }
 
   return (
-    <main className="user-dash__main">
-      <section className="user-dash">
+    <main className='user-dash__main'>
+      <section className='user-dash'>
         <DashboardHero
           nextBattle={userBattles?.battleArray[0]}
           user={userInfo.user}
@@ -49,7 +45,7 @@ export default function UserDashboard() {
           fantasyRanked={userInfo.rankArray.fantasy[0]}
         />
       </section>
-      <section className="user-ranking">
+      <section className='user-ranking'>
         <UsersFortyRanking
           rankArray={userInfo.rankArray.fortyK}
           user={userInfo.user.known_as}
@@ -59,7 +55,7 @@ export default function UserDashboard() {
           user={userInfo.user.known_as}
         />
       </section>
-      <section className="user-battles">
+      <section className='user-battles'>
         <UsersUpcomingBattles battleArray={userBattles?.battleArray} />
         <UsersResults battleArray={userInfo.userResults} />
       </section>

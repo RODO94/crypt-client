@@ -1,14 +1,13 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import InputBox from "../../components/InputBox/InputBox";
-import NavButton from "../../components/NavButton/NavButton";
+import { InputBox, NavButton } from "../../../shared";
 import "./LogInRedirect.scss";
-import logo from "../../assets/logo.svg";
+import logo from "../../../assets/logo.svg";
 import {
   forgotPasswordAuthentication,
   loginAuthentication,
-} from "../../utils/UserAuth";
+} from "../../../utils/UserAuth";
 import { useState } from "react";
-import { useUserStore } from "../../store/user";
+import { useUserStore } from "../../../store/user";
 
 export default function LogInRedirect() {
   const [errorMessage, setErrorMessage] = useState<string>("");

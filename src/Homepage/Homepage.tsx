@@ -1,10 +1,6 @@
-import CompletedBattles from "../../components/CompletedBattles/CompletedBattles";
-import FantasyTopFive from "../../components/FantasyTopFive/FantasyTopFive ";
-import FortyKTopFive from "../../components/FortyKTopFive/FortyKTopFive";
-import Header from "../../components/Header/Header";
-import HomeHero from "../../components/HomeHero/HomeHero";
-
-import UpcomingBattles from "../../components/UpcomingBattles/UpcomingBattles";
+import { CompletedBattles, UpcomingBattles } from "../features/battle";
+import { FantasyTopFive, FortyKTopFive } from "../features/ranking";
+import { Header, HomeHero } from "../shared";
 import "./Homepage.scss";
 
 export default function Homepage() {
@@ -12,8 +8,8 @@ export default function Homepage() {
     <main>
       <Header />
       <HomeHero />
-      <section className="homepage__content">
-        <div className="homepage__rankings">
+      <section className='homepage__content'>
+        <div className='homepage__rankings'>
           <FortyKTopFive />
           <FantasyTopFive />
         </div>

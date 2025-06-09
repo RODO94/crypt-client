@@ -1,8 +1,6 @@
 import { useState } from "react";
 import "./UserProfile.scss";
 import { useNavigate } from "react-router-dom";
-import { makeAdmin } from "../../utils/UserRequests";
-import BattleCard from "../../components/BattleCard/BattleCard";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import {
   Button,
@@ -12,9 +10,11 @@ import {
   alpha,
   styled,
 } from "@mui/material";
-import { useUserStore } from "../../store/user";
-import { useArmiesStore, UserArmies } from "../../store/armies";
-import { Users } from "../../utils/Interfaces";
+import { useUserStore } from "../../../../store/user";
+import { useArmiesStore, UserArmies } from "../../../../store/armies";
+import { makeAdmin } from "../../../../utils/UserRequests";
+import { BattleCard } from "../../../battle";
+import { Users } from "../../../../utils/Interfaces";
 
 const StyledMenu = styled((props: MenuProps) => (
   <Menu
@@ -91,45 +91,45 @@ export default function UserProfile() {
   if (!currentUser?.id) return <p>Loading</p>;
 
   return (
-    <main className="user-profile">
-      <section className="user-profile__dashboard">
-        <h1 className="user-profile__title">User Profile</h1>
-        <div className="user-profile__info-container">
-          <article className="user-profile__info-card">
-            <h3 className="user-profile__info-header">Name</h3>
-            <div className="user-profile__info-wrap">
-              <strong className="user-profile__info">{`${currentUser.first_name} ${currentUser.last_name}`}</strong>
+    <main className='user-profile'>
+      <section className='user-profile__dashboard'>
+        <h1 className='user-profile__title'>User Profile</h1>
+        <div className='user-profile__info-container'>
+          <article className='user-profile__info-card'>
+            <h3 className='user-profile__info-header'>Name</h3>
+            <div className='user-profile__info-wrap'>
+              <strong className='user-profile__info'>{`${currentUser.first_name} ${currentUser.last_name}`}</strong>
             </div>
           </article>{" "}
-          <article className="user-profile__info-card">
-            <h3 className="user-profile__info-header">Access</h3>
-            <div className="user-profile__info-wrap">
-              <strong className="user-profile__info">{userRole}</strong>
+          <article className='user-profile__info-card'>
+            <h3 className='user-profile__info-header'>Access</h3>
+            <div className='user-profile__info-wrap'>
+              <strong className='user-profile__info'>{userRole}</strong>
             </div>
           </article>{" "}
-          <article className="user-profile__info-card">
-            <h3 className="user-profile__info-header">Email</h3>
-            <div className="user-profile__info-wrap">
-              <strong className="user-profile__info">
+          <article className='user-profile__info-card'>
+            <h3 className='user-profile__info-header'>Email</h3>
+            <div className='user-profile__info-wrap'>
+              <strong className='user-profile__info'>
                 {currentUser.email}
               </strong>
             </div>
           </article>
         </div>
       </section>
-      <section className="user-profile__army-list">
-        <h2 className="user-profile__subheader">Fantasy Armies</h2>
+      <section className='user-profile__army-list'>
+        <h2 className='user-profile__subheader'>Fantasy Armies</h2>
         {userArmies
           .filter((army) => army.type === "fantasy")
           .map((army: UserArmies) => {
             return (
               <article
                 key={`article${army.army_id}`}
-                className="user-profile__army-card"
+                className='user-profile__army-card'
               >
                 <div
                   key={`div2${army.army_id}`}
-                  className="user-profile__army-wrap"
+                  className='user-profile__army-wrap'
                 >
                   <BattleCard
                     key={`battlecard${army.army_id}`}
@@ -139,11 +139,11 @@ export default function UserProfile() {
                 </div>
                 <div
                   key={`div${army.army_id}`}
-                  className="user-profile__count-wrap"
+                  className='user-profile__count-wrap'
                 >
                   <strong
                     key={`strong${army.army_id}`}
-                    className="user-profile__info"
+                    className='user-profile__info'
                   >
                     {army.count > 1 || army.count === 0
                       ? `${army.count} games`
@@ -154,20 +154,20 @@ export default function UserProfile() {
             );
           })}
       </section>{" "}
-      <section id="fortyk" className="user-profile__army-list">
-        <h2 className="user-profile__subheader">40k Armies</h2>
+      <section id='fortyk' className='user-profile__army-list'>
+        <h2 className='user-profile__subheader'>40k Armies</h2>
         {userArmies
           .filter((army) => army.type === "40k")
           .map((army: UserArmies) => {
             return (
               <article
                 key={`article${army.army_id}`}
-                className="user-profile__army-card"
+                className='user-profile__army-card'
               >
                 {" "}
                 <div
                   key={`div2${army.army_id}`}
-                  className="user-profile__army-wrap"
+                  className='user-profile__army-wrap'
                 >
                   <BattleCard
                     key={`battlecard${army.army_id}`}
@@ -177,11 +177,11 @@ export default function UserProfile() {
                 </div>
                 <div
                   key={`div${army.army_id}`}
-                  className="user-profile__count-wrap"
+                  className='user-profile__count-wrap'
                 >
                   <strong
                     key={`strong${army.army_id}`}
-                    className="user-profile__info"
+                    className='user-profile__info'
                   >
                     {army.count > 1 || army.count === 0
                       ? `${army.count} games`
@@ -192,19 +192,19 @@ export default function UserProfile() {
             );
           })}
       </section>
-      <section className="user-profile__user-list">
-        <div className="user-profile__user-headers">
-          <p id="user" className="user-profile__user-header">
+      <section className='user-profile__user-list'>
+        <div className='user-profile__user-headers'>
+          <p id='user' className='user-profile__user-header'>
             User
           </p>
-          <p id="email" className="user-profile__user-header">
+          <p id='email' className='user-profile__user-header'>
             Email
           </p>
-          <p id="role" className="user-profile__user-header">
+          <p id='role' className='user-profile__user-header'>
             Role
           </p>
           {isAdmin && (
-            <p id="action" className="user-profile__user-header">
+            <p id='action' className='user-profile__user-header'>
               Action
             </p>
           )}
@@ -222,45 +222,45 @@ export default function UserProfile() {
             >
               <strong
                 key={`strong${user.id}`}
-                id="user"
-                className="user-profile__user-record"
+                id='user'
+                className='user-profile__user-record'
               >
                 {user.known_as}
               </strong>
               <p
                 key={`email${user.id}`}
-                id="email"
-                className="user-profile__user-record"
+                id='email'
+                className='user-profile__user-record'
               >
                 {user.email}
               </p>
               <p
                 key={`role${user.id}`}
-                id="role"
-                className="user-profile__user-record"
+                id='role'
+                className='user-profile__user-record'
               >
                 {user.role}
               </p>
               {isAdmin && (
                 <div
                   key={`div${user.id}`}
-                  className="user-profile__user-record--action"
+                  className='user-profile__user-record--action'
                   id={user.id}
                 >
                   <Button
                     key={`button${user.id}`}
-                    size="small"
+                    size='small'
                     style={{
                       maxWidth: "30px",
                       maxHeight: "30px",
                       minWidth: "30px",
                       minHeight: "30px",
                     }}
-                    id="demo-customized-button"
+                    id='demo-customized-button'
                     aria-controls={open ? "demo-customized-menu" : undefined}
-                    aria-haspopup="true"
+                    aria-haspopup='true'
                     aria-expanded={open ? "true" : undefined}
-                    variant="contained"
+                    variant='contained'
                     disableElevation
                     onClick={(event: any) => {
                       setTargetUser(event.target.parentElement.id);
@@ -271,7 +271,7 @@ export default function UserProfile() {
                   </Button>
                   <StyledMenu
                     key={`styledmenu${user.id}`}
-                    id="demo-customized-menu"
+                    id='demo-customized-menu'
                     MenuListProps={{
                       "aria-labelledby": "demo-customized-button",
                     }}
