@@ -11,6 +11,7 @@ import { emblemNameArray } from "../../../../utils/EmblemNames";
 import { changeArmyField } from "../../../../utils/ArmyRequests";
 import { Emblem, EmblemHero } from "../../../../shared";
 import { BattleCard } from "../../../battle";
+import { Emblems } from "../../../../utils/emblems";
 interface armyDashObj {
   winPercent: string;
   battleCount: number;
@@ -39,7 +40,7 @@ export default function ArmyDash({
   const [editBool, setEditBool] = useState(false);
   const [newName, setNewName] = useState<string>(armyObj.name);
   const [newType, setNewType] = useState(armyObj.type);
-  const [newEmblem, setNewEmblem] = useState<string>(armyObj.emblem);
+  const [newEmblem, setNewEmblem] = useState<Emblems>(armyObj.emblem);
   const [emblemArray, setEmblemArray] = useState<null | EmblemNameObj[]>(null);
   const [successBool, setSuccessBool] = useState({
     name: false,
@@ -61,8 +62,8 @@ export default function ArmyDash({
       return;
     }
     const stringArray = emblemName.toLowerCase().split(" ").join("");
-    setEmblemName(stringArray);
-    setNewEmblem(stringArray);
+    setEmblemName(stringArray as Emblems);
+    setNewEmblem(stringArray as Emblems);
   }, [emblemName]);
 
   useEffect(() => {
@@ -289,8 +290,8 @@ export default function ArmyDash({
                     emblem: false,
                     user: false,
                   });
-                  setNewEmblem(e.target.value);
-                  setEmblemName(e.target.value);
+                  setNewEmblem(e.target.value as Emblems);
+                  setEmblemName(e.target.value as Emblems);
                   return;
                 }}
               >

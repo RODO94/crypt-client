@@ -4,6 +4,7 @@ import { Battle, Rank, Users } from "../../../../utils/Interfaces";
 import Emblem from "../../ui/Emblem/Emblem";
 import { NewBattleCard, NextBattleCard } from "../../../../features/battle";
 import { AllyCard, NemesisCard } from "../../../../features/army";
+import { Emblems } from "../../../../utils/emblems";
 
 interface DashboardType {
   user: Users;
@@ -26,7 +27,7 @@ export default function DashboardHero({
     <section className='dashboard-hero'>
       <div className='dashboard-hero__container'>
         <h1 className='dashboard-hero__header'>{`Hey ${user?.known_as}!`}</h1>
-        <Emblem emblem={user.user_emblem || ""} />
+        <Emblem emblem={(user.user_emblem as Emblems) || "tau"} />
       </div>
       <div className='dashboard-hero__content'>
         <div className='dashboard-hero__info'>

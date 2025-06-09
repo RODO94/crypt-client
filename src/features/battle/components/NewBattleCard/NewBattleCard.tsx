@@ -1,4 +1,5 @@
 import { EmblemCard } from "../../../../shared";
+import { Emblems } from "../../../../utils/emblems";
 import { Player } from "../../../../utils/Interfaces";
 import "./NewBattleCard.scss";
 
@@ -11,13 +12,11 @@ export default function NewBattleCard({
   player_number: string;
   id?: string;
 }) {
-  !player.emblem ? (player.emblem = "necrons") : player.emblem;
-
   let nameArray: string[] = [];
   if (player.emblem) {
     nameArray = player.emblem.toLowerCase().split(" ");
   }
-  let nameColour: string = "";
+  let nameColour = "";
 
   for (let i = 0; i < nameArray.length; i++) {
     nameArray[i] !== " "
@@ -33,7 +32,7 @@ export default function NewBattleCard({
       <div
         className={`new-battle-card__emblem-wrap new-battle-card__emblem-wrap--${player_number} ${nameColour} `}
       >
-        <EmblemCard emblem={nameColour} />
+        <EmblemCard emblem={nameColour as Emblems} />
       </div>
       <div
         className={`new-battle-card__player new-battle-card__player--${player_number}`}

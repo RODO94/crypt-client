@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { signUpAuthentication } from "../../../../utils/UserAuth";
 import { SignUpBody } from "../../../../utils/Interfaces";
 import { emblemNameArray } from "../../../../utils/EmblemNames";
+import { Emblems } from "../../../../utils/emblems";
 
 interface EmblemNameObj {
   lowercase: string;
@@ -177,7 +178,9 @@ export default function SignUp() {
           </select>
         </label>
         <div className='signup__emblem-wrap'>
-          <Emblem emblem={emblemName ? emblemName : "adeptasororitas"} />
+          <Emblem
+            emblem={emblemName ? (emblemName as Emblems) : "adeptasororitas"}
+          />
         </div>
         <h2 className={errorClass}>{errorMessage}</h2>
         <h2 className={successClass}>Sign Up Successful</h2>
