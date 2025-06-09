@@ -1,33 +1,33 @@
 import "./UsersUpcomingBattles.scss";
-import DateTableHeader from "../DateTableHeader/DateTableHeader";
 import { Link } from "react-router-dom";
-import { Battle } from "../../utils/Interfaces";
 import { CircularProgress } from "@mui/material";
-import NewBattleTableRow from "../NewBattleTableRow/NewBattleTableRow";
+import { Battle } from "../../../../utils/Interfaces";
+import { DateTableHeader } from "../../../../shared";
+import { NewBattleTableRow } from "../../../battle";
 
 export default function UsersUpcomingBattles({ battleArray }: any) {
   let currentDate = "";
   if (!battleArray) {
     return (
-      <div className="loading-message">
+      <div className='loading-message'>
         <CircularProgress style={{ color: "white" }} />
       </div>
     );
   }
   return (
-    <section className="upcomingbattles users-upcomingbattles">
-      <div className="upcomingbattles__header-wrap">
-        <Link to={"/battles/upcoming"} className="upcomingbattles__header">
+    <section className='upcomingbattles users-upcomingbattles'>
+      <div className='upcomingbattles__header-wrap'>
+        <Link to={"/battles/upcoming"} className='upcomingbattles__header'>
           Upcoming Battles
         </Link>
       </div>
-      <article className="upcomingbattles__battle-list">
+      <article className='upcomingbattles__battle-list'>
         {battleArray.map((battle: Battle, index: number) => {
           if (index === 0) {
             currentDate = battle.date;
             return (
               <article
-                className="upcomingbattles__container"
+                className='upcomingbattles__container'
                 key={crypto.randomUUID()}
               >
                 <DateTableHeader key={crypto.randomUUID()} date={battle.date} />
@@ -62,7 +62,7 @@ export default function UsersUpcomingBattles({ battleArray }: any) {
             currentDate = battle.date;
             return (
               <article
-                className="upcomingbattles__container"
+                className='upcomingbattles__container'
                 key={crypto.randomUUID()}
               >
                 <DateTableHeader key={crypto.randomUUID()} date={battle.date} />

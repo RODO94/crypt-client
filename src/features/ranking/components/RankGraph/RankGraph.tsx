@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import "./RankGraph.scss";
 import { ResponsiveLine, Serie } from "@nivo/line";
-import { getRankingsOneArmy } from "../../utils/RankingRequests";
 import dayjs from "dayjs";
+import { getRankingsOneArmy } from "../../../../utils/RankingRequests";
 interface Rankings {
   ranking: string | undefined;
   date: string;
@@ -44,9 +44,9 @@ export default function RankGraph(props: {
   }, []);
 
   return (
-    <article className="rank-graph">
-      <h2 className="rank-graph__title">Your Rank History</h2>
-      <div className="rank-graph__wrap">
+    <article className='rank-graph'>
+      <h2 className='rank-graph__title'>Your Rank History</h2>
+      <div className='rank-graph__wrap'>
         <ResponsiveLine
           data={rankings}
           margin={{ top: 20, right: 60, bottom: 50, left: 120 }}
@@ -82,8 +82,8 @@ export default function RankGraph(props: {
               },
             },
           }}
-          yFormat=" >-.2f"
-          curve="natural"
+          yFormat=' >-.2f'
+          curve='natural'
           yScale={{
             type: "linear",
             min: minValue,
@@ -105,7 +105,7 @@ export default function RankGraph(props: {
           pointColor={{ theme: "background" }}
           pointBorderWidth={2}
           pointBorderColor={{ from: "serieColor" }}
-          pointLabel="data.yFormatted"
+          pointLabel='data.yFormatted'
           pointLabelYOffset={-12}
           enableTouchCrosshair={true}
           useMesh={true}

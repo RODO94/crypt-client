@@ -1,4 +1,4 @@
-import { Player } from "../../utils/Interfaces";
+import { Player } from "../../../../utils/Interfaces";
 import "./BattleCard.scss";
 
 export default function BattleCard({
@@ -21,13 +21,13 @@ export default function BattleCard({
   }
 
   return (
-    <article className="battle-card" id={army_id}>
+    <article className='battle-card' id={army_id}>
       <div className={`battle-card__army ${nameColour}`}>
         <p className={`battle-card__text ${nameColour}`}>{name}</p>
       </div>
-      <div className="battle-card__player-info">
-        <p className="battle-card__player-name">{known_as}</p>
-        <p className="battle-card__player-rank">{ranking}</p>
+      <div className='battle-card__player-info'>
+        <p className='battle-card__player-name'>{known_as}</p>
+        <p className='battle-card__player-rank'>{ranking}</p>
       </div>
     </article>
   );

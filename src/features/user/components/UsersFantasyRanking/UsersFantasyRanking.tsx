@@ -1,21 +1,20 @@
-import { Rank } from "../../utils/Interfaces";
+import { FiveColTableHeader, FiveColTableRow } from "../../../../shared";
+import { Rank } from "../../../../utils/Interfaces";
 import "./UsersFantasyRanking.scss";
-import FiveColTableHeader from "../FiveColTableHeader/FiveColTableHeader";
-import FiveColTableRow from "../FiveColTableRow/FiveColTableRow";
 import { CircularProgress } from "@mui/material";
 
 export default function UsersFantasyRanking({ rankArray, user }: any) {
   if (!rankArray) {
     return (
-      <div className="loading-message">
+      <div className='loading-message'>
         <CircularProgress style={{ color: "white" }} />
       </div>
     );
   }
   return (
-    <section className="user-dash-rankings user-dash-rankings--fantasy">
-      <div className="user-dash-rankings__title-wrap">
-        <h2 className="user-dash-rankings__title">Fantasy Rankings</h2>
+    <section className='user-dash-rankings user-dash-rankings--fantasy'>
+      <div className='user-dash-rankings__title-wrap'>
+        <h2 className='user-dash-rankings__title'>Fantasy Rankings</h2>
       </div>
       <FiveColTableHeader />
       {rankArray.map((army: Rank, index: number) => {
@@ -32,7 +31,7 @@ export default function UsersFantasyRanking({ rankArray, user }: any) {
             ranking={army.ranking}
             status={army.status}
             colour={colour}
-            navTo="/armies/information"
+            navTo='/armies/information'
             id={army.army_id}
           />
         );

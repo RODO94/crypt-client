@@ -1,9 +1,9 @@
-import { Player } from "../../utils/Interfaces";
 import NewBattleCard from "../NewBattleCard/NewBattleCard";
 import "./NewBattleCompleteTableRow.scss";
 import { useEffect, useState } from "react";
 import crown from "../../assets/crown.svg";
-import NavigationLink from "../NavigationLink/NavigationLink";
+import { Player } from "../../../../utils/Interfaces";
+import { NavigationLink } from "../../../../shared";
 
 interface BattleTableRow {
   battle_type?: string;
@@ -40,8 +40,8 @@ export default function NewBattleCompleteTableRow({
 
   return (
     <NavigationLink to={`/battles/information/${id}`}>
-      <article className="new-battle-table-row">
-        <div className="new-battle-table-row__combatant-result new-battle-table-row__combatant-result--one">
+      <article className='new-battle-table-row'>
+        <div className='new-battle-table-row__combatant-result new-battle-table-row__combatant-result--one'>
           <div
             className={`new-battle-table-row__combatant-container  ${
               winnerValue === "Player 2" || winnerValue === "Draw"
@@ -60,24 +60,24 @@ export default function NewBattleCompleteTableRow({
           {winnerValue === "Player 2" || winnerValue === "Draw" ? (
             ""
           ) : (
-            <div className="new-battle-table-row__icon-wrap new-battle-table-row__icon-wrap--1">
+            <div className='new-battle-table-row__icon-wrap new-battle-table-row__icon-wrap--1'>
               <img
                 src={crown}
-                alt="crown depicting the winner of the battle"
-                className="new-battle-table-row__icon"
+                alt='crown depicting the winner of the battle'
+                className='new-battle-table-row__icon'
               />
             </div>
           )}
         </div>
-        <div className="new-battle-table-row__combatant-result">
+        <div className='new-battle-table-row__combatant-result'>
           {winnerValue === "Player 1" || winnerValue === "Draw" ? (
             ""
           ) : (
-            <div className="new-battle-table-row__icon-wrap">
+            <div className='new-battle-table-row__icon-wrap'>
               <img
                 src={crown}
-                alt="crown depicting the winner of the battle"
-                className="new-battle-table-row__icon"
+                alt='crown depicting the winner of the battle'
+                className='new-battle-table-row__icon'
               />
             </div>
           )}

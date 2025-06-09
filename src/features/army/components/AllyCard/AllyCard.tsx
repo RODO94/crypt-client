@@ -1,6 +1,6 @@
+import { Rank } from "../../../../utils/Interfaces";
+import { NewBattleCard } from "../../../battle";
 import "./AllyCard.scss";
-import { Rank } from "../../utils/Interfaces";
-import NewBattleCard from "../NewBattleCard/NewBattleCard";
 interface AllyComp {
   ally: Rank | undefined;
 }
@@ -12,14 +12,14 @@ export default function AllyCard({ ally }: AllyComp) {
       <NewBattleCard
         key={crypto.randomUUID()}
         player={ally}
-        player_number="one"
+        player_number='one'
       />
     );
   }
   return (
-    <article className="ally__army">
-      <h3 className="ally__header">Ally</h3>
-      <div className="ally__wrapper">{allyComp}</div>
+    <article className='ally__army'>
+      <h3 className='ally__header'>Ally</h3>
+      <div className='ally__wrapper'>{allyComp}</div>
     </article>
   );
 }

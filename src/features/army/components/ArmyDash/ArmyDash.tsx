@@ -1,17 +1,16 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { ArmyInformation, Users } from "../../utils/Interfaces";
 import "./ArmyDash.scss";
-import EmblemHero from "../EmblemHero/EmblemHero";
-import BattleCard from "../BattleCard/BattleCard";
 import logo from "../../assets/logo.svg";
 import { ArrowLeftIcon } from "@mui/x-date-pickers";
 import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
-import { emblemNameArray } from "../../utils/EmblemNames";
-import Emblem from "../Emblem/Emblem";
-import { changeArmyField } from "../../utils/ArmyRequests";
-import { useUserStore } from "../../store/user";
-import { useArmiesStore } from "../../store/armies";
+import { ArmyInformation, Users } from "../../../../utils/Interfaces";
+import { useUserStore } from "../../../../store/user";
+import { useArmiesStore } from "../../../../store/armies";
+import { emblemNameArray } from "../../../../utils/EmblemNames";
+import { changeArmyField } from "../../../../utils/ArmyRequests";
+import { Emblem, EmblemHero } from "../../../../shared";
+import { BattleCard } from "../../../battle";
 interface armyDashObj {
   winPercent: string;
   battleCount: number;
@@ -110,8 +109,8 @@ export default function ArmyDash({
 
   if (!armyObj) {
     return (
-      <section className="army-dash">
-        <div className="loading-message">
+      <section className='army-dash'>
+        <div className='loading-message'>
           <CircularProgress style={{ color: "white" }} />
         </div>
       </section>
@@ -144,39 +143,39 @@ export default function ArmyDash({
   };
 
   return (
-    <section className="army-dash">
+    <section className='army-dash'>
       <EmblemHero emblem={newEmblem} />
       <div
         onClick={() => {
           navigate(-1);
         }}
-        className="army-dash__back-arrow"
+        className='army-dash__back-arrow'
       >
         <ArrowLeftIcon /> Back
       </div>
-      <div className="army-dash__header">
-        <h2 className="army-dash__title">Army Information</h2>
-        <img className="army-dash__logo" src={logo} alt="the crypt emblem" />
+      <div className='army-dash__header'>
+        <h2 className='army-dash__title'>Army Information</h2>
+        <img className='army-dash__logo' src={logo} alt='the crypt emblem' />
       </div>
       {canEdit && (
         <button
           onClick={() => {
             editBool ? setEditBool(false) : setEditBool(true);
           }}
-          className="army-dash__update-button army-dash__update-button--edit"
+          className='army-dash__update-button army-dash__update-button--edit'
         >
           {editBool ? "Finish Edit" : "Edit Army"}
         </button>
       )}
       {editBool && canEdit ? (
-        <section className="army-dash__edit-form">
-          <article className="army-dash__stat-wrap">
-            <label className="army-dash__label">Army Name</label>
+        <section className='army-dash__edit-form'>
+          <article className='army-dash__stat-wrap'>
+            <label className='army-dash__label'>Army Name</label>
             <input
-              name="name"
-              className="army-dash__stat"
+              name='name'
+              className='army-dash__stat'
               value={newName}
-              type="text"
+              type='text'
               onChange={(event) => {
                 setSuccessBool({
                   name: false,
@@ -191,7 +190,7 @@ export default function ArmyDash({
               onClick={() => {
                 handleChange("name", newName);
               }}
-              className="army-dash__update-button"
+              className='army-dash__update-button'
             >
               {!successBool.name
                 ? "Update Name"
@@ -200,11 +199,11 @@ export default function ArmyDash({
                 : "Update Name"}{" "}
             </button>
           </article>
-          <article className="army-dash__stat-wrap">
-            <label className="army-dash__label">User</label>
+          <article className='army-dash__stat-wrap'>
+            <label className='army-dash__label'>User</label>
             <select
-              name="user"
-              className="army-dash__select"
+              name='user'
+              className='army-dash__select'
               value={selectedUser?.id || armyObj.id}
               onChange={(event: ChangeEvent<HTMLSelectElement>) => {
                 const newUser: Users | undefined = allUsers?.find(
@@ -235,7 +234,7 @@ export default function ArmyDash({
               onClick={() => {
                 selectedUser?.id && handleChange("user", selectedUser?.id);
               }}
-              className="army-dash__update-button"
+              className='army-dash__update-button'
             >
               {!successBool.user
                 ? "Update User"
@@ -244,11 +243,11 @@ export default function ArmyDash({
                 : "Update User"}{" "}
             </button>
           </article>
-          <article className="army-dash__stat-wrap">
-            <label className="army-dash__label">Army Type</label>
+          <article className='army-dash__stat-wrap'>
+            <label className='army-dash__label'>Army Type</label>
             <select
-              className="army-dash__stat"
-              onChange={(e: any) => {
+              className='army-dash__stat'
+              onChange={(e: unknown) => {
                 setSuccessBool({
                   name: false,
                   type: false,
@@ -259,14 +258,14 @@ export default function ArmyDash({
                 setNewType(e.target.value);
               }}
             >
-              <option value="40k">40k</option>
-              <option value="fantasy">Fantasy</option>
+              <option value='40k'>40k</option>
+              <option value='fantasy'>Fantasy</option>
             </select>
             <button
               onClick={() => {
                 handleChange("type", newType);
               }}
-              className="army-dash__update-button"
+              className='army-dash__update-button'
             >
               {!successBool.type
                 ? "Update Type"
@@ -275,12 +274,12 @@ export default function ArmyDash({
                 : "Update Type"}
             </button>
           </article>
-          <article className="army-dash__stat-wrap">
-            <label htmlFor="army-type" className="army-dash__label">
+          <article className='army-dash__stat-wrap'>
+            <label htmlFor='army-type' className='army-dash__label'>
               Emblem
               <select
-                name="emblem"
-                className="army-dash__select"
+                name='emblem'
+                className='army-dash__select'
                 value={newEmblem || emblemName}
                 onChange={(e) => {
                   setSuccessBool({
@@ -307,7 +306,7 @@ export default function ArmyDash({
               onClick={() => {
                 handleChange("emblem", newEmblem);
               }}
-              className="army-dash__update-button"
+              className='army-dash__update-button'
             >
               {!successBool.emblem
                 ? "Update Emblem"
@@ -315,37 +314,37 @@ export default function ArmyDash({
                 ? "Success"
                 : "Update Emblem"}
             </button>
-            <div className="add-army__emblem-wrap">
+            <div className='add-army__emblem-wrap'>
               <Emblem emblem={newEmblem} />
             </div>
           </article>
         </section>
       ) : (
         <>
-          <div className="army-dash__army-wrap">
-            <h3 className="army-dash__label">Army</h3>
-            <article className="army-dash__army-card">
+          <div className='army-dash__army-wrap'>
+            <h3 className='army-dash__label'>Army</h3>
+            <article className='army-dash__army-card'>
               <BattleCard name={armyObj.name} emblem={armyObj.emblem} />
             </article>
           </div>
-          <div className="army-dash__stat-container">
-            <article className="army-dash__stat-wrap">
-              <h3 className="army-dash__label">Owner</h3>
-              <p className="army-dash__stat">
+          <div className='army-dash__stat-container'>
+            <article className='army-dash__stat-wrap'>
+              <h3 className='army-dash__label'>Owner</h3>
+              <p className='army-dash__stat'>
                 {selectedUser?.known_as || armyObj.known_as}
               </p>
             </article>
-            <article className="army-dash__stat-wrap">
-              <h3 className="army-dash__label">Rank</h3>
-              <p className="army-dash__stat">{armyRank}</p>
+            <article className='army-dash__stat-wrap'>
+              <h3 className='army-dash__label'>Rank</h3>
+              <p className='army-dash__stat'>{armyRank}</p>
             </article>
-            <article className="army-dash__stat-wrap">
-              <h3 className="army-dash__label">Battles Completed</h3>
-              <p className="army-dash__stat">{battleCount}</p>
+            <article className='army-dash__stat-wrap'>
+              <h3 className='army-dash__label'>Battles Completed</h3>
+              <p className='army-dash__stat'>{battleCount}</p>
             </article>
-            <article className="army-dash__stat-wrap">
-              <h3 className="army-dash__label">Win Percentage</h3>
-              <p className="army-dash__stat">{`${winPercent}%`}</p>
+            <article className='army-dash__stat-wrap'>
+              <h3 className='army-dash__label'>Win Percentage</h3>
+              <p className='army-dash__stat'>{`${winPercent}%`}</p>
             </article>
           </div>
         </>

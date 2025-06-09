@@ -2,18 +2,18 @@ import { useState } from "react";
 import "./CreateBattle.scss";
 import dayjs, { Dayjs } from "dayjs";
 import { ArrowLeftIcon } from "@mui/x-date-pickers";
-import { Player } from "../../utils/Interfaces";
-import { createBattleRequest } from "../../utils/BattleRequests";
 import { CircularProgress } from "@mui/material";
 import DoneIcon from "@mui/icons-material/Done";
-import Header from "../../components/Header/Header";
 import { useFormik } from "formik";
 import CreateBattleForm from "../../components/CreateBattleForm/CreateBattleForm";
 import CreateBattleCombatants from "../../components/CreateBattleCombatants/CreateBattleCombatants";
 import { battleFormValidationSchema } from "./CreateBattleValidSchema";
 import { useNavigate } from "react-router-dom";
-import { useUserStore } from "../../store/user";
-import { useBattlesStore } from "../../store/battles";
+import { Player } from "../../../../utils/Interfaces";
+import { useUserStore } from "../../../../store/user";
+import { useBattlesStore } from "../../../../store/battles";
+import { createBattleRequest } from "../../../../utils/BattleRequests";
+import { Header } from "../../../../shared";
 export interface BattleInformation {
   battleType: "40k" | "fantasy";
   pointSize: number;
@@ -113,9 +113,9 @@ export default function CreateBattle() {
     } catch (error) {
       console.error(error);
       return (
-        <main className="create-battle">
-          <section className="create-battle_section">
-            <p className="error-message">
+        <main className='create-battle'>
+          <section className='create-battle_section'>
+            <p className='error-message'>
               Unable to create battle, please refresh and try again
             </p>
           </section>
@@ -125,25 +125,25 @@ export default function CreateBattle() {
   };
 
   return (
-    <main className="create-battle">
+    <main className='create-battle'>
       <Header />{" "}
-      <section className="create-battle__section">
-        <h2 className="create-battle__header">Create New Battle</h2>
+      <section className='create-battle__section'>
+        <h2 className='create-battle__header'>Create New Battle</h2>
         <div
           onClick={() => {
             navigate("/user");
           }}
-          className="create-battle__back-arrow"
+          className='create-battle__back-arrow'
         >
           <ArrowLeftIcon />{" "}
-          <p className="create-battle__back-arrow-txt">Go Back</p>
+          <p className='create-battle__back-arrow-txt'>Go Back</p>
         </div>
-        <form className="create-battle__form" onSubmit={formik.handleSubmit}>
+        <form className='create-battle__form' onSubmit={formik.handleSubmit}>
           <CreateBattleForm formik={formik} />
           <CreateBattleCombatants formik={formik} />
           {!successBool && !loadingBool ? (
             <div style={{ width: "100%" }}>
-              <button type="submit" className="create-battle__create">
+              <button type='submit' className='create-battle__create'>
                 Create Battle
               </button>
               {Object.keys(formik.errors).length !== 0 && (
@@ -160,11 +160,11 @@ export default function CreateBattle() {
               )}
             </div>
           ) : loadingBool && !successBool ? (
-            <div className="create-battle__success-message">
+            <div className='create-battle__success-message'>
               <CircularProgress />
             </div>
           ) : (
-            <div className="create-battle__success-message">
+            <div className='create-battle__success-message'>
               <span>Battle Created!</span> <DoneIcon />
             </div>
           )}

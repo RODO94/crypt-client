@@ -1,9 +1,9 @@
-import { Player } from "../../utils/Interfaces";
+import { NavigationLink } from "../../../../shared";
+import { Player } from "../../../../utils/Interfaces";
 import BattleTypePill from "../BattleTypePill/BattleTypePill";
 import NewBattleCard from "../NewBattleCard/NewBattleCard";
 import "./NewBattleTableRow.scss";
 import dayjs from "dayjs";
-import NavigationLink from "../NavigationLink/NavigationLink";
 
 interface BattleTableRow {
   battle_type: "40k" | "fantasy";
@@ -26,8 +26,8 @@ export default function NewBattleTableRow({
 }: BattleTableRow) {
   return (
     <NavigationLink to={`/battles/information/${id}`}>
-      <article className="new-battle-table-row">
-        <div className="new-battle-table-row__combatant-wrap">
+      <article className='new-battle-table-row'>
+        <div className='new-battle-table-row__combatant-wrap'>
           {player_1.map((player: Player) => (
             <NewBattleCard
               key={player.army_id}
@@ -36,14 +36,14 @@ export default function NewBattleTableRow({
             />
           ))}
         </div>
-        <div className="new-battle-table-row__details">
-          <span className="new-battle-table-row__details-table">{table}</span>
-          <strong className="new-battle-table-row__details-time">
+        <div className='new-battle-table-row__details'>
+          <span className='new-battle-table-row__details-table'>{table}</span>
+          <strong className='new-battle-table-row__details-time'>
             {dayjs(start, "HH:mm:ss").format("HH:mm")}
           </strong>
           <BattleTypePill battle_type={battle_type} />
         </div>
-        <div className="new-battle-table-row__combatant-wrap">
+        <div className='new-battle-table-row__combatant-wrap'>
           {player_2.map((player) => (
             <NewBattleCard
               key={player.army_id}

@@ -1,6 +1,6 @@
+import { Player } from "../../../../utils/Interfaces";
+import { BattleCard } from "../../../battle";
 import "./ArmyAlly.scss";
-import BattleCard from "../BattleCard/BattleCard";
-import { Player } from "../../utils/Interfaces";
 
 interface ArmyID {
   ally: Player | null;
@@ -8,22 +8,22 @@ interface ArmyID {
 
 export default function ArmyAlly({ ally }: ArmyID) {
   return (
-    <section className="army-ally">
-      <div className="army-ally__header">
-        <h3 className="army-ally__title">
+    <section className='army-ally'>
+      <div className='army-ally__header'>
+        <h3 className='army-ally__title'>
           {" "}
           Ally <br />
-          <span className="army-ally__subtxt">who you play with the most</span>
+          <span className='army-ally__subtxt'>who you play with the most</span>
         </h3>
       </div>
-      <article className="army-ally__army-card">
+      <article className='army-ally__army-card'>
         {ally?.count === undefined ? (
-          <p className="army-ally__undefined-text">
+          <p className='army-ally__undefined-text'>
             This army does not need Allies.
           </p>
         ) : (
           <>
-            <div className="army-ally__army-wrap">
+            <div className='army-ally__army-wrap'>
               <BattleCard
                 name={ally?.name}
                 known_as={ally?.known_as}
@@ -32,7 +32,7 @@ export default function ArmyAlly({ ally }: ArmyID) {
                 emblem={ally?.emblem}
               />
             </div>
-            <p className="army-ally__txt">{`${ally?.count} games`}</p>
+            <p className='army-ally__txt'>{`${ally?.count} games`}</p>
           </>
         )}
       </article>

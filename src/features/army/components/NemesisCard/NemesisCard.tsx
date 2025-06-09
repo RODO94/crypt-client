@@ -1,6 +1,6 @@
+import { Rank } from "../../../../utils/Interfaces";
+import { NewBattleCard } from "../../../battle";
 import "./NemesisCard.scss";
-import { Rank } from "../../utils/Interfaces";
-import NewBattleCard from "../NewBattleCard/NewBattleCard";
 
 interface NemesisComp {
   nemesis: Rank | undefined;
@@ -14,14 +14,14 @@ export default function NemesisCard({ nemesis }: NemesisComp) {
       <NewBattleCard
         key={crypto.randomUUID()}
         player={nemesis}
-        player_number="one"
+        player_number='one'
       />
     );
   }
   return (
-    <article className="nemesis__army">
-      <h3 className="nemesis__header">Nemesis</h3>
-      <div className="nemesis__wrapper">{nemesisComp}</div>
+    <article className='nemesis__army'>
+      <h3 className='nemesis__header'>Nemesis</h3>
+      <div className='nemesis__wrapper'>{nemesisComp}</div>
     </article>
   );
 }

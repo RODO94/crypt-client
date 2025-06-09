@@ -1,7 +1,7 @@
 import "./NextBattleCard.scss";
-import { Battle, Player } from "../../utils/Interfaces";
 import dayjs from "dayjs";
 import NewBattleCard from "../NewBattleCard/NewBattleCard";
+import { Battle, Player } from "../../../../utils/Interfaces";
 
 interface nextBattleType {
   nextBattle: Battle | undefined;
@@ -20,19 +20,19 @@ export default function NextBattleCard({ nextBattle, id }: nextBattleType) {
       : nextBattle.player_1;
     nextBattleComp = (
       <>
-        <div className="next-battle-card__timing">
-          <p className="next-battle-card__date">
+        <div className='next-battle-card__timing'>
+          <p className='next-battle-card__date'>
             {dayjs(nextBattle.date).format("DD/MM")}
           </p>
-          <p className="next-battle-card__start">{startTime}</p>
+          <p className='next-battle-card__start'>{startTime}</p>
         </div>
-        <p className="next-battle-card__versus">vs</p>
-        <div className="next-battle-card__container--50">
+        <p className='next-battle-card__versus'>vs</p>
+        <div className='next-battle-card__container--50'>
           {battleOpponentArray.map((player: Player) => (
             <NewBattleCard
               key={crypto.randomUUID()}
               player={player}
-              player_number="two"
+              player_number='two'
             />
           ))}
         </div>
@@ -41,9 +41,9 @@ export default function NextBattleCard({ nextBattle, id }: nextBattleType) {
   }
 
   return (
-    <article className="next-battle-card">
-      <h3 className="next-battle-card__header">Next Battle</h3>
-      <div className="next-battle-card__container">{nextBattleComp}</div>
+    <article className='next-battle-card'>
+      <h3 className='next-battle-card__header'>Next Battle</h3>
+      <div className='next-battle-card__container'>{nextBattleComp}</div>
     </article>
   );
 }

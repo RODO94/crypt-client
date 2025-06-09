@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./BattleResultBanner.scss";
-import { getUserLastFiveBattles } from "../../utils/BattleRequests";
 import Chip from "@mui/material/Chip";
+import { getUserLastFiveBattles } from "../../../../utils/BattleRequests";
 
 export default function BattleResultBanner() {
   const [resultArray, setResultArray] = useState<string[]>();
@@ -17,17 +17,17 @@ export default function BattleResultBanner() {
 
   const chipSize = screen.width < 768 ? "small" : "medium";
   return (
-    <article className="result-card">
+    <article className='result-card'>
       {/* <h3 className="result-card__header">Recent Results</h3> */}
-      <div className="result-card__wrap">
+      <div className='result-card__wrap'>
         {resultArray?.map((result) => {
           switch (result) {
             case "win":
               return (
                 <Chip
                   size={chipSize}
-                  className="result-card__chip"
-                  color="success"
+                  className='result-card__chip'
+                  color='success'
                   label={"W"}
                 />
               );
@@ -35,8 +35,8 @@ export default function BattleResultBanner() {
               return (
                 <Chip
                   size={chipSize}
-                  color="error"
-                  className="result-card__chip"
+                  color='error'
+                  className='result-card__chip'
                   label={"L"}
                 />
               );
@@ -44,8 +44,8 @@ export default function BattleResultBanner() {
               return (
                 <Chip
                   size={chipSize}
-                  color="info"
-                  className="result-card__chip"
+                  color='info'
+                  className='result-card__chip'
                   label={"D"}
                 />
               );

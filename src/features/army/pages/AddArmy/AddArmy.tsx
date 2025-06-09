@@ -1,15 +1,14 @@
 import { ArrowLeftIcon } from "@mui/x-date-pickers";
-import { Header } from "../../../shared";
 import "./AddArmy.scss";
 import { useNavigate } from "react-router-dom";
 import DoneIcon from "@mui/icons-material/Done";
 import { CircularProgress } from "@mui/material";
 import { useEffect, useState } from "react";
-import { emblemNameArray } from "../../../utils/EmblemNames";
-import { Emblem } from "../../../shared";
-import { addArmyRequest } from "../../../utils/ArmyRequests";
-import { useUserStore } from "../../../store/user";
-import { useArmiesStore } from "../../../store/armies";
+import { useArmiesStore } from "../../../../store/armies";
+import { useUserStore } from "../../../../store/user";
+import { emblemNameArray } from "../../../../utils/EmblemNames";
+import { addArmyRequest } from "../../../../utils/ArmyRequests";
+import { Emblem, Header } from "../../../../shared";
 
 interface EmblemNameObj {
   lowercase: string;
@@ -109,7 +108,7 @@ export default function AddArmy() {
 
   if (!emblemArray) {
     return (
-      <div className="loading-message">
+      <div className='loading-message'>
         <CircularProgress style={{ color: "green" }} />
       </div>
     );
@@ -117,30 +116,30 @@ export default function AddArmy() {
 
   return (
     <>
-      <main className="add-army">
+      <main className='add-army'>
         <Header />{" "}
-        <section className="add-army__section">
-          <h2 className="add-army__header">Add New Army</h2>
+        <section className='add-army__section'>
+          <h2 className='add-army__header'>Add New Army</h2>
           <div
             onClick={() => {
               navigate(-1);
             }}
-            className="add-army__back-arrow"
+            className='add-army__back-arrow'
           >
             <ArrowLeftIcon />
           </div>
-          <form className="add-army__form">
-            <label htmlFor="name" className="add-army__label">
+          <form className='add-army__form'>
+            <label htmlFor='name' className='add-army__label'>
               Army Name
               <input
-                type="text"
+                type='text'
                 value={name}
                 onChange={(event) => {
                   nameError ? setNameError(false) : nameError;
                   setName(event.target.value);
                 }}
-                name="name"
-                className="add-army__input"
+                name='name'
+                className='add-army__input'
               />
               <p
                 className={
@@ -150,19 +149,19 @@ export default function AddArmy() {
                 Please add an Army Name
               </p>
             </label>
-            <label htmlFor="army-type" className="add-army__label">
+            <label htmlFor='army-type' className='add-army__label'>
               Army Type
               <select
-                name="army-type"
-                className="add-army__select"
+                name='army-type'
+                className='add-army__select'
                 value={type}
                 onChange={(event) => {
                   typeError ? setTypeError(false) : typeError;
                   setType(event.target.value);
                 }}
               >
-                <option value="40k">40k</option>
-                <option value="fantasy">Fantasy</option>
+                <option value='40k'>40k</option>
+                <option value='fantasy'>Fantasy</option>
               </select>
               <p
                 className={
@@ -172,11 +171,11 @@ export default function AddArmy() {
                 Please add an Army Type
               </p>
             </label>
-            <label htmlFor="army-emblem" className="add-army__label">
+            <label htmlFor='army-emblem' className='add-army__label'>
               Emblem
               <select
-                name="emblem"
-                className="add-army__select"
+                name='emblem'
+                className='add-army__select'
                 value={emblemName}
                 onChange={(event) => {
                   emblemNameError ? setEmblemNameError(false) : emblemNameError;
@@ -199,7 +198,7 @@ export default function AddArmy() {
                 Please add an Army Emblem
               </p>
             </label>
-            <div className="add-army__emblem-wrap">
+            <div className='add-army__emblem-wrap'>
               <Emblem emblem={emblemName} />
             </div>
 
@@ -209,16 +208,16 @@ export default function AddArmy() {
                   event.preventDefault();
                   addArmy();
                 }}
-                className="add-army__add"
+                className='add-army__add'
               >
                 Add Army
               </button>
             ) : loadingBool && !successBool ? (
-              <div className="add-army__success-message">
+              <div className='add-army__success-message'>
                 <CircularProgress />
               </div>
             ) : (
-              <div className="add-army__success-message">
+              <div className='add-army__success-message'>
                 <span>Army Added!</span> <DoneIcon />
               </div>
             )}

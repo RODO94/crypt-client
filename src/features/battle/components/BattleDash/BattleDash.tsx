@@ -1,16 +1,9 @@
-import { Armies, Player, Users } from "../../utils/Interfaces";
 import "./BattleDash.scss";
 import logo from "../../assets/logo.svg";
 import save from "../../assets/save.svg";
 import BattleCard from "../BattleCard/BattleCard";
-import PlayerTypePill from "../PlayerTypePill/PlayerTypePill";
 import BattleTypePill from "../BattleTypePill/BattleTypePill";
 import { useEffect, useState } from "react";
-import { updateArmyCombatants } from "../../utils/ArmyRequests";
-import {
-  deleteBattleRequest,
-  updateBattleDetail,
-} from "../../utils/BattleRequests";
 import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import {
@@ -21,9 +14,16 @@ import {
 } from "@mui/x-date-pickers";
 import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
-import { useUserStore } from "../../store/user";
-import { useArmiesStore } from "../../store/armies";
-import { useBattlesStore } from "../../store/battles";
+import { Armies, Player, Users } from "../../../../utils/Interfaces";
+import { useUserStore } from "../../../../store/user";
+import { useArmiesStore } from "../../../../store/armies";
+import { useBattlesStore } from "../../../../store/battles";
+import { updateArmyCombatants } from "../../../../utils/ArmyRequests";
+import {
+  deleteBattleRequest,
+  updateBattleDetail,
+} from "../../../../utils/BattleRequests";
+import { PlayerTypePill } from "../../../../shared";
 
 interface BattleComp {
   playerOne: Player[];
@@ -291,8 +291,8 @@ export default function BattleDash({
 
   if (!allUsers || !playerOne || !playerTwo) {
     return (
-      <section className="battle-dash">
-        <div className="loading-message">
+      <section className='battle-dash'>
+        <div className='loading-message'>
           <CircularProgress style={{ color: "white" }} />
         </div>
       </section>
@@ -300,26 +300,26 @@ export default function BattleDash({
   }
 
   return (
-    <section className="battle-dash">
+    <section className='battle-dash'>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <div
           onClick={() => {
             navigate(-1);
           }}
-          className="battle-dash__back-arrow"
+          className='battle-dash__back-arrow'
         >
           <ArrowLeftIcon /> Back
         </div>
-        <div className="battle-dash__header-wrap">
-          <h1 className="battle-dash__header">Battle Information</h1>
+        <div className='battle-dash__header-wrap'>
+          <h1 className='battle-dash__header'>Battle Information</h1>
           <img
-            className="battle-dash__header-img"
+            className='battle-dash__header-img'
             src={logo}
-            alt="the crest of the crypt"
+            alt='the crest of the crypt'
           />
         </div>
-        <div className="battle-dash__battle-wrap">
-          <h2 className="battle-dash__subheader">Combatants</h2>
+        <div className='battle-dash__battle-wrap'>
+          <h2 className='battle-dash__subheader'>Combatants</h2>
           <div
             className={
               playerEditBool === false
@@ -339,8 +339,8 @@ export default function BattleDash({
                 ? "Edit Combatants"
                 : ""}
             </button>
-            <div className="battle-dash__combatant-container">
-              <div className="battle-dash__player-wrap">
+            <div className='battle-dash__combatant-container'>
+              <div className='battle-dash__player-wrap'>
                 {playerOne.map((player) => (
                   <BattleCard
                     key={crypto.randomUUID()}
@@ -351,8 +351,8 @@ export default function BattleDash({
                   />
                 ))}{" "}
               </div>
-              <p className="battle-dash__versus">vs</p>
-              <div className="battle-dash__player-wrap">
+              <p className='battle-dash__versus'>vs</p>
+              <div className='battle-dash__player-wrap'>
                 {playerTwo.map((player) => (
                   <BattleCard
                     key={crypto.randomUUID()}
@@ -382,11 +382,11 @@ export default function BattleDash({
             >
               {userEditBool && playerEditBool === true ? "Finish editing" : ""}
             </button>
-            <div className="battle-dash__combatant-container battle-dash__combatant-container--edit">
+            <div className='battle-dash__combatant-container battle-dash__combatant-container--edit'>
               {playerOne.map((player) => (
                 <article
                   key={crypto.randomUUID()}
-                  className="battle-dash__combatant"
+                  className='battle-dash__combatant'
                 >
                   <BattleCard
                     key={crypto.randomUUID()}
@@ -398,7 +398,7 @@ export default function BattleDash({
                   />
                   <button
                     key={crypto.randomUUID()}
-                    className="battle-dash__remove"
+                    className='battle-dash__remove'
                     onClick={(event) => {
                       removePlayer(event, 1);
                     }}
@@ -407,11 +407,11 @@ export default function BattleDash({
                   </button>
                 </article>
               ))}{" "}
-              <div className="battle-dash__combatant-edit-row">
+              <div className='battle-dash__combatant-edit-row'>
                 <select
-                  name="users_1"
-                  className="battle-dash__select"
-                  id="users_1"
+                  name='users_1'
+                  className='battle-dash__select'
+                  id='users_1'
                   value={userOne}
                   onChange={(event) => {
                     setUserOneFilter(event.target.value.split("+")[0]);
@@ -431,9 +431,9 @@ export default function BattleDash({
                   })}
                 </select>
                 <select
-                  name="army_1"
-                  className="battle-dash__select"
-                  id="army_1"
+                  name='army_1'
+                  className='battle-dash__select'
+                  id='army_1'
                   value={armyOne}
                   disabled={userOne ? false : true}
                   onChange={(event) => {
@@ -461,7 +461,7 @@ export default function BattleDash({
                 </select>
 
                 <button
-                  className="battle-dash__add"
+                  className='battle-dash__add'
                   onClick={(event) => {
                     addArmy(event, 1);
                   }}
@@ -470,11 +470,11 @@ export default function BattleDash({
                   +
                 </button>
               </div>{" "}
-              <p className="battle-dash__versus">vs</p>
+              <p className='battle-dash__versus'>vs</p>
               {playerTwo.map((player) => (
                 <article
                   key={crypto.randomUUID()}
-                  className="battle-dash__combatant"
+                  className='battle-dash__combatant'
                 >
                   <BattleCard
                     key={player.army_id}
@@ -486,7 +486,7 @@ export default function BattleDash({
                   />
                   <button
                     key={crypto.randomUUID()}
-                    className="battle-dash__remove"
+                    className='battle-dash__remove'
                     onClick={(event) => {
                       removePlayer(event, 2);
                     }}
@@ -495,11 +495,11 @@ export default function BattleDash({
                   </button>
                 </article>
               ))}{" "}
-              <div className="battle-dash__combatant-edit-row">
+              <div className='battle-dash__combatant-edit-row'>
                 <select
-                  name="users_2"
-                  id="users_2"
-                  className="battle-dash__select"
+                  name='users_2'
+                  id='users_2'
+                  className='battle-dash__select'
                   value={userTwo}
                   onChange={(event) => {
                     setUserTwoFilter(event.target.value.split("+")[0]);
@@ -519,9 +519,9 @@ export default function BattleDash({
                   ))}
                 </select>
                 <select
-                  name="army_2"
-                  id="army_2"
-                  className="battle-dash__select"
+                  name='army_2'
+                  id='army_2'
+                  className='battle-dash__select'
                   value={armyTwo}
                   disabled={userTwo ? false : true}
                   onChange={(event) => {
@@ -543,7 +543,7 @@ export default function BattleDash({
                   })}
                 </select>
                 <button
-                  className="battle-dash__add"
+                  className='battle-dash__add'
                   onClick={(event) => {
                     addArmy(event, 2);
                   }}
@@ -555,16 +555,16 @@ export default function BattleDash({
             </div>
           </div>
         </div>
-        <div className="battle-dash__info-wrap">
-          <article className="battle-dash__info-container">
-            <h2 className="battle-dash__subheader">Game Type</h2>
-            <div className="battle-dash__info">
+        <div className='battle-dash__info-wrap'>
+          <article className='battle-dash__info-container'>
+            <h2 className='battle-dash__subheader'>Game Type</h2>
+            <div className='battle-dash__info'>
               <PlayerTypePill player_type={gameType} />
               {editBattleTypeBool === true ? (
                 <select
-                  className="battle-dash__select"
-                  name="battletype"
-                  id=""
+                  className='battle-dash__select'
+                  name='battletype'
+                  id=''
                   onChange={(event) => {
                     event.target.value === "40k"
                       ? setBattleTypeValue("40k")
@@ -591,12 +591,12 @@ export default function BattleDash({
               )}
             </div>
           </article>
-          <article className="battle-dash__info-container">
-            <h2 className="battle-dash__subheader">Scenario</h2>
-            <div className="battle-dash__info">
+          <article className='battle-dash__info-container'>
+            <h2 className='battle-dash__subheader'>Scenario</h2>
+            <div className='battle-dash__info'>
               <input
                 value={!scenarioValue ? " " : scenarioValue}
-                name="scenario"
+                name='scenario'
                 maxLength={80}
                 className={
                   editScenarioBool === true
@@ -618,9 +618,9 @@ export default function BattleDash({
                 }
               >
                 <img
-                  className="battle-dash__toggle-icon"
+                  className='battle-dash__toggle-icon'
                   src={save}
-                  alt="saving toggle"
+                  alt='saving toggle'
                   onClick={() => {
                     setEditScenarioBool(false);
                     handleChangeSubmit("scenario");
@@ -643,9 +643,9 @@ export default function BattleDash({
               </p>
             </div>
           </article>
-          <article className="battle-dash__info-container">
-            <h2 className="battle-dash__subheader">Points Size</h2>
-            <div className="battle-dash__info">
+          <article className='battle-dash__info-container'>
+            <h2 className='battle-dash__subheader'>Points Size</h2>
+            <div className='battle-dash__info'>
               <input
                 className={
                   editPointSizeBool === true
@@ -653,7 +653,7 @@ export default function BattleDash({
                     : "battle-dash__info-text--hide"
                 }
                 value={pointsSizeValue}
-                type="number"
+                type='number'
                 onChange={(event: any) => {
                   if (isNaN(event.target.value)) {
                     return setPointsSizeValue(pointsSizeValue);
@@ -672,9 +672,9 @@ export default function BattleDash({
                 }
               >
                 <img
-                  className="battle-dash__toggle-icon"
+                  className='battle-dash__toggle-icon'
                   src={save}
-                  alt="saving toggle"
+                  alt='saving toggle'
                   onClick={() => {
                     handleChangeSubmit("pointsize");
                     setEditPointSizeBool(false);
@@ -697,18 +697,18 @@ export default function BattleDash({
               </p>
             </div>
           </article>
-          <article className="battle-dash__info-container">
-            <h2 className="battle-dash__subheader">Result</h2>
-            <div className="battle-dash__info">
-              <p className="battle-dash__info-text">
+          <article className='battle-dash__info-container'>
+            <h2 className='battle-dash__subheader'>Result</h2>
+            <div className='battle-dash__info'>
+              <p className='battle-dash__info-text'>
                 {!result ? "TBC" : result === "victory" ? "Victory" : "Draw"}
               </p>
             </div>
           </article>
-          <article className="battle-dash__info-container">
-            <h2 className="battle-dash__subheader">Winner</h2>
-            <div className="battle-dash__info">
-              <p className="battle-dash__info-text">
+          <article className='battle-dash__info-container'>
+            <h2 className='battle-dash__subheader'>Winner</h2>
+            <div className='battle-dash__info'>
+              <p className='battle-dash__info-text'>
                 {!winner && !result
                   ? "TBC"
                   : winner && result !== "draw"
@@ -717,9 +717,9 @@ export default function BattleDash({
               </p>
             </div>
           </article>
-          <article className="battle-dash__info-container">
-            <h2 className="battle-dash__subheader">Table</h2>{" "}
-            <div className="battle-dash__info">
+          <article className='battle-dash__info-container'>
+            <h2 className='battle-dash__subheader'>Table</h2>{" "}
+            <div className='battle-dash__info'>
               <div
                 onClick={() => {
                   if (token) {
@@ -732,13 +732,13 @@ export default function BattleDash({
                     : "battle-dash__select-wrap battle-dash__select-wrap--hide"
                 }
               >
-                <p className="battle-dash__info-text">
+                <p className='battle-dash__info-text'>
                   {tableValue ? `Table ${tableValue[6]}` : ""}
                 </p>
               </div>
               <select
                 value={tableValue}
-                name="table"
+                name='table'
                 className={
                   userEditBool && editTableBool === true
                     ? "battle-dash__info-text"
@@ -750,9 +750,9 @@ export default function BattleDash({
                 disabled={userEditBool && editTableBool === true ? false : true}
               >
                 <option hidden>{tableValue}</option>
-                <option value="Table 1">Table 1</option>
-                <option value="Table 2">Table 2</option>
-                <option value="Table 3">Table 3</option>
+                <option value='Table 1'>Table 1</option>
+                <option value='Table 2'>Table 2</option>
+                <option value='Table 3'>Table 3</option>
               </select>
               <button
                 className={
@@ -762,9 +762,9 @@ export default function BattleDash({
                 }
               >
                 <img
-                  className="battle-dash__toggle-icon"
+                  className='battle-dash__toggle-icon'
                   src={save}
-                  alt="saving toggle"
+                  alt='saving toggle'
                   onClick={() => {
                     handleChangeSubmit("table");
                     setEditTableBool(false);
@@ -773,9 +773,9 @@ export default function BattleDash({
               </button>
             </div>
           </article>{" "}
-          <article className="battle-dash__info-container battle-dash__info-container--date">
-            <h2 className="battle-dash__subheader">Date</h2>{" "}
-            <div className="battle-dash__info">
+          <article className='battle-dash__info-container battle-dash__info-container--date'>
+            <h2 className='battle-dash__subheader'>Date</h2>{" "}
+            <div className='battle-dash__info'>
               <div
                 className={
                   editDateBool === true
@@ -800,7 +800,7 @@ export default function BattleDash({
                     : "battle-dash__toggle-icon--hide"
                 }
                 src={save}
-                alt="saving toggle"
+                alt='saving toggle'
                 onClick={() => {
                   handleChangeSubmit("date");
                   setEditDateBool(false);
@@ -822,9 +822,9 @@ export default function BattleDash({
               </p>
             </div>
           </article>{" "}
-          <article className="battle-dash__info-container battle-dash__info-container--date">
-            <h2 className="battle-dash__subheader">Start</h2>{" "}
-            <div className="battle-dash__info">
+          <article className='battle-dash__info-container battle-dash__info-container--date'>
+            <h2 className='battle-dash__subheader'>Start</h2>{" "}
+            <div className='battle-dash__info'>
               <div
                 className={
                   editStartBool === true
@@ -851,7 +851,7 @@ export default function BattleDash({
                     : "battle-dash__toggle-icon--hide"
                 }
                 src={save}
-                alt="saving toggle"
+                alt='saving toggle'
                 onClick={() => {
                   handleChangeSubmit("start");
                   setEditStartBool(false);
@@ -873,9 +873,9 @@ export default function BattleDash({
               </p>
             </div>
           </article>{" "}
-          <article className="battle-dash__info-container battle-dash__info-container--date">
-            <h2 className="battle-dash__subheader">Finish</h2>{" "}
-            <div className="battle-dash__info">
+          <article className='battle-dash__info-container battle-dash__info-container--date'>
+            <h2 className='battle-dash__subheader'>Finish</h2>{" "}
+            <div className='battle-dash__info'>
               <div
                 className={
                   editFinishBool === true
@@ -902,7 +902,7 @@ export default function BattleDash({
                     : "battle-dash__toggle-icon--hide"
                 }
                 src={save}
-                alt="saving toggle"
+                alt='saving toggle'
                 onClick={() => {
                   handleChangeSubmit("finish");
                   setEditFinishBool(false);
@@ -938,7 +938,7 @@ export default function BattleDash({
         </button>
       )}
       {deleteClicked && (
-        <div className="battle-dash__delete-wrap">
+        <div className='battle-dash__delete-wrap'>
           <button
             className={"battle-dash__delete"}
             onClick={() => {

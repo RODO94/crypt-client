@@ -1,14 +1,14 @@
 import { FormikProps } from "formik";
 import { addArmy, removePlayer } from "../../pages/CreateBattle/utils";
-import { Armies, Player, Users } from "../../utils/Interfaces";
 import "./CreateBattleCombatants.scss";
 import { BattleInformation } from "../../pages/CreateBattle/CreateBattle";
 import { useEffect, useState } from "react";
 import { filterArrays } from "../../pages/CreateBattle/filterFunctions";
 import { CircularProgress } from "@mui/material";
 import NewBattleCard from "../NewBattleCard/NewBattleCard";
-import { useArmiesStore } from "../../store/armies";
-import { useUserStore } from "../../store/user";
+import { Armies, Player, Users } from "../../../../utils/Interfaces";
+import { useArmiesStore } from "../../../../store/armies";
+import { useUserStore } from "../../../../store/user";
 
 interface Props {
   formik: FormikProps<BattleInformation>;
@@ -56,33 +56,33 @@ export default function CreateBattleCombatants({ formik }: Props) {
 
   if (!armies || !allUsers) {
     return (
-      <div className="loading-message">
+      <div className='loading-message'>
         <CircularProgress style={{ color: "green" }} />
       </div>
     );
   }
 
   return (
-    <div className="create-battle__form-combatants">
-      <div id="1" className="create-battle__combatant">
-        <div className="create-battle__combatant-container">
-          <label className="create-battle__label" htmlFor="users_1">
+    <div className='create-battle__form-combatants'>
+      <div id='1' className='create-battle__combatant'>
+        <div className='create-battle__combatant-container'>
+          <label className='create-battle__label' htmlFor='users_1'>
             Player / Team 1
           </label>
           {formik.values.playerOne.map((player: Player) => (
             <article
               key={crypto.randomUUID()}
-              className="create-battle__combatant-card"
+              className='create-battle__combatant-card'
             >
               <NewBattleCard
                 key={crypto.randomUUID()}
                 player={player}
-                player_number="one"
+                player_number='one'
                 id={player.army_id}
               />
               <button
                 key={crypto.randomUUID()}
-                className="create-battle__remove"
+                className='create-battle__remove'
                 onClick={(event) => {
                   const { parentElement } = event.currentTarget;
                   const targetID: string = parentElement
@@ -95,15 +95,15 @@ export default function CreateBattleCombatants({ formik }: Props) {
               </button>
             </article>
           ))}{" "}
-          <div className="create-battle__combatant-edit-row">
+          <div className='create-battle__combatant-edit-row'>
             <select
-              name="users_1"
+              name='users_1'
               className={
                 !formik.errors.playerOne
                   ? "create-battle__select"
                   : "create-battle__select create-battle__select--error"
               }
-              id="users_1"
+              id='users_1'
               value={selectedPlayerOne?.user?.id}
               onChange={(event) => {
                 const userId = event.target.value;
@@ -121,13 +121,13 @@ export default function CreateBattleCombatants({ formik }: Props) {
               })}
             </select>
             <select
-              name="army_1"
+              name='army_1'
               className={
                 !formik.errors.playerOne
                   ? "create-battle__select"
                   : "create-battle__select create-battle__select--error"
               }
-              id="army_1"
+              id='army_1'
               value={selectedPlayerOne?.army?.id}
               disabled={!selectedPlayerOne?.user ? true : false}
               onChange={(event) => {
@@ -183,25 +183,25 @@ export default function CreateBattleCombatants({ formik }: Props) {
           </div>{" "}
         </div>
       </div>
-      <div id="2" className="create-battle__combatant">
-        <div className="create-battle__combatant-container">
-          <label className="create-battle__label" htmlFor="users_1">
+      <div id='2' className='create-battle__combatant'>
+        <div className='create-battle__combatant-container'>
+          <label className='create-battle__label' htmlFor='users_1'>
             Player / Team 2
           </label>
           {formik.values.playerTwo.map((player) => (
             <article
               key={crypto.randomUUID()}
-              className="create-battle__combatant-card"
+              className='create-battle__combatant-card'
             >
               <NewBattleCard
                 key={crypto.randomUUID()}
                 player={player}
-                player_number="one"
+                player_number='one'
                 id={player.army_id}
               />
               <button
                 key={crypto.randomUUID()}
-                className="create-battle__remove"
+                className='create-battle__remove'
                 onClick={(event) => {
                   const targetID =
                     event.currentTarget.parentElement?.children[0].id;
@@ -212,10 +212,10 @@ export default function CreateBattleCombatants({ formik }: Props) {
               </button>
             </article>
           ))}{" "}
-          <div className="create-battle__combatant-edit-row">
+          <div className='create-battle__combatant-edit-row'>
             <select
-              name="users_2"
-              id="users_2"
+              name='users_2'
+              id='users_2'
               className={
                 !formik.errors.playerTwo
                   ? "create-battle__select"
@@ -237,8 +237,8 @@ export default function CreateBattleCombatants({ formik }: Props) {
               ))}
             </select>
             <select
-              name="army_2"
-              id="army_2"
+              name='army_2'
+              id='army_2'
               disabled={!selectedPlayerTwo?.user ? true : false}
               className={
                 !formik.errors.playerTwo

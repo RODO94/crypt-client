@@ -1,11 +1,10 @@
-import { Player } from "../../utils/Interfaces";
 import BattleCard from "../BattleCard/BattleCard";
 import BattleTypePill from "../BattleTypePill/BattleTypePill";
-import PlayerTypePill from "../PlayerTypePill/PlayerTypePill";
 import "./BattleCompleteRow.scss";
 import { useEffect, useState } from "react";
 import crown from "../../assets/crown.svg";
-import NavigationLink from "../NavigationLink/NavigationLink";
+import { Player } from "../../../../utils/Interfaces";
+import { NavigationLink, PlayerTypePill } from "../../../../shared";
 
 interface BattleTableRow {
   battle_type: string;
@@ -47,11 +46,11 @@ export default function BattleCompleteRow({
 
   winnerValue === "Player 1"
     ? (resultStatementOne = (
-        <div className="completedbattle-row__icon-wrap">
+        <div className='completedbattle-row__icon-wrap'>
           <img
             src={crown}
-            alt="crown depicting the winner of the battle"
-            className="completedbattle-row__icon"
+            alt='crown depicting the winner of the battle'
+            className='completedbattle-row__icon'
           />
         </div>
       ))
@@ -61,11 +60,11 @@ export default function BattleCompleteRow({
 
   winnerValue === "Player 2"
     ? (resultStatementTwo = (
-        <div className="completedbattle-row__icon-wrap">
+        <div className='completedbattle-row__icon-wrap'>
           <img
             src={crown}
-            alt="crown depicting the winner of the battle"
-            className="completedbattle-row__icon"
+            alt='crown depicting the winner of the battle'
+            className='completedbattle-row__icon'
           />
         </div>
       ))
@@ -73,14 +72,10 @@ export default function BattleCompleteRow({
     ? (resultStatementTwo = "")
     : (resultStatementTwo = "Draw");
 
-  // //const handleClick = () => {
-  //   navigate(`/battles/information`, { state: { id: id } });
-  // };
-
   return (
     <NavigationLink to={`/battles/information/${id}`}>
-      <section className="completedbattle-row">
-        <article className="completedbattle-row__combatants">
+      <section className='completedbattle-row'>
+        <article className='completedbattle-row__combatants'>
           <div
             className={
               winnerValue === "Player 1"
@@ -113,7 +108,7 @@ export default function BattleCompleteRow({
               );
             })}
           </div>
-          <p className="completedbattle-row__versus">VS</p>
+          <p className='completedbattle-row__versus'>VS</p>
           <div
             className={
               winnerValue === "Player 2"
@@ -147,7 +142,7 @@ export default function BattleCompleteRow({
             })}
           </div>
         </article>
-        <div className="completedbattle-row__details">
+        <div className='completedbattle-row__details'>
           <BattleTypePill key={crypto.randomUUID()} battle_type={battle_type} />
           <PlayerTypePill key={crypto.randomUUID()} player_type={player_type} />
         </div>

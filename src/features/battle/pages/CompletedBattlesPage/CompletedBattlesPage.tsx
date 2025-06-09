@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import "./CompletedBattlesPage.scss";
-import { CompletedBattle } from "../../utils/Interfaces";
-import DateTableHeader from "../../components/DateTableHeader/DateTableHeader";
 
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.svg";
 import dayjs from "dayjs";
-import NewBattleCompleteTableRow from "../../components/NewBattleTableCompleteRow copy/NewBattleCompleteTableRow";
+import NewBattleCompleteTableRow from "../../components/NewBattleTableCompleteRow/NewBattleCompleteTableRow";
 import { CircularProgress } from "@mui/material";
-import { useBattlesStore } from "../../store/battles";
-import { useUserStore } from "../../store/user";
+import { useBattlesStore } from "../../../../store/battles";
+import { useUserStore } from "../../../../store/user";
+import { CompletedBattle } from "../../../../utils/Interfaces";
+import { DateTableHeader } from "../../../../shared";
 
 interface BattleArray extends Array<CompletedBattle> {}
 interface NameArray extends Array<string> {}
@@ -165,33 +165,33 @@ export default function CompletedBattlesPage() {
 
   if (!battleArray || !nameArray || !yearArray) {
     return (
-      <div className="loading-message">
+      <div className='loading-message'>
         <CircularProgress style={{ color: "green" }} />
       </div>
     );
   }
 
   return (
-    <main className="completed-battles-page">
-      <div className="completed-battles-page__header-wrap">
-        <h2 className="completed-battles-page__header">Completed Battles</h2>
-        <Link className="completed-battles-page__home-link" to={"/"}>
+    <main className='completed-battles-page'>
+      <div className='completed-battles-page__header-wrap'>
+        <h2 className='completed-battles-page__header'>Completed Battles</h2>
+        <Link className='completed-battles-page__home-link' to={"/"}>
           <img
             src={logo}
-            alt="the crest of the crypt as a home button"
-            className="completed-battles-page__logo"
+            alt='the crest of the crypt as a home button'
+            className='completed-battles-page__logo'
           />
         </Link>
       </div>
-      <Link className="completed-battles-page__link" to={"/battles/upcoming"}>
+      <Link className='completed-battles-page__link' to={"/battles/upcoming"}>
         {"Upcoming Battles  >"}
       </Link>
-      <form className="completed-battles-page__filters">
-        <div className="completed-battles-page__filters-container">
-          <p className="completed-battles-page__filters-txt">Filter by Name</p>
+      <form className='completed-battles-page__filters'>
+        <div className='completed-battles-page__filters-container'>
+          <p className='completed-battles-page__filters-txt'>Filter by Name</p>
           <select
-            className="completed-battles-page__filters-box"
-            name="name"
+            className='completed-battles-page__filters-box'
+            name='name'
             value={nameFilter}
             onChange={handleChange}
           >
@@ -206,11 +206,11 @@ export default function CompletedBattlesPage() {
             ))}
           </select>
         </div>
-        <div className="completed-battles-page__filters-container">
-          <p className="completed-battles-page__filters-txt">Filter by Month</p>
+        <div className='completed-battles-page__filters-container'>
+          <p className='completed-battles-page__filters-txt'>Filter by Month</p>
           <select
-            className="completed-battles-page__filters-box"
-            name="month"
+            className='completed-battles-page__filters-box'
+            name='month'
             onChange={handleChange}
             value={monthFilter}
           >
@@ -232,15 +232,15 @@ export default function CompletedBattlesPage() {
             <option value={11}>Dec</option>
           </select>
         </div>{" "}
-        <div className="completed-battles-page__filters-container">
-          <p className="completed-battles-page__filters-txt">Filter by Year</p>
+        <div className='completed-battles-page__filters-container'>
+          <p className='completed-battles-page__filters-txt'>Filter by Year</p>
           <select
-            className="completed-battles-page__filters-box"
-            name="year"
+            className='completed-battles-page__filters-box'
+            name='year'
             onChange={handleChange}
             value={yearFilter}
           >
-            <option value="all">All</option>
+            <option value='all'>All</option>
             {yearArray.map((year, index) => (
               <option key={`${year} ${index}`} value={year.toString()}>
                 {year}
@@ -248,30 +248,30 @@ export default function CompletedBattlesPage() {
             ))}
           </select>
         </div>{" "}
-        <div className="completed-battles-page__filters-container">
-          <p className="completed-battles-page__filters-txt">
+        <div className='completed-battles-page__filters-container'>
+          <p className='completed-battles-page__filters-txt'>
             Filter by Battle Type (40k or Fantasy)
           </p>
           <select
-            className="completed-battles-page__filters-box"
-            name="battle-type"
+            className='completed-battles-page__filters-box'
+            name='battle-type'
             onChange={handleChange}
             value={battleTypeFilter}
           >
-            <option value="all">All</option>
-            <option value="40k">40k</option>
-            <option value="fantasy">Fantasy</option>
+            <option value='all'>All</option>
+            <option value='40k'>40k</option>
+            <option value='fantasy'>Fantasy</option>
           </select>
         </div>
       </form>
-      <section className="completed-battles-page-list">
-        <article className="completedbattles__battle-list">
+      <section className='completed-battles-page-list'>
+        <article className='completedbattles__battle-list'>
           {battleArray.map((battle: CompletedBattle, index: number) => {
             if (index === 0) {
               currentDate = battle.date;
               return (
                 <article
-                  className="completedbattles__container"
+                  className='completedbattles__container'
                   key={crypto.randomUUID()}
                 >
                   <DateTableHeader
@@ -319,7 +319,7 @@ export default function CompletedBattlesPage() {
               currentDate = battle.date;
               return (
                 <article
-                  className="completedbattles__container"
+                  className='completedbattles__container'
                   key={crypto.randomUUID()}
                 >
                   <DateTableHeader

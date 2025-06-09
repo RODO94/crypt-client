@@ -1,10 +1,10 @@
 import { NavLink, useNavigate, useParams } from "react-router-dom";
-import { InputBox } from "../../../shared";
 import "./ResetPassword.scss";
 import logo from "../../../assets/logo.svg";
-import { resetPasswordAuthentication } from "../../../utils/UserAuth";
 import { useState } from "react";
-import { Password } from "../../utils/Interfaces";
+import { Password } from "../../../../utils/Interfaces";
+import { resetPasswordAuthentication } from "../../../../utils/UserAuth";
+import { InputBox } from "../../../../shared";
 
 export default function ResetPassword() {
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -68,27 +68,27 @@ export default function ResetPassword() {
   };
 
   return (
-    <section className="resetpassword">
+    <section className='resetpassword'>
       <NavLink to={"/"}>
-        <img src={logo} className="resetpassword__logo" />
+        <img src={logo} className='resetpassword__logo' />
       </NavLink>
-      <form className="resetpassword__form" onSubmit={handleSubmit}>
-        <h1 className="resetpassword__form-title">Reset Password</h1>
+      <form className='resetpassword__form' onSubmit={handleSubmit}>
+        <h1 className='resetpassword__form-title'>Reset Password</h1>
         <InputBox
-          name="password"
-          label="Password"
-          type="password"
+          name='password'
+          label='Password'
+          type='password'
           required={true}
         />
         <InputBox
-          name="confirmpassword"
-          label="Confirm Password"
-          type="password"
+          name='confirmpassword'
+          label='Confirm Password'
+          type='password'
           required={true}
         />
         <h2 className={errorClass}>{errorMessage}</h2>
         <h2 className={successClass}>Sign Up Successful</h2>
-        <button type="submit" className="resetpassword__submit-button">
+        <button type='submit' className='resetpassword__submit-button'>
           Submit
         </button>
       </form>

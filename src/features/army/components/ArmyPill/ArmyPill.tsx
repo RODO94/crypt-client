@@ -1,8 +1,8 @@
-import { Player } from "../../utils/Interfaces";
+import { Player } from "../../../../utils/Interfaces";
 import "./ArmyPill.scss";
 
 export default function ArmyPill({ name, emblem }: Player) {
-  let nameArray = emblem ? emblem.toLowerCase().split(" ") : "";
+  const nameArray = emblem ? emblem.toLowerCase().split(" ") : "";
   let nameColour: string = " ";
 
   for (let i = 0; i < nameArray.length; i++) {

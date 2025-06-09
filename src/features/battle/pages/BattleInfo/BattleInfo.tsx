@@ -1,11 +1,11 @@
 import "./BattleInfo.scss";
 import { useEffect, useState } from "react";
-import { getOneBattle } from "../../utils/BattleRequests";
 import BattleDash from "../../components/BattleDash/BattleDash";
 import BattlePointsForm from "../../components/BattlePointsForm/BattlePointsForm";
-import { Battle, Player } from "../../utils/Interfaces";
 import { CircularProgress } from "@mui/material";
-import { useUserStore } from "../../store/user";
+import { Battle, Player } from "../../../../utils/Interfaces";
+import { useUserStore } from "../../../../store/user";
+import { getOneBattle } from "../../../../utils/BattleRequests";
 
 export default function BattleInfo() {
   const [battle, setBattle] = useState<Battle>();
@@ -43,7 +43,7 @@ export default function BattleInfo() {
 
   if (!battle || !userRole || !playerOneArray || !playerTwoArray) {
     return (
-      <div className="loading-message">
+      <div className='loading-message'>
         <CircularProgress style={{ color: "white" }} />
       </div>
     );

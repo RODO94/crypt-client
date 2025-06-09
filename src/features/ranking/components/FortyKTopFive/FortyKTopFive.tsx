@@ -1,13 +1,12 @@
 import { useState } from "react";
-import FiveColTableHeader from "../FiveColTableHeader/FiveColTableHeader";
-import FiveColTableRow from "../FiveColTableRow/FiveColTableRow";
 import "./FortyKTopFive.scss";
-import { Rank } from "../../utils/Interfaces";
 import { Link } from "react-router-dom";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { CircularProgress } from "@mui/material";
-import { useRankingsStore } from "../../store/rankings";
+import { useRankingsStore } from "../../../../store/rankings";
+import { FiveColTableHeader, FiveColTableRow } from "../../../../shared";
+import { Rank } from "../../../../utils/Interfaces";
 
 export default function FortyKTopFive() {
   const [hideSectionBool, setHideSectionBool] = useState<boolean>(false);
@@ -22,19 +21,19 @@ export default function FortyKTopFive() {
 
   if (!fortyKRankings) {
     return (
-      <div className="loading-message">
+      <div className='loading-message'>
         <CircularProgress style={{ color: "white" }} />
       </div>
     );
   }
 
   return (
-    <section className="fortyk-rankings">
-      <div className="fortyk-rankings__title-wrap">
-        <Link to={"/rankings/40k"} className="fortyk-rankings__title">
+    <section className='fortyk-rankings'>
+      <div className='fortyk-rankings__title-wrap'>
+        <Link to={"/rankings/40k"} className='fortyk-rankings__title'>
           40,000 Rankings
         </Link>
-        <div className="fortyk-rankings__toggle" onClick={handleClick}>
+        <div className='fortyk-rankings__toggle' onClick={handleClick}>
           {hideSectionBool === false ? (
             <ExpandLessIcon
               style={{ color: "#fff", width: "100%", height: "auto" }}

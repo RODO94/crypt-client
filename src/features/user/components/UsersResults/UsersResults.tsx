@@ -1,27 +1,27 @@
 import { CircularProgress } from "@mui/material";
-import { CompletedBattle } from "../../utils/Interfaces";
-import DateTableHeader from "../DateTableHeader/DateTableHeader";
 import "./UsersResults.scss";
 import { Link } from "react-router-dom";
-import NewBattleCompleteTableRow from "../NewBattleTableCompleteRow copy/NewBattleCompleteTableRow";
+import { CompletedBattle } from "../../../../utils/Interfaces";
+import { DateTableHeader } from "../../../../shared";
+import NewBattleCompleteTableRow from "../../../battle/components/NewBattleTableCompleteRow/NewBattleCompleteTableRow";
 
 export default function UsersResults({ battleArray }: any) {
   let currentDate = "";
   if (!battleArray) {
     return (
-      <div className="loading-message">
+      <div className='loading-message'>
         <CircularProgress style={{ color: "white" }} />
       </div>
     );
   }
   return (
-    <section className="completedbattles user-completedbattles">
-      <div className="completedbattles__header-wrap">
-        <Link to={"/battles/completed"} className="completedbattles__header">
+    <section className='completedbattles user-completedbattles'>
+      <div className='completedbattles__header-wrap'>
+        <Link to={"/battles/completed"} className='completedbattles__header'>
           Recent Results
         </Link>
       </div>
-      <article className="completedbattles-list">
+      <article className='completedbattles-list'>
         {battleArray.map((battle: CompletedBattle, index: number) => {
           if (index > 7) {
             return;
@@ -30,7 +30,7 @@ export default function UsersResults({ battleArray }: any) {
             currentDate = battle.date;
             return (
               <article
-                className="completedbattles__container"
+                className='completedbattles__container'
                 key={crypto.randomUUID()}
               >
                 <DateTableHeader key={crypto.randomUUID()} date={battle.date} />
@@ -75,7 +75,7 @@ export default function UsersResults({ battleArray }: any) {
             currentDate = battle.date;
             return (
               <article
-                className="completedbattles__container"
+                className='completedbattles__container'
                 key={crypto.randomUUID()}
               >
                 <DateTableHeader key={crypto.randomUUID()} date={battle.date} />

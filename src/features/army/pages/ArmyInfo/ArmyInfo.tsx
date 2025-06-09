@@ -3,9 +3,9 @@ import "./ArmyInfo.scss";
 import { useEffect } from "react";
 import { ArmyDash, ArmyNemesis, ArmyAlly } from "../../index";
 import { CircularProgress } from "@mui/material";
-import { useArmiesStore } from "../../../store/armies";
-import { useRankingsStore } from "../../../store/rankings";
-import { RankTracker } from "../../../features/ranking";
+import { useArmiesStore } from "../../../../store/armies";
+import { useRankingsStore } from "../../../../store/rankings";
+import { RankTracker } from "../../../ranking";
 
 export default function ArmyInfo() {
   const location = useLocation();
@@ -25,7 +25,7 @@ export default function ArmyInfo() {
 
   if (!selectedArmy) {
     return (
-      <div className="loading-message">
+      <div className='loading-message'>
         <CircularProgress style={{ color: "white" }} />
       </div>
     );
@@ -34,7 +34,7 @@ export default function ArmyInfo() {
   console.log(selectedArmyRankings);
 
   return (
-    <main className="army-info">
+    <main className='army-info'>
       <ArmyDash
         winPercent={selectedArmy.winPercent}
         battleCount={selectedArmy.battleCount}
@@ -43,8 +43,8 @@ export default function ArmyInfo() {
       />
 
       <RankTracker rankings={selectedArmyRankings || []} />
-      <section className="army-info__nemesis-ally">
-        <div className="army-info__container">
+      <section className='army-info__nemesis-ally'>
+        <div className='army-info__container'>
           <ArmyNemesis nemesis={selectedArmy.nemesis} />
           <ArmyAlly ally={selectedArmy.ally} />
         </div>

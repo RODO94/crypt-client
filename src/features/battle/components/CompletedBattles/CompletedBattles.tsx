@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { CompletedBattle } from "../../utils/Interfaces";
-import DateTableHeader from "../DateTableHeader/DateTableHeader";
 import "./CompletedBattles.scss";
 import { Link } from "react-router-dom";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import NewBattleCompleteTableRow from "../NewBattleTableCompleteRow copy/NewBattleCompleteTableRow";
-import { useBattlesStore } from "../../store/battles";
+import NewBattleCompleteTableRow from "../NewBattleTableCompleteRow/NewBattleCompleteTableRow";
+import { useBattlesStore } from "../../../../store/battles";
+import { CompletedBattle } from "../../../../utils/Interfaces";
+import { DateTableHeader } from "../../../../shared";
 
 export default function CompletedBattles() {
   const [hideSectionBool, setHideSectionBool] = useState<boolean>(false);
@@ -22,12 +22,12 @@ export default function CompletedBattles() {
   };
 
   return (
-    <section className="completedbattles">
-      <div className="completedbattles__header-wrap">
-        <Link to={"/battles/completed"} className="completedbattles__header">
+    <section className='completedbattles'>
+      <div className='completedbattles__header-wrap'>
+        <Link to={"/battles/completed"} className='completedbattles__header'>
           Completed Battles
         </Link>
-        <div className="completedbattles__toggle" onClick={handleClick}>
+        <div className='completedbattles__toggle' onClick={handleClick}>
           {hideSectionBool === false ? (
             <ExpandLessIcon
               style={{ color: "#fff", width: "100%", height: "auto" }}
@@ -52,7 +52,7 @@ export default function CompletedBattles() {
             currentDate = battle.date;
             return (
               <article
-                className="completedbattles__container"
+                className='completedbattles__container'
                 key={crypto.randomUUID()}
               >
                 <DateTableHeader key={crypto.randomUUID()} date={battle.date} />
@@ -93,7 +93,7 @@ export default function CompletedBattles() {
             currentDate = battle.date;
             return (
               <article
-                className="completedbattles__container"
+                className='completedbattles__container'
                 key={crypto.randomUUID()}
               >
                 <DateTableHeader key={crypto.randomUUID()} date={battle.date} />

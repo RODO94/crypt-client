@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import "./UpcomingBattlesPage.scss";
-import { Battle } from "../../utils/Interfaces";
-import DateTableHeader from "../../components/DateTableHeader/DateTableHeader";
 
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.svg";
 import NewBattleTableRow from "../../components/NewBattleTableRow/NewBattleTableRow";
 import { CircularProgress } from "@mui/material";
-import { useBattlesStore } from "../../store/battles";
-import { useUserStore } from "../../store/user";
+import { Battle } from "../../../../utils/Interfaces";
+import { useBattlesStore } from "../../../../store/battles";
+import { useUserStore } from "../../../../store/user";
+import { DateTableHeader } from "../../../../shared";
 
 interface BattleArray extends Array<Battle> {}
 interface NameArray extends Array<string> {}
@@ -96,42 +96,42 @@ export default function UpcomingBattlesPage() {
 
   if (!battleArray || !nameArray) {
     return (
-      <div className="loading-message">
+      <div className='loading-message'>
         <CircularProgress style={{ color: "green" }} />
       </div>
     );
   }
 
   return (
-    <main className="upcomingbattlespage">
-      <div className="upcomingbattlespage__header-wrap">
-        <h2 className="upcomingbattlespage__header">Upcoming Battles</h2>
-        <Link className="upcomingbattlespage__home-link" to={"/"}>
+    <main className='upcomingbattlespage'>
+      <div className='upcomingbattlespage__header-wrap'>
+        <h2 className='upcomingbattlespage__header'>Upcoming Battles</h2>
+        <Link className='upcomingbattlespage__home-link' to={"/"}>
           <img
             src={logo}
-            alt="the crest of the crypt as a home button"
-            className="upcomingbattlespage__logo"
+            alt='the crest of the crypt as a home button'
+            className='upcomingbattlespage__logo'
           />
         </Link>
       </div>
-      <Link className="upcomingbattlespage__link" to={"/battles/completed"}>
+      <Link className='upcomingbattlespage__link' to={"/battles/completed"}>
         {"Completed Battles  >"}
       </Link>
-      <form className="upcomingbattlespage__filters">
-        <div className="upcomingbattlespage__filters-container">
-          <p className="upcomingbattlespage__filters-txt">Filter by Name</p>
+      <form className='upcomingbattlespage__filters'>
+        <div className='upcomingbattlespage__filters-container'>
+          <p className='upcomingbattlespage__filters-txt'>Filter by Name</p>
           <select
-            className="upcomingbattlespage__filters-box"
-            name="name"
+            className='upcomingbattlespage__filters-box'
+            name='name'
             value={nameFilter}
             onChange={handleChange}
           >
-            <option className="upcomingbattlespage__option" value={"all"}>
+            <option className='upcomingbattlespage__option' value={"all"}>
               All
             </option>
             {nameArray.map((name) => (
               <option
-                className="upcomingbattlespage__option"
+                className='upcomingbattlespage__option'
                 key={crypto.randomUUID()}
                 value={name}
               >
@@ -140,30 +140,30 @@ export default function UpcomingBattlesPage() {
             ))}
           </select>
         </div>
-        <div className="upcomingbattlespage__filters-container">
-          <p className="upcomingbattlespage__filters-txt">
+        <div className='upcomingbattlespage__filters-container'>
+          <p className='upcomingbattlespage__filters-txt'>
             Filter by Battle Type (40k or Fantasy)
           </p>
           <select
-            className="upcomingbattlespage__filters-box"
-            name="battle-type"
+            className='upcomingbattlespage__filters-box'
+            name='battle-type'
             onChange={handleChange}
             value={battleTypeFilter}
           >
-            <option value="all">All</option>
-            <option value="40k">40k</option>
-            <option value="fantasy">Fantasy</option>
+            <option value='all'>All</option>
+            <option value='40k'>40k</option>
+            <option value='fantasy'>Fantasy</option>
           </select>
         </div>
       </form>
-      <section className="upcomingbattlespage-list">
-        <article className="upcomingbattles__battle-list">
+      <section className='upcomingbattlespage-list'>
+        <article className='upcomingbattles__battle-list'>
           {battleArray.map((battle: Battle, index: number) => {
             if (index === 0) {
               currentDate = battle.date;
               return (
                 <article
-                  className="upcomingbattles__container"
+                  className='upcomingbattles__container'
                   key={crypto.randomUUID()}
                 >
                   <DateTableHeader
@@ -199,7 +199,7 @@ export default function UpcomingBattlesPage() {
               currentDate = battle.date;
               return (
                 <article
-                  className="upcomingbattles__container"
+                  className='upcomingbattles__container'
                   key={crypto.randomUUID()}
                 >
                   <DateTableHeader

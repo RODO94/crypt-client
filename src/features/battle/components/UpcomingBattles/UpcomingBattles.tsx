@@ -1,13 +1,13 @@
 import { useState } from "react";
 import "./UpcomingBattles.scss";
-import DateTableHeader from "../DateTableHeader/DateTableHeader";
-import { Player } from "../../utils/Interfaces";
 import { Link } from "react-router-dom";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { CircularProgress } from "@mui/material";
 import NewBattleTableRow from "../NewBattleTableRow/NewBattleTableRow";
-import { useBattlesStore } from "../../store/battles";
+import { Player } from "../../../../utils/Interfaces";
+import { useBattlesStore } from "../../../../store/battles";
+import { DateTableHeader } from "../../../../shared";
 
 interface Battle {
   id: string;
@@ -36,19 +36,19 @@ export default function UpcomingBattles() {
 
   if (!upcomingBattles) {
     return (
-      <div className="loading-message">
+      <div className='loading-message'>
         <CircularProgress style={{ color: "white" }} />
       </div>
     );
   }
 
   return (
-    <section className="upcomingbattles">
-      <div className="upcomingbattles__header-wrap">
-        <Link to={"/battles/upcoming"} className="upcomingbattles__header">
+    <section className='upcomingbattles'>
+      <div className='upcomingbattles__header-wrap'>
+        <Link to={"/battles/upcoming"} className='upcomingbattles__header'>
           Upcoming Battles
         </Link>
-        <div className="upcomingbattles__toggle" onClick={handleClick}>
+        <div className='upcomingbattles__toggle' onClick={handleClick}>
           {hideSectionBool === false ? (
             <ExpandLessIcon
               style={{ color: "#fff", width: "100%", height: "auto" }}
@@ -75,7 +75,7 @@ export default function UpcomingBattles() {
             currentDate = battle.date;
             return (
               <article
-                className="upcomingbattles__container"
+                className='upcomingbattles__container'
                 key={crypto.randomUUID()}
               >
                 <DateTableHeader key={crypto.randomUUID()} date={battle.date} />
@@ -108,7 +108,7 @@ export default function UpcomingBattles() {
             currentDate = battle.date;
             return (
               <article
-                className="upcomingbattles__container"
+                className='upcomingbattles__container'
                 key={crypto.randomUUID()}
               >
                 <DateTableHeader key={crypto.randomUUID()} date={battle.date} />

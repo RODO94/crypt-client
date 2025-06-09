@@ -1,5 +1,5 @@
-import { Player } from "../../utils/Interfaces";
-import EmblemCard from "../EmblemCard/EmblemCard";
+import { EmblemCard } from "../../../../shared";
+import { Player } from "../../../../utils/Interfaces";
 import "./NewBattleCard.scss";
 
 export default function NewBattleCard({
@@ -41,10 +41,10 @@ export default function NewBattleCard({
         <div
           className={`new-battle-card__player-details new-battle-card__player-details--${player_number}`}
         >
-          <p className="new-battle-card__player-details-name">
+          <p className='new-battle-card__player-details-name'>
             {player.known_as}
           </p>
-          <p className="new-battle-card__player-details-rank">
+          <p className='new-battle-card__player-details-rank'>
             {player.ranking}
           </p>
         </div>

@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
-import { Player } from "../../utils/Interfaces";
 import "./BattlePointsForm.scss";
 import BattleCard from "../BattleCard/BattleCard";
 import save from "../../assets/save.svg";
+import { CircularProgress } from "@mui/material";
+import { Player } from "../../../../utils/Interfaces";
+import { useUserStore } from "../../../../store/user";
+import { useBattlesStore } from "../../../../store/battles";
 import {
   reSubmitBattle,
   submitBattle,
   updateBattleDetail,
-} from "../../utils/BattleRequests";
-import { CircularProgress } from "@mui/material";
-import { useUserStore } from "../../store/user";
-import { useBattlesStore } from "../../store/battles";
-
+} from "../../../../utils/BattleRequests";
 interface BattlePoints {
   playerOne: Player[];
   playerTwo: Player[];
@@ -95,7 +94,7 @@ export default function BattlePointsForm({
 
   if (!playerOne || !playerTwo) {
     return (
-      <div className="loading-message">
+      <div className='loading-message'>
         <CircularProgress style={{ color: "white" }} />
       </div>
     );
@@ -103,12 +102,12 @@ export default function BattlePointsForm({
 
   const isAdmin = userRole === "admin";
   return (
-    <section className="battle-points">
-      <div className="battle-points__header-wrap">
-        <h2 className="battle-points__header">Combatant Points</h2>
+    <section className='battle-points'>
+      <div className='battle-points__header-wrap'>
+        <h2 className='battle-points__header'>Combatant Points</h2>
       </div>
-      <article className="battle-points__player-wrap">
-        <div className="battle-points__players">
+      <article className='battle-points__player-wrap'>
+        <div className='battle-points__players'>
           {playerOne.map((player) => (
             <BattleCard
               key={crypto.randomUUID()}
@@ -121,10 +120,10 @@ export default function BattlePointsForm({
           ))}
         </div>
         <input
-          type="number"
-          name="playerOnePoints"
-          id="playerOnePoints"
-          className="battle-points__point-input"
+          type='number'
+          name='playerOnePoints'
+          id='playerOnePoints'
+          className='battle-points__point-input'
           step={"any"}
           value={playerOneVictoryPoints}
           readOnly={
@@ -151,9 +150,9 @@ export default function BattlePointsForm({
           }
         >
           <img
-            className="battle-dash__toggle-icon"
+            className='battle-dash__toggle-icon'
             src={save}
-            alt="saving toggle"
+            alt='saving toggle'
             onClick={() => {
               setEditPlayerOneBool(false);
               handlePointChange(1);
@@ -161,8 +160,8 @@ export default function BattlePointsForm({
           />
         </button>
       </article>
-      <article className="battle-points__player-wrap">
-        <div className="battle-points__players">
+      <article className='battle-points__player-wrap'>
+        <div className='battle-points__players'>
           {playerTwo.map((player) => (
             <BattleCard
               key={crypto.randomUUID()}
@@ -175,10 +174,10 @@ export default function BattlePointsForm({
           ))}
         </div>
         <input
-          type="number"
-          name="playerTwoPoints"
-          id="playerTwoPoints"
-          className="battle-points__point-input"
+          type='number'
+          name='playerTwoPoints'
+          id='playerTwoPoints'
+          className='battle-points__point-input'
           value={playerTwoVictoryPoints}
           readOnly={
             editPlayerTwoBool && (userEditBool || isAdmin) === true
@@ -204,9 +203,9 @@ export default function BattlePointsForm({
           }
         >
           <img
-            className="battle-dash__toggle-icon"
+            className='battle-dash__toggle-icon'
             src={save}
-            alt="saving toggle"
+            alt='saving toggle'
             onClick={() => {
               setEditPlayerTwoBool(false);
               handlePointChange(2);
@@ -220,7 +219,7 @@ export default function BattlePointsForm({
             ? "battle-points__submit-button"
             : "battle-points__submit-button--hide"
         }
-        type="submit"
+        type='submit'
         onClick={() => {
           setSubmitBool(true);
           handleReSubmit();
@@ -236,7 +235,7 @@ export default function BattlePointsForm({
             ? "battle-points__submit-button"
             : "battle-points__submit-button--hide"
         }
-        type="submit"
+        type='submit'
         onClick={() => {
           setSubmitBool(true);
           handleSubmit();

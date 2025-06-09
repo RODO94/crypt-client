@@ -1,13 +1,13 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { InputBox, NavButton } from "../../../shared";
 import "./LogInRedirect.scss";
 import logo from "../../../assets/logo.svg";
+import { useState } from "react";
+import { useUserStore } from "../../../../store/user";
 import {
   forgotPasswordAuthentication,
   loginAuthentication,
-} from "../../../utils/UserAuth";
-import { useState } from "react";
-import { useUserStore } from "../../../store/user";
+} from "../../../../utils/UserAuth";
+import { InputBox, NavButton } from "../../../../shared";
 
 export default function LogInRedirect() {
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -67,25 +67,25 @@ export default function LogInRedirect() {
   };
 
   return (
-    <main className="login">
+    <main className='login'>
       <NavLink to={"/"}>
-        <img src={logo} className="login__logo" />
+        <img src={logo} className='login__logo' />
       </NavLink>
-      <form className="login__form" onSubmit={handleSubmit}>
-        <h1 className="login__form-title">Log In</h1>
-        <InputBox name="email" label="Email" type="text" required={true} />
+      <form className='login__form' onSubmit={handleSubmit}>
+        <h1 className='login__form-title'>Log In</h1>
+        <InputBox name='email' label='Email' type='text' required={true} />
         <InputBox
-          name="password"
-          label="Password"
-          type="password"
+          name='password'
+          label='Password'
+          type='password'
           required={true}
         />
         <h2 className={errorClass}>{errorMessage}</h2>
-        <div className="login__button-wrap">
-          <button type="submit" className="login__submit-button">
+        <div className='login__button-wrap'>
+          <button type='submit' className='login__submit-button'>
             Login
           </button>
-          <NavButton colour="dark" text="Sign Up" page="/signup" />{" "}
+          <NavButton colour='dark' text='Sign Up' page='/signup' />{" "}
         </div>
         <button onClick={handleReset} className={"login__form-forgot"}>
           Forgot Password

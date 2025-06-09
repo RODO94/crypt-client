@@ -1,13 +1,12 @@
 import { useState } from "react";
-import FiveColTableHeader from "../FiveColTableHeader/FiveColTableHeader";
-import FiveColTableRow from "../FiveColTableRow/FiveColTableRow";
 import "./FantasyTopFive .scss";
-import { Rank } from "../../utils/Interfaces";
 import { Link } from "react-router-dom";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { CircularProgress } from "@mui/material";
-import { useRankingsStore } from "../../store/rankings";
+import { useRankingsStore } from "../../../../store/rankings";
+import { FiveColTableHeader, FiveColTableRow } from "../../../../shared";
+import { Rank } from "../../../../utils/Interfaces";
 
 export default function FantasyTopFive() {
   const [hideSectionBool, setHideSectionBool] = useState<boolean>(false);
@@ -22,19 +21,19 @@ export default function FantasyTopFive() {
 
   if (!fantasyRankings) {
     return (
-      <div className="loading-message">
+      <div className='loading-message'>
         <CircularProgress style={{ color: "white" }} />
       </div>
     );
   }
 
   return (
-    <section className="fantasy-rankings">
-      <div className="fantasy-rankings__title-wrap">
-        <Link to={"/rankings/fantasy"} className="fantasy-rankings__title">
+    <section className='fantasy-rankings'>
+      <div className='fantasy-rankings__title-wrap'>
+        <Link to={"/rankings/fantasy"} className='fantasy-rankings__title'>
           Fantasy Rankings
         </Link>
-        <div className="fantasy-rankings__toggle" onClick={handleClick}>
+        <div className='fantasy-rankings__toggle' onClick={handleClick}>
           {hideSectionBool === false ? (
             <ExpandLessIcon
               style={{ color: "#fff", width: "100%", height: "auto" }}
@@ -74,7 +73,7 @@ export default function FantasyTopFive() {
                     : "no change"
                 }
                 colour={colour}
-                navTo="/armies/information"
+                navTo='/armies/information'
                 id={army.army_id}
               />
             );
