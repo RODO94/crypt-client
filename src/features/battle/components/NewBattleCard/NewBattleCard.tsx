@@ -12,13 +12,11 @@ export default function NewBattleCard({
   player_number: string;
   id?: string;
 }) {
-  !player.emblem ? (player.emblem = "necrons") : player.emblem;
-
   let nameArray: string[] = [];
   if (player.emblem) {
     nameArray = player.emblem.toLowerCase().split(" ");
   }
-  let nameColour: string = "";
+  let nameColour = "";
 
   for (let i = 0; i < nameArray.length; i++) {
     nameArray[i] !== " "
