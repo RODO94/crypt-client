@@ -278,6 +278,7 @@ export default function ArmyDash({
             <label htmlFor='army-type' className='army-dash__label'>
               Emblem
               <select
+                id='army-type'
                 name='emblem'
                 className='army-dash__select'
                 value={newEmblem || emblemName}
