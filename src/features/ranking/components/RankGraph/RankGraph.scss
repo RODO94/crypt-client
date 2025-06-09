@@ -1,0 +1,41 @@
+@use "../../../../partials/variables" as *;
+@use "../../../../partials/mixins" as *;
+
+.rank-graph {
+  display: none;
+  @include desktop {
+    padding: 2rem 3rem;
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    &__title {
+      color: #fff;
+      font-size: 1.25rem;
+      font-style: normal;
+      font-weight: 900;
+      line-height: normal;
+      margin: 0;
+      width: 100%;
+      max-width: 1000px;
+      text-align: left;
+      @include tablet {
+        font-size: 1.5rem;
+      }
+      @include desktop {
+        font-size: 2rem;
+      }
+    }
+    &__wrap {
+      height: 75vh;
+      width: 100%;
+      max-width: 1000px;
+      border-radius: 1rem;
+      background-color: $table-background--light;
+    }
+  }
+}

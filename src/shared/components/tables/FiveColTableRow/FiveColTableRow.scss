@@ -1,0 +1,86 @@
+@use "../../../../partials/variables" as *;
+@use "../../../../partials/typography" as *;
+@use "../../../../partials/mixins" as *;
+.table-row {
+  display: inline-flex;
+  padding: 1rem;
+  align-items: center;
+  gap: 1.2rem;
+  width: 100%;
+  height: auto;
+  &--light {
+    background-color: $table-background--light;
+  }
+  &--dark {
+    background-color: $table-background--dark;
+  }
+  &:hover {
+    background-color: $table-background--hover;
+    cursor: pointer;
+  }
+  @include tablet {
+    padding: 1.5rem;
+  }
+  &__content {
+    display: flex;
+    height: 1.125rem;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    height: 100%;
+    margin: 0;
+    @include tablet {
+      font-size: 1.2rem;
+    }
+    @include desktop {
+      font-size: 1.2rem;
+    }
+    &--rank {
+      width: 15%;
+      text-align: center;
+      font-weight: 800;
+    }
+    &--user {
+      width: 25%;
+    }
+    &--army {
+      width: 37%;
+    }
+    &--ranking {
+      width: 13%;
+    }
+    &--icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  &__icon-wrap {
+    display: flex;
+    width: 10%;
+    height: 1rem;
+    padding: 0.0625rem 0rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    @include tablet {
+      height: 1.5rem;
+    }
+  }
+  &__icon-svg {
+    height: 0.5rem;
+    @include tablet {
+      height: 0.75rem;
+    }
+    @include desktop {
+      height: 0.75rem;
+    }
+    &--nochange {
+      width: 50%;
+    }
+  }
+}

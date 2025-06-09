@@ -1,9 +1,0 @@
-@use "../../partials/variables" as *;
-@use "../../partials/mixins" as *;
-.users-upcomingbattles {
-  background-color: $background-4;
-  @include desktop {
-    order: 1;
-    width: 100%;
-  }
-}

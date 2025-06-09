@@ -1,0 +1,34 @@
+@use "../../../../partials/variables" as *;
+@use "../../../../partials/mixins" as *;
+
+.battle-type {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  text-align: center;
+  font-family: "Roboto", system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  line-height: normal;
+  width: 100%;
+  padding: 0.25rem 0.75rem;
+  @include tablet {
+    font-size: 0.875rem;
+  }
+  @include desktop {
+    font-size: 1.2rem;
+  }
+
+  &--40k {
+    background-color: $ultramarine-4;
+    color: whitesmoke;
+  }
+  &--fantasy {
+    background-color: $dark-angels-2;
+    color: whitesmoke;
+  }
+  &__text {
+    margin: 0;
+  }
+}

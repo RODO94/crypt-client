@@ -1,0 +1,46 @@
+@use "../../../../partials/variables" as *;
+@use "../../../../partials/mixins" as *;
+.nemesis {
+  &__army {
+    width: 45%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    @include desktop {
+      width: 100%;
+    }
+  }
+  &__header {
+    font-size: 0.8125rem;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    color: #fff;
+    margin: 0;
+    @include tablet {
+      font-size: 1.5rem;
+    }
+    @include desktop {
+      font-size: 2.25rem;
+    }
+  }
+  &__wrapper {
+    display: flex;
+    padding: 1rem;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    border-radius: 0.5rem;
+    background-color: $dark-angels-6;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    @include tablet {
+      padding: 1.5rem;
+      gap: 2rem;
+    }
+    @include desktop {
+      width: 100%;
+      padding: 2rem;
+    }
+  }
+}

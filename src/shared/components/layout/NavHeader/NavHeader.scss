@@ -1,0 +1,139 @@
+@use "../../../../partials/variables" as *;
+@use "../../../../partials/mixins" as *;
+.header-nav {
+  display: none;
+  @include desktop {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 12px;
+    gap: 1rem;
+    flex-wrap: wrap;
+    position: fixed;
+    margin-left: 1.5rem;
+    top: 2rem;
+    z-index: 1;
+    width: auto;
+    &--toggled {
+      z-index: 10;
+    }
+
+    &__toggle {
+      background-color: $background-1;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      padding: 0.5rem;
+      align-self: flex-start;
+      &:hover {
+        background-color: $background-2;
+        cursor: pointer;
+      }
+    }
+    &__nav {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2rem;
+      border-radius: 12px;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+      z-index: 10;
+
+      &--hide {
+        display: none;
+      }
+      &-container {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        align-items: flex-start;
+        border-bottom: 5px solid transparent;
+        &--active {
+          border-radius: 0.5rem;
+          background-color: $background-3;
+        }
+
+        &:hover {
+          cursor: pointer;
+          border-bottom: 5px solid $table-background--hover;
+        }
+      }
+    }
+    &__link {
+      text-decoration: none;
+      color: white;
+      font-size: 1rem;
+      font-style: normal;
+      font-weight: 900;
+      line-height: normal;
+      z-index: 10;
+      text-align: center;
+      border-radius: 8px;
+      padding: 0.5rem;
+      &--active {
+        border-radius: 0.5rem;
+        background-color: $background-3;
+      }
+      &:hover {
+        cursor: pointer;
+        background-color: $background-3;
+      }
+    }
+    &__links {
+      padding: 0.75rem;
+      height: 100%;
+      display: flex;
+      flex-direction: row;
+      z-index: 10;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: white;
+      font-size: 1rem;
+      font-style: normal;
+      font-weight: 900;
+      line-height: normal;
+      text-align: center;
+      background-color: $background-4;
+      border-radius: 8px;
+      &--hide {
+        display: none;
+      }
+    }
+    &__icons {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+    &__icon-txt {
+      color: white;
+      font-size: 0.85rem;
+      font-style: normal;
+      font-weight: 600;
+      text-align: center;
+      margin: 0;
+    }
+    &__clickable-div {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 10;
+      gap: 0.5rem;
+      padding: 0.5rem;
+      &--active {
+        &--active {
+          border-radius: 0.5rem;
+          background-color: $background-3;
+        }
+      }
+    }
+  }
+  &__user-nav {
+    display: flex;
+    &--hide {
+      display: none;
+    }
+  }
+}

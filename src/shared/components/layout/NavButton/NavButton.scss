@@ -1,0 +1,60 @@
+@use "../../../../partials/variables" as *;
+@use "../../../../partials/mixins" as *;
+
+.nav-button {
+  display: flex;
+  padding: 1rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  flex: 1 0 0;
+  font-family: "Roboto", system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 0.85rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  color: #fff;
+  border-radius: 1.5rem;
+  text-decoration: none;
+  width: 100%;
+  border: 1px solid $ultramarine-1;
+  max-width: 25rem;
+  &:hover {
+    font-weight: 900;
+    text-decoration: underline;
+  }
+  @include tablet {
+    font-size: 1rem;
+    border: 2px solid $ultramarine-1;
+  }
+  @include desktop {
+    font-size: 1.25rem;
+    padding: 1rem;
+    border: 2px solid $ultramarine-1;
+  }
+
+  &--blue {
+    background: $ultramarine-4;
+    &:hover {
+      background: $ultramarine-5;
+    }
+  }
+  &--dark {
+    background-color: $space-wolves-5;
+    border: 2px solid $space-wolves-1;
+
+    @include tablet {
+      border: 2px solid $space-wolves-2;
+    }
+
+    &:hover {
+      background: $space-wolves-1;
+    }
+  }
+  &--green {
+    background-color: $dark-angels-1;
+    &:hover {
+      background: $dark-angels-2;
+    }
+  }
+}

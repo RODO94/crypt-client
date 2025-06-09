@@ -1,0 +1,217 @@
+@use "../../../../partials/variables" as *;
+@use "../../../../partials/mixins" as *;
+.army-dash {
+  position: relative;
+  display: flex;
+  padding: 2rem 1rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+  align-self: stretch;
+  border-radius: 0rem 0rem 2rem 2rem;
+  background-color: $space-wolves-2;
+  min-height: 75vh;
+  @include tablet {
+    width: 100%;
+    padding: 2rem 3rem;
+    gap: 1.5rem;
+  }
+  @include desktop {
+    padding: 2rem 8rem 2rem;
+    gap: 2rem;
+  }
+  &__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: center;
+    width: 100%;
+    margin-top: 1.5rem;
+    max-width: 1280px;
+    @include desktop {
+      margin: 0 auto;
+    }
+  }
+  &__title {
+    color: #fff;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0;
+    @include tablet {
+      font-size: 3rem;
+    }
+    @include desktop {
+      font-size: 4rem;
+    }
+  }
+  &__edit-form {
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    gap: 1.5rem;
+  }
+  &__select {
+    display: flex;
+    padding: 1.1rem;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+    border-radius: 4px;
+    background: #fff;
+    font-size: 1rem;
+    border: 0.5px solid $space-wolves-3;
+    width: 100%;
+  }
+  &__update-button {
+    padding: 0.5rem 0.25rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    background-color: $space-wolves-5;
+    color: white;
+    outline: none;
+    border: none;
+    border-radius: 0.5rem;
+    width: 50%;
+    align-self: flex-end;
+    justify-self: flex-end;
+    border: 1px solid transparent;
+    z-index: 1;
+    max-width: 150px;
+    &:hover {
+      font-weight: 600;
+      text-decoration: underline;
+      cursor: pointer;
+      border: 1px solid $space-wolves-1;
+    }
+    &--edit {
+      justify-self: flex-start;
+      align-self: flex-start;
+      width: 25%;
+      background-color: $space-wolves-3;
+      color: black;
+      font-weight: 600;
+      max-width: 150;
+
+      &:hover {
+        font-weight: 700;
+        text-decoration: none;
+        cursor: pointer;
+        border: 1px solid white;
+      }
+    }
+  }
+  &__logo {
+    height: 3rem;
+    width: 3rem;
+    @include tablet {
+      width: 5rem;
+      height: 5rem;
+    }
+    @include desktop {
+      width: 6rem;
+      height: 6rem;
+    }
+  }
+  &__army-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+    align-self: stretch;
+    max-width: 1280px;
+    @include desktop {
+      margin: 0 auto;
+      width: 100%;
+    }
+  }
+  &__label {
+    color: #fff;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    margin: 0;
+    @include tablet {
+      font-size: 1.4rem;
+    }
+    @include desktop {
+      font-size: 1.8rem;
+    }
+  }
+  &__army-card {
+    display: flex;
+    padding: 1rem;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+    background-color: $space-wolves-3;
+    border-radius: 0.5rem;
+    z-index: 1;
+  }
+  &__stat {
+    color: #000;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    display: flex;
+    padding: 1rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6875rem;
+    background-color: $space-wolves-3;
+    border-radius: 0.5rem;
+    text-align: center;
+    margin: 0;
+    @include tablet {
+      font-size: 1.25rem;
+      padding: 1.25rem;
+    }
+    @include desktop {
+      font-size: 1.5rem;
+      padding: 1.25rem 1.5rem;
+    }
+    &-container {
+      display: flex;
+      align-items: flex-start;
+      align-content: flex-start;
+      gap: 2rem;
+      align-self: stretch;
+      flex-wrap: wrap;
+      z-index: 1;
+      max-width: 1280px;
+      @include desktop {
+        width: 100%;
+        margin: 0 auto;
+      }
+    }
+    &-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+  &__back-arrow {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #fff;
+    padding: 0.25rem;
+    padding-right: 0.5rem;
+    border-radius: 4px;
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
+      background-color: $background-3;
+    }
+    @include desktop {
+      top: 8rem;
+    }
+  }
+}
