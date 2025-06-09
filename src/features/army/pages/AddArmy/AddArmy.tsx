@@ -9,6 +9,7 @@ import { useUserStore } from "../../../../store/user";
 import { emblemNameArray } from "../../../../utils/EmblemNames";
 import { addArmyRequest } from "../../../../utils/ArmyRequests";
 import { Emblem, Header } from "../../../../shared";
+import { Emblems } from "../../../../utils/emblems";
 
 interface EmblemNameObj {
   lowercase: string;
@@ -199,7 +200,7 @@ export default function AddArmy() {
               </p>
             </label>
             <div className='add-army__emblem-wrap'>
-              <Emblem emblem={emblemName} />
+              <Emblem emblem={emblemName as Emblems} />
             </div>
 
             {!successBool && !loadingBool ? (
