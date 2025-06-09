@@ -1,12 +1,13 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import InputBox from "../../components/InputBox/InputBox";
+import { InputBox, NavButton } from "../../../shared";
 import "./SignUp.scss";
-import logo from "../../assets/logo.svg";
-import { signupAuthentication } from "../../utils/UserAuth";
-import { useEffect, useState } from "react";
-import { SignUpBody } from "../../utils/Interfaces";
-import { emblemNameArray } from "../../utils/EmblemNames";
-import Emblem from "../../components/Emblem/Emblem";
+import logo from "../../../assets/logo.svg";
+import { useState } from "react";
+import { emblemNameArray } from "../../../utils/EmblemNames";
+import { Emblem } from "../../../shared";
+import { useEffect } from "react";
+import { signUpAuthentication } from "../../../utils/UserAuth";
+import { SignUpBody } from "../../../utils/Interfaces";
 
 interface EmblemNameObj {
   lowercase: string;
@@ -98,7 +99,7 @@ export default function SignUp() {
       user_emblem: emblemName,
     };
 
-    const response = await signupAuthentication(requestObj);
+    const response = await signUpAuthentication(requestObj);
 
     if (response === "Registration Failed") {
       setErrorClass("signup__error signup__error--visible");
