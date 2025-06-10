@@ -14,14 +14,15 @@ import { useUserStore } from "../../../../store/user";
 import { useBattlesStore } from "../../../../store/battles";
 import { createBattleRequest } from "../../../../utils/BattleRequests";
 import { Header } from "../../../../shared";
+import { PickerValue } from "@mui/x-date-pickers/internals";
 export interface BattleInformation {
   battleType: "40k" | "fantasy";
   pointSize: number;
   scenario?: string;
   date: Dayjs;
   table: "Table 1" | "Table 2" | "Table 3";
-  start: string | Dayjs;
-  finish: string | Dayjs;
+  start: PickerValue;
+  finish: PickerValue;
   playerOne: Player[] | [];
   playerTwo: Player[] | [];
 }
@@ -33,7 +34,7 @@ const initialBattleValues: BattleInformation = {
   date: dayjs(),
   table: "Table 1",
   start: dayjs(),
-  finish: "",
+  finish: null,
   playerOne: [],
   playerTwo: [],
 };
