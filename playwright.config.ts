@@ -44,4 +44,11 @@ export default defineConfig({
       use: { ...devices["Desktop Safari"] },
     },
   ],
+  webServer: [
+    {
+      command: "pnpm dev",
+      port: 5173,
+      reuseExistingServer: !process.env.CI,
+    },
+  ],
 });
