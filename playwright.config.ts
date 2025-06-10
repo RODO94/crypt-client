@@ -17,14 +17,27 @@ export default defineConfig({
   testMatch: ["**/*.spec.tsx"],
   /* Run tests in files in parallel */
   fullyParallel: true,
-  reporter: "html",
+  /* Fail the build on CI if you accidentally left test.only in the source code. */
+  forbidOnly: !!process.env.CI,
+  /* Retry on CI only */
+  retries: process.env.CI ? 2 : 0,
+  /* Opt out of parallel tests on CI. */
+  workers: process.env.CI ? 1 : undefined,
+  /* Reporter to use. See https://playwright.dev/docs/test-reporters */
+  reporter: process.env.CI ? "github" : "html",
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: "http://localhost:5173",
+    baseURL: process.env.CI ? "http://localhost:4173" : "http://localhost:5173",
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
+    
+    /* Take screenshot on failure */
+    screenshot: "only-on-failure",
+    
+    /* Record video on failure */
+    video: "retain-on-failure",
   },
 
   /* Configure projects for major browsers */
@@ -44,11 +57,10 @@ export default defineConfig({
       use: { ...devices["Desktop Safari"] },
     },
   ],
-  webServer: [
-    {
-      command: "pnpm dev",
-      port: 5173,
-      reuseExistingServer: !process.env.CI,
-    },
-  ],
+  webServer: {
+    command: process.env.CI ? "pnpm preview" : "pnpm dev",
+    port: process.env.CI ? 4173 : 5173,
+    reuseExistingServer: !process.env.CI,
+    timeout: 120 * 1000,
+  },
 });
