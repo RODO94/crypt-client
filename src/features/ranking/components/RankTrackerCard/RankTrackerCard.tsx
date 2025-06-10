@@ -4,6 +4,7 @@ import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import TrendingDownIcon from "@mui/icons-material/TrendingDown";
 import TrendingFlatIcon from "@mui/icons-material/TrendingFlat";
 import { Rank } from "../../../../utils/Interfaces";
+import { JSX } from "react";
 
 interface RankCardProps {
   ranking: Rank;
@@ -12,7 +13,7 @@ interface RankCardProps {
 
 interface RankMessage {
   message: "Increase" | "Decrease" | "Unchanged";
-  icon: JSX.Element | null;
+  icon: JSX.Element;
 }
 
 export default function RankTrackerCard({

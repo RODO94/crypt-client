@@ -22,7 +22,8 @@ export default function UserDashboard() {
 
   useEffect(() => {
     if (!token) {
-      return navigate("/login");
+      navigate("/login");
+      return;
     }
 
     fetchUserInfo(token);
