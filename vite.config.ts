@@ -13,6 +13,6 @@ export default defineConfig({
     typecheck: {
       enabled: true,
     },
-    include: ["src/**/__tests__/*.test.tsx"],
+    include: ["src/**/**/__tests__/**/*.test.tsx"],
   },
 });
