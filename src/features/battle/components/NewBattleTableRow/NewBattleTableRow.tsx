@@ -4,6 +4,7 @@ import BattleTypePill from "../BattleTypePill/BattleTypePill";
 import NewBattleCard from "../NewBattleCard/NewBattleCard";
 import "./NewBattleTableRow.scss";
 import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
 
 interface BattleTableRow {
   battle_type: "40k" | "fantasy";
@@ -24,6 +25,7 @@ export default function NewBattleTableRow({
   table,
   start,
 }: BattleTableRow) {
+  dayjs.extend(customParseFormat);
   return (
     <NavigationLink to={`/battles/information/${id}`}>
       <article className='new-battle-table-row'>
