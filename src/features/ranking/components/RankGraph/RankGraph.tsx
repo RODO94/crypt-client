@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./RankGraph.scss";
-import { ResponsiveLine, Serie } from "@nivo/line";
+import { LineSeries, ResponsiveLine } from "@nivo/line";
 import dayjs from "dayjs";
 import { getRankingsOneArmy } from "../../../../utils/RankingRequests";
 interface Rankings {
@@ -12,7 +12,7 @@ export default function RankGraph(props: {
   army_id: string | undefined;
   name: string;
 }) {
-  const [rankings, setRankings] = useState<Serie[]>([
+  const [rankings, setRankings] = useState<LineSeries[]>([
     { id: "", data: [{ x: 0, y: 0 }] },
   ]);
   const [minValue, setMinValue] = useState(0);
