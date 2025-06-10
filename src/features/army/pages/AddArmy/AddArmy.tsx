@@ -37,7 +37,8 @@ export default function AddArmy() {
   const { token, currentUser } = useUserStore();
   useEffect(() => {
     if (!token) {
-      return navigate("/login");
+      navigate("/login");
+      return;
     }
     const formatEmblemArray = () => {
       const filteredArray =
