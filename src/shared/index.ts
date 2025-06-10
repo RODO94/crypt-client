@@ -13,7 +13,7 @@ export { default as NavHeader } from "./components/layout/NavHeader/NavHeader";
 export { default as NavFooter } from "./components/layout/NavFooter/NavFooter";
 export { default as NavigationLink } from "./components/layout/NavigationLink/NavigationLink";
 export { default as NavButton } from "./components/layout/NavButton/NavButton";
-export { default as DashboardHero } from "./components/layout/DashboardHero/DashboardHero";
+export { default as DashboardHero } from "../features/user/components/DashboardHero/DashboardHero";
 export { default as EmblemHero } from "./components/layout/EmblemHero/EmblemHero";
 export { default as HomeHero } from "./components/layout/HomeHero/HomeHero";
 

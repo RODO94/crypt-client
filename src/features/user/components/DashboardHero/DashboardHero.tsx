@@ -1,9 +1,9 @@
 import "./DashboardHero.scss";
-import NavButton from "../NavButton/NavButton";
+import NavButton from "../../../../shared/components/layout/NavButton/NavButton";
 import { Battle, Rank, Users } from "../../../../utils/Interfaces";
-import Emblem from "../../ui/Emblem/Emblem";
-import { NewBattleCard, NextBattleCard } from "../../../../features/battle";
-import { AllyCard, NemesisCard } from "../../../../features/army";
+import Emblem from "../../../../shared/components/ui/Emblem/Emblem";
+import { NewBattleCard, NextBattleCard } from "../../../battle";
+import { AllyCard, NemesisCard } from "../../../army";
 import { Emblems } from "../../../../utils/emblems";
 
 interface DashboardType {
