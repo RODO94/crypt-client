@@ -21,7 +21,7 @@
     "noFallthroughCasesInSwitch": true,
 
     /* Tests */
-    "types": ["vitest/globals"]
+    "types": ["vitest/globals", "@vitest/browser/providers/playwright"]
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

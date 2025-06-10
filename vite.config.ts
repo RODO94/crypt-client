@@ -1,4 +1,6 @@
 /// <reference types="vitest/config" />
+/// <reference types="@vitest/browser/providers/playwright" />
+
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
