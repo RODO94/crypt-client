@@ -4,6 +4,7 @@ import {
   UsersFortyRanking,
   UsersResults,
   UsersUpcomingBattles,
+  DashboardHero,
 } from "../../index";
 import "./UserDashboard.scss";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +12,6 @@ import { CircularProgress } from "@mui/material";
 import { useUserStore } from "../../../../store/user";
 import { useBattlesStore } from "../../../../store/battles";
 import { useArmiesStore } from "../../../../store/armies";
-import { DashboardHero } from "../../../../shared";
 
 export default function UserDashboard() {
   const { token, userInfo, fetchUserInfo } = useUserStore();
