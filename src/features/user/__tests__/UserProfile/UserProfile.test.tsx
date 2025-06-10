@@ -12,4 +12,5 @@ describe("the UI of the armies section", () => {
 describe("the UI of the User list section", () => {
   it.todo("shows the list of users");
   it.todo("shows the ability to make a user an admin for admin users");
+  it.todo("hides the ability to make a user an admin for normal users");
 });
