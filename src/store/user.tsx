@@ -10,19 +10,21 @@ import {
 
 export type UserRole = "admin" | "user" | "guest";
 
+export type UserInfo = {
+  user: Users;
+  ally: Rank | undefined;
+  nemesis: Rank | undefined;
+  rankArray: {
+    fortyK: Rank[];
+    fantasy: Rank[];
+  };
+  userResults: Battle[];
+} | null;
+
 interface UserState {
   userRole: UserRole;
   currentUser: Users | null;
-  userInfo: {
-    user: Users;
-    ally: Rank | undefined;
-    nemesis: Rank | undefined;
-    rankArray: {
-      fortyK: Rank[];
-      fantasy: Rank[];
-    };
-    userResults: Battle[];
-  } | null;
+  userInfo: UserInfo;
   allUsers: Users[] | null;
   token: string | null;
 
