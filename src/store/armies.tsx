@@ -30,7 +30,9 @@ export const useArmiesStore = create<ArmiesState>()(
       fetchAllArmies: async () => {
         try {
           const armies = await getAllArmies(2);
-          armies && set({ armies });
+          if (armies) {
+            set({ armies });
+          }
         } catch (error) {
           console.error(error);
         }
@@ -48,7 +50,9 @@ export const useArmiesStore = create<ArmiesState>()(
       fetchArmyDetails: async (armyId: string) => {
         try {
           const armyDetails = await getArmyInfo(armyId, 3);
-          armyDetails && set({ selectedArmy: armyDetails });
+          if (armyDetails) {
+            set({ selectedArmy: armyDetails });
+          }
           return armyDetails;
         } catch (error) {
           console.error(error);

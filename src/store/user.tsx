@@ -76,6 +76,7 @@ export const useUserStore = create<UserState>()(
             token: null,
           });
           sessionStorage.removeItem("token");
+          console.error(error);
         }
       },
 
