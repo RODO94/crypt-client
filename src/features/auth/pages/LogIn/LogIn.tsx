@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import "./LogIn.scss";
 import logo from "../../../../assets/logo.svg";
-import { useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import { useUserStore } from "../../../../store/user";
 import {
   forgotPasswordAuthentication,
@@ -20,10 +20,11 @@ export default function LogIn() {
 
   const navigate = useNavigate();
 
-  const handleSubmit = async (event: any) => {
+  const handleSubmit = async <T extends SyntheticEvent>(event: T) => {
     event.preventDefault();
-    const email = event.target.email.value;
-    const password = event.target.password.value;
+    const target = event.target as HTMLFormElement;
+    const email = target.email.value;
+    const password = target.password.value;
     const requestObj = { email: email, password: password };
     const response = await loginAuthentication(requestObj);
     setUserRole(response.role);
@@ -45,10 +46,17 @@ export default function LogIn() {
     navigate("/user");
   };
 
-  const handleReset = async (event: any) => {
+  const handleReset = async <T extends SyntheticEvent>(event: T) => {
     event.preventDefault();
-    const email = event.target.parentElement.email.value;
+    const target = event.target as HTMLButtonElement;
+    if (!target || !target.parentElement) {
+      return "No Target";
+    }
+    const emailElement = target.parentElement.children.namedItem(
+      "email"
+    ) as HTMLInputElement;
 
+    const email = emailElement.value;
     if (!email) {
       setErrorClass("signup__error signup__error--visible");
       return setErrorMessage(

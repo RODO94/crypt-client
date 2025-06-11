@@ -54,15 +54,16 @@ export default function SignUp() {
     formatEmblemArray();
   }, []);
 
-  const handleSubmit = async (event: any) => {
+  const handleSubmit = async <T extends React.SyntheticEvent>(event: T) => {
     event.preventDefault();
-    const email = event.target.email.value;
-    const password = event.target.password.value;
-    const confirmPassword = event.target.confirmpassword.value;
-    const firstName = event.target.firstname.value;
-    const lastName = event.target.lastname.value;
-    const knownAs = event.target.knownas.value;
-    const code = event.target.cryptcode.value;
+    const target = event.target as HTMLFormElement;
+    const email = target.email.value;
+    const password = target.password.value;
+    const confirmPassword = target.confirmpassword.value;
+    const firstName = target.firstname.value;
+    const lastName = target.lastname.value;
+    const knownAs = target.knownas.value;
+    const code = target.cryptcode.value;
 
     if (password !== confirmPassword) {
       setErrorClass("login__error login__error--visible");
