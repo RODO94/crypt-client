@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./CompletedBattlesPage.scss";
 
 import { Link } from "react-router-dom";
@@ -11,16 +11,12 @@ import { useUserStore } from "../../../../store/user";
 import { CompletedBattle } from "../../../../utils/Interfaces";
 import { DateTableHeader } from "../../../../shared";
 
-interface BattleArray extends Array<CompletedBattle> {}
-interface NameArray extends Array<string> {}
-interface YearArray extends Array<number> {}
-
 export default function CompletedBattlesPage() {
   const { completedBattles } = useBattlesStore();
   const [battleArray, setBattleArray] =
     useState<CompletedBattle[]>(completedBattles);
-  const [nameArray, setNameArray] = useState<NameArray>();
-  const [yearArray, setYearArray] = useState<YearArray>();
+  const [nameArray, setNameArray] = useState<string[]>();
+  const [yearArray, setYearArray] = useState<number[]>();
   const [nameFilter, setNameFilter] = useState<string>("all");
   const [yearFilter, setYearFilter] = useState<string>("all");
   const [monthFilter, setMonthFilter] = useState<string>("all");
@@ -37,7 +33,7 @@ export default function CompletedBattlesPage() {
       return userNames;
     };
     nameFn();
-    let dateArray: YearArray = [];
+    let dateArray: number[] = [];
     if (battleArray !== undefined) {
       dateArray = battleArray?.map((battle) => {
         if (dateArray.includes(dayjs(battle.date).year())) {
@@ -55,7 +51,7 @@ export default function CompletedBattlesPage() {
   }, [battleArray, allUsers]);
 
   useEffect(() => {
-    let tempBattleArray: BattleArray = [];
+    let tempBattleArray: CompletedBattle[] = [];
     const filterFn = async () => {
       tempBattleArray = completedBattles;
       let filterArray: Array<CompletedBattle> = [];
@@ -148,7 +144,9 @@ export default function CompletedBattlesPage() {
     filterFn();
   }, [nameFilter, battleTypeFilter, yearFilter, monthFilter, completedBattles]);
 
-  const handleChange = (event: any) => {
+  const handleChange = (
+    event: React.ChangeEvent<{ name: string; value: string }>
+  ) => {
     if (event.target.name === "battle-type") {
       return setBattleTypeFilter(event.target.value);
     }
