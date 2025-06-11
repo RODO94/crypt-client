@@ -1,13 +1,14 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import "./LogIn.scss";
 import logo from "../../../../assets/logo.svg";
-import { SyntheticEvent, useState } from "react";
+import { useState } from "react";
 import { useUserStore } from "../../../../store/user";
 import {
   forgotPasswordAuthentication,
   loginAuthentication,
 } from "../../../../utils/UserAuth";
 import { InputBox, NavButton } from "../../../../shared";
+import { HandleEvent } from "../../../../types/functionTypes";
 
 export default function LogIn() {
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -20,7 +21,7 @@ export default function LogIn() {
 
   const navigate = useNavigate();
 
-  const handleSubmit = async <T extends SyntheticEvent>(event: T) => {
+  const handleSubmit: HandleEvent = async (event) => {
     event.preventDefault();
     const target = event.target as HTMLFormElement;
     const email = target.email.value;
@@ -46,7 +47,7 @@ export default function LogIn() {
     navigate("/user");
   };
 
-  const handleReset = async <T extends SyntheticEvent>(event: T) => {
+  const handleReset: HandleEvent = async (event) => {
     event.preventDefault();
     const target = event.target as HTMLButtonElement;
     if (!target || !target.parentElement) {

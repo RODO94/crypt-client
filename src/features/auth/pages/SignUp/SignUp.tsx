@@ -8,6 +8,7 @@ import { signUpAuthentication } from "../../../../utils/UserAuth";
 import { SignUpBody } from "../../../../utils/Interfaces";
 import { emblemNameArray } from "../../../../utils/EmblemNames";
 import { Emblems } from "../../../../utils/emblems";
+import { HandleEvent } from "../../../../types/functionTypes";
 
 interface EmblemNameObj {
   lowercase: string;
@@ -54,7 +55,7 @@ export default function SignUp() {
     formatEmblemArray();
   }, []);
 
-  const handleSubmit = async <T extends React.SyntheticEvent>(event: T) => {
+  const handleSubmit: HandleEvent = async (event) => {
     event.preventDefault();
     const target = event.target as HTMLFormElement;
     const email = target.email.value;
