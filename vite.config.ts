@@ -13,6 +13,7 @@ export default defineConfig({
     typecheck: {
       enabled: true,
     },
+    setupFiles: ["setup-tests.ts"],
     include: ["src/**/**/__tests__/**/*.test.tsx"],
   },
 });
