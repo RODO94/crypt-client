@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
 import DashboardHero from "../../components/DashboardHero/DashboardHero";
 import {
   mockAlly,
@@ -14,17 +15,19 @@ import {
 describe.only("Hero Dashboard UI", () => {
   beforeEach(() => {
     render(
-      <DashboardHero
-        user={mockUser}
-        nemesis={mockNemesis}
-        ally={mockAlly}
-        nextBattle={mockBattles[0]}
-        fortykRanked={mockFortyKRanks[0]}
-        fantasyRanked={mockFantasyRanks[0]}
-      />
+      <MemoryRouter>
+        <DashboardHero
+          user={mockUser}
+          nemesis={mockNemesis}
+          ally={mockAlly}
+          nextBattle={mockBattles[0]}
+          fortykRanked={mockFortyKRanks[0]}
+          fantasyRanked={mockFantasyRanks[0]}
+        />
+      </MemoryRouter>
     );
   });
-  it.todo("Renders a green background with a welcome message", () => {
+  it("Renders a green background with a welcome message", () => {
     const helloMessage = screen.getByText(`Hey ${mockUser.known_as}!`);
     expect(helloMessage).toBeInTheDocument();
   });
