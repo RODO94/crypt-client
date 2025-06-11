@@ -1,4 +1,6 @@
 import axios from "axios";
+import { Users } from "./Interfaces";
+import { UserInfo } from "../store/user";
 
 const baseURL = import.meta.env.VITE_SERVER_URL;
 
@@ -21,13 +23,13 @@ const verifyUser = async (token: string, count: number) => {
 const getAllUsersNames = async () => {
   const { data } = await axios.get(`${baseURL}/users/all`);
 
-  const userArray = data.map((user: any) => {
+  const userArray = data.map((user: Users) => {
     return user.known_as;
   });
   return userArray;
 };
 
-const getAllUsers = async (count: number): Promise<any | false> => {
+const getAllUsers = async (count: number) => {
   try {
     const { data } = await axios.get(`${baseURL}/users/all`);
     return data;
@@ -69,10 +71,7 @@ const getUserWithToken = async (token: string) => {
   }
 };
 
-const getUserInfo = async (
-  token: string,
-  count: number
-): Promise<any | false> => {
+const getUserInfo = async (token: string, count: number) => {
   try {
     const { data } = await axios.get(`${baseURL}/users/user/info`, {
       headers: {
@@ -101,10 +100,7 @@ const getArmyUser = async (id: string) => {
   }
 };
 
-const getNemesis = async (
-  token: string,
-  count: number
-): Promise<any | false> => {
+const getNemesis = async (token: string, count: number) => {
   try {
     const { data } = await axios.get(`${baseURL}/users/nemesis`, {
       headers: {
@@ -122,7 +118,10 @@ const getNemesis = async (
     return false;
   }
 };
-const getAlly = async (token: string, count: number): Promise<any | false> => {
+const getAlly = async (
+  token: string,
+  count: number
+): Promise<UserInfo | false> => {
   try {
     const { data } = await axios.get(`${baseURL}/users/ally`, {
       headers: {
