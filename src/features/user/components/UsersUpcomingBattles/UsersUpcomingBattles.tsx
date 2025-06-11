@@ -5,7 +5,11 @@ import { Battle } from "../../../../utils/Interfaces";
 import { DateTableHeader } from "../../../../shared";
 import { NewBattleTableRow } from "../../../battle";
 
-export default function UsersUpcomingBattles({ battleArray }: any) {
+export default function UsersUpcomingBattles({
+  battleArray,
+}: {
+  battleArray: Battle[] | undefined;
+}) {
   let currentDate = "";
   if (!battleArray) {
     return (

@@ -3,7 +3,13 @@ import { Rank } from "../../../../utils/Interfaces";
 import "./UsersFantasyRanking.scss";
 import { CircularProgress } from "@mui/material";
 
-export default function UsersFantasyRanking({ rankArray, user }: any) {
+export default function UsersFantasyRanking({
+  rankArray,
+  user,
+}: {
+  rankArray: Rank[];
+  user: string;
+}) {
   if (!rankArray) {
     return (
       <div className='loading-message'>

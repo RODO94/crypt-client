@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import "./FiveColTableRow.scss";
 import { Rank } from "../../../../utils/Interfaces";
+import { JSX } from "react";
 
 interface rankObjTable extends Rank {
   colour: string;
@@ -18,7 +19,7 @@ export default function FiveColTableRow({
   navTo,
   id,
 }: rankObjTable) {
-  let icon: any = "no change";
+  let icon: string | JSX.Element = "no change";
   let rowColourClass = "table-row table-row--light";
   const navigate = useNavigate();
 

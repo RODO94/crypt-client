@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./UserProfile.scss";
 import { useNavigate } from "react-router-dom";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
@@ -262,7 +262,8 @@ export default function UserProfile() {
                     aria-expanded={open ? "true" : undefined}
                     variant='contained'
                     disableElevation
-                    onClick={(event: any) => {
+                    onClick={(event) => {
+                      // @ts-ignore
                       setTargetUser(event.target.parentElement.id);
                       handleClick(event);
                     }}
