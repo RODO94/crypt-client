@@ -4,7 +4,8 @@ import "./BattleCompleteRow.scss";
 import { JSX, useEffect, useState } from "react";
 import crown from "../../../../assets/crown.svg";
 import { Player } from "../../../../utils/Interfaces";
-import { NavigationLink, PlayerTypePill } from "../../../../shared";
+import PlayerTypePill from "../../../../shared/components/ui/PlayerTypePill/PlayerTypePill";
+import NavigationLink from "../../../../shared/components/layout/NavigationLink/NavigationLink";
 
 interface BattleTableRow {
   battle_type: string;

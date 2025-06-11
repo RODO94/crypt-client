@@ -6,7 +6,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import NewBattleCompleteTableRow from "../NewBattleTableCompleteRow/NewBattleCompleteTableRow";
 import { useBattlesStore } from "../../../../store/battles";
 import { CompletedBattle } from "../../../../utils/Interfaces";
-import { DateTableHeader } from "../../../../shared";
+import DateTableHeader from "../../../../shared/components/tables/DateTableHeader/DateTableHeader";
 
 export default function CompletedBattles() {
   const [hideSectionBool, setHideSectionBool] = useState<boolean>(false);

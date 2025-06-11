@@ -9,7 +9,7 @@ import { CircularProgress } from "@mui/material";
 import { useBattlesStore } from "../../../../store/battles";
 import { useUserStore } from "../../../../store/user";
 import { CompletedBattle } from "../../../../utils/Interfaces";
-import { DateTableHeader } from "../../../../shared";
+import DateTableHeader from "../../../../shared/components/tables/DateTableHeader/DateTableHeader";
 
 export default function CompletedBattlesPage() {
   const { completedBattles } = useBattlesStore();

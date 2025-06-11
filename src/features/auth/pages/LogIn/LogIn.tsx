@@ -7,8 +7,9 @@ import {
   forgotPasswordAuthentication,
   loginAuthentication,
 } from "../../../../utils/UserAuth";
-import { InputBox, NavButton } from "../../../../shared";
 import { HandleEvent } from "../../../../types/functionTypes";
+import InputBox from "../../../../shared/components/ui/InputBox/InputBox";
+import NavButton from "../../../../shared/components/layout/NavButton/NavButton";
 
 export default function LogIn() {
   const [errorMessage, setErrorMessage] = useState<string>("");

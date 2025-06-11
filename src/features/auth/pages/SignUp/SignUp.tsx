@@ -2,13 +2,14 @@ import { NavLink, useNavigate } from "react-router-dom";
 import "./SignUp.scss";
 import logo from "../../../../assets/logo.svg";
 import { useState } from "react";
-import { Emblem, InputBox } from "../../../../shared";
 import { useEffect } from "react";
 import { signUpAuthentication } from "../../../../utils/UserAuth";
 import { SignUpBody } from "../../../../utils/Interfaces";
 import { emblemNameArray } from "../../../../utils/EmblemNames";
 import { Emblems } from "../../../../utils/emblems";
 import { HandleEvent } from "../../../../types/functionTypes";
+import InputBox from "../../../../shared/components/ui/InputBox/InputBox";
+import Emblem from "../../../../shared/components/ui/Emblem/Emblem";
 
 interface EmblemNameObj {
   lowercase: string;

@@ -5,7 +5,6 @@ import { useEffect } from "react";
 import { useBattlesStore } from "./store/battles";
 import { useRankingsStore } from "./store/rankings";
 import { useUserStore } from "./store/user";
-import { NavFooter, NavHeader } from "./shared";
 import Homepage from "./Homepage/Homepage";
 import {
   ForgotPassword,
@@ -23,6 +22,8 @@ import {
 } from "./features/battle";
 import { AddArmy, ArmyInfo } from "./features/army";
 import { UserDashboard, UserProfile } from "./features/user";
+import NavHeader from "./shared/components/layout/NavHeader/NavHeader";
+import NavFooter from "./shared/components/layout/NavFooter/NavFooter";
 
 function App() {
   const { fetchAllUsers } = useUserStore();

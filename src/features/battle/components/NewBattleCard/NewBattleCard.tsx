@@ -1,4 +1,4 @@
-import { EmblemCard } from "../../../../shared";
+import EmblemCard from "../../../../shared/components/ui/EmblemCard/EmblemCard";
 import { Emblems } from "../../../../utils/emblems";
 import { Player } from "../../../../utils/Interfaces";
 import "./NewBattleCard.scss";

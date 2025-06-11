@@ -2,8 +2,8 @@ import "./UsersUpcomingBattles.scss";
 import { Link } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import { Battle } from "../../../../utils/Interfaces";
-import { DateTableHeader } from "../../../../shared";
 import { NewBattleTableRow } from "../../../battle";
+import DateTableHeader from "../../../../shared/components/tables/DateTableHeader/DateTableHeader";
 
 export default function UsersUpcomingBattles({
   battleArray,

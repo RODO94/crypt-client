@@ -13,8 +13,8 @@ import { Player } from "../../../../utils/Interfaces";
 import { useUserStore } from "../../../../store/user";
 import { useBattlesStore } from "../../../../store/battles";
 import { createBattleRequest } from "../../../../utils/BattleRequests";
-import { Header } from "../../../../shared";
 import { PickerValue } from "@mui/x-date-pickers/internals";
+import Header from "../../../../shared/components/layout/Header/Header";
 export interface BattleInformation {
   battleType: "40k" | "fantasy";
   pointSize: number;

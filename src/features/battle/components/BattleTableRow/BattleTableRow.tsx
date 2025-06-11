@@ -1,4 +1,5 @@
-import { NavigationLink, PlayerTypePill } from "../../../../shared";
+import NavigationLink from "../../../../shared/components/layout/NavigationLink/NavigationLink";
+import PlayerTypePill from "../../../../shared/components/ui/PlayerTypePill/PlayerTypePill";
 import { Player } from "../../../../utils/Interfaces";
 import BattleCard from "../BattleCard/BattleCard";
 import BattleTypePill from "../BattleTypePill/BattleTypePill";

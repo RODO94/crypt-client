@@ -1,4 +1,5 @@
-import { FiveColTableHeader, FiveColTableRow } from "../../../../shared";
+import FiveColTableHeader from "../../../../shared/components/tables/FiveColTableHeader/FiveColTableHeader";
+import FiveColTableRow from "../../../../shared/components/tables/FiveColTableRow/FiveColTableRow";
 import { Rank } from "../../../../utils/Interfaces";
 import "./UsersFortyRanking.scss";
 import { CircularProgress } from "@mui/material";

@@ -8,7 +8,7 @@ import { CircularProgress } from "@mui/material";
 import { Battle } from "../../../../utils/Interfaces";
 import { useBattlesStore } from "../../../../store/battles";
 import { useUserStore } from "../../../../store/user";
-import { DateTableHeader } from "../../../../shared";
+import DateTableHeader from "../../../../shared/components/tables/DateTableHeader/DateTableHeader";
 
 export default function UpcomingBattlesPage() {
   const { upcomingBattles } = useBattlesStore();

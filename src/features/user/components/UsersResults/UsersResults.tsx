@@ -2,8 +2,8 @@ import { CircularProgress } from "@mui/material";
 import "./UsersResults.scss";
 import { Link } from "react-router-dom";
 import { Battle, CompletedBattle } from "../../../../utils/Interfaces";
-import { DateTableHeader } from "../../../../shared";
 import NewBattleCompleteTableRow from "../../../battle/components/NewBattleTableCompleteRow/NewBattleCompleteTableRow";
+import DateTableHeader from "../../../../shared/components/tables/DateTableHeader/DateTableHeader";
 
 export default function UsersResults({
   battleArray,

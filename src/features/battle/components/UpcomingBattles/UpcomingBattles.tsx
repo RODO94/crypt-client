@@ -7,7 +7,7 @@ import { CircularProgress } from "@mui/material";
 import NewBattleTableRow from "../NewBattleTableRow/NewBattleTableRow";
 import { Player } from "../../../../utils/Interfaces";
 import { useBattlesStore } from "../../../../store/battles";
-import { DateTableHeader } from "../../../../shared";
+import DateTableHeader from "../../../../shared/components/tables/DateTableHeader/DateTableHeader";
 
 interface Battle {
   id: string;

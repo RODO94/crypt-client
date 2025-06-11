@@ -3,7 +3,7 @@ import "./NewBattleCompleteTableRow.scss";
 import { useEffect, useState } from "react";
 import crown from "../../../../assets/crown.svg";
 import { Player } from "../../../../utils/Interfaces";
-import { NavigationLink } from "../../../../shared";
+import NavigationLink from "../../../../shared/components/layout/NavigationLink/NavigationLink";
 
 interface BattleTableRow {
   battle_type?: string;

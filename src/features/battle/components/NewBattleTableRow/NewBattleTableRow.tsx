@@ -1,4 +1,4 @@
-import { NavigationLink } from "../../../../shared";
+import NavigationLink from "../../../../shared/components/layout/NavigationLink/NavigationLink";
 import { Player } from "../../../../utils/Interfaces";
 import BattleTypePill from "../BattleTypePill/BattleTypePill";
 import NewBattleCard from "../NewBattleCard/NewBattleCard";

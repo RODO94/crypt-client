@@ -8,9 +8,10 @@ import { useArmiesStore } from "../../../../store/armies";
 import { useUserStore } from "../../../../store/user";
 import { emblemNameArray } from "../../../../utils/EmblemNames";
 import { addArmyRequest } from "../../../../utils/ArmyRequests";
-import { Emblem, Header } from "../../../../shared";
 import { Emblems } from "../../../../utils/emblems";
 import { AxiosError } from "axios";
+import Header from "../../../../shared/components/layout/Header/Header";
+import Emblem from "../../../../shared/components/ui/Emblem/Emblem";
 
 interface EmblemNameObj {
   lowercase: string;

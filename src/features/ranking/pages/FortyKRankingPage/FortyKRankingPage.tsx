@@ -5,8 +5,9 @@ import crown from "../../../../assets/crown.svg";
 import { CircularProgress } from "@mui/material";
 import { useRankingsStore } from "../../../../store/rankings";
 import { NewBattleCard } from "../../../battle";
-import { FiveColTableHeader, FiveColTableRow } from "../../../../shared";
 import { Rank } from "../../../../utils/Interfaces";
+import FiveColTableHeader from "../../../../shared/components/tables/FiveColTableHeader/FiveColTableHeader";
+import FiveColTableRow from "../../../../shared/components/tables/FiveColTableRow/FiveColTableRow";
 
 export default function FortyKPage() {
   const { fortyKRankings } = useRankingsStore();

@@ -1,6 +1,7 @@
 import { CompletedBattles, UpcomingBattles } from "../features/battle";
 import { FantasyTopFive, FortyKTopFive } from "../features/ranking";
-import { Header, HomeHero } from "../shared";
+import Header from "../shared/components/layout/Header/Header";
+import HomeHero from "../shared/components/layout/HomeHero/HomeHero";
 import "./Homepage.scss";
 
 export default function Homepage() {

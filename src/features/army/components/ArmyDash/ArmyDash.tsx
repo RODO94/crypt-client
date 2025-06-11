@@ -9,9 +9,10 @@ import { useUserStore } from "../../../../store/user";
 import { useArmiesStore } from "../../../../store/armies";
 import { emblemNameArray } from "../../../../utils/EmblemNames";
 import { changeArmyField } from "../../../../utils/ArmyRequests";
-import { Emblem, EmblemHero } from "../../../../shared";
 import { BattleCard } from "../../../battle";
 import { Emblems } from "../../../../utils/emblems";
+import EmblemHero from "../../../../shared/components/layout/EmblemHero/EmblemHero";
+import Emblem from "../../../../shared/components/ui/Emblem/Emblem";
 interface armyDashObj {
   winPercent: string;
   battleCount: number;

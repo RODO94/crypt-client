@@ -4,7 +4,7 @@ import logo from "../../../../assets/logo.svg";
 import { SyntheticEvent, useState } from "react";
 import { Password } from "../../../../utils/Interfaces";
 import { resetPasswordAuthentication } from "../../../../utils/UserAuth";
-import { InputBox } from "../../../../shared";
+import InputBox from "../../../../shared/components/ui/InputBox/InputBox";
 
 export default function ResetPassword() {
   const [errorMessage, setErrorMessage] = useState<string>("");

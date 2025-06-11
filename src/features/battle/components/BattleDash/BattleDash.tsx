@@ -23,8 +23,8 @@ import {
   deleteBattleRequest,
   updateBattleDetail,
 } from "../../../../utils/BattleRequests";
-import { PlayerTypePill } from "../../../../shared";
 import { PickerValue } from "@mui/x-date-pickers/internals";
+import PlayerTypePill from "../../../../shared/components/ui/PlayerTypePill/PlayerTypePill";
 
 interface BattleComp {
   playerOne: Player[];

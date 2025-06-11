@@ -5,8 +5,9 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { CircularProgress } from "@mui/material";
 import { useRankingsStore } from "../../../../store/rankings";
-import { FiveColTableHeader, FiveColTableRow } from "../../../../shared";
 import { Rank } from "../../../../utils/Interfaces";
+import FiveColTableHeader from "../../../../shared/components/tables/FiveColTableHeader/FiveColTableHeader";
+import FiveColTableRow from "../../../../shared/components/tables/FiveColTableRow/FiveColTableRow";
 
 export default function FantasyTopFive() {
   const [hideSectionBool, setHideSectionBool] = useState<boolean>(false);
