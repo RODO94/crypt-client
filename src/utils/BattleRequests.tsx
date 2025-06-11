@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { Battle } from "./Interfaces";
 
 const baseURL = import.meta.env.VITE_SERVER_URL;
@@ -33,17 +33,19 @@ export const getUserLastFiveBattles = async (
   }
 };
 
-const getUpcomingBattles = async (count: number): Promise<any | false> => {
+const getUpcomingBattles = async (count: number) => {
   try {
     const { data } = await axios.get(`${baseURL}/battles/upcoming`);
     return data;
-  } catch (error: any) {
+  } catch (error) {
     count--;
     if (count > 0) {
       return getUpcomingBattles(count);
     }
-    console.error(error);
-    return error.response;
+    if (error instanceof AxiosError) {
+      console.error(error);
+      return error.response;
+    }
   }
 };
 
@@ -52,10 +54,7 @@ const getCompletedBattles = async () => {
   return data;
 };
 
-const getUsersBattles = async (
-  token: string,
-  count: number
-): Promise<any | false> => {
+const getUsersBattles = async (token: string, count: number) => {
   try {
     const { data } = await axios.get(`${baseURL}/battles/user/upcoming`, {
       headers: {
@@ -75,10 +74,7 @@ const getUsersBattles = async (
   }
 };
 
-const getUsersResults = async (
-  token: string,
-  count: number
-): Promise<any | false> => {
+const getUsersResults = async (token: string, count: number) => {
   const cachedUserResults = sessionStorage.getItem("user-results");
 
   if (cachedUserResults) {
@@ -93,7 +89,7 @@ const getUsersResults = async (
       sessionStorage.setItem("user-results", JSON.stringify(data));
 
       return data;
-    } catch (error: any) {
+    } catch (error) {
       count--;
       if (count > 0) {
         return getUsersResults(token, count);
@@ -169,11 +165,11 @@ const reSubmitBattle = async (battleID: string, token: string) => {
 
 const createBattleRequest = async (
   token: string,
-  requestBody: any,
+  requestBody: unknown,
   count: number
 ) => {
   try {
-    const response: any = await axios.post(
+    const response = await axios.post(
       `${baseURL}/battles/create`,
       requestBody,
       {
