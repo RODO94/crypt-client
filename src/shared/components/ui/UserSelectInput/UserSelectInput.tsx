@@ -24,8 +24,10 @@ export default function UserSelectInput({
         const newUser: Users | undefined = allUsers?.find(
           (user: Users) => user.id === event.target.value
         );
-        newUser && setSelectedUser(newUser);
-        newUser && setNewUser(newUser);
+        if (newUser) {
+          setSelectedUser(newUser);
+          setNewUser(newUser);
+        }
       }}
     >
       {allUsers?.map((user: Users) => (

@@ -34,6 +34,7 @@ export default tseslint.config(
       ],
       "@typescript-eslint/ban-ts-comment": ["off"],
       "no-unused-expressions": "off",
+      "@typescript-eslint/no-unused-expressions": "off",
     },
   }
 );
