@@ -10,6 +10,7 @@ import { emblemNameArray } from "../../../../utils/EmblemNames";
 import { addArmyRequest } from "../../../../utils/ArmyRequests";
 import { Emblem, Header } from "../../../../shared";
 import { Emblems } from "../../../../utils/emblems";
+import { AxiosError } from "axios";
 
 interface EmblemNameObj {
   lowercase: string;
@@ -102,9 +103,11 @@ export default function AddArmy() {
           }, 1000);
         }
       }
-    } catch (error: any) {
-      console.error(error);
-      return error.response.data;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        console.error(error);
+        return error.response?.data;
+      }
     }
   };
 

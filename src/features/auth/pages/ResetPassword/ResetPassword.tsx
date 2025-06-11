@@ -1,7 +1,7 @@
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import "./ResetPassword.scss";
 import logo from "../../../../assets/logo.svg";
-import { useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import { Password } from "../../../../utils/Interfaces";
 import { resetPasswordAuthentication } from "../../../../utils/UserAuth";
 import { InputBox } from "../../../../shared";
@@ -24,10 +24,11 @@ export default function ResetPassword() {
 
     return <p>Invalid Token</p>;
   }
-  const handleSubmit = async (event: any) => {
+  const handleSubmit = async <T extends SyntheticEvent>(event: T) => {
     event.preventDefault();
-    const password = event.target.password.value;
-    const confirmPassword = event.target.confirmpassword.value;
+    const target = event.target as HTMLFormElement;
+    const password = target.password.value;
+    const confirmPassword = target.confirmpassword.value;
 
     if (!password || !confirmPassword) {
       setErrorClass("signup__error signup__error--visible");

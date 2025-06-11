@@ -1,11 +1,15 @@
 import { CircularProgress } from "@mui/material";
 import "./UsersResults.scss";
 import { Link } from "react-router-dom";
-import { CompletedBattle } from "../../../../utils/Interfaces";
+import { Battle, CompletedBattle } from "../../../../utils/Interfaces";
 import { DateTableHeader } from "../../../../shared";
 import NewBattleCompleteTableRow from "../../../battle/components/NewBattleTableCompleteRow/NewBattleCompleteTableRow";
 
-export default function UsersResults({ battleArray }: any) {
+export default function UsersResults({
+  battleArray,
+}: {
+  battleArray: Battle[] | undefined;
+}) {
   let currentDate = "";
   if (!battleArray) {
     return (

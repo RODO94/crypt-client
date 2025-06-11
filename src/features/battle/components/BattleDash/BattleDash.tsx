@@ -3,7 +3,7 @@ import logo from "../../../../assets/logo.svg";
 import save from "../../../../assets/save.svg";
 import BattleCard from "../BattleCard/BattleCard";
 import BattleTypePill from "../BattleTypePill/BattleTypePill";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import {
@@ -24,6 +24,7 @@ import {
   updateBattleDetail,
 } from "../../../../utils/BattleRequests";
 import { PlayerTypePill } from "../../../../shared";
+import { PickerValue } from "@mui/x-date-pickers/internals";
 
 interface BattleComp {
   playerOne: Player[];
@@ -104,7 +105,10 @@ export default function BattleDash({
     }
   };
 
-  const addArmy = async (event: any, player: number) => {
+  const addArmy = async <T extends React.SyntheticEvent<HTMLElement>>(
+    event: T,
+    player: number
+  ) => {
     event.preventDefault();
 
     let userID = "1";
@@ -112,15 +116,23 @@ export default function BattleDash({
     let armyName = "Necrons";
     let armyID = "";
 
-    if (!event.target) {
+    const target = event.target as HTMLButtonElement;
+    if (!target || !target.parentElement) {
       return "No Target";
     }
     if (player === 1 && token) {
-      userID = event.target.parentElement.children.users_1.value.split("+")[0];
-      userName =
-        event.target.parentElement.children.users_1.value.split("+")[1];
-      armyName = event.target.parentElement.children.army_1.value.split("+")[1];
-      armyID = event.target.parentElement.children.army_1.value.split("+")[0];
+      const parentElement = target.parentElement;
+      const usersSelect = parentElement.children.namedItem(
+        "users_1"
+      ) as HTMLSelectElement;
+      const armySelect = parentElement.children.namedItem(
+        "army_1"
+      ) as HTMLSelectElement;
+
+      userID = usersSelect.value.split("+")[0];
+      userName = usersSelect.value.split("+")[1];
+      armyName = armySelect.value.split("+")[1];
+      armyID = armySelect.value.split("+")[0];
       const armyObj = armies.find((army) => army.id === armyID);
       const armyEmblem = armyObj?.emblem;
       const newArray = [
@@ -148,11 +160,18 @@ export default function BattleDash({
       };
       await updateArmyCombatants(requestBody, battleID, token);
     } else if (player === 2 && token) {
-      userID = event.target.parentElement.children.users_2.value.split("+")[0];
-      userName =
-        event.target.parentElement.children.users_2.value.split("+")[1];
-      armyName = event.target.parentElement.children.army_2.value.split("+")[1];
-      armyID = event.target.parentElement.children.army_2.value.split("+")[0];
+      const parentElement = target.parentElement;
+      const usersSelect = parentElement.children.namedItem(
+        "users_2"
+      ) as HTMLSelectElement;
+      const armySelect = parentElement.children.namedItem(
+        "army_2"
+      ) as HTMLSelectElement;
+
+      userID = usersSelect.value.split("+")[0];
+      userName = usersSelect.value.split("+")[1];
+      armyName = armySelect.value.split("+")[1];
+      armyID = armySelect.value.split("+")[0];
       const armyObj = armies.find((army) => army.id === armyID);
       const armyEmblem = armyObj?.emblem;
       const newArray = [
@@ -183,8 +202,15 @@ export default function BattleDash({
     }
   };
 
-  const removePlayer = async (event: any, player: number) => {
-    const targetArmyID = event.target.parentElement.children[0].id;
+  const removePlayer = async <T extends React.SyntheticEvent<HTMLElement>>(
+    event: T,
+    player: number
+  ) => {
+    const target = event.target as HTMLButtonElement;
+    if (!target || !target.parentElement) {
+      return "No Target";
+    }
+    const targetArmyID = target.parentElement.children[0].id;
     if (player === 1 && token) {
       const newArmyArray = playerOne.filter(
         (army) => army.army_id !== targetArmyID
@@ -219,7 +245,7 @@ export default function BattleDash({
     }
   };
 
-  const handleChangeSubmit = async (detail: string, value?: any) => {
+  const handleChangeSubmit = async (detail: string, value?: unknown) => {
     if (detail === "scenario" && token) {
       const requestBody = { scenario: scenarioValue };
       await updateBattleDetail(battleID, token, detail, requestBody);
@@ -654,11 +680,13 @@ export default function BattleDash({
                 }
                 value={pointsSizeValue}
                 type='number'
-                onChange={(event: any) => {
-                  if (isNaN(event.target.value)) {
+                onChange={(event: ChangeEvent) => {
+                  const target = event.target as HTMLInputElement;
+
+                  if (isNaN(Number(target.value))) {
                     return setPointsSizeValue(pointsSizeValue);
                   }
-                  setPointsSizeValue(Number(event.target.value));
+                  setPointsSizeValue(Number(target.value));
                 }}
                 readOnly={
                   userEditBool && editPointSizeBool === true ? false : true
@@ -785,8 +813,10 @@ export default function BattleDash({
               >
                 <DatePicker
                   value={dayjs(dateValue)}
-                  onChange={(newValue: any) => {
-                    setDateValue(newValue.format("YYYY-MM-DD"));
+                  onChange={(newValue: PickerValue) => {
+                    if (newValue) {
+                      setDateValue(newValue.format("YYYY-MM-DD"));
+                    }
                   }}
                   readOnly={
                     userEditBool && editDateBool === true ? false : true
@@ -836,8 +866,10 @@ export default function BattleDash({
                   sx={{ fontWeight: 900 }}
                   ampm={false}
                   value={startValue}
-                  onChange={(newValue: any) => {
-                    setStartValue(newValue);
+                  onChange={(newValue: PickerValue) => {
+                    if (newValue) {
+                      setStartValue(newValue);
+                    }
                   }}
                   readOnly={
                     userEditBool && editStartBool === true ? false : true
@@ -887,8 +919,10 @@ export default function BattleDash({
                   ampm={false}
                   value={finishValue}
                   minTime={startValue}
-                  onChange={(newValue: any) => {
-                    setFinishValue(newValue);
+                  onChange={(newValue: PickerValue) => {
+                    if (newValue) {
+                      setFinishValue(newValue);
+                    }
                   }}
                   readOnly={
                     userEditBool && editFinishBool === true ? false : true

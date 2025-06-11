@@ -10,14 +10,11 @@ import { useBattlesStore } from "../../../../store/battles";
 import { useUserStore } from "../../../../store/user";
 import { DateTableHeader } from "../../../../shared";
 
-interface BattleArray extends Array<Battle> {}
-interface NameArray extends Array<string> {}
-
 export default function UpcomingBattlesPage() {
   const { upcomingBattles } = useBattlesStore();
 
-  const [battleArray, setBattleArray] = useState<BattleArray>(upcomingBattles);
-  const [nameArray, setNameArray] = useState<NameArray>();
+  const [battleArray, setBattleArray] = useState<Battle[]>(upcomingBattles);
+  const [nameArray, setNameArray] = useState<string[]>();
   const [nameFilter, setNameFilter] = useState<string>("Name");
   const [battleTypeFilter, setBattleTypeFilter] =
     useState<string>("Battle Type");
@@ -36,10 +33,10 @@ export default function UpcomingBattlesPage() {
   }, [allUsers]);
 
   useEffect(() => {
-    let tempBattleArray: BattleArray = [];
+    let tempBattleArray: Battle[] = [];
     const filterFn = async () => {
       tempBattleArray = upcomingBattles;
-      let filterArray: any = [];
+      let filterArray: Battle[] = [];
       if (nameFilter !== "Name" && nameFilter !== "all") {
         filterArray = tempBattleArray?.filter((battle) => {
           const playerOneArray = battle.player_1.map((player) => {
@@ -65,7 +62,7 @@ export default function UpcomingBattlesPage() {
         battleTypeFilter !== "all"
       ) {
         const battleFilterArray = filterArray?.filter(
-          (battle: any) => battle.battle_type === battleTypeFilter
+          (battle: Battle) => battle.battle_type === battleTypeFilter
         );
 
         filterArray = battleFilterArray;
@@ -85,7 +82,7 @@ export default function UpcomingBattlesPage() {
     filterFn();
   }, [nameFilter, battleTypeFilter, upcomingBattles]);
 
-  const handleChange = (event: any) => {
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     if (event.target.name === "battle-type") {
       return setBattleTypeFilter(event.target.value);
     }

@@ -8,17 +8,17 @@ export default function PlayerTypePill({ player_type }: PlayerTypePill) {
   let pillType = "";
   let pillText = "";
 
-  player_type === "single"
-    ? (pillType = "player-type player-type--single")
-    : (pillType = "player-type player-type--multi");
-
-  player_type === "single"
-    ? (pillText = "Single Player")
-    : (pillText = "Multiplayer");
+  if (player_type === "single") {
+    pillType = "player-type player-type--single";
+    pillText = "Single Player";
+  } else if (player_type === "multi") {
+    pillType = "player-type player-type--multi";
+    pillText = "Multiplayer";
+  }
 
   return (
     <article className={pillType}>
-      <p className="player-type__text">{pillText}</p>
+      <p className='player-type__text'>{pillText}</p>
     </article>
   );
 }

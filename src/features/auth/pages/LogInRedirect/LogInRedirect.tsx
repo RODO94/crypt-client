@@ -8,6 +8,7 @@ import {
   loginAuthentication,
 } from "../../../../utils/UserAuth";
 import { InputBox, NavButton } from "../../../../shared";
+import { HandleEvent } from "../../../../types/functionTypes";
 
 export default function LogInRedirect() {
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -17,10 +18,11 @@ export default function LogInRedirect() {
   const { setUserRole } = useUserStore();
   const navigate = useNavigate();
 
-  const handleSubmit = async (event: any) => {
+  const handleSubmit: HandleEvent = async (event) => {
     event.preventDefault();
-    const email = event.target.email.value;
-    const password = event.target.password.value;
+    const target = event.target as HTMLFormElement;
+    const email = target.email.value;
+    const password = target.password.value;
     const requestObj = { email: email, password: password };
     const response = await loginAuthentication(requestObj);
     setUserRole(response.role);
@@ -40,10 +42,17 @@ export default function LogInRedirect() {
     navigate(-1);
   };
 
-  const handleReset = async (event: any) => {
+  const handleReset: HandleEvent = async (event) => {
     event.preventDefault();
-    const email = event.target.parentElement.email.value;
+    const target = event.target as HTMLButtonElement;
+    if (!target || !target.parentElement) {
+      return "No Target";
+    }
+    const emailElement = target.parentElement.children.namedItem(
+      "email"
+    ) as HTMLInputElement;
 
+    const email = emailElement.value;
     if (!email) {
       setErrorClass("signup__error signup__error--visible");
       return setErrorMessage(

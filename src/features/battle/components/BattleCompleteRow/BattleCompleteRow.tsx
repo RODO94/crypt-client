@@ -1,7 +1,7 @@
 import BattleCard from "../BattleCard/BattleCard";
 import BattleTypePill from "../BattleTypePill/BattleTypePill";
 import "./BattleCompleteRow.scss";
-import { useEffect, useState } from "react";
+import { JSX, useEffect, useState } from "react";
 import crown from "../../../../assets/crown.svg";
 import { Player } from "../../../../utils/Interfaces";
 import { NavigationLink, PlayerTypePill } from "../../../../shared";
@@ -28,8 +28,8 @@ export default function BattleCompleteRow({
   combatant_1_id,
   combatant_2_id,
 }: BattleTableRow) {
-  let resultStatementOne: any = <></>;
-  let resultStatementTwo: any = <></>;
+  let resultStatementOne: JSX.Element | string = <></>;
+  let resultStatementTwo: JSX.Element | string = <></>;
 
   const [winnerValue, setWinnerValue] = useState("");
 
