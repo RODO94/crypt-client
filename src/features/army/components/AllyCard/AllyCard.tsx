@@ -17,7 +17,7 @@ export default function AllyCard({ ally }: AllyComp) {
     );
   }
   return (
-    <article className='ally__army'>
+    <article className='ally__army' data-testid='ally-article'>
       <h3 className='ally__header'>Ally</h3>
       <div className='ally__wrapper'>{allyComp}</div>
     </article>

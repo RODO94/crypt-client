@@ -1,5 +1,35 @@
 import { Rank } from "../../utils/Interfaces";
-import { mockAlly, mockNemesis } from "./userMocks";
+
+// Mock rank data
+export const mockAlly: Rank = {
+  rank: "1",
+  known_as: "The Imperium",
+  name: "Space Marines",
+  ranking: "2500",
+  prev_ranking: "2400",
+  army_id: "army-001",
+  status: "active",
+  current_position: 1,
+  emblem: "space-marine-emblem",
+  rn: 1,
+  date: "2025-06-01",
+  id: "rank-001",
+};
+
+export const mockNemesis: Rank = {
+  rank: "3",
+  known_as: "Chaos Undivided",
+  name: "Chaos Space Marines",
+  ranking: "2200",
+  prev_ranking: "2300",
+  army_id: "army-002",
+  status: "active",
+  current_position: 3,
+  emblem: "chaos-emblem",
+  rn: 3,
+  date: "2025-06-01",
+  id: "rank-002",
+};
 
 export const mockFortyKRanks: Rank[] = [
   mockAlly,

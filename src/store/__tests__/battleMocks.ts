@@ -62,7 +62,7 @@ export const mockBattles: Battle[] = [
     player_2: [
       {
         id: "player-003",
-        name: "Orcs  Goblins",
+        name: "Orcs + Goblins",
         known_as: "Greenskins",
         ranking: "1650",
         army_id: "army-005",

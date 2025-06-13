@@ -14,7 +14,7 @@ export default function NextBattleCard({ nextBattle, id }: nextBattleType) {
   const startTime = dayjs(nextBattle?.start, "HH:mm:ss").format("HH:mm");
 
   if (nextBattle) {
-    const opponentBool = nextBattle.player_1.find((player) => player.id === id);
+    const opponentBool = nextBattle.user_1_id === id;
     const battleOpponentArray = opponentBool
       ? nextBattle.player_2
       : nextBattle.player_1;
@@ -41,7 +41,7 @@ export default function NextBattleCard({ nextBattle, id }: nextBattleType) {
   }
 
   return (
-    <article className='next-battle-card'>
+    <article className='next-battle-card' data-testid='next-battle-card'>
       <h3 className='next-battle-card__header'>Next Battle</h3>
       <div className='next-battle-card__container'>{nextBattleComp}</div>
     </article>

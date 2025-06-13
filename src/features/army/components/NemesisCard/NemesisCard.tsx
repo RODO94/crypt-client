@@ -19,7 +19,7 @@ export default function NemesisCard({ nemesis }: NemesisComp) {
     );
   }
   return (
-    <article className='nemesis__army'>
+    <article className='nemesis__army' data-testid='nemesis-article'>
       <h3 className='nemesis__header'>Nemesis</h3>
       <div className='nemesis__wrapper'>{nemesisComp}</div>
     </article>

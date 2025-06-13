@@ -24,7 +24,7 @@ export default function DashboardHero({
   fantasyRanked,
 }: DashboardType) {
   return (
-    <section className='dashboard-hero'>
+    <section className='dashboard-hero' data-testid='dashboard-hero'>
       <div className='dashboard-hero__container'>
         <h1 className='dashboard-hero__header'>{`Hey ${user?.known_as}!`}</h1>
         <Emblem emblem={(user.user_emblem as Emblems) || "tau"} />

@@ -28,6 +28,7 @@ export default function NewBattleCard({
     <div
       className={`new-battle-card__combatant new-battle-card__combatant--${player_number}`}
       id={id}
+      data-testid={`battle-card-${player.known_as}-${player.army_id}`}
     >
       <div
         className={`new-battle-card__emblem-wrap new-battle-card__emblem-wrap--${player_number} ${nameColour} `}
