@@ -86,6 +86,10 @@
       border: none;
       text-align: center;
       background-color: transparent;
+      &:hover {
+        text-decoration: underline;
+        cursor: pointer;
+      }
       @include tablet {
         font-size: 0.9rem;
       }

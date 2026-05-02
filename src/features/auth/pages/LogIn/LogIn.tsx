@@ -49,25 +49,20 @@ export default function LogIn() {
 
   const handleReset: HandleEvent = async (event) => {
     event.preventDefault();
-    const target = event.target as HTMLButtonElement;
-    if (!target || !target.parentElement) {
-      return "No Target";
-    }
-    const emailElement = target.parentElement.children.namedItem(
-      "email"
-    ) as HTMLInputElement;
-
+    const form = (event.target as HTMLButtonElement).closest("form");
+    if (!form) return "No Target";
+    const emailElement = form.elements.namedItem("email") as HTMLInputElement;
     const email = emailElement.value;
     if (!email) {
       setErrorClass("signup__error signup__error--visible");
       return setErrorMessage(
-        "Please enter your email address so we can send you a reset email"
+        "Enter your email address so we can send you a reset email"
       );
     }
 
     const response = await forgotPasswordAuthentication({ email: email });
 
-    if (response === "User is not found, please check the mail") {
+    if (response === "User is not found, check the mail") {
       setErrorClass("signup__error signup__error--visible");
       return setErrorMessage(response);
     }
