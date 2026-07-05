@@ -41,6 +41,7 @@ export default function UpcomingBattles() {
       </div>
     );
   }
+  console.log(upcomingBattles);
 
   return (
     <section className='upcomingbattles'>
@@ -67,7 +68,7 @@ export default function UpcomingBattles() {
             : "section--hide"
         }
       >
-        {upcomingBattles.map((battle: Battle, index: number) => {
+        {Array.isArray(upcomingBattles) && upcomingBattles.map((battle: Battle, index: number) => {
           if (index > 4) {
             return;
           }
