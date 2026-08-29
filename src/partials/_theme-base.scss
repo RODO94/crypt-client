@@ -1,0 +1,72 @@
+// ─────────────────────────────────────────────
+// BASE THEME — neutral design tokens
+// Maps current app values to CSS custom properties.
+// All theme files override these vars; components
+// should reference vars rather than raw hex values.
+// ─────────────────────────────────────────────
+
+:root {
+  // ── Backgrounds ──────────────────────────────
+  --color-bg-1:        #222222;   // primary page background (mobile)
+  --color-bg-2:        #393939;   // secondary surface
+  --color-bg-3:        #4f4f4f;   // tertiary surface
+  --color-bg-4:        #2d2d2d;   // desktop page background
+  --color-bg:          var(--color-bg-1);
+
+  // ── Surfaces / UI chrome ─────────────────────
+  --color-surface:     #393939;
+  --color-border:      #4f4f4f;
+  --color-border-subtle: rgba(255, 255, 255, 0.12);
+
+  // ── Brand / action colours ───────────────────
+  --color-accent:      #c9a227;   // gold highlight
+  --color-primary:     #8b090b;   // primary action (blood red)
+  --color-primary-dark: #6a0001;
+
+  // ── Result states ─────────────────────────────
+  --color-result-win:  #e6f2e6;
+  --color-result-win-dark: #e4f4e9;
+  --color-result-draw: #999999;
+
+  // ── Table chrome ─────────────────────────────
+  --color-table-dark:  #c1c1c1;
+  --color-table-light: #c9c9c9;
+  --color-table-hover: #cee4cf;
+  --color-table-header: #b0b0b0;
+
+  // ── Typography ───────────────────────────────
+  --font-body:         'Roboto', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --font-heading:      'Roboto', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --font-label:        'Roboto', system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  // ── Font sizes ────────────────────────────────
+  --font-size-xs:      0.625rem;  // 10px
+  --font-size-sm:      0.75rem;   // 12px
+  --font-size-base:    0.875rem;  // 14px
+  --font-size-md:      1rem;      // 16px
+  --font-size-lg:      1.25rem;   // 20px
+  --font-size-xl:      1.5rem;    // 24px
+  --font-size-heading: 2rem;      // 32px
+
+  // ── Spacing ───────────────────────────────────
+  --space-xs:  4px;
+  --space-sm:  8px;
+  --space-md:  12px;
+  --space-lg:  16px;
+  --space-xl:  24px;
+  --space-2xl: 40px;
+
+  // ── Border radius ─────────────────────────────
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+
+  // ── Shadows ───────────────────────────────────
+  --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-panel: 0 8px 32px rgba(0, 0, 0, 0.6);
+
+  // ── Text colours ─────────────────────────────
+  --color-text-primary:   #ffffff;
+  --color-text-secondary: #b0b0b0;
+  --color-text-muted:     #777777;
+}

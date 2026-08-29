@@ -1,0 +1,67 @@
+// ─────────────────────────────────────────────
+// FANTASY THEME — Design 1a "Tome of War"
+// Illuminated manuscript: parchment & gold
+//
+// Applied by toggling class="theme-fantasy" on <html>.
+// Overrides the CSS custom properties defined in
+// _theme-base.scss for the Fantasy realm.
+// ─────────────────────────────────────────────
+
+.theme-fantasy {
+  // ── Backgrounds ──────────────────────────────
+  // Parchment stripe — alternating cream bands
+  --color-bg:          #e3cd97;
+  --color-bg-1:        #e7d3a1;
+  --color-bg-2:        #d8bf85;   // secondary panel
+  --color-bg-3:        #c9a97a;   // tertiary / inset surface
+  --color-bg-4:        #efe0ba;   // desktop background
+
+  // ── Surfaces / UI chrome ─────────────────────
+  --color-surface:     #efe0ba;   // card / panel fill
+  --color-border:      #6b4a1f;   // dark leather brown
+  --color-border-subtle: rgba(107, 74, 31, 0.25);
+
+  // ── Brand / action colours ───────────────────
+  --color-accent:      #c9a227;   // illuminated gold
+  --color-accent-light: #f0d9a0;  // inner inset highlight
+  --color-primary:     #8a1c12;   // oxblood red
+  --color-primary-dark: #5a1109;
+
+  // ── Result states ─────────────────────────────
+  --color-result-win:      #e4f4e9;
+  --color-result-win-dark: #a9d9b0;
+  --color-result-draw:     #c1c1c1;
+
+  // ── Table chrome ─────────────────────────────
+  --color-table-dark:   #d8bf85;
+  --color-table-light:  #efe0ba;
+  --color-table-hover:  #f5ecd2;
+  --color-table-header: #c9a97a;
+
+  // ── Typography ───────────────────────────────
+  // Google Fonts loaded via index.html
+  --font-heading: 'Jacquard 24', serif;           // Gothic blackletter for h1/h2
+  --font-label:   'Silkscreen', monospace;         // Pixel-art for tags / badges
+  --font-body:    'Pixelify Sans', sans-serif;     // Readable body text
+
+  // ── Font sizes (upscale headings for blackletter) ─
+  --font-size-heading: 2.25rem;   // Jacquard 24 reads better slightly larger
+
+  // ── Shadows ───────────────────────────────────
+  --shadow-card:  0 8px 24px rgba(42, 28, 13, 0.35);
+  --shadow-panel: inset 0 0 0 3px #c9a227, inset 0 0 0 6px #6b4a1f;
+
+  // ── Text colours ─────────────────────────────
+  --color-text-primary:   #3a2a14;   // dark oak
+  --color-text-secondary: #6b4a1f;   // warm leather
+  --color-text-muted:     #a88951;   // faded parchment ink
+
+  // ── Fantasy-specific decorative tokens ───────
+  --fantasy-vs-color:         #8a1c12;
+  --fantasy-rank-badge-bg:    #8a1c12;
+  --fantasy-rank-badge-color: #f5ecd2;
+  --fantasy-victory-bg:       #e4f4e9;
+  --fantasy-victory-color:    #1c4a1c;
+  --fantasy-draw-bg:          #c1c1c1;
+  --fantasy-draw-color:       #5a3d17;
+}

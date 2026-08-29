@@ -1,0 +1,72 @@
+// ─────────────────────────────────────────────
+// 40,000 THEME — Design 2a "Imperial Gothic"
+// Codex dataslate: black, gold & oxblood
+//
+// Applied by toggling class="theme-fortyk" on <html>.
+// Overrides the CSS custom properties defined in
+// _theme-base.scss for the 40,000 realm.
+// ─────────────────────────────────────────────
+
+.theme-fortyk {
+  // ── Backgrounds ──────────────────────────────
+  --color-bg:          #0f0c07;
+  --color-bg-1:        #0f0c07;   // deepest black
+  --color-bg-2:        #1c1710;   // elevated surface
+  --color-bg-3:        #241c10;   // secondary panel
+  --color-bg-4:        #17120b;   // desktop background
+
+  // ── Surfaces / UI chrome ─────────────────────
+  --color-surface:     #17120b;   // card / panel fill
+  --color-border:      #2e2410;   // dark border
+  --color-border-subtle: rgba(184, 145, 46, 0.2);
+
+  // ── Brand / action colours ───────────────────
+  --color-accent:       #b8912e;  // aged brass / Aquila gold
+  --color-accent-light: #eccb6f;  // bright brass highlight
+  --color-primary:      #5a0d0e;  // dark oxblood
+  --color-primary-dark: #2a0505;
+
+  // ── Result states ─────────────────────────────
+  --color-result-win:      #12331f;
+  --color-result-win-dark: #9cffc4;
+  --color-result-draw:     #2a2723;
+
+  // ── Table chrome ─────────────────────────────
+  --color-table-dark:   #241c10;
+  --color-table-light:  #17120b;
+  --color-table-hover:  #2e2410;
+  --color-table-header: #1c1710;
+
+  // ── Typography ───────────────────────────────
+  // Google Fonts loaded via index.html
+  --font-heading: 'Cinzel', serif;             // Imperial Roman for h1/h2
+  --font-label:   'Silkscreen', monospace;     // Pixel-art for tags / badges
+  --font-body:    'Pixelify Sans', sans-serif; // Readable body text
+
+  // ── Font sizes ────────────────────────────────
+  --font-size-heading: 2rem;
+
+  // ── Shadows ───────────────────────────────────
+  --shadow-card:  0 12px 32px rgba(0, 0, 0, 0.7);
+  --shadow-panel: inset 0 0 0 3px #b8912e, inset 0 0 0 6px #2e2410;
+
+  // ── Text colours ─────────────────────────────
+  --color-text-primary:   #ecd9a8;   // aged vellum
+  --color-text-secondary: #a8905a;   // burnished gold
+  --color-text-muted:     #6a5220;   // worn brass
+
+  // ── 40K-specific decorative tokens ───────────
+  --fortyk-vs-color:         #c0281f;
+  --fortyk-rank-badge-bg:    #5a0d0e;
+  --fortyk-rank-badge-color: #f2d98a;
+  --fortyk-victory-bg:       #12331f;
+  --fortyk-victory-color:    #9cffc4;
+  --fortyk-draw-bg:          #2a2723;
+  --fortyk-draw-color:       #a8905a;
+
+  // ── Combat card detail tokens ─────────────────
+  // The small pin + wax-seal corner details from design 2a
+  --fortyk-card-pin-color:    #c9a227;
+  --fortyk-card-seal-bg:      #7a1012;
+  --fortyk-card-seal-border:  #4a0808;
+}

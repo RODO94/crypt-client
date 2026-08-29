@@ -1,10 +1,30 @@
 name: Tests
 on:
   push:
-    branches: [main, master]
+    branches: [main, master, 'version-2/**']
+  # Run on every pull request, whatever the target branch, so long-lived
+  # epic branches keep their safety net.
   pull_request:
-    branches: [main, master]
 jobs:
+  typecheck:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Typecheck
+        run: pnpm typecheck
+      - name: Lint
+        run: pnpm lint
+
   e2e:
     timeout-minutes: 60
     runs-on: ubuntu-latest

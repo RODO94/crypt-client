@@ -1,6 +1,9 @@
 @use "./partials/variables" as *;
 @use "./partials/typography" as *;
 @use "./partials/mixins" as *;
+@use "./partials/theme-base";
+@use "./partials/theme-fantasy";
+@use "./partials/theme-fortyk";
 
 :root {
   font-family: "Roboto", system-ui, Avenir, Helvetica, Arial, sans-serif;

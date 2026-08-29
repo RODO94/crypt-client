@@ -6,12 +6,13 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "preview": "vite preview",
-    "test": "vitest",
-    "test:browser": "vitest --config=vitest.browser.config.ts",
-    "test:e2e": "playwright test"
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
